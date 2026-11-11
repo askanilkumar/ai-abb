@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Engineering for Managers — Day 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22262A; --ink-soft:#4A5157; --paper:#FAFBFA; --panel:#EDEFED;
+    --amber:#E8A200; --amber-deep:#B37E00; --amber-pale:#FFF8E8;
+    --green:#2F7D4F; --red:#B3432B; --line:#C6CBC6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  body{font-family:'Saira',system-ui,sans-serif; color:var(--ink); background:var(--paper);
+    font-size:16.5px; line-height:1.55}
+  a{color:var(--ink); text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:3px}
+  a:hover{color:var(--amber-deep)}
+  a:focus-visible, button:focus-visible{outline:3px solid var(--amber); outline-offset:2px}
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px}
+  h1,h2,h3,h4{font-family:'Saira Condensed',sans-serif; line-height:1.08}
+
+  .hazard{height:10px; background:repeating-linear-gradient(135deg,var(--amber) 0 18px,var(--ink) 18px 36px)}
+  header{border-bottom:2px solid var(--ink); background:#fff}
+  .mast{padding:32px 0 24px}
+  .mast .doc-id{font-weight:600; font-size:.95rem; color:var(--ink-soft); border:1.5px solid var(--line);
+    display:inline-block; padding:3px 12px; border-radius:3px; margin-bottom:14px}
+  h1{font-size:clamp(2.4rem,6vw,4.1rem); font-weight:700}
+  h1 .day{color:var(--amber-deep)}
+  .mast p.sub{margin-top:10px; font-size:1.1rem; color:var(--ink-soft); max-width:64ch}
+  .factstrip{display:flex; flex-wrap:wrap; border-top:2px solid var(--ink)}
+  .factstrip div{flex:1 1 170px; padding:11px 18px; border-right:1.5px solid var(--line); background:var(--panel)}
+  .factstrip div:last-child{border-right:none}
+  .factstrip b{display:block; font-size:.85rem; color:var(--ink-soft); font-weight:500}
+  .factstrip span{font-weight:600}
+
+  /* flow bar — the day at a glance, every item jumps to its section */
+  nav.flow{position:sticky; top:0; z-index:10; background:var(--ink); overflow-x:auto}
+  nav.flow .wrap{display:flex; gap:2px; padding:0 24px}
+  nav.flow a{color:#E8EAE8; text-decoration:none; font-family:'Saira Condensed'; font-weight:600;
+    font-size:1rem; padding:9px 13px; white-space:nowrap; border-bottom:4px solid transparent}
+  nav.flow a:hover{border-bottom-color:var(--amber); color:#fff}
+  nav.flow a.labstep{color:#FFD34D}
+
+  section{padding:44px 0 8px; border-bottom:1.5px solid var(--line)}
+  h2{font-size:2rem; font-weight:700; margin-bottom:4px}
+  .slot-time{font-weight:600; color:var(--amber-deep); font-size:1rem; margin-bottom:2px}
+  .rule{width:64px; height:5px; background:var(--amber); margin:10px 0 20px}
+  p{max-width:72ch; margin-bottom:12px}
+  ul.c, ol.c{max-width:70ch; margin:0 0 14px 22px}
+  ul.c li, ol.c li{margin-bottom:6px}
+  .muted{color:var(--ink-soft)}
+
+  table{width:100%; border-collapse:collapse; background:#fff; font-size:.95rem; margin:6px 0 18px}
+  th{font-family:'Saira Condensed'; font-size:1.05rem; text-align:left; border-bottom:2px solid var(--ink); padding:8px 12px}
+  td{border-bottom:1px solid var(--line); padding:8px 12px; vertical-align:top}
+  code{font-family:ui-monospace,Consolas,monospace; font-size:.88em; background:var(--panel); padding:1px 6px; border-radius:3px}
+
+  .note{background:var(--panel); border-left:5px solid var(--amber); padding:13px 18px; border-radius:0 3px 3px 0;
+    max-width:76ch; margin:16px 0; font-size:.97rem}
+  .tree{background:#fff; border:1.5px solid var(--line); border-radius:4px; padding:16px 20px; max-width:76ch;
+    font-size:.96rem; margin:6px 0 18px}
+  .tree p{margin-bottom:8px}
+  .tree .q{font-weight:600}
+  .tree .a{padding-left:22px}
+
+  /* lab card */
+  .lab{background:var(--amber-pale); border:2px solid var(--ink); border-radius:4px; margin:22px 0;
+    position:relative; overflow:hidden}
+  .lab .labhead{background:var(--amber); padding:10px 20px; display:flex; flex-wrap:wrap; gap:4px 16px;
+    justify-content:space-between; align-items:baseline}
+  .lab .labhead h3{font-size:1.5rem}
+  .lab .labhead .nb{font-weight:600; font-size:.95rem}
+  .lab .labbody{padding:16px 20px 8px}
+  .lab ol.c li{margin-bottom:8px}
+  .checkpoint{background:#fff; border:1.5px dashed var(--ink); border-radius:3px; padding:12px 16px; margin:12px 0 16px; max-width:76ch}
+  .checkpoint b{color:var(--amber-deep)}
+
+  /* paste & check */
+  .paste{background:#fff; border:2px solid var(--ink); border-radius:3px; padding:12px 16px; margin:12px 0 16px; max-width:76ch}
+  .paste b{color:var(--amber-deep)}
+  .paste textarea{display:block; width:100%; margin:8px 0; padding:8px 10px; font-family:ui-monospace,Consolas,monospace;
+    font-size:.9rem; border:1.5px solid var(--line); border-radius:3px; resize:vertical}
+  .btn{font:inherit; font-weight:600; padding:7px 18px; border:2px solid var(--ink); border-radius:3px;
+    background:var(--amber); cursor:pointer}
+  .btn:hover{background:var(--amber-deep); color:#fff}
+  .btn.ghost{background:#fff}
+  .verdict{margin-left:12px; font-weight:600}
+  .verdict.ok{color:var(--green)} .verdict.no{color:var(--red)}
+
+  .summary{background:#fff; border:2px solid var(--ink); border-radius:4px; padding:20px; margin:22px 0; max-width:76ch}
+  .summary .big{font-family:'Saira Condensed'; font-size:3rem; font-weight:700; color:var(--amber-deep)}
+  .summary textarea{display:block; width:100%; margin:10px 0; padding:8px 10px; font-family:ui-monospace,Consolas,monospace;
+    font-size:.88rem; border:1.5px solid var(--line); border-radius:3px; min-height:90px}
+
+  /* quiz */
+  .quiz{background:#fff; border:2px solid var(--ink); border-radius:4px; margin:22px 0}
+  .quiz .qhead{border-bottom:2px solid var(--ink); padding:10px 20px; background:var(--panel)}
+  .quiz .qhead h3{font-size:1.4rem}
+  .quiz .qhead span{font-size:.92rem; color:var(--ink-soft)}
+  .q-item{padding:16px 20px; border-bottom:1.5px solid var(--line)}
+  .q-item:last-child{border-bottom:none}
+  .q-item p.qt{font-weight:600; margin-bottom:10px}
+  .q-item button.opt{display:block; width:100%; max-width:66ch; text-align:left; margin:0 0 7px;
+    padding:9px 14px; font:inherit; font-size:.96rem; background:var(--paper); border:1.5px solid var(--line);
+    border-radius:3px; cursor:pointer}
+  .q-item button.opt:hover{border-color:var(--ink)}
+  .q-item button.opt.correct{border:2px solid var(--green); background:#EFF6F1; font-weight:600}
+  .q-item button.opt.wrong{border:2px solid var(--red); background:#FBF0ED}
+  .q-item .expl{display:none; margin-top:8px; padding:10px 14px; background:var(--panel);
+    border-left:4px solid var(--green); font-size:.94rem; max-width:66ch}
+  .q-item.answered .expl{display:block}
+
+  footer{margin-top:52px; border-top:2px solid var(--ink); background:var(--ink); color:#E8EAE8}
+  footer .wrap{padding:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; font-size:.95rem}
+  footer b{color:#fff}
+
+  @media (max-width:640px){ .factstrip div{flex:1 1 46%} }
+</style>
+</head>
+<body>
+
+<div class="hazard" aria-hidden="true"></div>
+<header>
+  <div class="wrap mast">
+    <span class="doc-id">SINGLE POINT OF CONTACT · DAY 1 · 12 NOV 2026</span>
+    <h1>AI Engineering for Managers <span class="day">— Day 1</span></h1>
+    <p class="sub">Choose and Build. This page carries the whole day — content, labs and quizzes, in order.
+    Stay on this page; it tells you when to switch to your lab VM and when to come back.</p>
+  </div>
+  <div class="factstrip">
+    <div><b>Venue</b><span>ABB Bangalore</span></div>
+    <div><b>Time</b><span>09:00 – 17:00</span></div>
+    <div><b>Your machine</b><span>Lab VM — link on your seat card</span></div>
+    <div><b>Faculty</b><span>Anil Kumar Sandrapuri · DevPro Academy</span></div>
+  </div>
+</header>
+
+<nav class="flow" aria-label="Day flow">
+  <div class="wrap">
+    <a href="#start">Start</a>
+    <a href="#m1">M1 Tiers</a>
+    <a href="#lab1" class="labstep">Lab 1</a>
+    <a href="#quiz1">Quiz</a>
+    <a href="#m2">M2 Prompting</a>
+    <a href="#lab2" class="labstep">Lab 2</a>
+    <a href="#quiz2">Quiz</a>
+    <a href="#m3">M3 RAG</a>
+    <a href="#lab3" class="labstep">Lab 3</a>
+    <a href="#quiz3">Quiz</a>
+    <a href="#m4">M4 Trust</a>
+    <a href="#lab4" class="labstep">Lab 4</a>
+    <a href="#quiz4">Quiz</a>
+    <a href="#m5">M5 Graphs</a>
+    <a href="#close">Close</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ======================================================= START -->
+<section id="start">
+  <p class="slot-time">09:00 – 09:25</p>
+  <h2>Start here — the five decisions, the case, your machine</h2>
+  <div class="rule" aria-hidden="true"></div>
+
+  <p>Your teams are at roughly <strong>30% AI adoption</strong>. The target is <strong>80%</strong>.
+  What stands between those numbers is not enthusiasm — it is five decisions that someone with
+  authority has to make well:</p>
+  <table>
+    <thead><tr><th>Decision</th><th>The question</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1 · Choose</strong></td><td>Where does this AI workload run?</td><td>Today, M1</td></tr>
+      <tr><td><strong>2 · Build</strong></td><td>What does a trustworthy AI application look like?</td><td>Today, M2–M5</td></tr>
+      <tr><td><strong>3 · Cost</strong></td><td>What does it cost, and how do I budget it?</td><td>Tomorrow</td></tr>
+      <tr><td><strong>4 · Govern</strong></td><td>How do I defend it to compliance (CRA)?</td><td>Tomorrow</td></tr>
+      <tr><td><strong>5 · Adopt</strong></td><td>How do I get my team from 30% to 80%?</td><td>Tomorrow</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:1.5rem; margin:14px 0 6px">The case: Axion Controls</h3>
+  <p><strong>Axion Controls</strong> is a fictional maker of industrial automation equipment. Its service
+  desk fields hundreds of tickets a month against four products, two open service bulletins and years of
+  firmware history. Today you build the <strong>service-knowledge assistant</strong> its engineers deserve.
+  Everything is synthetic — no ABB data is anywhere in this room.</p>
+  <table>
+    <thead><tr><th>Product</th><th>What it is</th><th>Fault prefix</th><th>Current firmware</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AX-900</strong></td><td>Programmable logic controller</td><td><code>E-xx</code> / <code>W-xx</code></td><td>3.4</td></tr>
+      <tr><td><strong>VectorDrive 450</strong></td><td>Variable-frequency drive, 0.75–160 kW</td><td><code>F-xx</code> / <code>A-xx</code></td><td>2.5</td></tr>
+      <tr><td><strong>AXIO-16</strong></td><td>Remote I/O station</td><td>LED codes</td><td>—</td></tr>
+      <tr><td><strong>OptiPanel 7</strong></td><td>7-inch touch HMI</td><td>service log</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>Two service bulletins to remember</strong> — they run through everything today:<br>
+  <strong>SB-2025-04</strong> — VectorDrive 450 trips F-07 overtemp on firmware below 2.4.1 at ≥ 8 kHz switching.<br>
+  <strong>SB-2026-01</strong> — AX-900 ETH2 port lockup (E-22) on firmware 3.2 and earlier.</div>
+
+  <h3 style="font-size:1.5rem; margin:14px 0 6px">Your lab machine — set up once, at 09:55</h3>
+  <ol class="c">
+    <li>Take the seat card with your name: VM name, link, username, password.</li>
+    <li>Open the link in your browser — it is an <strong>azure.com</strong> address and opens a full Windows
+        desktop in the tab. No install, no VPN, no Azure account, nothing on your ABB laptop.</li>
+    <li>On the desktop, open <strong>VS Code</strong> → folder <strong>Documents\abb-ai-engineering</strong>.
+        All four lab notebooks are in <code>labs/</code>; model endpoints are pre-configured.</li>
+  </ol>
+  <p class="muted">Three ground rules for the day: hands on, not hands up (ask your pair partner first) ·
+  numbers, not impressions · everything here is fictional.</p>
+</section>
+
+<!-- ======================================================= M1 -->
+<section id="m1">
+  <p class="slot-time">09:25 – 09:55 · trainer-led</p>
+  <h2>M1 · Where AI runs — the three tiers</h2>
+  <div class="rule" aria-hidden="true"></div>
+
+  <p>Every AI request your team makes lands in one of three tiers. The tier decides the cost model,
+  the data exposure, and how much engineering you own. Most bad AI decisions are tier mismatches.</p>
+  <table>
+    <thead><tr><th></th><th>Tier 1 · SaaS assistants</th><th>Tier 2 · Managed endpoints</th><th>Tier 3 · Self-hosted</th></tr></thead>
+    <tbody>
+      <tr><td><strong>What</strong></td><td>Abby, Basic Copilot — someone else's app</td><td>Serverless model APIs (Azure AI Foundry — what your VM uses today)</td><td>Open models on your own compute</td></tr>
+      <tr><td><strong>You control</strong></td><td>Almost nothing — prompts only</td><td>Prompts, context, guardrails, routing</td><td>Everything, including weights</td></tr>
+      <tr><td><strong>Cost model</strong></td><td>Per seat / bundled</td><td>Per token — scales with use</td><td>Per GPU-hour — scales with capacity</td></tr>
+      <tr><td><strong>Data path</strong></td><td>Vendor's terms</td><td>Your tenancy, your region</td><td>Never leaves your network</td></tr>
+      <tr><td><strong>Right for</strong></td><td>Individual productivity</td><td>Team applications — the 80% case</td><td>Hard data constraints, high steady volume</td></tr>
+      <tr><td><strong>Wrong when</strong></td><td>You need it in a workflow or product</td><td>Air-gapped or extreme-volume workloads</td><td>You have no platform team for it</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>The deployment decision tree</strong> — your first takeaway framework. It lives in the repo as
+  an editable template; use it on any request your team brings you:</p>
+  <div class="tree">
+    <p class="q">1 · Is this one person being faster, or a team workflow?</p>
+    <p class="a">One person → Tier 1 (Abby / Copilot). Done — don't build what a seat licence solves.</p>
+    <p class="q">2 · Can the data leave your tenancy under vendor terms?</p>
+    <p class="a">No, and it can't even sit in your cloud region → Tier 3. Otherwise continue.</p>
+    <p class="q">3 · Is volume steady and very high (always-on, millions of calls)?</p>
+    <p class="a">Yes → price Tier 3 against Tier 2 before committing. No / spiky / unknown → Tier 2.</p>
+    <p class="q">4 · Default</p>
+    <p class="a"><strong>Tier 2.</strong> Start serverless, measure, move only with evidence. Today's labs run here.</p>
+  </div>
+  <div class="note"><strong>Abby's place in this picture:</strong> Abby fronts Claude and GPT models inside ABB —
+  that tells you the model families are already accepted here. What Abby can't give your team is a workflow:
+  no API into your tools, no custom retrieval over your documents, no evals. That gap is exactly what Tier 2 fills,
+  and exactly what you build today.</div>
+</section>
+
+<!-- ======================================================= LAB 1 -->
+<section id="lab1">
+  <p class="slot-time">09:55 – 10:45 · on your VM</p>
+  <h2>Lab 1 · Stand up and compare</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="lab">
+    <div class="labhead"><h3>Switch to your VM now</h3><span class="nb">labs/<strong>lab1_stand_up_and_compare.ipynb</strong></span></div>
+    <div class="labbody">
+      <p><strong>Goal:</strong> prove your environment works, then call two very different models on the same
+      Axion field report and put numbers on the difference.</p>
+      <ol class="c">
+        <li>Open the Bastion link from your seat card → Windows desktop → VS Code → the Lab 1 notebook.</li>
+        <li>Run the cells top to bottom (<em>Run All</em> works). First call = environment proven.</li>
+        <li>Same prompt to the mini model and the frontier model; read both answers.</li>
+        <li>Build the comparison table: latency, tokens, cost per 1,000 queries.</li>
+        <li>Answer the ✏️ YOUR TURN questions in the notebook.</li>
+      </ol>
+      <div class="checkpoint"><b>Checkpoint:</b> did the expensive model change the <em>decision</em>, or only the prose? Y / N — hold that thought for Quiz 1.</div>
+      <div class="paste" data-lab="1">
+        <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (1.5), paste the printed line here, press Check.
+        <textarea rows="2" placeholder="LAB1|mini_per_1k=...|frontier_per_1k=..."></textarea>
+        <button class="btn check" type="button">Check</button><span class="verdict"></span>
+      </div>
+      <p class="muted">Done early? Set temperature to 0.9, run twice, watch the answers differ — then decide which of your use cases could tolerate that.</p>
+    </div>
+  </div>
+  <p class="muted">☕ Break 10:45 – 11:00. Every VM proven working before it.</p>
+</section>
+
+<!-- ======================================================= QUIZ 1 -->
+<section id="quiz1">
+  <h2>Quick check · tiers and models</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="quiz">
+    <div class="qhead"><h3>Quiz 1</h3><span>Click an answer — instant feedback. Nothing is recorded.</span></div>
+
+    <div class="q-item">
+      <p class="qt">1. Your test team wants an assistant that reads your internal test specs and drafts test cases inside your pipeline. Which tier?</p>
+      <button class="opt" data-ok="0">Tier 1 — ask Abby, it already knows AI</button>
+      <button class="opt" data-ok="1">Tier 2 — a managed endpoint with your own retrieval over the specs</button>
+      <button class="opt" data-ok="0">Tier 3 — buy GPUs first, decide later</button>
+      <div class="expl">A team workflow over your own documents is the textbook Tier 2 case: your context, your guardrails, pay per token. Abby has no path into your pipeline, and Tier 3 needs evidence you don't have yet.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">2. In Lab 1 the frontier model cost roughly 15–20× the mini model. When is that premium worth paying?</p>
+      <button class="opt" data-ok="0">Always — quality first</button>
+      <button class="opt" data-ok="0">Never — cost first</button>
+      <button class="opt" data-ok="1">When the measured answer changes a decision the cheap model gets wrong</button>
+      <div class="expl">Routing is an evidence question. If the mini model's answer leads to the same action, the premium bought nothing. You measured this yourself an hour ago.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">3. Neither model knew about SB-2025-04 without being given the manuals. Why not?</p>
+      <button class="opt" data-ok="0">The models are too small</button>
+      <button class="opt" data-ok="1">Models know their training data, not your documents — your knowledge has to be supplied as context</button>
+      <button class="opt" data-ok="0">Azure blocks that information</button>
+      <div class="expl">This is the single most important sentence of the morning — and the entire reason Lab 3 (retrieval) exists.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= M2 -->
+<section id="m2">
+  <p class="slot-time">11:00 – 11:30 · trainer-led</p>
+  <h2>M2 · Prompting for cost and quality</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <p>Not prompt-engineering basics — you've had those. This is prompting as a <strong>production design
+  discipline</strong>, where every design choice shows up on the invoice.</p>
+  <table>
+    <thead><tr><th>Pattern</th><th>What it is</th><th>Why a manager cares</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Structured output</strong></td><td>Demand JSON against a schema, not prose</td><td>Parseable, testable, pipeline-ready — and shorter outputs cost less</td></tr>
+      <tr><td><strong>Context engineering</strong></td><td>Supply the reference facts the task needs, nothing more</td><td>Facts in context beat facts hoped-for in training; extra context is paid noise</td></tr>
+      <tr><td><strong>Cache-friendly design</strong></td><td>Stable system prompt, variable part last</td><td>Providers price cached input tokens at a fraction — but only identical, stable prefixes cache</td></tr>
+      <tr><td><strong>Model-appropriate scaffolding</strong></td><td>Mini models need rules and examples; frontier models need less</td><td>Scaffolding is what makes the 20×-cheaper model usable — it's where routing savings come from</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>The anti-pattern to ban:</strong> the "kitchen sink" prompt — 300 words of
+  politely-worded prose instructions, rewritten per call. It costs several times more than a tight schema
+  prompt, caches never, and usually scores <em>worse</em>. You will prove this yourself in about ten minutes.</div>
+</section>
+
+<!-- ======================================================= LAB 2 -->
+<section id="lab2">
+  <p class="slot-time">11:30 – 12:30 · on your VM</p>
+  <h2>Lab 2 · Four prompt designs, measured</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="lab">
+    <div class="labhead"><h3>Switch to your VM</h3><span class="nb">labs/<strong>lab2_prompt_designs_measured.ipynb</strong></span></div>
+    <div class="labbody">
+      <p><strong>Goal:</strong> one real task — classify Axion service tickets — four prompt designs,
+      scored for quality and cost. Find out which design your team should standardise on.</p>
+      <ol class="c">
+        <li>Run the bake-off: V1 naive · V2 kitchen sink · V3 few-shot · V4 structured schema. 20 calls, one table.</li>
+        <li>Read the table like a manager: quality %, cost per 100k tickets.</li>
+        <li>Check which designs caught the SB-2025-04 ticket — the one that saves a site visit.</li>
+        <li>✏️ Change one thing in V4, re-run, see if quality or tokens moved.</li>
+        <li>Write your first prompt-library entry in the notebook.</li>
+      </ol>
+      <div class="checkpoint"><b>Checkpoint:</b> was the longest prompt the best one? Y / N</div>
+      <div class="paste" data-lab="2">
+        <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (2.6), paste the line here.
+        <textarea rows="2" placeholder="LAB2|best=V4|quality=...|cost_100k=..."></textarea>
+        <button class="btn check" type="button">Check</button><span class="verdict"></span>
+      </div>
+      <p class="muted">Done early? Run V4 on the frontier model — is it worth 15–20× the price <em>for this task</em>?</p>
+    </div>
+  </div>
+  <p class="muted">🍽 Lunch 12:30 – 13:15.</p>
+</section>
+
+<!-- ======================================================= QUIZ 2 -->
+<section id="quiz2">
+  <h2>Quick check · prompt economics</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="quiz">
+    <div class="qhead"><h3>Quiz 2</h3><span>Three questions, instant feedback.</span></div>
+
+    <div class="q-item">
+      <p class="qt">1. Your engineer shows you a 400-word prompt that "covers every case". What do you ask for?</p>
+      <button class="opt" data-ok="0">Approve it — thorough is good</button>
+      <button class="opt" data-ok="1">The measured comparison against a short schema-constrained version</button>
+      <button class="opt" data-ok="0">An even longer prompt to be safe</button>
+      <div class="expl">In Lab 2 the kitchen-sink prompt cost multiples of V4 for equal or worse quality. "Show me the bake-off" is now your standard sentence.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">2. Why does a stable system prompt save real money at scale?</p>
+      <button class="opt" data-ok="0">Shorter prompts are always smarter</button>
+      <button class="opt" data-ok="1">Identical prompt prefixes get cached, and cached input tokens are billed at a fraction of the price</button>
+      <button class="opt" data-ok="0">Azure gives loyalty discounts</button>
+      <div class="expl">Caching only works on stable, identical prefixes — a prompt that changes every call never caches. Design decision → invoice line.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">3. A mini model fails a task a frontier model passes. The first engineering response is:</p>
+      <button class="opt" data-ok="0">Switch everything to the frontier model</button>
+      <button class="opt" data-ok="1">Add scaffolding — rules, examples, schema — and re-measure the mini model</button>
+      <button class="opt" data-ok="0">Abandon the use case</button>
+      <div class="expl">V3/V4 scaffolding is what unlocked the cheap model in Lab 2. Route up only when scaffolding measurably fails — that discipline is most of your AI budget.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= M3 -->
+<section id="m3">
+  <p class="slot-time">13:15 – 13:45 · trainer-led</p>
+  <h2>M3 · Retrieval done properly</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <p>RAG — retrieval-augmented generation — is how the model gets <em>your</em> knowledge: find the relevant
+  passages, hand them to the model as context, answer with citations. Four stages, each with a dial your
+  team will set wrong the first time:</p>
+  <table>
+    <thead><tr><th>Stage</th><th>The dial</th><th>The classic failure</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Chunk</strong></td><td>Chunk size & overlap</td><td>Whole-document chunks: retrieval gets vague, every question costs 5× in tokens</td></tr>
+      <tr><td><strong>Embed</strong></td><td>Embedding model</td><td>Paid once per document update — not per question. Teams overspend here out of fear</td></tr>
+      <tr><td><strong>Retrieve</strong></td><td>k (how many chunks)</td><td>k too small: answers that need two documents get one. k too big: paid noise</td></tr>
+      <tr><td><strong>Answer</strong></td><td>System prompt</td><td>No "answer only from context" rule → the model fills gaps from training data, confidently</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>The sentence to take home:</strong> the model is the engine; your knowledge
+  pipeline is the fuel quality. When a RAG pilot disappoints, the fix is almost never a bigger model —
+  it's chunking, retrieval and prompt rules. You'll break and fix all three in the next hour.</div>
+</section>
+
+<!-- ======================================================= LAB 3 -->
+<section id="lab3">
+  <p class="slot-time">13:45 – 14:45 · on your VM</p>
+  <h2>Lab 3 · Build the retrieval pipeline</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="lab">
+    <div class="labhead"><h3>Switch to your VM</h3><span class="nb">labs/<strong>lab3_build_the_rag_pipeline.ipynb</strong></span></div>
+    <div class="labbody">
+      <p><strong>Goal:</strong> build the Axion service-knowledge assistant end to end — ingest 14 documents,
+      chunk, embed, retrieve, answer with citations. Then break it on purpose, three ways.</p>
+      <ol class="c">
+        <li>Ingest the corpus and chunk it (start at 1,200 characters).</li>
+        <li>Embed all chunks, build the index — note this is the <em>only</em> indexing cost.</li>
+        <li>Ask the F-07 question from Lab 1 again. Compare with the model's blind guess this morning.</li>
+        <li>Break it: 8,000-char chunks → token bill; k=1 → the two-document question fails; the multi-hop
+            ticket question → flat RAG can't join tables (remember this for M5).</li>
+        <li>Run the final cell — it saves the index for Lab 4.</li>
+      </ol>
+      <div class="checkpoint"><b>Checkpoint:</b> the question k=1 failed but k=5 passed needed which TWO documents? ____________</div>
+      <div class="paste" data-lab="3">
+        <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (3.7), paste the line here.
+        <textarea rows="2" placeholder="LAB3|tokens_tuned=...|tokens_big=..."></textarea>
+        <button class="btn check" type="button">Check</button><span class="verdict"></span>
+      </div>
+      <p class="muted">Done early? Change the chunk size to 400 and see what breaks next.</p>
+    </div>
+  </div>
+  <p class="muted">☕ Break 14:45 – 15:00.</p>
+</section>
+
+<!-- ======================================================= QUIZ 3 -->
+<section id="quiz3">
+  <h2>Quick check · retrieval</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="quiz">
+    <div class="qhead"><h3>Quiz 3</h3><span>Three questions, instant feedback.</span></div>
+
+    <div class="q-item">
+      <p class="qt">1. A team's RAG assistant gives vague answers and burns tokens. Lab 3 says look first at:</p>
+      <button class="opt" data-ok="0">The model — upgrade to frontier</button>
+      <button class="opt" data-ok="1">Chunk size — oversized chunks make retrieval vague and every question expensive</button>
+      <button class="opt" data-ok="0">The GPU quota</button>
+      <div class="expl">You watched 8,000-char chunks multiply the token bill for equal-or-worse answers. Pipeline first, model last.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">2. Which cost scales with usage in a RAG system?</p>
+      <button class="opt" data-ok="0">Embedding the documents — paid on every question</button>
+      <button class="opt" data-ok="1">Per-question tokens (retrieved context + answer) — embedding is paid once per document update</button>
+      <button class="opt" data-ok="0">Neither, RAG is free after setup</button>
+      <div class="expl">Indexing is a one-time cost per corpus update; the per-question context is the line that grows with adoption. That split drives tomorrow's budget model.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">3. "Which sites have F-07 tickets on firmware affected by SB-2025-04?" failed on flat RAG because:</p>
+      <button class="opt" data-ok="0">The corpus doesn't mention F-07</button>
+      <button class="opt" data-ok="1">The answer needs a join across tickets, bulletin and release notes — retrieval finds text, it doesn't join tables</button>
+      <button class="opt" data-ok="0">The question was too long for the model</button>
+      <div class="expl">Multi-hop questions over structured relationships are where retrieval stops and knowledge graphs start — M5, in about ninety minutes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= M4 -->
+<section id="m4">
+  <p class="slot-time">15:00 – 15:30 · trainer-led</p>
+  <h2>M4 · Guardrails and evaluation</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <p>Your assistant works. Now the question your compliance and your own judgment will ask: <strong>can it
+  be trusted, and can you prove it?</strong> Two mechanisms, both cheap, both skipped by most teams:</p>
+  <table>
+    <thead><tr><th>Mechanism</th><th>What it does</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Input guardrail</strong></td><td>Bounces off-topic questions and injection attempts at the door — rules first, cheap model check second</td><td>Fractions of a cent per request</td></tr>
+      <tr><td><strong>Output guardrail</strong></td><td>Groundedness check: is every claim in the answer supported by the retrieved context? Catches confident fabrication before a technician acts on it</td><td>One cheap-model call</td></tr>
+      <tr><td><strong>Eval set + judge</strong></td><td>20 questions with reference answers, scored by an LLM judge. Quality becomes a number</td><td>Minutes to run</td></tr>
+      <tr><td><strong>Baseline → change → re-score</strong></td><td>Regression protection — the discipline your teams already apply to code, applied to AI</td><td>The habit is the cost</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>Your sentence as a manager, starting tomorrow:</strong> "No eval set, no deployment."
+  It is the single highest-leverage sentence in this programme — it converts every AI argument in your team
+  from opinion to measurement.</div>
+</section>
+
+<!-- ======================================================= LAB 4 -->
+<section id="lab4">
+  <p class="slot-time">15:30 – 16:20 · on your VM</p>
+  <h2>Lab 4 · Make it trustworthy</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="lab">
+    <div class="labhead"><h3>Switch to your VM</h3><span class="nb">labs/<strong>lab4_make_it_trustworthy.ipynb</strong></span></div>
+    <div class="labbody">
+      <p><strong>Goal:</strong> add guardrails to your Lab 3 assistant, score it against an eval set,
+      improve one thing, and prove the score moved.</p>
+      <ol class="c">
+        <li>Reload the Lab 3 index (saved automatically).</li>
+        <li>Input guardrail: watch it pass real questions and bounce injection and off-topic ones.</li>
+        <li>Groundedness check: watch it catch a fabricated answer.</li>
+        <li>Run the 8-question eval → your <strong>baseline score</strong>.</li>
+        <li>Improve one thing (k=6 + sharper prompt) → re-score → compare.</li>
+        <li>✏️ Add two questions of your own — the messy kind your help desk really gets.</li>
+      </ol>
+      <div class="checkpoint"><b>This number comes back tomorrow:</b> Day 2's cost lab is scored against your baseline — cutting the bill doesn't count if the eval score drops.</div>
+      <div class="paste" data-lab="4">
+        <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (4.7), paste the line here.
+        <textarea rows="2" placeholder="LAB4|baseline=...|improved=..."></textarea>
+        <button class="btn check" type="button">Check</button><span class="verdict"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= QUIZ 4 -->
+<section id="quiz4">
+  <h2>Quick check · trust</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="quiz">
+    <div class="qhead"><h3>Quiz 4</h3><span>Three questions, instant feedback.</span></div>
+
+    <div class="q-item">
+      <p class="qt">1. The most dangerous failure of a service assistant is:</p>
+      <button class="opt" data-ok="0">Refusing an off-topic question</button>
+      <button class="opt" data-ok="1">A confident, fluent, wrong answer a technician acts on</button>
+      <button class="opt" data-ok="0">Slow responses at peak load</button>
+      <div class="expl">Which is why the output guardrail checks groundedness before the answer ships — a refusal costs seconds, a fabrication can cost a site visit or worse.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">2. A team proposes swapping the embedding model "because it's newer". You say yes if:</p>
+      <button class="opt" data-ok="0">The vendor blog recommends it</button>
+      <button class="opt" data-ok="1">The eval score holds or improves on the same question set</button>
+      <button class="opt" data-ok="0">The demo looks better</button>
+      <div class="expl">Baseline → change → re-score. You did exactly this an hour ago; nothing about a bigger system changes the discipline.</div>
+    </div>
+
+    <div class="q-item">
+      <p class="qt">3. Who should write most of the 20 eval questions?</p>
+      <button class="opt" data-ok="0">The AI engineer who built the pipeline</button>
+      <button class="opt" data-ok="1">The people who answer those questions today — they know the messy, real phrasing</button>
+      <button class="opt" data-ok="0">The model itself, for efficiency</button>
+      <div class="expl">Eval sets written by the builder test what the system is good at. Eval sets written by the service desk test what the job actually is.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= M5 -->
+<section id="m5">
+  <p class="slot-time">16:20 – 16:45 · trainer demo, laptops closed</p>
+  <h2>M5 · When retrieval is not enough</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <p>The multi-hop question Lab 3 could not answer — <em>"which sites have F-07 tickets on drives affected by
+  SB-2025-04, and what one action closes all of them?"</em> — needs a <strong>join</strong>: tickets × bulletin
+  × release notes. On the projector you'll watch flat RAG fail it, then a knowledge graph answer it.</p>
+  <p><strong>The decision rule you take away</strong> (the demo exists only to make this rule stick):</p>
+  <table>
+    <thead><tr><th>Signal in your use case</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr><td>Questions are "what does X say / how do I fix Y" — answers live in passages</td><td>Flat RAG. A graph adds cost and no accuracy</td></tr>
+      <tr><td>Questions join entities — "which customers × which firmware × which bulletin"</td><td>Graph-backed retrieval, or honestly: sometimes just SQL</td></tr>
+      <tr><td>Not sure</td><td>Start flat, log the questions that fail, count them. The failures tell you if a graph pays</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======================================================= CLOSE -->
+<section id="close">
+  <p class="slot-time">16:45 – 17:00</p>
+  <h2>Day 1 close — and what you take home</h2>
+  <div class="rule" aria-hidden="true"></div>
+  <p><strong>The zero-licence variant:</strong> everything you built today — retrieval, guardrails, evals —
+  rebuilt on free and open-source components, walked through on the projector. The repo branch is yours to keep:
+  proof that the architecture, not the licences, is the asset.</p>
+  <p><strong>Bonus you saw today:</strong> the same Lab 3 pipeline with a face on it — <code>app.py</code>,
+  a small Streamlit app. That's what "your team ships" looks like: the pipeline you built, plus 100 lines of UI.</p>
+  <table>
+    <thead><tr><th>You leave today with</th><th>Use it for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Model comparison sheet</strong> (Lab 1)</td><td>Your model-routing rule</td></tr>
+      <tr><td><strong>Prompt library entry</strong> (Lab 2)</td><td>The measured pattern your team standardises</td></tr>
+      <tr><td><strong>Working RAG app + architecture reference</strong> (Lab 3)</td><td>The shape your engineers build against</td></tr>
+      <tr><td><strong>Eval harness + baseline score</strong> (Lab 4)</td><td>"No eval set, no deployment" — with proof</td></tr>
+      <tr><td><strong>Deployment decision tree</strong> (M1) · <strong>graph decision rule</strong> (M5)</td><td>Minutes-not-meetings answers to team requests</td></tr>
+      <tr><td><strong>The course repo</strong></td><td>Fork it Monday</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>Tomorrow — Day 2: Cost, Govern, Adopt.</strong> Your application becomes the object
+  under study: measure its real cost per query, cut the bill without moving your eval score, run a real workload
+  through the CRA checklist, build your 30→80% plan. <strong>Bring your baseline eval score.</strong></div>
+
+  <div class="summary" id="result">
+    <h3 style="font-size:1.6rem">Your Day 1 result</h3>
+    <div class="big" id="bigscore">0 / 16</div>
+    <p class="muted" id="scoredetail">Labs checked: 0 of 4 · quiz answers correct: 0 of 12</p>
+    <textarea id="sumtxt" readonly aria-label="Result summary to copy"></textarea>
+    <button class="btn" id="copyres" type="button">Copy my result</button>
+    <button class="btn ghost" id="resetpage" type="button">Reset this page</button>
+    <p class="muted" style="margin-top:8px">Paste the copied text into the AhaSlides board when the trainer asks.
+    Works offline — nothing on this page is sent anywhere; checks run in your browser.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>AI Engineering for Managers</b> · ABB Bangalore · 12–13 Nov 2026</div>
+    <div>DevPro Academy · Anil Kumar Sandrapuri</div>
+  </div>
+</footer>
+
+<script>
+  // Everything runs in the browser. Nothing is stored or sent anywhere.
+  var state = { quizRight: 0, quizDone: 0, labs: {1:false, 2:false, 3:false, 4:false},
+                labLines: {} };
+
+  function refresh(){
+    var labsOk = Object.values(state.labs).filter(Boolean).length;
+    var total = labsOk + state.quizRight;             // 4 labs + 12 quiz = 16
+    document.getElementById('bigscore').textContent = total + ' / 16';
+    document.getElementById('scoredetail').textContent =
+      'Labs checked: ' + labsOk + ' of 4 · quiz answers correct: ' + state.quizRight + ' of 12';
+    var lines = ['AI Engineering for Managers - Day 1 result',
+                 'Score: ' + total + '/16 (labs ' + labsOk + '/4, quiz ' + state.quizRight + '/12)'];
+    [1,2,3,4].forEach(function(n){ if(state.labLines[n]) lines.push(state.labLines[n]); });
+    document.getElementById('sumtxt').value = lines.join('\n');
+  }
+
+  // --- Quiz: click an option → mark right/wrong, reveal explanation, count score.
+  document.querySelectorAll('.q-item').forEach(function(item){
+    item.querySelectorAll('button.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(item.classList.contains('answered')) return;
+        item.classList.add('answered');
+        state.quizDone++;
+        if(btn.dataset.ok === '1'){ btn.classList.add('correct'); state.quizRight++; }
+        else{
+          btn.classList.add('wrong');
+          var right = item.querySelector('button.opt[data-ok="1"]');
+          if(right) right.classList.add('correct');
+        }
+        refresh();
+      });
+    });
+  });
+
+  // --- Paste & check validators. Format + one sanity rule per lab; values differ per person.
+  function num(s){ return parseFloat(String(s).replace('$','')); }
+  var validators = {
+    1: function(t){
+         var m = t.match(/LAB1\|mini_per_1k=\$?([\d.]+)\|frontier_per_1k=\$?([\d.]+)/);
+         if(!m) return 'Not the Lab 1 result line — run cell 1.5 and paste its whole output.';
+         if(num(m[2]) <= num(m[1])) return 'Frontier should cost more than mini — re-run the comparison.';
+         return true; },
+    2: function(t){
+         var m = t.match(/LAB2\|best=V(\d)\|quality=(\d+)\|cost_100k=\$?([\d.]+)/);
+         if(!m) return 'Not the Lab 2 result line — run cell 2.6 and paste its whole output.';
+         if(+m[2] < 40) return 'Quality under 40% — something went wrong in the bake-off; call the trainer.';
+         return true; },
+    3: function(t){
+         var m = t.match(/LAB3\|tokens_tuned=(\d+)\|tokens_big=(\d+)/);
+         if(!m) return 'Not the Lab 3 result line — run cell 3.7 and paste its whole output.';
+         if(+m[1] >= +m[2]) return 'Tuned chunks should use fewer input tokens than 8,000-char chunks — re-run 3.5.';
+         return true; },
+    4: function(t){
+         var m = t.match(/LAB4\|baseline=(\d+)\|improved=(\d+)/);
+         if(!m) return 'Not the Lab 4 result line — run cell 4.7 and paste its whole output.';
+         return true; }
+  };
+
+  document.querySelectorAll('.paste').forEach(function(box){
+    var n = +box.dataset.lab;
+    box.querySelector('button.check').addEventListener('click', function(){
+      var t = box.querySelector('textarea').value.trim();
+      var v = box.querySelector('.verdict');
+      var res = validators[n](t);
+      if(res === true){
+        state.labs[n] = true; state.labLines[n] = t.split('\n').pop();
+        v.textContent = '✔ Checked'; v.className = 'verdict ok';
+      } else {
+        state.labs[n] = false;
+        v.textContent = '✘ ' + res; v.className = 'verdict no';
+      }
+      refresh();
+    });
+  });
+
+  document.getElementById('copyres').addEventListener('click', function(){
+    var ta = document.getElementById('sumtxt'); ta.select();
+    try{ navigator.clipboard.writeText(ta.value); }catch(e){ document.execCommand('copy'); }
+    this.textContent = 'Copied ✔'; var b=this; setTimeout(function(){ b.textContent='Copy my result'; }, 1500);
+  });
+  document.getElementById('resetpage').addEventListener('click', function(){ location.reload(); });
+
+  refresh();
+</script>
+
+</body>
+</html>

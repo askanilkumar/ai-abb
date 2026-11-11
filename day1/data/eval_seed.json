@@ -1,0 +1,61 @@
+{
+  "description": "Starter eval set for the Axion service-knowledge assistant. 8 questions provided — your team adds 12 more in Lab 4 to reach 20. Each item: question, reference_answer (ground truth from the corpus), and source document.",
+  "items": [
+    {
+      "id": "Q01",
+      "question": "A VectorDrive 450 keeps tripping F-07 even though the filters are clean and the fan works. What should I check next?",
+      "reference_answer": "Check the firmware version and parameter P-210. If firmware is below 2.4.1 and switching frequency is 8 kHz or higher, this matches Service Bulletin SB-2025-04 — upgrade firmware to 2.4.1 or later. Interim workaround: reduce P-210 to 4 kHz. Hardware replacement is not required.",
+      "source": "vectordrive450_fault_codes.md, sb-2025-04_vectordrive_overtemp.md"
+    },
+    {
+      "id": "Q02",
+      "question": "What does fault E-22 on the AX-900 mean and how do I fix it permanently?",
+      "reference_answer": "E-22 is an ETH2 port lockup under sustained multicast burst (above ~8,000 pps), affecting firmware 3.2 and earlier. Permanent fix is upgrading to firmware 3.3 or later (3.4 recommended). Interim mitigations: enable storm guard, keep non-automation devices off the device VLAN. A power cycle only clears it temporarily. See SB-2026-01.",
+      "source": "ax900_fault_codes.md, sb-2026-01_ax900_eth2_lockup.md"
+    },
+    {
+      "id": "Q03",
+      "question": "Which Ethernet port of the AX-900 should the OptiPanel 7 connect to, and why?",
+      "reference_answer": "ETH1, the service/HMI port. Panels on ETH2 add OPC UA traffic to the device network and can push PROFINET jitter above the W-13 threshold. Bridging ETH1 and ETH2 through an external switch creates a loop and triggers fault E-17.",
+      "source": "optipanel7_manual.md, ax900_installation.md"
+    },
+    {
+      "id": "Q04",
+      "question": "How many concurrent OPC UA sessions does the AX-900 support?",
+      "reference_answer": "8 sessions on firmware up to 3.3; firmware 3.4 raises this to 12. Each OptiPanel uses one session and AxionStudio online uses another; exhaustion shows as BadMaxConnectionsReached on the panel.",
+      "source": "optipanel7_manual.md, ax900_firmware_release_notes.md"
+    },
+    {
+      "id": "Q05",
+      "question": "What is the recommended procedure for upgrading firmware on a redundant AX-900R pair?",
+      "reference_answer": "Upgrade the standby CPU first, fail over, then upgrade the former active CPU. Always export the diagnostic buffer and project archive before upgrading.",
+      "source": "ax900_firmware_release_notes.md"
+    },
+    {
+      "id": "Q06",
+      "question": "A drive trips F-02 every time a high-inertia fan stops. What are the options?",
+      "reference_answer": "F-02 is DC bus overvoltage from decelerating too fast on a regenerative load. Increase deceleration time P-111, or fit the BRK-450 braking chopper (frames A–C; frame D has one built in).",
+      "source": "vectordrive450_fault_codes.md, vectordrive450_overview.md"
+    },
+    {
+      "id": "Q07",
+      "question": "What causes sporadic E-11 fieldbus CRC errors on AXIO-16 stations and what is the fix?",
+      "reference_answer": "EMC coupling from VectorDrive motor cables — typically unshielded cables or cables routed in the same tray as the bus drop. Fix the motor cable shielding (360° bonding at both ends) and separate the routing by at least 100 mm.",
+      "source": "ax900_installation.md, ax900_fault_codes.md, axio16_manual.md"
+    },
+    {
+      "id": "Q08",
+      "question": "What should be included when raising a support ticket for an AX-900 fault?",
+      "reference_answer": "The fault code, firmware version, the diagnostic buffer export (CSV from AxionStudio → Online → Diagnostic Buffer) and the project archive. Tickets without the buffer export take on average three extra days to resolve.",
+      "source": "ax900_fault_codes.md"
+    }
+  ],
+  "multihop_demo_questions": [
+    {
+      "id": "MH1",
+      "question": "Which customer sites have open or repeated F-07 tickets on drives that SB-2025-04 says are affected, and what single action closes all of them?",
+      "why_it_breaks_flat_rag": "Needs tickets (site + fw + fault) joined to the bulletin's affected-version rule joined to the release notes — three sources, one join condition. Flat retrieval returns fragments of each but cannot do the join.",
+      "reference_answer": "Sites with F-07 tickets on firmware below 2.4.1 (see service_tickets.csv — e.g. Deccan Beverages Pune, Everpack Foods Coimbatore, Sierra Cement Monterrey, Bluegrass Bottling Louisville, SteelAxis Tubes Raipur). One action: upgrade those drives to firmware 2.4.1 or later."
+    }
+  ]
+}
