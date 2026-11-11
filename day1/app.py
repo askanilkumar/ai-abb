@@ -16,7 +16,7 @@ ENDPOINT    = os.environ.get("FOUNDRY_ENDPOINT", "")
 API_KEY     = os.environ.get("FOUNDRY_API_KEY", "")
 MODEL_MINI  = os.environ.get("MODEL_MINI", "gpt-4o-mini")
 MODEL_EMBED = os.environ.get("MODEL_EMBED", "text-embedding-3-small")
-PRICE_IN, PRICE_OUT = 0.15, 0.60  # USD per 1M tokens — edit to your deployment
+PRICE_IN, PRICE_OUT = 0.75, 4.50  # USD per 1M tokens — edit to your deployment
 
 def get_client():
     if any(h in ENDPOINT for h in ("openai.azure.com", "cognitiveservices", "services.ai.azure.com")):

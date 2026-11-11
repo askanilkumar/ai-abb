@@ -61,8 +61,8 @@ def ask(model, messages, temperature=0.2, **kw):
 # Prices in USD per 1 MILLION tokens.
 # >>> EDIT these to match the actual prices of your deployments. <<<
 PRICE = {
-    MODEL_MINI:     {"in": 0.15, "out": 0.60},
-    MODEL_FRONTIER: {"in": 2.50, "out": 10.00},
+    MODEL_MINI:     {"in": 0.75, "out": 4.50},
+    MODEL_FRONTIER: {"in": 5.50, "out": 33.00},
 }
 
 def cost_usd(result):
@@ -263,7 +263,7 @@ Measured: quality ___% at $___ per 100k tickets, model: mini
 """
 print(PROMPT_LIBRARY_ENTRY)'''),
 md('''## 2.5 — Stretch
-Run V4 on the frontier model and compare with V4-on-mini. Is the frontier model worth 15–20× the price *for this task*? (This is the model-routing decision in M7 tomorrow.)
+Run V4 on the frontier model and compare with V4-on-mini. Is the frontier model worth ~7× the price *for this task*? (This is the model-routing decision in M7 tomorrow.)
 
 ---
 ✅ **Done.** You have measured proof that prompt design is an engineering decision with a budget attached — and the start of a prompt library.'''),
