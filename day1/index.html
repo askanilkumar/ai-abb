@@ -158,20 +158,21 @@
   <div class="wrap mast">
     <span class="doc-id">SINGLE POINT OF CONTACT · DAY 1 · 12 NOV 2026</span>
     <h1>AI Engineering for Managers <span class="day">— Day 1</span></h1>
-    <p class="sub">Choose and Build. This page carries the whole day — content, labs and quizzes, in order.
-    Stay on this page; it tells you when to switch to your lab VM and when to come back.</p>
+    <p class="sub">Day 1 is about choosing and building. This one page carries the whole day for you: the topics, the labs
+    and the quizzes, in the order we will do them. Please keep this page open; it will tell you when to move to
+    your lab machine and when to come back here.</p>
   </div>
   <div class="factstrip">
     <div><b>Venue</b><span>ABB Bangalore</span></div>
     <div><b>Time</b><span>09:00 – 17:00</span></div>
-    <div><b>Your machine</b><span>Lab VM — link on your seat card</span></div>
+    <div><b>Your machine</b><span>A lab machine in the cloud; the trainer shares your link</span></div>
     <div><b>Faculty</b><span>Anil Kumar Sandrapuri · DevPro Academy</span></div>
   </div>
 </header>
 
 <nav class="flow" aria-label="Day flow">
   <div class="wrap">
-    <a href="flow.html">Day flow ↗</a>
+    <a href="tokens.html">Tokens playground ↗</a>
     <a href="#start">Start</a>
     <a href="#m1">M1 Tiers</a>
     <a href="#lab1" class="labstep">Lab 1</a>
@@ -194,29 +195,46 @@
 
 <!-- ======================================================= START -->
 <section id="start">
-  <p class="slot-time">09:00 – 09:25</p>
+  <p class="slot-time">09:00 – 09:45</p>
   <h2>Start here — the five decisions, the case, your machine</h2>
   <div class="rule" aria-hidden="true"></div>
+  <div class="outcomes"><strong>How today runs</strong>
+    <ol>
+      <li>Welcome and trainer introduction</li>
+      <li>AhaSlides: who's in the room, and what you want from today</li>
+      <li>Your lab machine: open your Bastion link, check you can log in</li>
+      <li>This page: the case, your role, how every lab works</li>
+      <li>AI Engineering, the big picture: <a href="https://askanilkumar.github.io/AI_Overview/" target="_blank" rel="noopener">interactive overview ↗</a></li>
+      <li>Tokens, cost and the next token: <a href="tokens.html" target="_blank">tokens playground ↗</a></li>
+      <li><a href="#m1">M1</a> Where AI runs → <a href="#lab1">Lab 1</a> Compare models</li>
+      <li><a href="#m2">M2</a> Prompting → <a href="#lab2">Lab 2</a> Prompt bake-off</li>
+      <li><a href="#m3">M3</a> Retrieval → <a href="#lab3">Lab 3</a> Build the RAG pipeline</li>
+      <li><a href="#m4">M4</a> Guardrails and evals → <a href="#lab4">Lab 4</a> Make it trustworthy</li>
+      <li><a href="#m5">M5</a> When retrieval is not enough</li>
+      <li><a href="#close">Close</a>: your GO / NO-GO and your Monday memo</li>
+    </ol>
+  </div>
 
-  <p>Your teams are at roughly <strong>30% AI adoption</strong>. The target is <strong>80%</strong>.
-  What stands between those numbers is not enthusiasm — it is five decisions that someone with
-  authority has to make well:</p>
+  <p>Today roughly <strong>30%</strong> of the work in your teams uses AI, and the target is <strong>80%</strong>.
+  Interest is not the problem. What gets a team from 30% to 80% is a set of five decisions that a manager has to
+  take well. These two days are built around those five decisions:</p>
   <table>
     <thead><tr><th>Decision</th><th>The question</th><th>When</th></tr></thead>
     <tbody>
-      <tr><td><strong>1 · Choose</strong></td><td>Where does this AI workload run?</td><td>Today, M1</td></tr>
-      <tr><td><strong>2 · Build</strong></td><td>What does a trustworthy AI application look like?</td><td>Today, M2–M5</td></tr>
-      <tr><td><strong>3 · Cost</strong></td><td>What does it cost, and how do I budget it?</td><td>Tomorrow</td></tr>
-      <tr><td><strong>4 · Govern</strong></td><td>How do I defend it to compliance (CRA)?</td><td>Tomorrow</td></tr>
-      <tr><td><strong>5 · Adopt</strong></td><td>How do I get my team from 30% to 80%?</td><td>Tomorrow</td></tr>
+      <tr><td><strong>1 · Choose</strong></td><td>Where should this AI work run: in a ready-made tool, on a cloud model service, or on our own servers?</td><td>Today, M1</td></tr>
+      <tr><td><strong>2 · Build</strong></td><td>What does a reliable AI application look like, and how do we build one?</td><td>Today, M2–M5</td></tr>
+      <tr><td><strong>3 · Cost</strong></td><td>How much will it cost, and how do I plan the budget for it?</td><td>Tomorrow</td></tr>
+      <tr><td><strong>4 · Govern</strong></td><td>How do I satisfy security and compliance, for example the EU Cyber Resilience Act (CRA)?</td><td>Tomorrow</td></tr>
+      <tr><td><strong>5 · Adopt</strong></td><td>How do I take my team from 30% AI usage to 80%?</td><td>Tomorrow</td></tr>
     </tbody>
   </table>
 
   <h3 style="font-size:1.5rem; margin:14px 0 6px">The case: Axion Controls</h3>
-  <p><strong>Axion Controls</strong> is a fictional maker of industrial automation equipment. Its service
-  desk fields hundreds of tickets a month against four products, two open service bulletins and years of
-  firmware history. Today you build the <strong>service-knowledge assistant</strong> its engineers deserve.
-  Everything is synthetic — no ABB data is anywhere in this room.</p>
+  <p><strong>Axion Controls</strong> is an imaginary company that makes industrial automation equipment. Its
+  service desk receives hundreds of support tickets every month for four products. Engineers have to search
+  through manuals, two service bulletins and years of firmware release notes to answer them. Today we build a
+  <strong>service assistant</strong> that answers these questions from Axion's own documents. All the data is
+  made up for this training. There is no ABB data anywhere in this room.</p>
   <table>
     <thead><tr><th>Product</th><th>What it is</th><th>Fault prefix</th><th>Current firmware</th></tr></thead>
     <tbody>
@@ -226,20 +244,26 @@
       <tr><td><strong>OptiPanel 7</strong></td><td>7-inch touch HMI</td><td>service log</td><td>—</td></tr>
     </tbody>
   </table>
-  <div class="note"><strong>Two service bulletins to remember</strong> — they run through everything today:<br>
-  <strong>SB-2025-04</strong> — VectorDrive 450 trips F-07 overtemp on firmware below 2.4.1 at ≥ 8 kHz switching.<br>
-  <strong>SB-2026-01</strong> — AX-900 ETH2 port lockup (E-22) on firmware 3.2 and earlier.</div>
+  <div class="note"><strong>Please remember these two service bulletins.</strong> A service bulletin is the maker's official note
+  about a known problem and its fix, and these two come up again and again today:<br>
+  <strong>SB-2025-04:</strong> the VectorDrive 450 stops with an overheating fault (F-07) when it runs old firmware
+  (below 2.4.1) at a high switching setting (8 kHz or more). The fix is a firmware update, not a new fan.<br>
+  <strong>SB-2026-01:</strong> the network port of the AX-900 controller freezes (fault E-22) on firmware 3.2 or
+  older. The fix is again a firmware update.</div>
 
-  <h3 style="font-size:1.5rem; margin:14px 0 6px">Your lab machine — set up once, at 09:55</h3>
+  <h3 style="font-size:1.5rem; margin:14px 0 6px">Your lab machine — set up once, at the start</h3>
   <ol class="c">
-    <li>Take the seat card with your name: VM name, link, username, password.</li>
-    <li>Open the link in your browser — it is an <strong>azure.com</strong> address and opens a full Windows
-        desktop in the tab. No install, no VPN, no Azure account, nothing on your ABB laptop.</li>
-    <li>On the desktop, open <strong>VS Code</strong> → folder <strong>C:\ai-abb\day1</strong>.
-        All four lab notebooks are in <code>labs/</code>; model endpoints are pre-configured.</li>
+    <li>The trainer will give you your machine name (lab-vm-XX), a link, a username and a password.</li>
+    <li>Open the link in your browser. It is an <strong>azure.com</strong> address, and it opens a complete
+        Windows desktop inside your browser tab. You do not need to install anything, you do not need VPN, and you
+        do not need an Azure account. Nothing gets installed on your ABB laptop.</li>
+    <li>On that desktop, open <strong>VS Code</strong>, then <em>File → Open Folder</em> and choose
+        <strong>C:\ai-abb\day1</strong>. The four lab notebooks are inside the <code>labs</code> folder. The
+        connection to the AI models is already set up for you.</li>
   </ol>
-  <p class="muted">Three ground rules for the day: hands on, not hands up (ask your pair partner first) ·
-  numbers, not impressions · everything here is fictional.</p>
+  <p class="muted">Three simple rules for today. First, try it yourself, and if you are stuck, ask your partner before raising
+  your hand. Second, we decide based on numbers we measure, not on how an answer feels. Third, everything in
+  the case is imaginary, so feel free to experiment.</p>
 
   <div class="outcomes"><strong>By 17:00 you will be able to:</strong>
     <ol>
@@ -273,9 +297,10 @@
   <h3 style="font-size:1.5rem; margin:18px 0 6px">Your role today: Axion's AI steering committee</h3>
   <div class="note"><strong>Axion's CEO has one question for this room, due at 17:00:</strong><br>
   <em>"Do we ship the service-knowledge assistant to our field engineers, and on what terms?"</em><br>
-  Every lab today produces one piece of <strong>evidence</strong> for that decision. You know plants and
-  products better than any model does; today you learn how to make AI trustworthy on top of what you know.
-  At the close, each table gives a two-minute <strong>GO / NO-GO</strong> with its own numbers.</div>
+  Each lab today gives you one piece of <strong>evidence</strong> for this decision. You know plants and
+  products far better than any AI model does. Today you will learn how to make AI reliable on top of that
+  knowledge. At the end of the day, each table will take two minutes to give its answer, <strong>GO or
+  NO-GO</strong>, using the numbers it measured.</div>
   <p><strong>Every lab runs the same five steps</strong>, so you always know what comes next:</p>
   <div class="rhythm" aria-label="The lab rhythm">
     <div><b>1 · Predict</b><span>Vote on AhaSlides before you run anything</span></div>
@@ -290,63 +315,66 @@
 
 <!-- ======================================================= M1 -->
 <section id="m1">
-  <p class="slot-time">09:25 – 09:55 · trainer-led</p>
+  <p class="slot-time">09:45 – 10:10 · trainer-led</p>
   <h2>M1 · Where AI runs — the three tiers</h2>
   <div class="rule" aria-hidden="true"></div>
 
-  <p>Every AI request your team makes lands in one of three tiers. The tier decides the cost model,
-  the data exposure, and how much engineering you own. Most bad AI decisions are tier mismatches.</p>
+  <p>Whenever your team uses AI, it is using one of three options. We call them tiers. The tier you pick decides
+  how you pay, where your data goes, and how much your own team has to build and maintain. Many poor AI
+  decisions happen simply because a team picked the wrong tier for the job.</p>
   <table>
-    <thead><tr><th></th><th>Tier 1 · SaaS assistants</th><th>Tier 2 · Managed endpoints</th><th>Tier 3 · Self-hosted</th></tr></thead>
+    <thead><tr><th></th><th>Tier 1 · Ready-made AI tools</th><th>Tier 2 · Cloud model services</th><th>Tier 3 · Run it yourself</th></tr></thead>
     <tbody>
-      <tr><td><strong>What</strong></td><td>Abby, Basic Copilot — someone else's app</td><td>Serverless model APIs (Azure AI Foundry — what your VM uses today)</td><td>Open models on your own compute</td></tr>
-      <tr><td><strong>You control</strong></td><td>Almost nothing — prompts only</td><td>Prompts, context, guardrails, routing</td><td>Everything, including weights</td></tr>
-      <tr><td><strong>Cost model</strong></td><td>Per seat / bundled</td><td>Per token — scales with use</td><td>Per GPU-hour — scales with capacity</td></tr>
-      <tr><td><strong>Data path</strong></td><td>Vendor's terms</td><td>Your tenancy, your region</td><td>Never leaves your network</td></tr>
-      <tr><td><strong>Right for</strong></td><td>Individual productivity</td><td>Team applications — the 80% case</td><td>Hard data constraints, high steady volume</td></tr>
-      <tr><td><strong>Wrong when</strong></td><td>You need it in a workflow or product</td><td>Air-gapped or extreme-volume workloads</td><td>You have no platform team for it</td></tr>
+      <tr><td><strong>What</strong></td><td>Tools like Abby and Copilot that you simply log in to and use</td><td>AI models you call from your own application through the cloud, paid per use. Today's labs use this (Azure AI Foundry).</td><td>Open-source models running on your own servers</td></tr>
+      <tr><td><strong>You control</strong></td><td>Very little. You can only change what you type.</td><td>The instructions, the documents the model sees, the safety checks, and which model handles which task</td><td>Everything, including the model itself</td></tr>
+      <tr><td><strong>Cost model</strong></td><td>A fixed fee per user per month (a per-user licence)</td><td>Pay for what you use, counted in tokens</td><td>Pay for the servers by the hour, whether you use them or not</td></tr>
+      <tr><td><strong>Data path</strong></td><td>As per the tool vendor's terms</td><td>Stays in your company's own cloud account and region</td><td>Never leaves your own network</td></tr>
+      <tr><td><strong>Right for</strong></td><td>Helping one person work faster</td><td>Team workflows and AI inside your products. This covers most cases.</td><td>Very strict data rules, or very heavy usage all day, every day</td></tr>
+      <tr><td><strong>Wrong when</strong></td><td>You need AI inside a team process or a product</td><td>Systems that must stay fully offline, or extremely heavy usage</td><td>You do not have a team to run and maintain the servers</td></tr>
     </tbody>
   </table>
 
-  <p><strong>The deployment decision tree</strong> — your first takeaway framework. It lives in the repo as
-  an editable template; use it on any request your team brings you:</p>
+  <p><strong>The decision tree for "where should this AI run?"</strong> This is your first take-home tool. An editable
+  copy is in the course files. Use these four questions whenever your team brings you a new AI request:</p>
   <div class="tree">
-    <p class="q">1 · Is this one person being faster, or a team workflow?</p>
-    <p class="a">One person → Tier 1 (Abby / Copilot). Done — don't build what a seat licence solves.</p>
-    <p class="q">2 · Can the data leave your tenancy under vendor terms?</p>
-    <p class="a">No, and it can't even sit in your cloud region → Tier 3. Otherwise continue.</p>
-    <p class="q">3 · Is volume steady and very high (always-on, millions of calls)?</p>
-    <p class="a">Yes → price Tier 3 against Tier 2 before committing. No / spiky / unknown → Tier 2.</p>
-    <p class="q">4 · Default</p>
-    <p class="a"><strong>Tier 2.</strong> Start serverless, measure, move only with evidence. Today's labs run here.</p>
+    <p class="q">1 · Is this about one person working faster, or about a process the whole team uses?</p>
+    <p class="a">If it is one person, use Tier 1, that is Abby or Copilot. You can stop here. There is no need to build something when a per-user tool the company already pays for does the job.</p>
+    <p class="q">2 · Is this data allowed to go to a cloud AI service in your company's cloud account?</p>
+    <p class="a">If the data cannot leave your own network at all, you need Tier 3. Otherwise, go to the next question.</p>
+    <p class="q">3 · Will it be used very heavily and steadily, for example millions of requests, all day, every day?</p>
+    <p class="a">If yes, compare the cost of Tier 3 with Tier 2 before you decide. If no, or if usage goes up and down, or if you do not know yet, choose Tier 2.</p>
+    <p class="q">4 · When in doubt</p>
+    <p class="a"><strong>Start with Tier 2.</strong> Begin with a cloud model service, measure the real usage and cost, and move only when the numbers tell you to. All of today's labs run on Tier 2.</p>
   </div>
-  <div class="note"><strong>Abby's place in this picture:</strong> Abby fronts Claude and GPT models inside ABB —
-  that tells you the model families are already accepted here. What Abby can't give your team is a workflow:
-  no API into your tools, no custom retrieval over your documents, no evals. That gap is exactly what Tier 2 fills,
-  and exactly what you build today.</div>
+  <div class="note"><strong>Where does Abby fit?</strong> Abby gives ABB employees access to Claude and GPT models, so these model
+  families are already approved for use here. But Abby is a Tier 1 tool for individuals. It cannot plug into your
+  team's own tools, it cannot search your team's documents in a controlled way, and you cannot measure its answer
+  quality with a test set. Filling exactly this gap is the job of Tier 2, and that is what we build today.</div>
 </section>
 
 <!-- ======================================================= LAB 1 -->
 <section id="lab1">
-  <p class="slot-time">09:55 – 10:45 · on your VM</p>
+  <p class="slot-time">10:10 – 11:00 · on your VM</p>
   <h2>Lab 1 · Stand up and compare</h2>
   <div class="rule" aria-hidden="true"></div>
   <div class="lab">
     <div class="labhead"><h3>Switch to your VM now</h3><span class="nb">labs/<strong>lab1_stand_up_and_compare.ipynb</strong></span></div>
     <div class="labbody">
-      <p><strong>Goal:</strong> prove your environment works, then call two very different models on the same
-      Axion field report and put numbers on the difference.</p>
+      <p><strong>Goal:</strong> first check that your lab machine works. Then send the same Axion field problem to a
+      small, cheap model and to a large, expensive model, and compare their answers with real numbers.</p>
       <p class="plain"><strong>In plain words:</strong> we ask two AI models the same question and compare answer, speed and price. That's all. It shows you what you are paying for.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>15 min</span></div><div><b>3 · Challenge</b><span>17 min</span></div><div><b>4 · Reveal</b><span>10 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> A VectorDrive 450 keeps tripping F-07 overtemp. The frontier model costs about 7× the mini model. What happens?<ol type="A"><li>The frontier model finds the real fix; the mini model doesn't</li><li>Both find the same fix; the frontier model just writes better</li><li>Neither finds the real fix</li></ol></div>
       <ol class="c">
-        <li>Open the Bastion link from your seat card → Windows desktop → VS Code → the Lab 1 notebook.</li>
-        <li>Run the cells top to bottom (<em>Run All</em> works). First call = environment proven.</li>
-        <li>Same prompt to the mini model and the frontier model; read both answers.</li>
-        <li>Build the comparison table: latency, tokens, cost per 1,000 queries.</li>
-        <li>Answer the ✏️ YOUR TURN questions in the notebook.</li>
+        <li>Open your lab machine link, then VS Code, then the Lab 1 notebook from the <code>labs</code> folder.</li>
+        <li>Run the cells from top to bottom. The <em>Run All</em> button does this in one click. If the first cell
+        prints "Client ready", your machine is working.</li>
+        <li>The same question goes to the small model ("mini") and the large model ("frontier"). Read both answers.</li>
+        <li>Look at the comparison table: how long each answer took, how many tokens it used, and what 1,000 such questions would cost.</li>
+        <li>Answer the questions marked ✏️ YOUR TURN in the notebook.</li>
       </ol>
-      <div class="checkpoint"><b>Checkpoint:</b> did the expensive model change the <em>decision</em>, or only the prose? Y / N — hold that thought for Quiz 1.</div>
+      <div class="checkpoint"><b>Checkpoint:</b> did the expensive model lead to a different <em>decision</em>, or did it only write better
+      sentences? Note your answer, yes or no. We will come back to it in Quiz 1.</div>
       <div class="paste" data-lab="1">
         <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (1.5), paste the printed line here, press Check.
         <textarea rows="2" placeholder="LAB1|mini_per_1k=...|frontier_per_1k=..."></textarea>
@@ -364,7 +392,7 @@
         <textarea rows="2" data-card="1" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
-  <p class="muted">☕ Break 10:45 – 11:00. Every VM proven working before it.</p>
+  <p class="muted">☕ Break 11:00 – 11:15.</p>
 </section>
 
 <!-- ======================================================= QUIZ 1 -->
@@ -375,73 +403,76 @@
     <div class="qhead"><h3>Quiz 1</h3><span>Click an answer — instant feedback. Nothing is recorded.</span></div>
 
     <div class="q-item">
-      <p class="qt">1. Your test team wants an assistant that reads your internal test specs and drafts test cases inside your pipeline. Which tier?</p>
-      <button class="opt" data-ok="0">Tier 1 — ask Abby, it already knows AI</button>
-      <button class="opt" data-ok="1">Tier 2 — a managed endpoint with your own retrieval over the specs</button>
-      <button class="opt" data-ok="0">Tier 3 — buy GPUs first, decide later</button>
-      <div class="expl">A team workflow over your own documents is the textbook Tier 2 case: your context, your guardrails, pay per token. Abby has no path into your pipeline, and Tier 3 needs evidence you don't have yet.</div>
+      <p class="qt">1. Your test team wants an AI assistant that reads your internal test specifications and writes draft test cases inside your build pipeline. Which tier should they use?</p>
+      <button class="opt" data-ok="0">Tier 1: just use Abby, it already knows AI</button>
+      <button class="opt" data-ok="1">Tier 2: a cloud model service that searches your own test specifications</button>
+      <button class="opt" data-ok="0">Tier 3: buy our own servers first and decide later</button>
+      <div class="expl">This is a team process that works on your own documents, which is the standard Tier 2 case. You control what the model sees and add your own checks, and you pay only for what you use. Abby cannot connect to your pipeline, and buying your own servers (Tier 3) needs usage numbers that you do not have yet.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">2. In Lab 1 the frontier model cost roughly 7× the mini model. When is that premium worth paying?</p>
-      <button class="opt" data-ok="0">Always — quality first</button>
-      <button class="opt" data-ok="0">Never — cost first</button>
-      <button class="opt" data-ok="1">When the measured answer changes a decision the cheap model gets wrong</button>
-      <div class="expl">Routing is an evidence question. If the mini model's answer leads to the same action, the premium bought nothing. You measured this yourself an hour ago.</div>
+      <p class="qt">2. In Lab 1 the large model cost about 7 times more than the small model. When is it worth paying that extra?</p>
+      <button class="opt" data-ok="0">Always, because quality comes first</button>
+      <button class="opt" data-ok="0">Never, because cost comes first</button>
+      <button class="opt" data-ok="1">When its answer leads to a better decision, in cases where the cheap model's answer leads to a wrong one</button>
+      <div class="expl">Choosing a model should be based on evidence. If the small model's answer leads to the same action, the extra money bought you nothing. You measured this yourself in Lab 1.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">3. Neither model knew about SB-2025-04 without being given the manuals. Why not?</p>
+      <p class="qt">3. Neither model knew about bulletin SB-2025-04 when we did not give it the manuals. Why?</p>
       <button class="opt" data-ok="0">The models are too small</button>
-      <button class="opt" data-ok="1">Models know their training data, not your documents — your knowledge has to be supplied as context</button>
+      <button class="opt" data-ok="1">A model only knows what it was trained on, not your company's documents. You have to give it your information along with the question.</button>
       <button class="opt" data-ok="0">Azure blocks that information</button>
-      <div class="expl">This is the single most important sentence of the morning — and the entire reason Lab 3 (retrieval) exists.</div>
+      <div class="expl">This is the most important idea of the morning. It is the whole reason we build Lab 3, where the model first looks up your documents and then answers.</div>
     </div>
   </div>
 </section>
 
 <!-- ======================================================= M2 -->
 <section id="m2">
-  <p class="slot-time">11:00 – 11:30 · trainer-led</p>
+  <p class="slot-time">11:15 – 11:40 · trainer-led</p>
   <h2>M2 · Prompting for cost and quality</h2>
   <div class="rule" aria-hidden="true"></div>
-  <p>Not prompt-engineering basics — you've had those. This is prompting as a <strong>production design
-  discipline</strong>, where every design choice shows up on the invoice.</p>
+  <p>A prompt is the instruction you give to the model. This session is not about prompt basics. It is about
+  writing prompts for real applications that run thousands of times a day, where <strong>every choice in the
+  prompt shows up in the monthly bill</strong>.</p>
   <table>
-    <thead><tr><th>Pattern</th><th>What it is</th><th>Why a manager cares</th></tr></thead>
+    <thead><tr><th>Good practice</th><th>What it means</th><th>Why it matters to you as a manager</th></tr></thead>
     <tbody>
-      <tr><td><strong>Structured output</strong></td><td>Demand JSON against a schema, not prose</td><td>Parseable, testable, pipeline-ready — and shorter outputs cost less</td></tr>
-      <tr><td><strong>Context engineering</strong></td><td>Supply the reference facts the task needs, nothing more</td><td>Facts in context beat facts hoped-for in training; extra context is paid noise</td></tr>
-      <tr><td><strong>Cache-friendly design</strong></td><td>Stable system prompt, variable part last</td><td>Providers price cached input tokens at a fraction — but only identical, stable prefixes cache</td></tr>
-      <tr><td><strong>Model-appropriate scaffolding</strong></td><td>Mini models need rules and examples; frontier models need less</td><td>Scaffolding is what makes the ~7×-cheaper model usable — it's where routing savings come from</td></tr>
+      <tr><td><strong>Ask for a fixed format</strong></td><td>Ask the model to fill a fixed format (for example JSON fields) instead of writing free paragraphs</td><td>Software can read and test the answer easily, and shorter answers cost less</td></tr>
+      <tr><td><strong>Give the right facts</strong></td><td>Include the reference facts the task needs, and nothing more</td><td>A model given the facts is more accurate than one that has to guess. But every extra page you send is paid for, even if it does not help.</td></tr>
+      <tr><td><strong>Keep the fixed part first</strong></td><td>Put the instructions that never change at the start, and the part that changes (the question) at the end</td><td>Providers remember ("cache") a repeated starting text and charge much less for it. This only works when the start is exactly the same every time.</td></tr>
+      <tr><td><strong>Help the small model</strong></td><td>Small models need clear rules and a few examples; large models need fewer</td><td>Good rules and examples let the much cheaper small model do the job. This is where most of the savings come from.</td></tr>
     </tbody>
   </table>
-  <div class="note"><strong>The anti-pattern to ban:</strong> the "kitchen sink" prompt — 300 words of
-  politely-worded prose instructions, rewritten per call. It costs several times more than a tight schema
-  prompt, caches never, and usually scores <em>worse</em>. You will prove this yourself in about ten minutes.</div>
+  <div class="note"><strong>The habit to stop:</strong> the "kitchen sink" prompt. This is a long, 300-word paragraph of polite
+  instructions that tries to cover every possible case. It costs several times more than a short prompt with a
+  fixed format, it never gets the caching discount, and it usually gives <em>worse</em> results. You will see
+  this for yourself in the next lab.</div>
 </section>
 
 <!-- ======================================================= LAB 2 -->
 <section id="lab2">
-  <p class="slot-time">11:30 – 12:30 · on your VM</p>
+  <p class="slot-time">11:40 – 12:40 · on your VM</p>
   <h2>Lab 2 · Four prompt designs, measured</h2>
   <div class="rule" aria-hidden="true"></div>
   <div class="lab">
     <div class="labhead"><h3>Switch to your VM</h3><span class="nb">labs/<strong>lab2_prompt_designs_measured.ipynb</strong></span></div>
     <div class="labbody">
-      <p><strong>Goal:</strong> one real task — classify Axion service tickets — four prompt designs,
-      scored for quality and cost. Find out which design your team should standardise on.</p>
+      <p><strong>Goal:</strong> take one real task, sorting Axion support tickets into categories, and try four
+      different ways of writing the prompt. Each one gets a quality score and a cost. Then decide which style your
+      team should use as its standard.</p>
       <p class="plain"><strong>In plain words:</strong> the same job, four ways of asking. We score which way of asking works best and costs least.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>12 min</span></div><div><b>3 · Challenge</b><span>25 min</span></div><div><b>4 · Reveal</b><span>15 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> Four prompts do the same job. Which one wins on quality?<ol type="A"><li>V1 · one line, no rules</li><li>V2 · 300-word "kitchen sink" covering every case</li><li>V3 · a few worked examples</li><li>V4 · short, with a strict output schema</li></ol></div>
       <ol class="c">
-        <li>Run the bake-off: V1 naive · V2 kitchen sink · V3 few-shot · V4 structured schema. 20 calls, one table.</li>
-        <li>Read the table like a manager: quality %, cost per 100k tickets.</li>
-        <li>Check which designs caught the SB-2025-04 ticket — the one that saves a site visit.</li>
-        <li>✏️ Change one thing in V4, re-run, see if quality or tokens moved.</li>
-        <li>Write your first prompt-library entry in the notebook.</li>
+        <li>Run the comparison of the four prompts: V1 is a one-line prompt, V2 is the long "kitchen sink", V3 gives a few worked examples, and V4 asks for a strict fixed format. The notebook makes 20 calls and shows one results table.</li>
+        <li>Read the table as a manager would: what percentage it got right, and what 100,000 tickets would cost.</li>
+        <li>Check which prompts correctly spotted the SB-2025-04 ticket. Catching it saves an engineer an unnecessary site visit.</li>
+        <li>✏️ Change one thing in V4, run it again, and see whether the quality or the token count changed.</li>
+        <li>Write your first entry for your team's prompt library in the notebook.</li>
       </ol>
-      <div class="checkpoint"><b>Checkpoint:</b> was the longest prompt the best one? Y / N</div>
+      <div class="checkpoint"><b>Checkpoint:</b> was the longest prompt also the best one? Note yes or no.</div>
       <div class="paste" data-lab="2">
         <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (2.6), paste the line here.
         <textarea rows="2" placeholder="LAB2|best=V4|quality=...|cost_100k=..."></textarea>
@@ -460,7 +491,7 @@
         <textarea rows="2" data-card="2" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
-  <p class="muted">🍽 Lunch 12:30 – 13:15.</p>
+  <p class="muted">🍽 Lunch 12:40 – 13:25.</p>
 </section>
 
 <!-- ======================================================= QUIZ 2 -->
@@ -471,75 +502,78 @@
     <div class="qhead"><h3>Quiz 2</h3><span>Three questions, instant feedback.</span></div>
 
     <div class="q-item">
-      <p class="qt">1. Your engineer shows you a 400-word prompt that "covers every case". What do you ask for?</p>
-      <button class="opt" data-ok="0">Approve it — thorough is good</button>
-      <button class="opt" data-ok="1">The measured comparison against a short schema-constrained version</button>
-      <button class="opt" data-ok="0">An even longer prompt to be safe</button>
-      <div class="expl">In Lab 2 the kitchen-sink prompt cost multiples of V4 for equal or worse quality. "Show me the bake-off" is now your standard sentence.</div>
+      <p class="qt">1. An engineer in your team shows you a 400-word prompt that "covers every case". What should you ask for?</p>
+      <button class="opt" data-ok="0">Approve it, because detailed is good</button>
+      <button class="opt" data-ok="1">A measured comparison against a short prompt with a fixed output format</button>
+      <button class="opt" data-ok="0">An even longer prompt, to be safe</button>
+      <div class="expl">In Lab 2 the long prompt cost several times more than V4 and gave the same or worse quality. From now on, your standard question to the team is: "Show me the comparison."</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">2. Why does a stable system prompt save real money at scale?</p>
+      <p class="qt">2. Why does keeping the instructions exactly the same every time save real money when usage grows?</p>
       <button class="opt" data-ok="0">Shorter prompts are always smarter</button>
-      <button class="opt" data-ok="1">Identical prompt prefixes get cached, and cached input tokens are billed at a fraction of the price</button>
-      <button class="opt" data-ok="0">Azure gives loyalty discounts</button>
-      <div class="expl">Caching only works on stable, identical prefixes — a prompt that changes every call never caches. Design decision → invoice line.</div>
+      <button class="opt" data-ok="1">Providers remember a repeated starting text (caching) and charge much less for it</button>
+      <button class="opt" data-ok="0">Azure gives a loyalty discount</button>
+      <div class="expl">Caching only works when the start of the prompt is exactly the same every time. A prompt that changes with every call never gets the discount. A small design choice here shows up directly in the bill.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">3. A mini model fails a task a frontier model passes. The first engineering response is:</p>
-      <button class="opt" data-ok="0">Switch everything to the frontier model</button>
-      <button class="opt" data-ok="1">Add scaffolding — rules, examples, schema — and re-measure the mini model</button>
-      <button class="opt" data-ok="0">Abandon the use case</button>
-      <div class="expl">V3/V4 scaffolding is what unlocked the cheap model in Lab 2. Route up only when scaffolding measurably fails — that discipline is most of your AI budget.</div>
+      <p class="qt">3. The small model fails a task that the large model handles. What should the team try first?</p>
+      <button class="opt" data-ok="0">Move everything to the large model</button>
+      <button class="opt" data-ok="1">Give the small model clear rules, examples and a fixed format, then measure it again</button>
+      <button class="opt" data-ok="0">Drop the idea</button>
+      <div class="expl">In Lab 2, the rules and examples in V3 and V4 are what made the cheap model good enough. Move to the expensive model only when this has been tried and measured, and still fails. This one habit controls most of your AI budget.</div>
     </div>
   </div>
 </section>
 
 <!-- ======================================================= M3 -->
 <section id="m3">
-  <p class="slot-time">13:15 – 13:45 · trainer-led</p>
+  <p class="slot-time">13:25 – 13:50 · trainer-led</p>
   <h2>M3 · Retrieval done properly</h2>
   <div class="rule" aria-hidden="true"></div>
-  <p>RAG — retrieval-augmented generation — is how the model gets <em>your</em> knowledge: find the relevant
-  passages, hand them to the model as context, answer with citations. Four stages, each with a dial your
-  team will set wrong the first time:</p>
+  <p>RAG stands for "retrieval-augmented generation". In simple words, it means <em>look it up first, then
+  answer</em>. The system finds the right passages in your documents, gives them to the model along with the
+  question, and the model answers with references to its sources. There are four stages, and each one has a
+  setting that teams usually get wrong the first time:</p>
   <table>
-    <thead><tr><th>Stage</th><th>The dial</th><th>The classic failure</th></tr></thead>
+    <thead><tr><th>Stage</th><th>The setting</th><th>The common mistake</th></tr></thead>
     <tbody>
-      <tr><td><strong>Chunk</strong></td><td>Chunk size & overlap</td><td>Whole-document chunks: retrieval gets vague, every question costs 5× in tokens</td></tr>
-      <tr><td><strong>Embed</strong></td><td>Embedding model</td><td>Paid once per document update — not per question. Teams overspend here out of fear</td></tr>
-      <tr><td><strong>Retrieve</strong></td><td>k (how many chunks)</td><td>k too small: answers that need two documents get one. k too big: paid noise</td></tr>
-      <tr><td><strong>Answer</strong></td><td>System prompt</td><td>No "answer only from context" rule → the model fills gaps from training data, confidently</td></tr>
+      <tr><td><strong>Cut the documents into pieces</strong></td><td>How big each piece ("chunk") is</td><td>Pieces that are too big: the search becomes vague, and every question costs several times more tokens</td></tr>
+      <tr><td><strong>Turn pieces into numbers</strong></td><td>Which embedding model to use</td><td>This is paid once, when documents are added or changed, not for every question. Teams often worry and overspend here.</td></tr>
+      <tr><td><strong>Find the right pieces</strong></td><td>How many pieces to fetch (called "k")</td><td>Too few: an answer that needs two documents gets only one. Too many: you pay for text that does not help.</td></tr>
+      <tr><td><strong>Write the answer</strong></td><td>The instructions to the model</td><td>Without the rule "answer only from the documents given", the model fills the gaps with confident guesses</td></tr>
     </tbody>
   </table>
-  <div class="note"><strong>The sentence to take home:</strong> the model is the engine; your knowledge
-  pipeline is the fuel quality. When a RAG pilot disappoints, the fix is almost never a bigger model —
-  it's chunking, retrieval and prompt rules. You'll break and fix all three in the next hour.</div>
+  <div class="note"><strong>The line to take home:</strong> the model is the engine, and your documents and how you search them
+  are the fuel. When a RAG pilot gives poor answers, the fix is almost never a bigger model. It is usually the
+  piece size, the search settings or the instructions. In the next lab you will break and fix all three.</div>
 </section>
 
 <!-- ======================================================= LAB 3 -->
 <section id="lab3">
-  <p class="slot-time">13:45 – 14:45 · on your VM</p>
+  <p class="slot-time">13:50 – 14:50 · on your VM</p>
   <h2>Lab 3 · Build the retrieval pipeline</h2>
   <div class="rule" aria-hidden="true"></div>
   <div class="lab">
     <div class="labhead"><h3>Switch to your VM</h3><span class="nb">labs/<strong>lab3_build_the_rag_pipeline.ipynb</strong></span></div>
     <div class="labbody">
-      <p><strong>Goal:</strong> build the Axion service-knowledge assistant end to end — ingest 14 documents,
-      chunk, embed, retrieve, answer with citations. Then break it on purpose, three ways.</p>
+      <p><strong>Goal:</strong> build the complete Axion service assistant. Load the 14 documents, cut them into
+      pieces, make them searchable, find the right pieces for a question, and answer with sources. After that,
+      break it on purpose in three ways to see what goes wrong.</p>
       <p class="plain"><strong>In plain words:</strong> we give the AI Axion's 14 documents to look things up in before it answers. Then we turn some knobs to see what breaks.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>15 min</span></div><div><b>3 · Challenge</b><span>22 min</span></div><div><b>4 · Reveal</b><span>15 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> Same cheap mini model as this morning, now given Axion's 14 documents. Ask the F-07 question again. What happens?<ol type="A"><li>Still guesses "cooling or the fan"</li><li>Names the bulletin and the firmware fix, with the source</li><li>Needs the frontier model to get it right</li></ol></div>
       <ol class="c">
-        <li>Ingest the corpus and chunk it (start at 1,200 characters).</li>
-        <li>Embed all chunks, build the index — note this is the <em>only</em> indexing cost.</li>
-        <li>Ask the F-07 question from Lab 1 again. Compare with the model's blind guess this morning.</li>
-        <li>Break it: 8,000-char chunks → token bill; k=1 → the two-document question fails; the multi-hop
-            ticket question → flat RAG can't join tables (remember this for M5).</li>
-        <li>Run the final cell — it saves the index for Lab 4.</li>
+        <li>Load the documents and cut them into pieces of about 1,200 characters each.</li>
+        <li>Turn every piece into numbers and build the search index. Notice that this is the <em>only</em> time you pay for indexing.</li>
+        <li>Ask the same F-07 question from Lab 1 again. Compare the answer with the model's guess from this morning.</li>
+        <li>Now break it in three ways. Very big pieces (8,000 characters) push the token bill up. Fetching only one
+            piece (k=1) makes a question that needs two documents fail. A question that needs combining tickets
+            with bulletins also fails, because simple search cannot join data together. We discuss this last one in M5.</li>
+        <li>Run the last cell. It saves your search index so that Lab 4 can use it.</li>
       </ol>
-      <div class="checkpoint"><b>Checkpoint:</b> the question k=1 failed but k=5 passed needed which TWO documents? ____________</div>
+      <div class="checkpoint"><b>Checkpoint:</b> one question failed with k=1 but worked with k=5. Which TWO documents did it need? ____________</div>
       <div class="paste" data-lab="3">
         <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (3.7), paste the line here.
         <textarea rows="2" placeholder="LAB3|tokens_tuned=...|tokens_big=..."></textarea>
@@ -559,7 +593,7 @@
         <textarea rows="2" data-card="3" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
-  <p class="muted">☕ Break 14:45 – 15:00.</p>
+  <p class="muted">☕ Break 14:50 – 15:05.</p>
 </section>
 
 <!-- ======================================================= QUIZ 3 -->
@@ -570,50 +604,50 @@
     <div class="qhead"><h3>Quiz 3</h3><span>Three questions, instant feedback.</span></div>
 
     <div class="q-item">
-      <p class="qt">1. A team's RAG assistant gives vague answers and burns tokens. Lab 3 says look first at:</p>
-      <button class="opt" data-ok="0">The model — upgrade to frontier</button>
-      <button class="opt" data-ok="1">Chunk size — oversized chunks make retrieval vague and every question expensive</button>
-      <button class="opt" data-ok="0">The GPU quota</button>
-      <div class="expl">You watched 8,000-char chunks multiply the token bill for equal-or-worse answers. Pipeline first, model last.</div>
+      <p class="qt">1. A team's RAG assistant gives vague answers and uses too many tokens. Based on Lab 3, what should they check first?</p>
+      <button class="opt" data-ok="0">The model: move to the large model</button>
+      <button class="opt" data-ok="1">The piece size: pieces that are too big make the search vague and every question expensive</button>
+      <button class="opt" data-ok="0">The server capacity</button>
+      <div class="expl">You saw that 8,000-character pieces raised the token bill several times, with answers that were no better. Fix the search setup first, and change the model last.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">2. Which cost scales with usage in a RAG system?</p>
-      <button class="opt" data-ok="0">Embedding the documents — paid on every question</button>
-      <button class="opt" data-ok="1">Per-question tokens (retrieved context + answer) — embedding is paid once per document update</button>
-      <button class="opt" data-ok="0">Neither, RAG is free after setup</button>
-      <div class="expl">Indexing is a one-time cost per corpus update; the per-question context is the line that grows with adoption. That split drives tomorrow's budget model.</div>
+      <p class="qt">2. In a RAG system, which cost grows as more people use it?</p>
+      <button class="opt" data-ok="0">Turning the documents into numbers, which is paid on every question</button>
+      <button class="opt" data-ok="1">The tokens for each question (the pieces sent plus the answer). Turning documents into numbers is paid only once per update.</button>
+      <button class="opt" data-ok="0">Neither, RAG is free once it is set up</button>
+      <div class="expl">Building the index is a one-time cost each time the documents change. The cost per question is what grows as more people use the assistant. We use this split in tomorrow's budget session.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">3. "Which sites have F-07 tickets on firmware affected by SB-2025-04?" failed on flat RAG because:</p>
-      <button class="opt" data-ok="0">The corpus doesn't mention F-07</button>
-      <button class="opt" data-ok="1">The answer needs a join across tickets, bulletin and release notes — retrieval finds text, it doesn't join tables</button>
+      <p class="qt">3. The question "Which sites have F-07 tickets on firmware affected by SB-2025-04?" failed with simple RAG. Why?</p>
+      <button class="opt" data-ok="0">The documents do not mention F-07</button>
+      <button class="opt" data-ok="1">The answer needs combining tickets, the bulletin and the release notes. Search finds similar text, but it cannot join data together.</button>
       <button class="opt" data-ok="0">The question was too long for the model</button>
-      <div class="expl">Multi-hop questions over structured relationships are where retrieval stops and knowledge graphs start — M5, in about ninety minutes.</div>
+      <div class="expl">Questions that need several facts linked together are where simple search stops working, and tools like knowledge graphs or databases take over. We cover this in M5 at the end of the day.</div>
     </div>
   </div>
 </section>
 
 <!-- ======================================================= M4 -->
 <section id="m4">
-  <p class="slot-time">15:00 – 15:30 · trainer-led</p>
+  <p class="slot-time">15:05 – 15:30 · trainer-led</p>
   <h2>M4 · Guardrails and evaluation</h2>
   <div class="rule" aria-hidden="true"></div>
-  <p>Your assistant works. Now the question your compliance and your own judgment will ask: <strong>can it
-  be trusted, and can you prove it?</strong> Two mechanisms, both cheap, both skipped by most teams:</p>
+  <p>Your assistant now works. The next question, from compliance and from your own judgement, is simple:
+  <strong>can we trust it, and can we prove it?</strong> There are two kinds of protection. Both are cheap,
+  and most teams still skip them:</p>
   <table>
-    <thead><tr><th>Mechanism</th><th>What it does</th><th>Cost</th></tr></thead>
+    <thead><tr><th>Protection</th><th>What it does</th><th>What it costs</th></tr></thead>
     <tbody>
-      <tr><td><strong>Input guardrail</strong></td><td>Bounces off-topic questions and injection attempts at the door — rules first, cheap model check second</td><td>Fractions of a cent per request</td></tr>
-      <tr><td><strong>Output guardrail</strong></td><td>Groundedness check: is every claim in the answer supported by the retrieved context? Catches confident fabrication before a technician acts on it</td><td>One cheap-model call</td></tr>
-      <tr><td><strong>Eval set + judge</strong></td><td>20 questions with reference answers, scored by an LLM judge. Quality becomes a number</td><td>Minutes to run</td></tr>
-      <tr><td><strong>Baseline → change → re-score</strong></td><td>Regression protection — the discipline your teams already apply to code, applied to AI</td><td>The habit is the cost</td></tr>
+      <tr><td><strong>Check the question (input guardrail)</strong></td><td>Stops off-topic questions and attempts to trick the AI before they reach it. Simple rules come first, then a quick check by a cheap model.</td><td>A tiny fraction of a cent per question</td></tr>
+      <tr><td><strong>Check the answer (output guardrail)</strong></td><td>Checks that every statement in the answer is backed by the documents that were found. It catches made-up answers before a technician acts on them.</td><td>One extra call to a cheap model</td></tr>
+      <tr><td><strong>Test set and scoring (eval)</strong></td><td>A set of questions with known good answers. A model scores the assistant's answers, so quality becomes a number you can track.</td><td>A few minutes to run</td></tr>
+      <tr><td><strong>Score, change, score again</strong></td><td>Take a score before any change and again after it, so nothing gets worse without you noticing. Your teams already do this regression testing for code.</td><td>Only the habit</td></tr>
     </tbody>
   </table>
-  <div class="note"><strong>Your sentence as a manager, starting tomorrow:</strong> "No eval set, no deployment."
-  It is the single highest-leverage sentence in this programme — it converts every AI argument in your team
-  from opinion to measurement.</div>
+  <div class="note"><strong>Your rule as a manager, starting tomorrow:</strong> "No test set, no launch." This one sentence
+  changes every AI discussion in your team from opinions to measured numbers.</div>
 </section>
 
 <!-- ======================================================= LAB 4 -->
@@ -624,20 +658,20 @@
   <div class="lab">
     <div class="labhead"><h3>Switch to your VM</h3><span class="nb">labs/<strong>lab4_make_it_trustworthy.ipynb</strong></span></div>
     <div class="labbody">
-      <p><strong>Goal:</strong> add guardrails to your Lab 3 assistant, score it against an eval set,
-      improve one thing, and prove the score moved.</p>
+      <p><strong>Goal:</strong> add safety checks to the assistant you built in Lab 3, score it with a test set,
+      improve one thing, and show that the score changed.</p>
       <p class="plain"><strong>In plain words:</strong> we add safety checks, then test the assistant with a set of real-style questions and get a score. No score, no launch.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>12 min</span></div><div><b>3 · Challenge</b><span>20 min</span></div><div><b>4 · Reveal</b><span>10 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> Lab 4 adds a groundedness check run by the cheap mini model. It reads a fluent but invented answer: "replace the PSU to fix F-07". Will it catch it?<ol type="A"><li>No, fluent answers fool small models</li><li>Only the frontier model could catch it</li><li>Yes, it flags the claim as not supported by the documents</li></ol></div>
       <ol class="c">
-        <li>Reload the Lab 3 index (saved automatically).</li>
-        <li>Input guardrail: watch it pass real questions and bounce injection and off-topic ones.</li>
-        <li>Groundedness check: watch it catch a fabricated answer.</li>
-        <li>Run the 8-question eval → your <strong>baseline score</strong>.</li>
-        <li>Improve one thing (k=6 + sharper prompt) → re-score → compare.</li>
-        <li>✏️ Add two questions of your own — the messy kind your help desk really gets.</li>
+        <li>Load the search index from Lab 3. It was saved automatically.</li>
+        <li>Question check: see it allow real questions and block trick questions and off-topic requests.</li>
+        <li>Answer check: see it catch an answer that was made up.</li>
+        <li>Run the 8-question test set. The result is your <strong>starting score</strong> (baseline).</li>
+        <li>Improve one thing (fetch 6 pieces and use clearer instructions), score again and compare.</li>
+        <li>✏️ Add two questions of your own, written the way real users write to your help desk.</li>
       </ol>
-      <div class="checkpoint"><b>This number comes back tomorrow:</b> Day 2's cost lab is scored against your baseline — cutting the bill doesn't count if the eval score drops.</div>
+      <div class="checkpoint"><b>Please keep this number for tomorrow.</b> In the Day 2 cost lab, you will try to cut the bill, and the saving only counts if this score does not drop.</div>
       <div class="paste" data-lab="4">
         <b>Paste &amp; check — scored.</b> Run the notebook's <em>Result line</em> cell (4.7), paste the line here.
         <textarea rows="2" placeholder="LAB4|baseline=...|improved=..."></textarea>
@@ -666,27 +700,27 @@
     <div class="qhead"><h3>Quiz 4</h3><span>Three questions, instant feedback.</span></div>
 
     <div class="q-item">
-      <p class="qt">1. The most dangerous failure of a service assistant is:</p>
-      <button class="opt" data-ok="0">Refusing an off-topic question</button>
-      <button class="opt" data-ok="1">A confident, fluent, wrong answer a technician acts on</button>
-      <button class="opt" data-ok="0">Slow responses at peak load</button>
-      <div class="expl">Which is why the output guardrail checks groundedness before the answer ships — a refusal costs seconds, a fabrication can cost a site visit or worse.</div>
+      <p class="qt">1. What is the most dangerous mistake a service assistant can make?</p>
+      <button class="opt" data-ok="0">Refusing to answer an off-topic question</button>
+      <button class="opt" data-ok="1">A confident, well-written but wrong answer that a technician acts on</button>
+      <button class="opt" data-ok="0">Slow answers at busy times</button>
+      <div class="expl">That is why the answer check looks for support in the documents before the answer goes out. A refusal costs a few seconds, but a made-up answer can cost a site visit, or worse.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">2. A team proposes swapping the embedding model "because it's newer". You say yes if:</p>
-      <button class="opt" data-ok="0">The vendor blog recommends it</button>
-      <button class="opt" data-ok="1">The eval score holds or improves on the same question set</button>
-      <button class="opt" data-ok="0">The demo looks better</button>
-      <div class="expl">Baseline → change → re-score. You did exactly this an hour ago; nothing about a bigger system changes the discipline.</div>
+      <p class="qt">2. A team wants to change to a new embedding model "because it is newer". When should you say yes?</p>
+      <button class="opt" data-ok="0">When the vendor's blog recommends it</button>
+      <button class="opt" data-ok="1">When the test-set score stays the same or improves on the same questions</button>
+      <button class="opt" data-ok="0">When the demo looks better</button>
+      <div class="expl">Score before, make the change, score again. You did exactly this in Lab 4, and the same habit applies to bigger systems too.</div>
     </div>
 
     <div class="q-item">
-      <p class="qt">3. Who should write most of the 20 eval questions?</p>
-      <button class="opt" data-ok="0">The AI engineer who built the pipeline</button>
-      <button class="opt" data-ok="1">The people who answer those questions today — they know the messy, real phrasing</button>
-      <button class="opt" data-ok="0">The model itself, for efficiency</button>
-      <div class="expl">Eval sets written by the builder test what the system is good at. Eval sets written by the service desk test what the job actually is.</div>
+      <p class="qt">3. Who should write most of the test-set questions?</p>
+      <button class="opt" data-ok="0">The AI engineer who built the system</button>
+      <button class="opt" data-ok="1">The people who answer these questions today, because they know how users really ask them</button>
+      <button class="opt" data-ok="0">The AI model itself, to save time</button>
+      <div class="expl">When the builder writes the test questions, they test what the system is already good at. When the service desk writes them, they test what the job really needs.</div>
     </div>
   </div>
 </section>
@@ -696,17 +730,18 @@
   <p class="slot-time">16:20 – 16:45 · trainer demo, laptops closed</p>
   <h2>M5 · When retrieval is not enough</h2>
   <div class="rule" aria-hidden="true"></div>
-  <p>The multi-hop question Lab 3 could not answer — <em>"which sites have F-07 tickets on drives affected by
-  SB-2025-04, and what one action closes all of them?"</em> — needs a <strong>join</strong>: tickets × bulletin
-  × release notes. You already watched flat RAG fail it in Lab 3. A knowledge graph (or plain SQL) answers it
-  by following links between tickets, drives and bulletins instead of searching for similar text.</p>
-  <p><strong>The decision rule you take away:</strong></p>
+  <p>In Lab 3 one question could not be answered: <em>"Which sites have F-07 tickets on drives affected by
+  SB-2025-04, and what single action fixes all of them?"</em> To answer it, the system has to <strong>combine</strong>
+  three things: the tickets, the bulletin and the firmware release notes. Simple RAG searches for similar text, so
+  it cannot do this. A knowledge graph, or even a plain database query (SQL), can answer it by following the links
+  between tickets, drives and bulletins.</p>
+  <p><strong>The rule to take home for choosing between them:</strong></p>
   <table>
-    <thead><tr><th>Signal in your use case</th><th>Build</th></tr></thead>
+    <thead><tr><th>If your users' questions look like this</th><th>Then build this</th></tr></thead>
     <tbody>
-      <tr><td>Questions are "what does X say / how do I fix Y" — answers live in passages</td><td>Flat RAG. A graph adds cost and no accuracy</td></tr>
-      <tr><td>Questions join entities — "which customers × which firmware × which bulletin"</td><td>Graph-backed retrieval, or honestly: sometimes just SQL</td></tr>
-      <tr><td>Not sure</td><td>Start flat, log the questions that fail, count them. The failures tell you if a graph pays</td></tr>
+      <tr><td>"What does this manual say?" or "How do I fix this fault?" The answer is written in a passage somewhere.</td><td>Simple RAG. A knowledge graph would add cost without improving the answers.</td></tr>
+      <tr><td>Questions that link several things together, like "which customers, on which firmware, are hit by which bulletin"</td><td>A knowledge graph, or quite often just a normal database query (SQL)</td></tr>
+      <tr><td>You are not sure yet</td><td>Start with simple RAG, record the questions it fails on and count them. That count tells you whether a knowledge graph is worth building.</td></tr>
     </tbody>
   </table>
 </section>
@@ -726,20 +761,21 @@
     </table>
     <p class="muted" style="margin:6px 0 0">All four are in your Monday memo below.</p>
   </div>
-  <p><strong>The zero-licence variant:</strong> everything you built today can be rebuilt on free and open-source
-  components. The checklist is in <code>frameworks/zero_licence.md</code>: proof that the architecture, not the
-  licences, is the asset.</p>
-  <p><strong>Bonus you saw today:</strong> the same Lab 3 pipeline with a face on it — <code>app.py</code>,
-  a small Streamlit app. That's what "your team ships" looks like: the pipeline you built, plus 100 lines of UI.</p>
+  <p><strong>Without paid licences:</strong> everything you built today can also be built with free, open-source
+  tools. The checklist is in <code>frameworks/zero_licence.md</code>. It shows that the real value is in the design
+  of the system, not in the software licences you buy.</p>
+  <p><strong>Bonus you saw today:</strong> the same Lab 3 assistant with a simple screen on top
+  (<code>app.py</code>, a small Streamlit app). This is what your team would actually deliver: the system you built
+  in the lab, plus about 100 lines of code for the screen.</p>
   <table>
     <thead><tr><th>You leave today with</th><th>Use it for</th></tr></thead>
     <tbody>
-      <tr><td><strong>Model comparison sheet</strong> (Lab 1)</td><td>Your model-routing rule</td></tr>
-      <tr><td><strong>Prompt library entry</strong> (Lab 2)</td><td>The measured pattern your team standardises</td></tr>
-      <tr><td><strong>Working RAG app + architecture reference</strong> (Lab 3)</td><td>The shape your engineers build against</td></tr>
-      <tr><td><strong>Eval harness + baseline score</strong> (Lab 4)</td><td>"No eval set, no deployment" — with proof</td></tr>
-      <tr><td><strong>Deployment decision tree</strong> (M1) · <strong>graph decision rule</strong> (M5)</td><td>Minutes-not-meetings answers to team requests</td></tr>
-      <tr><td><strong>The course repo</strong></td><td>Fork it Monday</td></tr>
+      <tr><td><strong>Model comparison</strong> (Lab 1)</td><td>Your rule for when to use the cheap model and when to pay for the expensive one</td></tr>
+      <tr><td><strong>Prompt library entry</strong> (Lab 2)</td><td>A tested prompt style your team can adopt as its standard</td></tr>
+      <tr><td><strong>A working RAG assistant and its design</strong> (Lab 3)</td><td>A reference your engineers can follow when they build their own</td></tr>
+      <tr><td><strong>Test set, scoring and your starting score</strong> (Lab 4)</td><td>Proof behind your rule "no test set, no launch"</td></tr>
+      <tr><td><strong>The "where should it run" decision tree</strong> (M1) and <strong>the knowledge-graph rule</strong> (M5)</td><td>Quick, clear answers when your team brings you a new AI request, without long meetings</td></tr>
+      <tr><td><strong>All the course files</strong></td><td>Take a copy on Monday and use them with your team</td></tr>
     </tbody>
   </table>
   <div class="note"><strong>Tomorrow — Day 2: Cost, Govern, Adopt.</strong> Your application becomes the object

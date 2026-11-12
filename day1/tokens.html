@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tokens, cost and the next token: a playground</title>
+<style>
+  :root{--ink:#22262A;--soft:#4A5157;--paper:#FAFBFA;--panel:#EDEFED;--amber:#E8A200;--deep:#B37E00;--pale:#FFF8E8;--green:#2F7D4F;--red:#B3432B;--line:#C6CBC6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Aptos,'Segoe UI',system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.5}
+  .hazard{height:8px;background:repeating-linear-gradient(135deg,var(--amber) 0 16px,var(--ink) 16px 32px)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:2px solid var(--ink);padding:18px 0 0}
+  h1{font-size:1.9rem;line-height:1.15} h1 span{color:var(--deep)}
+  .sub{color:var(--soft);margin:4px 0 12px}
+  .tabs{display:flex;gap:4px;flex-wrap:wrap}
+  .tabs button{font:inherit;font-weight:700;padding:9px 16px;border:2px solid var(--ink);border-bottom:none;border-radius:4px 4px 0 0;background:var(--panel);cursor:pointer}
+  .tabs button.on{background:var(--amber)}
+  section{display:none;padding:22px 0 40px} section.on{display:block}
+  h2{font-size:1.4rem;margin-bottom:6px} h3{font-size:1.1rem;margin:16px 0 6px}
+  p{max-width:80ch;margin:6px 0}
+  .card{background:#fff;border:2px solid var(--ink);border-radius:4px;padding:16px;margin:12px 0}
+  textarea{width:100%;min-height:110px;font:inherit;font-size:1rem;padding:10px;border:1.5px solid var(--line);border-radius:4px;resize:vertical}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .chips button,.btn{font:inherit;font-size:.9rem;font-weight:600;padding:5px 12px;border:1.5px solid var(--ink);border-radius:3px;background:#fff;cursor:pointer}
+  .btn.main{background:var(--amber);font-size:1rem;padding:8px 18px}
+  .toks{font-family:ui-monospace,Consolas,monospace;font-size:.98rem;line-height:2.1;background:var(--paper);border:1.5px dashed var(--line);border-radius:4px;padding:10px;min-height:60px;white-space:pre-wrap;word-break:break-word}
+  .toks span{border-radius:3px;padding:2px 1px;margin-right:1px}
+  .c0{background:#FFE7A8}.c1{background:#CFE6F5}.c2{background:#D8F0DD}.c3{background:#F6D4CC}.c4{background:#E5DAF3}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+  .stat{flex:1 1 140px;background:var(--panel);border-radius:4px;padding:10px 12px}
+  .stat b{display:block;font-size:1.6rem;line-height:1.1}
+  .stat small{color:var(--soft)}
+  .note{background:var(--pale);border-left:5px solid var(--amber);padding:10px 14px;margin:10px 0;max-width:80ch}
+  .ok{color:var(--green);font-weight:700} .bad{color:var(--red);font-weight:700}
+  table{border-collapse:collapse;width:100%;font-size:.95rem;margin:8px 0}
+  th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+  th{border-bottom:2px solid var(--ink)} td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.sel{background:var(--pale)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px} @media(max-width:800px){.grid2{grid-template-columns:1fr}}
+  .slider{display:grid;grid-template-columns:200px 1fr 80px;gap:10px;align-items:center;margin:6px 0}
+  .slider input{width:100%} .slider output{font-weight:700;text-align:right}
+  .toggle{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1.5px solid var(--line);border-radius:4px;margin:6px 0;background:#fff;cursor:pointer}
+  .toggle input{margin-top:5px;transform:scale(1.3)}
+  .big{font-size:2.2rem;font-weight:800;color:var(--deep)}
+  .bar{height:14px;background:var(--amber);border-radius:3px}
+  .pipe{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:10px 0}
+  .pipe div{flex:1 1 150px;background:#fff;border:2px solid var(--ink);border-radius:4px;padding:10px}
+  .pipe div b{display:block;color:var(--deep)}
+  .arrow{flex:0 0 auto!important;border:none!important;background:none!important;align-self:center;font-size:1.4rem;padding:0!important}
+  .sentence{font-size:1.25rem;background:#fff;border:2px solid var(--ink);border-radius:4px;padding:12px;min-height:56px}
+  .sentence .new{background:#FFE7A8;border-radius:3px;padding:0 2px}
+  .probs .row{display:grid;grid-template-columns:110px 1fr 60px;gap:8px;align-items:center;margin:4px 0}
+  .probs .row.pick .bar{background:var(--green)}
+  .att{font-size:1.25rem;line-height:2.2}
+  .att span{cursor:pointer;padding:3px 6px;border-radius:3px;margin:0 1px;border:1.5px solid transparent}
+  .att span.focus{border-color:var(--ink)}
+  footer{color:var(--soft);font-size:.85rem;padding:20px 0}
+</style>
+</head>
+<body>
+<div class="hazard"></div>
+<header><div class="wrap">
+  <h1>Tokens, cost and the next token <span>· a playground</span></h1>
+  <p class="sub">AI Engineering for Managers · Day 1. Type, click and watch the numbers. Nothing you type leaves this page.</p>
+  <div class="tabs" role="tablist">
+    <button class="on" data-t="t1">1 · What is a token?</button>
+    <button data-t="t2">2 · What does it cost?</button>
+    <button data-t="t3">3 · Save tokens</button>
+    <button data-t="t4">4 · How the next token is chosen</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<!-- ===================== TAB 1 -->
+<section id="t1" class="on">
+  <h2>1 · What is a token?</h2>
+  <p>Models don't read words. They read <strong>tokens</strong>: small pieces of text, about ¾ of an English word
+  on average. Every bill, speed limit and memory limit is counted in tokens. Type below and watch your text get cut up.</p>
+  <div class="card">
+    <div class="chips" aria-label="Examples">
+      <button data-ex="short">Short question</button>
+      <button data-ex="ramble">Same question, rambling</button>
+      <button data-ex="codes">Fault codes & part numbers</button>
+      <button data-ex="json">JSON output</button>
+      <button data-ex="hindi">Hindi</button>
+      <button data-ex="tamil">Tamil</button>
+    </div>
+    <textarea id="txt" aria-label="Your text">Why does my VectorDrive 450 keep tripping F-07 in the afternoon?</textarea>
+    <div class="stats">
+      <div class="stat"><b id="sTok">0</b><small>tokens (approx.)</small></div>
+      <div class="stat"><b id="sWord">0</b><small>words</small></div>
+      <div class="stat"><b id="sChar">0</b><small>characters</small></div>
+      <div class="stat"><b id="sRatio">0</b><small>tokens per word</small></div>
+    </div>
+    <div class="toks" id="toks" aria-label="Your text cut into tokens"></div>
+  </div>
+  <div class="note"><strong>Try this:</strong> compare "Short question" with "Same question, rambling". Same meaning,
+  several times the tokens. Then try the fault codes and the Indian-language examples: codes, numbers and
+  non-English text cost <em>more</em> tokens per word.</div>
+  <p class="muted" style="color:var(--soft);font-size:.9rem">The colours show token boundaries. The count is an
+  approximation of how GPT and Claude tokenizers cut text (usually within ±15%). Exact counts come back in every
+  API response, as you saw in the labs.</p>
+</section>
+
+<!-- ===================== TAB 2 -->
+<section id="t2">
+  <h2>2 · What does it cost?</h2>
+  <p>You pay for tokens <strong>in</strong> (everything you send: instructions, documents, history, the question) and
+  tokens <strong>out</strong> (the answer). Output usually costs <strong>5–6× more</strong> than input.</p>
+  <div class="card">
+    <div class="slider"><label for="inTok">Tokens IN per request</label><input type="range" id="inTok" min="100" max="20000" step="100" value="2000"><output id="inTokO"></output></div>
+    <div class="slider"><label for="outTok">Tokens OUT per request</label><input type="range" id="outTok" min="50" max="4000" step="50" value="500"><output id="outTokO"></output></div>
+    <div class="slider"><label for="reqs">Requests per day</label><input type="range" id="reqs" min="100" max="100000" step="100" value="5000"><output id="reqsO"></output></div>
+    <p style="margin-top:8px">Click a row to pick that model for tab 3.</p>
+    <table id="costTable" aria-label="Cost per model">
+      <thead><tr><th>Model</th><th class="num">$ per 1M in</th><th class="num">$ per 1M out</th><th class="num">Per request</th><th class="num">Per month</th><th style="width:22%">Monthly cost</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p style="color:var(--soft);font-size:.85rem">List prices per 1M tokens, standard tier, as published Nov 2026 (OpenAI rates as on Azure
+    Global Standard). Prices change often; check the provider page before you budget. Month = 30 days.</p>
+  </div>
+  <div class="note"><strong>Look at the spread:</strong> the same workload can cost 40× more on one model than on another.
+  And check the split: with a long answer, the <em>output</em> column often drives the bill.</div>
+</section>
+
+<!-- ===================== TAB 3 -->
+<section id="t3">
+  <h2>3 · Save tokens: control what goes in and what comes out</h2>
+  <p>A typical assistant request has four parts. Each one is a lever. Model: <strong id="selName"></strong>,
+  <span id="selReqs"></span> requests a day (change on tab 2).</p>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Before: the request as built</h3>
+      <div class="slider"><label>Instructions (system prompt)</label><input type="range" id="pSys" min="100" max="4000" step="50" value="1500"><output id="pSysO"></output></div>
+      <div class="slider"><label>Documents retrieved</label><input type="range" id="pDoc" min="0" max="12000" step="200" value="6000"><output id="pDocO"></output></div>
+      <div class="slider"><label>Chat history</label><input type="range" id="pHist" min="0" max="8000" step="100" value="3000"><output id="pHistO"></output></div>
+      <div class="slider"><label>Answer length</label><input type="range" id="pOut" min="50" max="2000" step="50" value="800"><output id="pOutO"></output></div>
+      <h3>Now switch on the levers</h3>
+      <label class="toggle"><input type="checkbox" id="l1"><span><strong>Trim the instructions</strong> to the rules that matter (−60%)</span></label>
+      <label class="toggle"><input type="checkbox" id="l2"><span><strong>Retrieve 3 chunks, not 10</strong> (−70% documents)</span></label>
+      <label class="toggle"><input type="checkbox" id="l3"><span><strong>Summarise old chat history</strong> instead of resending it (−80%)</span></label>
+      <label class="toggle"><input type="checkbox" id="l4"><span><strong>Ask for a short, structured answer</strong> (cap at 150 tokens)</span></label>
+      <label class="toggle"><input type="checkbox" id="l5"><span><strong>Cache the stable part</strong> (instructions): cached tokens bill at ~10%</span></label>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Result per month</h3>
+      <table>
+        <tr><th></th><th class="num">Before</th><th class="num">After</th></tr>
+        <tr><td>Tokens in / request</td><td class="num" id="bIn"></td><td class="num" id="aIn"></td></tr>
+        <tr><td>Tokens out / request</td><td class="num" id="bOut"></td><td class="num" id="aOut"></td></tr>
+        <tr><td>Cost per month</td><td class="num" id="bCost"></td><td class="num" id="aCost"></td></tr>
+      </table>
+      <p style="margin-top:10px">You save</p>
+      <div class="big" id="saved">0%</div>
+      <p id="savedAbs"></p>
+      <div class="note" id="leverTip">Switch on the levers one by one. Which single lever saves the most for <em>this</em> request?</div>
+    </div>
+  </div>
+  <div class="note"><strong>The manager's checklist:</strong> (1) short, sharp instructions, put first so they cache; (2) send only the
+  documents that answer the question; (3) don't resend the whole conversation; (4) ask for short, structured
+  answers; (5) the cheapest model that passes your eval. <em>Cut tokens, then re-run the eval: savings only count if
+  quality holds.</em></div>
+</section>
+
+<!-- ===================== TAB 4 -->
+<section id="t4">
+  <h2>4 · How the next token is chosen</h2>
+  <p>A model writes <strong>one token at a time</strong>. For each one it runs the whole text so far through the network,
+  gets a probability for every possible next token, picks one, adds it, and repeats.</p>
+  <div class="pipe" aria-label="Transformer at a glance">
+    <div><b>1 · Tokenize</b>Text → tokens (tab 1)</div><div class="arrow">→</div>
+    <div><b>2 · Embed</b>Each token → a list of numbers that carries its meaning</div><div class="arrow">→</div>
+    <div><b>3 · Attention layers</b>Every token "looks at" the others to work out what matters, dozens of layers deep</div><div class="arrow">→</div>
+    <div><b>4 · Probabilities</b>A score for every token in the vocabulary (~200,000)</div><div class="arrow">→</div>
+    <div><b>5 · Pick & repeat</b>Choose one, append it, go again</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Attention: what does "it" refer to?</h3>
+      <p>Click a word. Darker = the model pays more attention to it when processing your word.</p>
+      <div class="att" id="att"></div>
+      <p style="color:var(--soft);font-size:.9rem">Illustrative weights. Real models do this in dozens of layers and many "heads" at once.
+      This is the step that lets the model connect "it" to "drive".</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Generate the next token yourself</h3>
+      <div class="sentence" id="sent"></div>
+      <div class="slider" style="grid-template-columns:140px 1fr 60px"><label for="temp">Temperature</label><input type="range" id="temp" min="0" max="1.5" step="0.1" value="0.7"><output id="tempO"></output></div>
+      <div class="probs" id="probs"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn main" id="gen">Generate next token</button>
+        <button class="btn" id="reset">Start again</button>
+      </div>
+      <p id="genInfo" style="margin-top:8px"></p>
+    </div>
+  </div>
+  <div class="note"><strong>Three things this explains:</strong> (1) <em>Temperature</em> reshapes the probabilities: at 0 the
+  model always takes the top token (repeatable); higher values let less likely tokens through (more varied).
+  (2) <em>Output costs more</em> because every output token needs its own full pass through the model, while your
+  input is read in one go. (3) <em>Hallucination</em>: the model picks a <strong>likely</strong> token, not a
+  <strong>verified</strong> one. If the facts aren't in the input, it fills the gap with something plausible.</div>
+</section>
+
+<footer>AI Engineering for Managers · Day 1 · DevPro Academy · <a href="index.html">Back to the course page</a></footer>
+</main>
+
+<script>
+(function(){
+  // ---------- tabs
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.tabs button').forEach(function(x){ x.classList.toggle('on', x===b); });
+      document.querySelectorAll('main section').forEach(function(s){ s.classList.toggle('on', s.id===b.dataset.t); });
+      if (b.dataset.t==='t3') calcSave();
+    });
+  });
+  function fmt(n){ return Math.round(n).toLocaleString('en-IN'); }
+  function usd(n){ return n<0.01 ? '$'+n.toFixed(5) : n<1 ? '$'+n.toFixed(4) : '$'+n.toLocaleString('en-US',{maximumFractionDigits:0}); }
+
+  // ---------- TAB 1: approximate tokenizer
+  var EX = {
+    short: "Why does my VectorDrive 450 keep tripping F-07 in the afternoon?",
+    ramble: "Hi there, I hope you are doing well today. I wanted to ask you a quick question if that is okay. We have a drive, I think it is the VectorDrive 450 model, and it seems to keep tripping with some kind of F-07 error, mostly in the afternoons as far as we can tell. Could you please explain to me in detail why this might be happening and what we could possibly do about it? Thank you so much in advance for your help!",
+    codes: "Ticket TK-2026-00417: VD450 SN 4502-88731-B, FW 2.3.0, P-210=10kHz, F-07 x14 (2026-03-02T14:31:07Z), FAN-450 kit ordered PO#88-41927.",
+    json: '{"category": "drive_fault", "product": "VectorDrive 450", "fault": "F-07", "bulletin": "SB-2025-04", "action": "upgrade_firmware", "confidence": 0.92}',
+    hindi: "मेरा VectorDrive 450 दोपहर में बार-बार F-07 पर ट्रिप क्यों होता है?",
+    tamil: "என் VectorDrive 450 மதியம் ஏன் மீண்டும் மீண்டும் F-07 இல் ட்ரிப் ஆகிறது?"
+  };
+  var COMMON = {"the":1,"and":1,"to":1,"of":1,"a":1,"in":1,"is":1,"it":1,"you":1,"that":1,"for":1,"on":1,"with":1,"as":1,"are":1,"this":1,"be":1,"at":1,"or":1,"from":1,"have":1,"an":1,"what":1,"why":1,"my":1,"we":1,"can":1,"keep":1,"does":1,"drive":1,"about":1,"could":1,"would":1,"please":1,"thank":1,"there":1,"today":1,"doing":1,"question":1,"model":1,"error":1,"happening":1,"possibly":1,"explain":1,"afternoon":1,"afternoons":1,"advance":1,"product":1,"category":1,"action":1,"ordered":1,"ticket":1,"firmware":1};
+  function tokenize(t){
+    var out=[], re=/(\s*)([A-Za-z]+|\d+|[ऀ-ॿ஀-௿]+|[^\sA-Za-z\d])|\s+/g, m;
+    while((m=re.exec(t))){
+      if(m[2]===undefined){ out.push(m[0]); continue; }
+      var sp=m[1], w=m[2];
+      if(/^[A-Za-z]+$/.test(w)){
+        if(w.length<=4 || COMMON[w.toLowerCase()] || (w.length<=7 && w===w.toLowerCase())){ out.push(sp+w); }
+        else { var first=true; for(var i=0;i<w.length;i+= (i===0?Math.min(5,w.length):4)){ var len = i===0?Math.min(5,w.length):4; out.push((first?sp:'')+w.substr(i,len)); first=false; } }
+      } else if(/^\d+$/.test(w)){
+        var f=true; for(var j=0;j<w.length;j+=3){ out.push((f?sp:'')+w.substr(j,3)); f=false; }
+      } else if(/[ऀ-ॿ஀-௿]/.test(w)){
+        var g=true; for(var k=0;k<w.length;k+=2){ out.push((g?sp:'')+w.substr(k,2)); g=false; }
+      } else { out.push(sp+w); }
+    }
+    return out;
+  }
+  var txt=document.getElementById('txt'), toksEl=document.getElementById('toks');
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function renderTokens(){
+    var t=txt.value, tk=tokenize(t), html='', n=0;
+    tk.forEach(function(x){ if(/^\s+$/.test(x)){ html+=esc(x); return; } html+='<span class="c'+(n%5)+'">'+esc(x)+'</span>'; n++; });
+    toksEl.innerHTML=html||'<span style="color:var(--soft)">Type something above…</span>';
+    var words=(t.trim().match(/\S+/g)||[]).length;
+    document.getElementById('sTok').textContent=n;
+    document.getElementById('sWord').textContent=words;
+    document.getElementById('sChar').textContent=t.length;
+    document.getElementById('sRatio').textContent=words? (n/words).toFixed(2):'0';
+  }
+  txt.addEventListener('input', renderTokens);
+  document.querySelectorAll('[data-ex]').forEach(function(b){ b.addEventListener('click', function(){ txt.value=EX[b.dataset.ex]; renderTokens(); }); });
+  renderTokens();
+
+  // ---------- TAB 2: cost table
+  var MODELS=[
+    {n:"Claude Haiku 5.5",  i:0.10, o:0.50},
+    {n:"GPT-5.4 mini",      i:0.75, o:4.50},
+    {n:"Claude Sonnet 5.5", i:2.00, o:10.00},
+    {n:"GPT-5.4",           i:2.50, o:15.00},
+    {n:"Claude Opus 5.5",   i:4.00, o:20.00},
+    {n:"GPT-5.5",           i:5.00, o:30.00}
+  ];
+  var sel=1;
+  var inTok=document.getElementById('inTok'), outTok=document.getElementById('outTok'), reqs=document.getElementById('reqs');
+  function perReq(m,a,b){ return (a*m.i + b*m.o)/1e6; }
+  function renderCost(){
+    var a=+inTok.value, b=+outTok.value, r=+reqs.value;
+    document.getElementById('inTokO').textContent=fmt(a);
+    document.getElementById('outTokO').textContent=fmt(b);
+    document.getElementById('reqsO').textContent=fmt(r);
+    var max=0, rows=MODELS.map(function(m){ var c=perReq(m,a,b); var mo=c*r*30; if(mo>max) max=mo; return [m,c,mo,(b*m.o)/(a*m.i+b*m.o)]; });
+    var tb=document.querySelector('#costTable tbody'); tb.innerHTML='';
+    rows.forEach(function(x,idx){
+      var tr=document.createElement('tr'); if(idx===sel) tr.className='sel'; tr.style.cursor='pointer';
+      tr.innerHTML='<td><strong>'+x[0].n+'</strong></td><td class="num">$'+x[0].i.toFixed(2)+'</td><td class="num">$'+x[0].o.toFixed(2)+'</td><td class="num">'+usd(x[1])+'</td><td class="num"><strong>'+usd(x[2])+'</strong></td>'+
+        '<td><div class="bar" style="width:'+Math.max(2,100*x[2]/max)+'%" title="'+Math.round(x[3]*100)+'% of this is output"></div><small style="color:var(--soft)">'+Math.round(x[3]*100)+'% from output</small></td>';
+      tr.addEventListener('click', function(){ sel=idx; renderCost(); });
+      tb.appendChild(tr);
+    });
+    calcSave();
+  }
+  [inTok,outTok,reqs].forEach(function(e){ e.addEventListener('input', renderCost); });
+
+  // ---------- TAB 3: savings
+  var P=['pSys','pDoc','pHist','pOut'].map(function(id){ return document.getElementById(id); });
+  var L=['l1','l2','l3','l4','l5'].map(function(id){ return document.getElementById(id); });
+  function calcSave(){
+    var m=MODELS[sel], r=+reqs.value;
+    document.getElementById('selName').textContent=m.n;
+    document.getElementById('selReqs').textContent=fmt(r);
+    P.forEach(function(p){ document.getElementById(p.id+'O').textContent=fmt(+p.value); });
+    var sys=+P[0].value, doc=+P[1].value, hist=+P[2].value, out=+P[3].value, q=60;
+    var bIn=sys+doc+hist+q, bCost=(bIn*m.i + out*m.o)/1e6*r*30;
+    var aSys = L[0].checked? sys*0.4 : sys, aDoc = L[1].checked? doc*0.3 : doc, aHist = L[2].checked? hist*0.2 : hist, aOut = L[3].checked? Math.min(out,150) : out;
+    var aIn=aSys+aDoc+aHist+q;
+    var inCost = L[4].checked ? (aSys*m.i*0.1 + (aIn-aSys)*m.i) : aIn*m.i;
+    var aCost=(inCost + aOut*m.o)/1e6*r*30;
+    document.getElementById('bIn').textContent=fmt(bIn); document.getElementById('aIn').textContent=fmt(aIn);
+    document.getElementById('bOut').textContent=fmt(out); document.getElementById('aOut').textContent=fmt(aOut);
+    document.getElementById('bCost').textContent=usd(bCost); document.getElementById('aCost').textContent=usd(aCost);
+    var pct = bCost? Math.round(100*(1-aCost/bCost)) : 0;
+    document.getElementById('saved').textContent=pct+'%';
+    document.getElementById('savedAbs').textContent = pct>0 ? usd(bCost-aCost)+' a month, '+usd((bCost-aCost)*12)+' a year, on one assistant.' : '';
+    var on=L.filter(function(x){return x.checked;}).length;
+    document.getElementById('leverTip').innerHTML = on===0 ? 'Switch on the levers one by one. Which single lever saves the most for <em>this</em> request?'
+      : on===5 ? '<span class="ok">All five levers on.</span> Now the real question: does the answer quality still pass your eval? Cut, then re-score.'
+      : 'Keep going. Tip: compare the answer-length lever on a cheap model vs an expensive one.';
+  }
+  P.concat(L).forEach(function(e){ e.addEventListener('input', calcSave); e.addEventListener('change', calcSave); });
+  renderCost();
+
+  // ---------- TAB 4a: attention
+  var WORDS=["The","drive","tripped","because","it","was","too","hot"];
+  var ATT={
+    4:[0.03,0.62,0.10,0.05,0.05,0.05,0.03,0.07],
+    7:[0.02,0.30,0.18,0.08,0.20,0.08,0.12,0.02],
+    2:[0.10,0.55,0.15,0.05,0.05,0.04,0.03,0.03],
+    1:[0.25,0.45,0.10,0.05,0.05,0.04,0.03,0.03]
+  };
+  var att=document.getElementById('att');
+  function renderAtt(f){
+    var w = ATT[f] || WORDS.map(function(_,i){ return i===f?0.5:0.5/(WORDS.length-1); });
+    att.innerHTML='';
+    WORDS.forEach(function(x,i){
+      var s=document.createElement('span'); s.textContent=x;
+      var a=Math.min(1,w[i]*1.6); s.style.background='rgba(232,162,0,'+a.toFixed(2)+')';
+      if(i===f) s.className='focus';
+      s.addEventListener('click', function(){ renderAtt(i); });
+      att.appendChild(s);
+    });
+  }
+  renderAtt(4);
+
+  // ---------- TAB 4b: next-token generation (scripted mini model)
+  var START="The drive tripped because the heatsink was too";
+  var STEPS={
+    "":        [[" hot",.55],[" warm",.22],[" small",.08],[" dusty",.07],[" close",.05],[" loud",.03]],
+    " hot":    [[".",.45],[" in",.20],[" and",.15],[" during",.12],[" for",.08]],
+    " warm":   [[".",.40],[" in",.25],[" and",.20],[" for",.15]],
+    " small":  [[" for",.60],[".",.30],[" and",.10]],
+    " dusty":  [[".",.50],[" and",.30],[" after",.20]],
+    " close":  [[" to",.80],[".",.20]],
+    " loud":   [[".",.60],[" and",.40]],
+    " in":     [[" the",.70],[" summer",.20],[" July",.10]],
+    " and":    [[" the",.50],[" the fan",.30],[" tripped",.20]],
+    " during": [[" peak",.60],[" summer",.40]],
+    " for":    [[" its",.50],[" the",.30],[" a",.20]],
+    " after":  [[" lunch",.60],[" the",.40]],
+    " to":     [[" the",.80],[" a",.20]],
+    " the":    [[" afternoon",.50],[" summer",.25],[" cabinet",.25]],
+    " afternoon":[["." ,.75],[" heat",.25]], " summer":[["." ,.8],[" heat",.2]], " cabinet":[["." ,1.0]],
+    " peak":[[" load",1.0]], " load":[["." ,1.0]], " heat":[["." ,1.0]], " its":[[" rating",1.0]], " rating":[["." ,1.0]],
+    " a":[[" while",1.0]], " while":[["." ,1.0]], " lunch":[["." ,1.0]],
+    " the fan":[[" stopped",.6],["." ,.4]], " stopped":[["." ,1.0]], " tripped":[["." ,1.0]]
+  };
+  var gen=[], sentEl=document.getElementById('sent'), probsEl=document.getElementById('probs'), tempEl=document.getElementById('temp');
+  function last(){ return gen.length? gen[gen.length-1] : ""; }
+  function dist(){
+    var base=STEPS[last()] || [["." ,1.0]];
+    var T=+tempEl.value;
+    if(T===0){ var mx=0; base.forEach(function(x,i){ if(x[1]>base[mx][1]) mx=i; }); return base.map(function(x,i){ return [x[0], i===mx?1:0]; }); }
+    var ex=base.map(function(x){ return Math.exp(Math.log(x[1])/T); }), s=ex.reduce(function(a,b){return a+b;},0);
+    return base.map(function(x,i){ return [x[0], ex[i]/s]; });
+  }
+  function renderGen(pick){
+    var done = last()==="." || gen.length>=8;
+    sentEl.innerHTML=esc(START)+gen.map(function(g,i){ return i===gen.length-1 ? '<span class="new">'+esc(g)+'</span>' : esc(g); }).join('');
+    document.getElementById('tempO').textContent=(+tempEl.value).toFixed(1);
+    if(done){ probsEl.innerHTML='<p><strong>Finished.</strong> The model stops when it predicts an end, or hits the output limit you set.</p>'; }
+    else {
+      probsEl.innerHTML='<p style="margin:0 0 4px"><strong>Next-token probabilities</strong></p>'+dist().map(function(x){
+        return '<div class="row'+(pick===x[0]?' pick':'')+'"><span style="font-family:ui-monospace,Consolas,monospace">"'+esc(x[0])+'"</span><div><div class="bar" style="width:'+Math.max(1,x[1]*100)+'%"></div></div><span style="text-align:right">'+Math.round(x[1]*100)+'%</span></div>';
+      }).join('');
+    }
+    document.getElementById('gen').disabled=done;
+    document.getElementById('genInfo').innerHTML = 'Output tokens generated: <strong>'+gen.length+'</strong> = '+gen.length+' full pass'+(gen.length===1?'':'es')+' through the model. Input was read once.';
+  }
+  document.getElementById('gen').addEventListener('click', function(){
+    var d=dist(), r=Math.random(), acc=0, pick=d[d.length-1][0];
+    for(var i=0;i<d.length;i++){ acc+=d[i][1]; if(r<=acc){ pick=d[i][0]; break; } }
+    gen.push(pick); renderGen(pick);
+  });
+  document.getElementById('reset').addEventListener('click', function(){ gen=[]; renderGen(); });
+  tempEl.addEventListener('input', function(){ renderGen(); });
+  renderGen();
+})();
+</script>
+</body>
+</html>
