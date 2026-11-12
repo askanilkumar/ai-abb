@@ -15,6 +15,7 @@ LAB = "Lab 2 · Build your RAG"
 PORT = 8601
 HERE = Path(__file__).resolve().parent
 PDF = HERE.parent.parent / "build-your-rag" / "Axion_HR_Policy.pdf"
+ARCH = HERE.parent.parent / "build-your-rag" / "rag_architecture.png"
 MY = Path(os.path.expanduser("~")) / "Desktop" / "my-rag"
 
 PROMPT = """Write a complete Python Streamlit app in ONE file called app.py. It is a "Chat with my PDF" app that uses RAG (retrieval-augmented generation).
@@ -31,13 +32,18 @@ Create the client exactly like this:
 Do NOT pass temperature or max_tokens to the model.
 
 WHAT THE APP MUST DO:
-1. Page title "📄 Chat with my PDF". In the sidebar, a PDF file uploader.
-2. When a PDF is uploaded: read the text of every page with pypdf. Split each page's text into chunks of about 800 characters with 100 characters of overlap. Keep the page number with every chunk.
-3. Create embeddings for all chunks in one call: client.embeddings.create(model=os.environ["MODEL_EMBED"], input=list_of_chunk_texts). Store the chunks and vectors in st.session_state so this happens only once per file. Show "Indexed N chunks from M pages" in the sidebar.
-4. A chat screen using st.chat_input and st.chat_message, with the chat history kept in st.session_state.
-5. For every question: embed the question, find the 3 most similar chunks using cosine similarity with numpy, and call client.chat.completions.create(model=os.environ["MODEL_MINI"], messages=[...]) with this system message: "Answer only from the context. If the answer is not in the context, say: I could not find this in the document. Mention the page number."
-6. Under every answer, an expander called "Sources" that shows the 3 chunks with their page number and similarity score.
-7. Wrap the model calls in try/except and show any error with st.error.
+1. Use st.set_page_config(layout="wide"). Page title: "📄 {NAME} – Chat with my PDF".
+2. In the sidebar, a PDF file uploader.
+3. When a PDF is uploaded: read the text of every page with pypdf. Split each page's text into chunks of about 800 characters with 100 characters of overlap. Keep the page number with every chunk.
+4. Create embeddings for all chunks in one call: client.embeddings.create(model=os.environ["MODEL_EMBED"], input=list_of_chunk_texts). Store the chunks and vectors (a NumPy array) in st.session_state so this happens only once per file. Show "Indexed N chunks from M pages" in the sidebar.
+5. Two tabs: "🏗️ How RAG works" and "💬 Chat".
+6. Tab "How RAG works": show the picture rag_architecture.png that is in the same folder as app.py (build the path with os.path.dirname(os.path.abspath(__file__))) using st.image(path, caption="Reference architecture of a production RAG system"). If the file is missing, show st.info.
+7. Tab "Chat": two columns with widths [3, 1].
+   Left column: the chat. Show the messages inside st.container(height=480) using st.chat_message, keep the chat history in st.session_state, and put st.chat_input in the left column below that container.
+   Right column: a panel titled "🔧 Under the hood" showing: the embedding model name (MODEL_EMBED); the embedding size (how many numbers are in one vector); the vector store: "In-memory NumPy array in st.session_state (no vector database)"; how many vectors are stored; similarity: cosine; chunks retrieved per question: 3; the chat model name (MODEL_MINI).
+8. For every question: embed the question, find the 3 most similar chunks using cosine similarity with numpy, and call client.chat.completions.create(model=os.environ["MODEL_MINI"], messages=[...]) with this system message: "Answer only from the context. If the answer is not in the context, say: I could not find this in the document. Mention the page number."
+9. Under every answer, an expander called "Sources" that shows the 3 chunks with their page number and similarity score.
+10. Wrap the model calls in try/except and show any error with st.error.
 
 Keep the code short and simple, with comments in plain English. Return only the complete code in one block."""
 
@@ -63,8 +69,9 @@ def _stop_old():
 
 def save_and_start(code):
     MY.mkdir(parents=True, exist_ok=True)
-    if PDF.exists() and not (MY / PDF.name).exists():
-        shutil.copy(PDF, MY / PDF.name)
+    for f in (PDF, ARCH):
+        if f.exists() and not (MY / f.name).exists():
+            shutil.copy(f, MY / f.name)
     (MY / "app.py").write_text(code, encoding="utf-8")
     compile(code, "app.py", "exec")            # raises SyntaxError before we start anything
     _stop_old()
@@ -99,8 +106,10 @@ def show():
         not_live_warning()
     st.session_state.setdefault("rag_msgs", [])
 
-    st.markdown("#### Step 1 · Read the instruction, then click Build")
-    prompt = st.text_area("Your instruction (a short specification)", PROMPT, height=300)
+    st.markdown("#### Step 1 · Put your name on it, read the instruction, then click Build")
+    name = st.text_input("Your name (it goes into your app's title)", key="rag_name", placeholder="e.g. Priya")
+    who = name.strip() or "My"
+    prompt = st.text_area("Your instruction (a short specification)", PROMPT.replace("{NAME}", who), height=320)
     c1, c2 = st.columns(2)
     if c1.button("🔨 Build my app", type="primary", disabled=not live()):
         st.session_state.rag_msgs = [{"role": "user", "content": prompt}]
@@ -111,7 +120,8 @@ def show():
             except Exception as e:
                 st.error(f"The model call failed: {e}. Click Replay to continue.")
     if c2.button("▶ Replay a saved build"):
-        deliver(rag_replay.CODE, "▶ Replay of a saved build (no model call)")
+        deliver(rag_replay.CODE.replace('"📄 My – Chat with my PDF"', repr(f"📄 {who} – Chat with my PDF")),
+                "▶ Replay of a saved build (no model call)")
 
     code = st.session_state.get("rag_code")
     if not code:
@@ -126,8 +136,9 @@ def show():
     else:
         st.markdown("#### Step 2 · Open your app")
         st.link_button("🚀 Open my app (new tab)", f"http://localhost:{PORT}", type="primary")
-        st.markdown(f"Upload **{PDF.name}** from the **my-rag** folder on your Desktop, then ask the 5 questions "
-                    "on the course page. Open **Sources** each time.")
+        st.markdown(f"In your app: tab **🏗️ How RAG works** shows the architecture. Then go to **💬 Chat**, upload "
+                    f"**{PDF.name}** from the **my-rag** folder on your Desktop, and ask the 5 questions on the course "
+                    "page. Open **Sources** each time, and watch **🔧 Under the hood** on the right.")
 
     st.markdown("#### Step 3 · If you see a red error in your app")
     err = st.text_area("Paste the error text here", value=st.session_state.get("rag_err", ""), height=80)

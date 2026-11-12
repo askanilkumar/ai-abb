@@ -31,6 +31,16 @@ def tasks():
     return d
 
 
+def memo_text(f):
+    parts = [f"AI Value Case — {f['project']}", ""]
+    for k, v in [("Hypothesis", f["hyp"]), ("How we compare (no baseline)", f["method"]), ("Time", f["time"]),
+                 ("Cost", f["cost"]), ("Quality gate", f["quality"]),
+                 ("Checkpoints", "Day 30: first numbers · Day 60: decide to scale or adjust · Day 90: go / stop"),
+                 ("We stop if", f["stop"])]:
+        parts += [k.upper(), v, ""]
+    return "\n".join(parts)
+
+
 def memo_docx(f):
     from docx import Document
     doc = Document()
@@ -113,5 +123,9 @@ def show():
                      f"cost ₹{ai:,}/month = net ₹{net:,.0f} per month.")
         f["quality"] = st.text_input("Quality gate", "Escaped defects and rework % no worse than the first 2 sprints.")
         f["stop"] = st.text_input("We stop if…", "Net value is negative at day 60, or escaped defects rise for 2 sprints.")
-        st.download_button("⬇️ Download my one-page Value Case (Word)", memo_docx(f),
-                           file_name="AI_Value_Case.docx", type="primary")
+        try:
+            st.download_button("⬇️ Download my one-page Value Case (Word)", memo_docx(f),
+                               file_name="AI_Value_Case.docx", type="primary")
+        except ImportError:                      # python-docx not installed on this VM: plain text instead
+            st.download_button("⬇️ Download my one-page Value Case (text)", memo_text(f),
+                               file_name="AI_Value_Case.txt", type="primary")

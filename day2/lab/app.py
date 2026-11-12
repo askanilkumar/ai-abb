@@ -5,7 +5,7 @@ import streamlit as st
 
 st.set_page_config(page_title="ABB AI Lab", page_icon="🧪", layout="wide")
 st.markdown("""<style>
-.block-container{padding-top:1.2rem; max-width:1250px}
+.block-container{padding-top:3.2rem; max-width:1250px}
 h1,h2,h3{font-family:'Saira Condensed',system-ui,sans-serif}
 div[data-testid="stMetricValue"]{font-size:1.7rem}
 </style>""", unsafe_allow_html=True)
@@ -31,11 +31,15 @@ LAB_LAYER = {"1": 1, "2": 2, "3": 3, "4": 5, "5": 6, "6": 2, "7": 7, "8": 9, "9"
 
 
 def stack_bar(active=None):
+    """The 10-layer AI stack from the course page; the layer this lab teaches is highlighted."""
     cells = "".join(
-        f"<div style='flex:1;padding:6px 4px;text-align:center;font-size:.78rem;font-weight:600;border-radius:4px;"
-        f"background:{'#E8A200' if i == active else '#EDEFED'};color:#22262A'>{name}</div>"
+        f"<div style='flex:1;min-width:0;padding:5px 3px;text-align:center;font-size:.72rem;line-height:1.2;"
+        f"font-weight:{700 if i == active else 500};border-radius:4px;"
+        f"background:{'#E8A200' if i == active else '#EDEFED'};color:#22262A'>{i + 1}<br>{name}</div>"
         for i, name in enumerate(STACK))
-    st.markdown(f"<div style='display:flex;gap:4px;margin-bottom:10px'>{cells}</div>", unsafe_allow_html=True)
+    label = f"You are here: layer {active + 1} · {STACK[active]}" if active is not None else "The AI stack"
+    st.markdown(f"<div style='font-size:.78rem;color:#4A5157;margin-bottom:3px'>🧭 AI stack — {label}</div>"
+                f"<div style='display:flex;gap:4px;margin-bottom:12px'>{cells}</div>", unsafe_allow_html=True)
 
 
 with st.sidebar:

@@ -131,7 +131,19 @@
     <div><span class="n">9</span><b>Security</b>How it is attacked and defended. Session 9.</div>
     <div><span class="n">10</span><b>Value</b>How you prove it was worth it. Session 8.</div>
   </div>
-  <div class="note"><b>Your lab tool today:</b> on your lab VM desktop, double-click <b>ABB AI Lab</b>. It opens in the VM's browser with one tab per lab. Every lab has the same rhythm: <b>Predict → Click → See the result → Reveal → Decide.</b> If a model is slow, every lab has a <b>Replay</b> button. Work in pairs: the <b>Driver</b> clicks, the <b>Decision-maker</b> predicts and decides.</div>
+  <div class="lab" id="howto"><span class="open">Do this once, at 09:05</span>
+    <h3>How to open the lab (no files to open, nothing to install)</h3>
+    <table>
+      <tr><th>Step</th><th>Where</th><th>What to do</th></tr>
+      <tr><td>1</td><td>Your ABB laptop</td><td>Open the <b>Bastion link</b> for your VM (the same link as Day 1, sent by the trainer). Sign in to the VM.</td></tr>
+      <tr><td>2</td><td>Lab VM desktop</td><td>Double-click the shortcut <b>ABB AI Lab</b>. A black window opens — <b>leave it open</b> (minimise it).</td></tr>
+      <tr><td>3</td><td>Lab VM browser</td><td>After about 10 seconds the browser on the VM opens <code>http://localhost:8501</code> — the <b>ABB AI Lab</b>. If it does not open, type that address in the VM's browser.</td></tr>
+      <tr><td>4</td><td>ABB AI Lab, left menu</td><td>Click the lab number the course page tells you (for example <b>1 · Prompt vs Spec</b>). Each lab is one item in this menu.</td></tr>
+      <tr><td>5</td><td>This course page</td><td>Keep this page open on your <b>laptop</b> for reading, predictions, quizzes and decision cards. Do the clicking in the <b>VM</b>.</td></tr>
+    </table>
+    <p><b>Something wrong?</b> Black window closed → double-click <b>ABB AI Lab</b> again. Sidebar shows "No model connection" → call the trainer, and use the <b>Replay</b> buttons meanwhile. Work in pairs: the <b>Driver</b> clicks in the VM, the <b>Decision-maker</b> predicts and decides on this page.</p>
+  </div>
+  <div class="note">Every lab has the same rhythm: <b>Predict → Click → See the result → Reveal → Decide.</b></div>
   <div class="plain"><b class="t">Yesterday in one line:</b> models are rented brains priced by the token; prompts shape the answer; RAG lets the AI answer from your documents; and nothing is trustworthy until it is tested.</div>
 </section>
 
@@ -150,15 +162,19 @@
     <tr><td>Out of scope</td><td>What it must not do</td></tr>
     <tr><td>Output format</td><td>How the result must look</td></tr>
   </table>
-  <div class="lab"><span class="open">ABB AI Lab → 1 · Prompt vs Spec</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 1 · Prompt vs Spec</span>
     <h3>Lab 1 · The same AI, scored two ways</h3>
+    <p><b>Tool:</b> the ABB AI Lab on your VM (<a href="#howto">how to open it</a>). <b>Files:</b> none — the prompts are already in the lab. <b>Time:</b> 20 minutes.</p>
     <div class="predict">Predict (pair): the vague prompt will score <input data-k="p1a" placeholder="__ / 5"> and the spec will score <input data-k="p1b" placeholder="__ / 5"></div>
     <ol>
-      <li><b>Round 1:</b> open the <i>Vague prompt</i> tab and click <b>Build</b>. Do not change the prompt. Look at the 5 release cards.</li>
-      <li><b>Round 2:</b> open the <i>Specification</i> tab. Read the rules R1–R4. Click <b>Build</b>.</li>
-      <li>Switch on <b>Reveal the correct answers</b>. Enter both scores in AhaSlides.</li>
-      <li>Twist: change 98% to 99% in rule R1 and build again. What would the vague team change?</li>
+      <li>In the ABB AI Lab left menu, click <b>1 · Prompt vs Spec</b>. You will see two tabs at the top: <b>Round 1 · Vague prompt</b> and <b>Round 2 · Specification</b>.</li>
+      <li><b>Round 1:</b> stay on the <i>Vague prompt</i> tab. Do not change the text in the box. Click the red <b>🔨 Build</b> button and wait 20–40 seconds while the AI writes the code.</li>
+      <li>Scroll down to <b>The 5 test releases</b>. Each card shows GO (green) or NO-GO (red) — this is the AI's decision engine at work. Do not reveal the answers yet.</li>
+      <li><b>Round 2:</b> click the <i>Specification</i> tab. Read rules R1–R4 in the box (these are Axion's own rules). Click <b>🔨 Build</b>.</li>
+      <li>Scroll to the bottom and switch on <b>🔍 Reveal the correct answers</b>. Each card gets a ✅ or ❌, and you see both scores. Enter them in AhaSlides.</li>
+      <li><b>Twist:</b> in the Specification box change <code>98.0%</code> to <code>99.0%</code> in rule R1 and click Build again. Discuss: what would the vague-prompt team even change?</li>
     </ol>
+    <p class="note" style="margin:8px 0 0">Model slow or failing? Click <b>▶ Replay a saved run</b> next to Build — it shows a real saved result instantly.</p>
   </div>
   <div class="plain"><b class="t">In plain words:</b> the AI was equally clever in both rounds. The spec did not make it smarter — it gave it the knowledge only your team has. The acceptance tests inside the spec are also how you check the AI's work.</div>
   <div class="card quiz" data-answer="1" data-why='["No. The model and the build contract were the same in both rounds.","Right. A safety-rated module needs 98% at Axion — a rule no AI can guess. The vague version used a common 95% and gave a green GO.","No. The release data was identical in both rounds."]'>
@@ -184,12 +200,14 @@
     <tr><td>Says <b>"I don't know"</b> when the answer is not there</td><td>This one behaviour decides whether people trust it</td></tr>
     <tr><td>Catches a document with a <b>hidden instruction</b></td><td>Anything the AI reads can try to give it orders</td></tr>
   </table>
-  <div class="lab"><span class="open">ABB AI Lab → 2 · Build your RAG</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 2 · Build your RAG</span>
     <h3>Lab 2 · Your own "Chat with my PDF" app in 10 minutes</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>File:</b> <code>Axion_HR_Policy.pdf</code> — the lab copies it to the <b>my-rag</b> folder on the VM Desktop when you click Build. Your app opens in a <b>new browser tab</b> on the VM (<code>http://localhost:8601</code>).</p>
     <div class="predict">Predict: how many lines of code will the AI write? <input data-k="p2" placeholder="lines"></div>
     <ol>
-      <li>Read the instruction in the box — it is a short spec. Click <b>Build my app</b>.</li>
-      <li>Click <b>Open my app</b>. In your app, upload <code>Axion_HR_Policy.pdf</code> from the <b>my-rag</b> folder on your Desktop.</li>
+      <li>Type <b>your name</b> — it goes into your app's title. Read the instruction in the box (a short spec). Click <b>Build my app</b>.</li>
+      <li>Click <b>Open my app</b>. Tab <b>🏗️ How RAG works</b> shows the architecture of a production RAG. Then open tab <b>💬 Chat</b> and upload <code>Axion_HR_Policy.pdf</code> from the <b>my-rag</b> folder on your Desktop (sidebar).</li>
+      <li>Watch the <b>🔧 Under the hood</b> panel on the right: which embedding model, how many numbers per chunk, and where the vectors live (in memory — no vector database).</li>
       <li>Ask the five questions below. Open <b>Sources</b> each time.</li>
       <li>Red error? Paste it in <b>Fix it</b>. Finished early? Try a <b>Level up</b>.</li>
     </ol>
@@ -257,8 +275,9 @@
     <tr><td>Output guard</td><td>Masks names, phone numbers and emails before anything leaves</td><td>Attack 2</td></tr>
     <tr><td>Action guard</td><td>Anything that touches a customer or a plant needs a human to approve</td><td>Attack 3</td></tr>
   </table>
-  <div class="lab"><span class="open">ABB AI Lab → 3 · Agents + Guardrails</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 3 · Agents + Guardrails</span>
     <h3>Lab 3 · The Release Readiness Crew</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. Pick a scenario, set the <b>🛡️ Guardrails ON</b> switch, click <b>▶ Run the crew</b> (20–40 s), read the conversation top to bottom, then the verdict bar. Fill the table below as you go.</p>
     <p>Five agents — Coordinator, Test Analyst, Security Analyst, Policy Agent, Release Manager — review AX900 v4.2. For each scenario: predict, run with guardrails <b>OFF</b>, then <b>ON</b>.</p>
     <table>
       <tr><th>Scenario</th><th>Guardrails OFF — what happened?</th><th>Guardrails ON — what happened?</th></tr>
@@ -292,8 +311,9 @@
     <li><b>Human review</b> — for anything that touches a customer or a plant.</li>
   </ul>
   <p><b>Observability</b> answers a different question: what did the AI actually do, step by step, and what did it cost? In production this is your early-warning system.</p>
-  <div class="lab"><span class="open">ABB AI Lab → 4 · Evals, then 5 · Observability</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 4 · Evals, then 5 · Observability</span>
     <h3>Lab 4 and 5 · The scorecard and the trace</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. Lab 5 shows everything <i>you</i> ran today, so do it after Labs 1–4.</p>
     <div class="predict">Predict: with guardrails OFF the crew gets <input data-k="p4a" placeholder="__ / 6"> right; with ON <input data-k="p4b" placeholder="__ / 6"></div>
     <ol>
       <li>Lab 4: click <b>Run the eval (OFF vs ON)</b>. Twelve crew reviews run in parallel. Read the two scorecards.</li>
@@ -354,8 +374,9 @@
     </g>
   </svg>
   <p><b>Where AI helps:</b> writing DAX and OData queries; three-sentence summaries of a dashboard; spotting unusual trends; predicting sprint slip or defect growth; first drafts of root-cause analysis. <b>Who owns what:</b> the ADO admin owns access, the BI team owns the model and measures, security owns what may leave the tenant.</p>
-  <div class="lab"><span class="open">ABB AI Lab → 6 · Sprint Board</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 6 · Sprint Board</span>
     <h3>Lab 6 · Six charts vs three sentences</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Data:</b> already loaded (the Azure DevOps export in <code>C:\ai-abb\day2\data</code>).</p>
     <div class="predict">Predict: in 10 seconds, the biggest v4.2 risk is <input data-k="p6" style="width:260px"></div>
     <ol>
       <li>Look at the six charts for 10 seconds. Write your answer above.</li>
@@ -384,8 +405,9 @@
     <tr><td>Upgrade path</td><td>Model gateway + eval set</td><td>Can we swap to next quarter's model in one day?</td></tr>
   </table>
   <p><b>Open-weight</b> means the model's weights are published, so it can run on your own servers — important for plants with no internet, for IP, and for data sovereignty. The price is a team to run it, GPUs to buy, and patches to apply.</p>
-  <div class="lab"><span class="open">ABB AI Lab → 7 · Trade-offs</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 7 · Trade-offs</span>
     <h3>Lab 7 · Four models, one question — then the money</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. Three tabs at the top: A, B, C.</p>
     <div class="predict">Predict: the best answer will come from <input data-k="p7a" style="width:180px">, the cheapest from <input data-k="p7b" style="width:180px"></div>
     <ol>
       <li><b>A:</b> click <b>Ask all four at once</b>. Score each answer 1–5. Look at quality per dollar.</li>
@@ -414,8 +436,9 @@
     <tr><td>Quality as a gate</td><td>Speed counts only if escaped defects, rework % and change failure rate do not get worse. The first two sprints are your baseline.</td><td>Quality</td></tr>
   </table>
   <p><b>The formulas:</b> Time saved = (estimate without AI − actual with AI) ÷ estimate, reported as a range. · Net cost = hours saved × loaded rate − (licences + tokens + extra review + training). · Quality = escaped defects and rework % against sprints 1–2.</p>
-  <div class="lab"><span class="open">ABB AI Lab → 8 · Value Case</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 8 · Value Case</span>
     <h3>Lab 8 · The trap, the honest range, your case</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. Your Word file downloads to the VM's <b>Downloads</b> folder — email it to yourself or copy it out.</p>
     <div class="predict">Predict: Team A (with AI) is <input data-k="p8" placeholder="__ %"> better than Team B</div>
     <ol>
       <li><b>A · The trap:</b> start with cycle time only. Then add review time, rework and escaped defects. Watch the headline.</li>
@@ -442,8 +465,9 @@
     <li><b>AI-written code</b> — secrets in code and vulnerable libraries arrive faster. Keep security scanning gates in every pipeline.</li>
     <li><b>AI for defenders</b> — triaging vulnerability advisories and PSAs, checking the software bill of materials, summarising logs.</li>
   </ul>
-  <div class="lab"><span class="open">ABB AI Lab → 9 · Break the Bot</span>
+  <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 9 · Break the Bot</span>
     <h3>Lab 9 · Make the support bot leak its secret</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. Type in the chat box at the bottom of the page.</p>
     <ol><li>Guardrails OFF: get the partner discount code out of the bot. Count your attempts.</li><li>Guardrails ON: try again. Enter your attempt counts in AhaSlides — fastest break wins.</li></ol>
   </div>
   <div class="plain"><b class="t">In plain words:</b> the bot's instructions are a polite request, not a lock. The real fix is simpler than any guardrail: never put a secret where the AI can read it.</div>
