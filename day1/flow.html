@@ -195,6 +195,7 @@
   function mins(t){ var p=t.split(':'); return (+p[0])*60 + (+p[1]); }
   function tick(){
     var d=new Date(), n=d.getHours()*60+d.getMinutes();
+    if (!(d.getFullYear()===2026 && d.getMonth()===10 && d.getDate()===12)) n = -1;  // highlight only on the training day
     document.getElementById('now').textContent = d.toTimeString().slice(0,5);
     var cur='—', nxt='—';
     blocks.forEach(function(b, i){

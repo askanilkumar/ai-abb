@@ -138,6 +138,12 @@
   .memo{background:#fff; border:2px solid var(--ink); border-radius:4px; padding:20px; margin:22px 0; max-width:76ch}
   .memo textarea{font-family:ui-monospace,Consolas,monospace; font-size:.88rem; min-height:220px}
 
+  .outcomes{background:#fff; border:2px solid var(--ink); border-radius:4px; padding:14px 18px; margin:14px 0; max-width:76ch}
+  .outcomes ol{margin:6px 0 0 22px} .outcomes li{margin:4px 0}
+  .plain{background:#E3F1E8; border-left:5px solid #2F7D4F; padding:8px 12px; margin:6px 0 12px; max-width:76ch}
+  details.primer{background:#fff; border:1.5px solid var(--line); border-radius:4px; padding:10px 16px; margin:12px 0; max-width:76ch}
+  details.primer summary{cursor:pointer; font-weight:700}
+  details.primer table{margin-top:8px}
   footer{margin-top:52px; border-top:2px solid var(--ink); background:var(--ink); color:#E8EAE8}
   footer .wrap{padding:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; font-size:.95rem}
   footer b{color:#fff}
@@ -235,6 +241,35 @@
   <p class="muted">Three ground rules for the day: hands on, not hands up (ask your pair partner first) ·
   numbers, not impressions · everything here is fictional.</p>
 
+  <div class="outcomes"><strong>By 17:00 you will be able to:</strong>
+    <ol>
+      <li><strong>Choose the right model</strong> for a task, and say when the expensive one is worth paying for. <span class="muted">(Lab 1)</span></li>
+      <li><strong>Ask your team for a measured prompt</strong>, not just a long one. <span class="muted">(Lab 2)</span></li>
+      <li><strong>Explain how AI answers from your own documents</strong> (RAG), and what to check when it disappoints. <span class="muted">(Lab 3)</span></li>
+      <li><strong>Set a shipping gate:</strong> guardrails plus a scored test set before anything goes live. <span class="muted">(Lab 4)</span></li>
+    </ol>
+  </div>
+  <div class="note"><strong>This is not a coding class.</strong> You won't write code. The notebooks are ready to run:
+  you press Run, change <em>one setting at a time</em>, read the numbers, and decide. If a cell looks scary,
+  read the line above it in plain English and ask your partner. New to AI or very experienced, both are welcome:
+  we start from the basics and build up step by step.</div>
+
+  <details class="primer"><summary>New to AI? Open this 2-minute primer (10 words you'll hear today)</summary>
+    <table>
+      <tr><th>Word</th><th>In plain English</th></tr>
+      <tr><td><strong>Model (LLM)</strong></td><td>The AI engine that reads text and writes text. "Mini" = cheap and fast; "frontier" = smartest and pricier.</td></tr>
+      <tr><td><strong>Prompt</strong></td><td>The instructions and question you send to the model.</td></tr>
+      <tr><td><strong>Token</strong></td><td>A small piece of text (about ¾ of a word). You pay per token, in and out.</td></tr>
+      <tr><td><strong>Context</strong></td><td>Everything the model can see for one answer: your prompt plus any documents you include.</td></tr>
+      <tr><td><strong>Hallucination</strong></td><td>A confident answer that isn't true. The main risk we manage today.</td></tr>
+      <tr><td><strong>Embedding</strong></td><td>Text turned into numbers that capture meaning, so similar ideas can be found by search.</td></tr>
+      <tr><td><strong>RAG</strong></td><td>"Look it up, then answer": find the right passages in your documents and give them to the model with the question.</td></tr>
+      <tr><td><strong>Chunk</strong></td><td>A piece of a document cut out for search (like a paragraph).</td></tr>
+      <tr><td><strong>Guardrail</strong></td><td>A check before or after the model that blocks unsafe or off-topic requests and made-up answers.</td></tr>
+      <tr><td><strong>Eval</strong></td><td>A test set of questions with known good answers, scored automatically. The AI version of acceptance testing.</td></tr>
+    </table>
+  </details>
+
   <h3 style="font-size:1.5rem; margin:18px 0 6px">Your role today: Axion's AI steering committee</h3>
   <div class="note"><strong>Axion's CEO has one question for this room, due at 17:00:</strong><br>
   <em>"Do we ship the service-knowledge assistant to our field engineers, and on what terms?"</em><br>
@@ -301,6 +336,7 @@
     <div class="labbody">
       <p><strong>Goal:</strong> prove your environment works, then call two very different models on the same
       Axion field report and put numbers on the difference.</p>
+      <p class="plain"><strong>In plain words:</strong> we ask two AI models the same question and compare answer, speed and price. That's all. It shows you what you are paying for.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>15 min</span></div><div><b>3 · Challenge</b><span>17 min</span></div><div><b>4 · Reveal</b><span>10 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> A VectorDrive 450 keeps tripping F-07 overtemp. The frontier model costs about 7× the mini model. What happens?<ol type="A"><li>The frontier model finds the real fix; the mini model doesn't</li><li>Both find the same fix; the frontier model just writes better</li><li>Neither finds the real fix</li></ol></div>
       <ol class="c">
@@ -395,6 +431,7 @@
     <div class="labbody">
       <p><strong>Goal:</strong> one real task — classify Axion service tickets — four prompt designs,
       scored for quality and cost. Find out which design your team should standardise on.</p>
+      <p class="plain"><strong>In plain words:</strong> the same job, four ways of asking. We score which way of asking works best and costs least.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>12 min</span></div><div><b>3 · Challenge</b><span>25 min</span></div><div><b>4 · Reveal</b><span>15 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> Four prompts do the same job. Which one wins on quality?<ol type="A"><li>V1 · one line, no rules</li><li>V2 · 300-word "kitchen sink" covering every case</li><li>V3 · a few worked examples</li><li>V4 · short, with a strict output schema</li></ol></div>
       <ol class="c">
@@ -491,6 +528,7 @@
     <div class="labbody">
       <p><strong>Goal:</strong> build the Axion service-knowledge assistant end to end — ingest 14 documents,
       chunk, embed, retrieve, answer with citations. Then break it on purpose, three ways.</p>
+      <p class="plain"><strong>In plain words:</strong> we give the AI Axion's 14 documents to look things up in before it answers. Then we turn some knobs to see what breaks.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>15 min</span></div><div><b>3 · Challenge</b><span>22 min</span></div><div><b>4 · Reveal</b><span>15 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> Same cheap mini model as this morning, now given Axion's 14 documents. Ask the F-07 question again. What happens?<ol type="A"><li>Still guesses "cooling or the fan"</li><li>Names the bulletin and the firmware fix, with the source</li><li>Needs the frontier model to get it right</li></ol></div>
       <ol class="c">
@@ -588,6 +626,7 @@
     <div class="labbody">
       <p><strong>Goal:</strong> add guardrails to your Lab 3 assistant, score it against an eval set,
       improve one thing, and prove the score moved.</p>
+      <p class="plain"><strong>In plain words:</strong> we add safety checks, then test the assistant with a set of real-style questions and get a score. No score, no launch.</p>
       <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>12 min</span></div><div><b>3 · Challenge</b><span>20 min</span></div><div><b>4 · Reveal</b><span>10 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
       <div class="predict"><b>1 · Predict first (AhaSlides):</b> Lab 4 adds a groundedness check run by the cheap mini model. It reads a fluent but invented answer: "replace the PSU to fix F-07". Will it catch it?<ol type="A"><li>No, fluent answers fool small models</li><li>Only the frontier model could catch it</li><li>Yes, it flags the claim as not supported by the documents</li></ol></div>
       <ol class="c">
@@ -659,8 +698,9 @@
   <div class="rule" aria-hidden="true"></div>
   <p>The multi-hop question Lab 3 could not answer — <em>"which sites have F-07 tickets on drives affected by
   SB-2025-04, and what one action closes all of them?"</em> — needs a <strong>join</strong>: tickets × bulletin
-  × release notes. On the projector you'll watch flat RAG fail it, then a knowledge graph answer it.</p>
-  <p><strong>The decision rule you take away</strong> (the demo exists only to make this rule stick):</p>
+  × release notes. You already watched flat RAG fail it in Lab 3. A knowledge graph (or plain SQL) answers it
+  by following links between tickets, drives and bulletins instead of searching for similar text.</p>
+  <p><strong>The decision rule you take away:</strong></p>
   <table>
     <thead><tr><th>Signal in your use case</th><th>Build</th></tr></thead>
     <tbody>
@@ -676,9 +716,19 @@
   <p class="slot-time">16:45 – 17:00</p>
   <h2>Day 1 close — and what you take home</h2>
   <div class="rule" aria-hidden="true"></div>
-  <p><strong>The zero-licence variant:</strong> everything you built today — retrieval, guardrails, evals —
-  rebuilt on free and open-source components, walked through on the projector. The repo branch is yours to keep:
-  proof that the architecture, not the licences, is the asset.</p>
+  <div class="outcomes"><strong>Look back: the four promises from 09:00</strong>
+    <table>
+      <tr><th>At 09:00 we said you'd be able to…</th><th>Your evidence today</th></tr>
+      <tr><td>1 · Choose the right model, and know when the expensive one is worth it</td><td>Lab 1 numbers + decision card 1</td></tr>
+      <tr><td>2 · Ask your team for a measured prompt</td><td>Lab 2 bake-off + decision card 2</td></tr>
+      <tr><td>3 · Explain RAG and what to check when it disappoints</td><td>Lab 3 breaks + decision card 3</td></tr>
+      <tr><td>4 · Set a shipping gate</td><td>Lab 4 baseline score + decision card 4</td></tr>
+    </table>
+    <p class="muted" style="margin:6px 0 0">All four are in your Monday memo below.</p>
+  </div>
+  <p><strong>The zero-licence variant:</strong> everything you built today can be rebuilt on free and open-source
+  components. The checklist is in <code>frameworks/zero_licence.md</code>: proof that the architecture, not the
+  licences, is the asset.</p>
   <p><strong>Bonus you saw today:</strong> the same Lab 3 pipeline with a face on it — <code>app.py</code>,
   a small Streamlit app. That's what "your team ships" looks like: the pipeline you built, plus 100 lines of UI.</p>
   <table>
