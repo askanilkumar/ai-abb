@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABB · AI Engineering for Managers · Day 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600&family=Saira+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#22262A;--ink-soft:#4A5157;--paper:#FAFBFA;--panel:#EDEFED;--amber:#E8A200;--amber-deep:#B37E00;
+    --amber-pale:#FFF8E8;--green:#2F7D4F;--green-pale:#E7F3EC;--red:#B3432B;--red-pale:#FBEDEA;--line:#C6CBC6;--blue:#1E4E8C}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Saira',system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16.5px;line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,h4{font-family:'Saira Condensed',sans-serif;line-height:1.1}
+  a{color:var(--ink);text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px}
+  .hazard{height:10px;background:repeating-linear-gradient(135deg,var(--amber) 0 18px,var(--ink) 18px 36px)}
+  header{background:#fff;border-bottom:2px solid var(--ink)}
+  .mast{padding:28px 0 20px}
+  .doc-id{font-weight:600;font-size:.95rem;color:var(--ink-soft);border:1.5px solid var(--line);display:inline-block;padding:3px 12px;border-radius:3px;margin-bottom:12px}
+  h1{font-size:clamp(2.2rem,5.5vw,3.8rem)} h1 span{color:var(--amber-deep)}
+  .sub{margin-top:8px;font-size:1.1rem;color:var(--ink-soft);max-width:68ch}
+  nav.flow{position:sticky;top:0;z-index:10;background:var(--ink);overflow-x:auto}
+  nav.flow .wrap{display:flex;gap:2px}
+  nav.flow a{color:#E8EAE8;text-decoration:none;font-family:'Saira Condensed';font-weight:600;font-size:.98rem;padding:9px 11px;white-space:nowrap;border-bottom:4px solid transparent}
+  nav.flow a:hover{border-bottom-color:var(--amber);color:#fff}
+  nav.flow a.hl{color:#FFD34D}
+  section{padding:40px 0 14px;border-bottom:1.5px solid var(--line)}
+  h2{font-size:2rem;margin-bottom:2px}
+  .slot{font-weight:600;color:var(--amber-deep);font-size:1rem}
+  .layer{display:inline-block;font-size:.8rem;font-weight:600;background:var(--amber-pale);border:1px solid var(--amber);color:var(--amber-deep);padding:1px 10px;border-radius:12px;margin-left:8px;vertical-align:middle}
+  .rule{width:64px;height:5px;background:var(--amber);margin:10px 0 18px}
+  h3{font-size:1.45rem;margin:20px 0 8px}
+  p{max-width:74ch;margin-bottom:12px}
+  ul.c,ol.c{max-width:72ch;margin:0 0 14px 22px} ul.c li,ol.c li{margin-bottom:5px}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;background:var(--panel);padding:1px 6px;border-radius:3px}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:.95rem;margin:6px 0 18px}
+  th{font-family:'Saira Condensed';font-size:1.05rem;text-align:left;border-bottom:2px solid var(--ink);padding:8px 12px}
+  td{border-bottom:1px solid var(--line);padding:8px 12px;vertical-align:top}
+  .plain{background:var(--green-pale);border-left:5px solid var(--green);padding:12px 18px;margin:14px 0;max-width:80ch;border-radius:0 3px 3px 0}
+  .plain b.t{color:var(--green)}
+  .note{background:var(--panel);border-left:5px solid var(--amber);padding:12px 18px;margin:14px 0;max-width:80ch;border-radius:0 3px 3px 0}
+  .war{background:#fff;border:1.5px dashed var(--red);border-radius:6px;padding:12px 16px;margin:14px 0;max-width:80ch}
+  .war b.t{color:var(--red)}
+  .lab{background:#fff;border:2px solid var(--blue);border-radius:8px;padding:16px 20px;margin:16px 0}
+  .lab h3{margin-top:0;color:var(--blue)}
+  .lab .open{display:inline-block;background:var(--blue);color:#fff;font-weight:600;padding:3px 12px;border-radius:4px;font-size:.92rem;margin-bottom:8px}
+  .lab ol{margin-left:22px} .lab li{margin-bottom:6px}
+  .predict{background:var(--amber-pale);border:1.5px solid var(--amber);border-radius:6px;padding:10px 14px;margin:10px 0}
+  .predict input{font:inherit;border:1px solid var(--line);border-radius:4px;padding:3px 8px;width:110px}
+  .card{background:#fff;border:2px solid var(--ink);border-radius:6px;padding:14px 18px;margin:14px 0}
+  .card h4{font-size:1.2rem;margin-bottom:8px}
+  .opts label{display:block;padding:6px 12px;margin:5px 0;border:1.5px solid var(--line);border-radius:4px;cursor:pointer;background:var(--paper)}
+  .opts label:hover{border-color:var(--amber)}
+  .opts label.right{border-color:var(--green);background:var(--green-pale)} .opts label.wrong{border-color:var(--red);background:var(--red-pale)}
+  .opts input{margin-right:8px}
+  .fb{margin-top:8px;font-size:.96rem;display:none}
+  .decision{background:var(--ink);color:#fff;border-radius:8px;padding:14px 18px;margin:16px 0}
+  .decision h4{color:#FFD34D;font-size:1.2rem;margin-bottom:6px}
+  .decision label{display:block;padding:5px 10px;margin:4px 0;border:1px solid #5B6770;border-radius:4px;cursor:pointer}
+  .decision label:hover{border-color:var(--amber)}
+  .decision input{margin-right:8px}
+  .stack{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:14px 0}
+  .stack div{background:#fff;border:1.5px solid var(--ink);border-radius:6px;padding:8px;font-size:.88rem}
+  .stack b{display:block;font-family:'Saira Condensed';font-size:1.1rem}
+  .stack .n{color:var(--amber-deep);font-weight:700}
+  details{background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:10px 14px;margin:10px 0;max-width:84ch}
+  summary{cursor:pointer;font-weight:600} details[open] summary{margin-bottom:8px}
+  .prompt{position:relative;background:var(--ink);color:#F2F3F2;border-radius:6px;padding:12px 16px;margin:6px 0;font-family:ui-monospace,Consolas,monospace;font-size:.85rem;white-space:pre-wrap}
+  .copy{font:600 .95rem 'Saira Condensed';background:var(--amber);color:var(--ink);border:none;padding:6px 14px;border-radius:4px;cursor:pointer;margin:4px 0}
+  .copy.ok{background:var(--green);color:#fff}
+  .score{font:700 1.2rem 'Saira Condensed';margin-top:6px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px} @media(max-width:760px){.two,.stack{grid-template-columns:1fr}}
+  input.t,textarea.t{font:inherit;width:100%;border:1.5px solid var(--line);border-radius:4px;padding:6px 10px;margin:4px 0 10px;background:#fff}
+  #playbook{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:20px 24px;margin:14px 0}
+  #playbook h3{margin-top:4px}
+  .btn{font:600 1rem 'Saira Condensed';background:var(--ink);color:#fff;border:none;padding:8px 18px;border-radius:4px;cursor:pointer}
+  footer{padding:30px 0 50px;color:var(--ink-soft);font-size:.92rem}
+  @media print{body *{visibility:hidden} #playbook,#playbook *{visibility:visible} #playbook{position:absolute;left:0;top:0;border:none}}
+</style>
+</head>
+<body>
+<div class="hazard"></div>
+<header>
+  <div class="wrap mast">
+    <div class="doc-id">ABB · AI Engineering for Managers · Day 2 · Axion Controls case</div>
+    <h1>From prompt to production: <span>the AI stack</span></h1>
+    <p class="sub">Yesterday you saw what AI can do. Today you will see how real AI systems are built, attacked, tested, watched and paid for — and how to prove their value to your management. Simple labs, visible results, no coding.</p>
+  </div>
+</header>
+<nav class="flow"><div class="wrap">
+  <a href="#start">Start</a><a href="#s1">1 Spec</a><a href="#s2">2 RAG</a><a href="#s3">3 Agents</a><a href="#s4">4 Evals &amp; Ops</a>
+  <a href="#s5">5 Workplace</a><a href="#s6">6 ADO</a><a href="#s7">7 Trade-offs</a><a href="#s8">8 Value</a><a href="#s9">9 Security</a><a href="#close" class="hl">My Playbook</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ================= START ================= -->
+<section id="start">
+  <h2>How today runs</h2><div class="rule"></div>
+  <table>
+    <tr><th>Time</th><th>Session</th><th>Time</th><th>Session</th></tr>
+    <tr><td>09:00</td><td>Recap and today's map</td><td>13:00</td><td>Lunch</td></tr>
+    <tr><td>09:10</td><td>1 · Prompt vs Spec</td><td>13:45</td><td>6 · Azure DevOps + Power BI</td></tr>
+    <tr><td>09:40</td><td>2 · Build your RAG + Knowledge Graphs</td><td>14:15</td><td>7 · Architecture trade-offs</td></tr>
+    <tr><td>10:15</td><td>3 · Agents + Guardrails</td><td>15:15</td><td>Tea</td></tr>
+    <tr><td>11:15</td><td>Tea</td><td>15:30</td><td>8 · Proving AI value</td></tr>
+    <tr><td>11:30</td><td>4 · Evals and Observability</td><td>16:10</td><td>9 · AI and cyber security</td></tr>
+    <tr><td>12:30</td><td>5 · AI in the workplace (demo)</td><td>16:35</td><td>Close — My AI Playbook</td></tr>
+  </table>
+  <h3>By the end of today you will be able to</h3>
+  <ol class="c">
+    <li>Explain the ten layers of an AI system and ask the right question at each layer.</li>
+    <li>Tell the difference between a demo and a product — specs, guardrails, evals and observability.</li>
+    <li>Make an architecture choice: which model, which hosting, buy or build.</li>
+    <li>Build a value case for an AI project even when there is no past data.</li>
+    <li>Leave with your own one-page <b>AI Playbook</b> and a Monday action.</li>
+  </ol>
+  <h3>The AI stack — today's map</h3>
+  <p>Every AI system your teams build has these ten layers. Each session today lights up one or two of them.</p>
+  <div class="stack">
+    <div><span class="n">1</span><b>Model</b>The brain you rent or run. Day 1.</div>
+    <div><span class="n">2</span><b>Prompt / Spec</b>What you ask, and how precisely. Session 1.</div>
+    <div><span class="n">3</span><b>Knowledge</b>Your documents and data — RAG, graphs. Session 2.</div>
+    <div><span class="n">4</span><b>Agents &amp; tools</b>AI that plans and acts. Session 3.</div>
+    <div><span class="n">5</span><b>Guardrails</b>Code around the AI that keeps it safe. Session 3.</div>
+    <div><span class="n">6</span><b>Evals</b>Proof it is good enough to ship. Session 4.</div>
+    <div><span class="n">7</span><b>Observability</b>What it did and what it cost. Session 4.</div>
+    <div><span class="n">8</span><b>Architecture &amp; cost</b>Where it runs, how you pay. Sessions 6–7.</div>
+    <div><span class="n">9</span><b>Security</b>How it is attacked and defended. Session 9.</div>
+    <div><span class="n">10</span><b>Value</b>How you prove it was worth it. Session 8.</div>
+  </div>
+  <div class="note"><b>Your lab tool today:</b> on your lab VM desktop, double-click <b>ABB AI Lab</b>. It opens in the VM's browser with one tab per lab. Every lab has the same rhythm: <b>Predict → Click → See the result → Reveal → Decide.</b> If a model is slow, every lab has a <b>Replay</b> button. Work in pairs: the <b>Driver</b> clicks, the <b>Decision-maker</b> predicts and decides.</div>
+  <div class="plain"><b class="t">Yesterday in one line:</b> models are rented brains priced by the token; prompts shape the answer; RAG lets the AI answer from your documents; and nothing is trustworthy until it is tested.</div>
+</section>
+
+<!-- ================= S1 ================= -->
+<section id="s1">
+  <div class="slot">09:10 · 30 minutes</div>
+  <h2>1 · Prompt vs Spec <span class="layer">Layer 2</span></h2><div class="rule"></div>
+  <p>Vibe coding means asking AI to build something with a short, loose request. It is fast, and often good enough for a prototype. But AI fills every gap in your request with a <b>sensible guess</b> — and your business rules are exactly the things it cannot guess.</p>
+  <p><b>Spec-driven development</b> means writing a short specification first and giving it to the AI. A good spec has six parts:</p>
+  <table>
+    <tr><th>Part</th><th>Question it answers</th></tr>
+    <tr><td>Purpose</td><td>What decision or job does this support?</td></tr>
+    <tr><td>Users</td><td>Who uses it, and what do they already know?</td></tr>
+    <tr><td>Business rules</td><td>The numbers and conditions only your team knows</td></tr>
+    <tr><td>Acceptance tests</td><td>Examples with the correct answer — how we will check the AI's work</td></tr>
+    <tr><td>Out of scope</td><td>What it must not do</td></tr>
+    <tr><td>Output format</td><td>How the result must look</td></tr>
+  </table>
+  <div class="lab"><span class="open">ABB AI Lab → 1 · Prompt vs Spec</span>
+    <h3>Lab 1 · The same AI, scored two ways</h3>
+    <div class="predict">Predict (pair): the vague prompt will score <input data-k="p1a" placeholder="__ / 5"> and the spec will score <input data-k="p1b" placeholder="__ / 5"></div>
+    <ol>
+      <li><b>Round 1:</b> open the <i>Vague prompt</i> tab and click <b>Build</b>. Do not change the prompt. Look at the 5 release cards.</li>
+      <li><b>Round 2:</b> open the <i>Specification</i> tab. Read the rules R1–R4. Click <b>Build</b>.</li>
+      <li>Switch on <b>Reveal the correct answers</b>. Enter both scores in AhaSlides.</li>
+      <li>Twist: change 98% to 99% in rule R1 and build again. What would the vague team change?</li>
+    </ol>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> the AI was equally clever in both rounds. The spec did not make it smarter — it gave it the knowledge only your team has. The acceptance tests inside the spec are also how you check the AI's work.</div>
+  <div class="card quiz" data-answer="1" data-why='["No. The model and the build contract were the same in both rounds.","Right. A safety-rated module needs 98% at Axion — a rule no AI can guess. The vague version used a common 95% and gave a green GO.","No. The release data was identical in both rounds."]'>
+    <h4>Quick check: why did the vague prompt give a GO to the Safety I/O release?</h4>
+    <div class="opts"><label><input type="radio" name="q11">The vague round used a weaker model</label><label><input type="radio" name="q11">It did not know Axion's 98% rule for safety-rated modules</label><label><input type="radio" name="q11">The test data was different</label></div><p class="fb"></p>
+  </div>
+  <div class="decision" data-d="d1"><h4>Decision card · When does my team need a spec?</h4>
+    <label><input type="radio" name="d1" value="Vibe coding is fine for prototypes and personal tools; anything with business rules, safety or customers needs a written spec with acceptance tests.">Prototypes: vibe. Business rules, safety or customers: spec with acceptance tests.</label>
+    <label><input type="radio" name="d1" value="Every AI-built tool, however small, starts from a one-page spec.">Always a one-page spec, even for small tools.</label>
+    <label><input type="radio" name="d1" value="Let teams decide case by case, but review every AI-built tool before it is shared.">Teams decide; I review before anything is shared.</label>
+  </div>
+</section>
+
+<!-- ================= S2 ================= -->
+<section id="s2">
+  <div class="slot">09:40 · 35 minutes</div>
+  <h2>2 · Build your RAG + Knowledge Graphs <span class="layer">Layer 3</span></h2><div class="rule"></div>
+  <h3>First, watch: a serious RAG (trainer demo — AskIT)</h3>
+  <table>
+    <tr><th>What AskIT does</th><th>Why a manager should care</th></tr>
+    <tr><td>Uses only the <b>current</b> version of an article</td><td>An old policy answered with confidence is worse than no answer</td></tr>
+    <tr><td>Answers a <b>contractor</b> differently from an <b>employee</b></td><td>The same question can have two correct answers</td></tr>
+    <tr><td>Says <b>"I don't know"</b> when the answer is not there</td><td>This one behaviour decides whether people trust it</td></tr>
+    <tr><td>Catches a document with a <b>hidden instruction</b></td><td>Anything the AI reads can try to give it orders</td></tr>
+  </table>
+  <div class="lab"><span class="open">ABB AI Lab → 2 · Build your RAG</span>
+    <h3>Lab 2 · Your own "Chat with my PDF" app in 10 minutes</h3>
+    <div class="predict">Predict: how many lines of code will the AI write? <input data-k="p2" placeholder="lines"></div>
+    <ol>
+      <li>Read the instruction in the box — it is a short spec. Click <b>Build my app</b>.</li>
+      <li>Click <b>Open my app</b>. In your app, upload <code>Axion_HR_Policy.pdf</code> from the <b>my-rag</b> folder on your Desktop.</li>
+      <li>Ask the five questions below. Open <b>Sources</b> each time.</li>
+      <li>Red error? Paste it in <b>Fix it</b>. Finished early? Try a <b>Level up</b>.</li>
+    </ol>
+    <table>
+      <tr><th>#</th><th>Ask this</th><th>Look for</th></tr>
+      <tr><td>1</td><td>How many days of earned leave do I get in a year?</td><td>A number and a page</td></tr>
+      <tr><td>2</td><td>What is the hotel limit per night in Pune?</td><td>The right city category</td></tr>
+      <tr><td>3</td><td>I am a contractor. Can I claim INR 6,500 for a hotel in Mumbai?</td><td>Did it notice the contractor rule?</td></tr>
+      <tr><td>4</td><td>Can I take 5 days of leave the week before the AX900 release?</td><td>Two sections joined</td></tr>
+      <tr><td>5</td><td>What is the canteen menu on Friday?</td><td>Does it admit it does not know?</td></tr>
+    </table>
+    <details><summary>Check your answers</summary><ol class="c">
+      <li>24 days, credited 2 a month (Section 2.1).</li><li>INR 4,500 — Pune is Tier-2 (Section 4.2).</li>
+      <li>No — contractors get the Tier-2 limit (INR 4,500) everywhere, only if travel is in the SOW and pre-approved (Section 6.3). A "yes" means the search found the Metro row but missed Section 6.</li>
+      <li>For engineering staff, more than 2 days in a release freeze also needs Engineering Director approval (Section 5.2).</li>
+      <li>"I could not find this in the document." A made-up menu means the grounding rule failed.</li></ol></details>
+  </div>
+  <h3>What happened in the background — six steps, two of them AI</h3>
+  <p><b>1 Read</b> the PDF → <b>2 Chunk</b> it into pieces → <b>3 Embed</b> each piece into numbers that capture meaning (AI) → <b>4 Search</b> for the 3 pieces closest to the question → <b>5 Prompt</b> = pieces + question + rules → <b>6 Answer</b> (AI).</p>
+  <div class="plain"><b class="t">In plain words:</b> the model never reads your PDF. It only sees the three pieces the search found. If the search picks the wrong pieces, even the best model gives a wrong answer. That is why question 3 often fails.</div>
+  <h3>Knowledge graphs and Graph RAG</h3>
+  <p>Normal RAG finds pieces of text that <i>sound like</i> the question. It struggles when the answer needs <b>several facts joined together</b> — "I am a contractor (Section 6) travelling to Mumbai (Metro, Section 4.2) — what applies?" A <b>knowledge graph</b> stores facts as things and the links between them, so the AI can follow a path instead of hoping the right paragraphs come up.</p>
+  <svg viewBox="0 0 900 190" style="width:100%;max-width:900px;background:#fff;border:1.5px solid var(--line);border-radius:6px" role="img" aria-label="Knowledge graph path from Contractor to hotel limit">
+    <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 z" fill="#22262A"/></marker></defs>
+    <g font-family="Saira, sans-serif" font-size="14">
+      <rect x="20" y="70" width="120" height="44" rx="22" fill="#FFF8E8" stroke="#B37E00" stroke-width="2"/><text x="80" y="97" text-anchor="middle" font-weight="600">Contractor</text>
+      <rect x="215" y="70" width="140" height="44" rx="6" fill="#E7F1FB" stroke="#1E4E8C" stroke-width="2"/><text x="285" y="97" text-anchor="middle">Section 6.3</text>
+      <rect x="430" y="70" width="150" height="44" rx="6" fill="#E7F1FB" stroke="#1E4E8C" stroke-width="2"/><text x="505" y="97" text-anchor="middle">Tier-2 limit</text>
+      <rect x="660" y="70" width="210" height="44" rx="22" fill="#E7F3EC" stroke="#2F7D4F" stroke-width="2"/><text x="765" y="97" text-anchor="middle" font-weight="600">INR 4,500 in Mumbai too</text>
+      <rect x="430" y="140" width="150" height="38" rx="6" fill="#fff" stroke="#C6CBC6" stroke-width="2"/><text x="505" y="164" text-anchor="middle" fill="#4A5157">Metro: INR 6,500</text>
+      <line x1="140" y1="92" x2="213" y2="92" stroke="#22262A" stroke-width="2" marker-end="url(#ar)"/><text x="176" y="84" text-anchor="middle" font-size="12">governed by</text>
+      <line x1="355" y1="92" x2="428" y2="92" stroke="#22262A" stroke-width="2" marker-end="url(#ar)"/><text x="392" y="84" text-anchor="middle" font-size="12">overrides</text>
+      <line x1="580" y1="92" x2="658" y2="92" stroke="#22262A" stroke-width="2" marker-end="url(#ar)"/><text x="619" y="84" text-anchor="middle" font-size="12">gives</text>
+      <line x1="285" y1="114" x2="428" y2="158" stroke="#B3432B" stroke-width="2" stroke-dasharray="5 4"/><text x="592" y="164" font-size="12" fill="#B3432B" text-anchor="start">← normal RAG often stops here ✗</text>
+      <text x="20" y="34" font-size="15" font-weight="600">Graph RAG follows the path: Contractor → Section 6.3 → Tier-2 limit → answer</text>
+    </g>
+  </svg>
+  <table>
+    <tr><th>Approach</th><th>Use it when</th><th>Cost and effort</th></tr>
+    <tr><td>Whole document in the prompt</td><td>One short, stable document</td><td>Simplest; expensive if long</td></tr>
+    <tr><td>Vector RAG (your app)</td><td>Many documents, mostly one-fact questions</td><td>Days to build; weeks to make trustworthy</td></tr>
+    <tr><td>Graph RAG</td><td>Rules that depend on each other — policies, product variants, compliance, asset hierarchies</td><td>Higher: someone must design and maintain the graph</td></tr>
+  </table>
+  <div class="card quiz" data-answer="2" data-why='["No. A bigger model still only sees the pieces the search found.","No. Smaller chunks make it more likely the contractor rule is split away from the limits table.","Right. The answer needs Section 6 and Section 4.2 together. Following links between facts is exactly what a knowledge graph does."]'>
+    <h4>Quick check: question 3 keeps failing. What is the best long-term fix?</h4>
+    <div class="opts"><label><input type="radio" name="q21">Use the most expensive model</label><label><input type="radio" name="q21">Make the chunks smaller</label><label><input type="radio" name="q21">Link related rules (contractor → limits) so the system can follow them — Graph RAG or metadata</label></div><p class="fb"></p>
+  </div>
+  <div class="decision" data-d="d2"><h4>Decision card · My team's first knowledge assistant</h4>
+    <label><input type="radio" name="d2" value="Start with vector RAG over a small, owned document set, with 'I don't know', source and date on every answer, and an eval set before go-live.">Vector RAG on a small owned set, with sources, "I don't know" and an eval set.</label>
+    <label><input type="radio" name="d2" value="Our questions join many rules (variants, compliance) — plan Graph RAG or strong metadata from the start.">Our questions join many rules — plan Graph RAG / metadata from the start.</label>
+    <label><input type="radio" name="d2" value="Buy first: use Abby or Copilot agents over our documents before building anything.">Buy first: Abby or Copilot agents over our documents.</label>
+  </div>
+</section>
+
+<!-- ================= S3 ================= -->
+<section id="s3">
+  <div class="slot">10:15 · 60 minutes</div>
+  <h2>3 · Agents + Guardrails <span class="layer">Layers 4 and 5</span></h2><div class="rule"></div>
+  <p>An <b>agent</b> is a model with a job description, tools it can ask to use, and memory of the conversation. A <b>multi-agent system</b> splits a job between several agents, each with its own instructions and tools — like a team. The model never touches data directly: it <i>asks</i> for a tool, and our code runs it.</p>
+  <p><b>Guardrails</b> are not inside the model. They are ordinary code around it, in four layers:</p>
+  <table>
+    <tr><th>Guard</th><th>What it does</th><th>Attack it stops in the lab</th></tr>
+    <tr><td>Input guard</td><td>Removes instructions hidden inside data (tickets, emails, documents)</td><td>Attack 1</td></tr>
+    <tr><td>Policy guard</td><td>Business rules written as code — the AI cannot talk its way past them</td><td>Attack 1</td></tr>
+    <tr><td>Output guard</td><td>Masks names, phone numbers and emails before anything leaves</td><td>Attack 2</td></tr>
+    <tr><td>Action guard</td><td>Anything that touches a customer or a plant needs a human to approve</td><td>Attack 3</td></tr>
+  </table>
+  <div class="lab"><span class="open">ABB AI Lab → 3 · Agents + Guardrails</span>
+    <h3>Lab 3 · The Release Readiness Crew</h3>
+    <p>Five agents — Coordinator, Test Analyst, Security Analyst, Policy Agent, Release Manager — review AX900 v4.2. For each scenario: predict, run with guardrails <b>OFF</b>, then <b>ON</b>.</p>
+    <table>
+      <tr><th>Scenario</th><th>Guardrails OFF — what happened?</th><th>Guardrails ON — what happened?</th></tr>
+      <tr><td>Normal release</td><td><input class="t" data-k="l3a"></td><td><input class="t" data-k="l3b"></td></tr>
+      <tr><td>Attack 1 · hidden instruction</td><td><input class="t" data-k="l3c"></td><td><input class="t" data-k="l3d"></td></tr>
+      <tr><td>Attack 2 · customer data</td><td><input class="t" data-k="l3e"></td><td><input class="t" data-k="l3f"></td></tr>
+      <tr><td>Attack 3 · too much power</td><td><input class="t" data-k="l3g"></td><td><input class="t" data-k="l3h"></td></tr>
+    </table>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> attack 1 is not a hacker trick — it is one sentence in a ticket, written to look like a note from a director. Anything the AI reads can try to give it orders. That is why the rules that matter live in code, and actions that matter need a human.</div>
+  <div class="war"><b class="t">Failure story:</b> in 2024 a tribunal held Air Canada liable for a refund rule its website chatbot invented. The lesson for every manager: <b>your AI's words are your company's words.</b></div>
+  <div class="card quiz" data-answer="0" data-why='["Right. Rules written in code run every time, whatever the model was told inside a ticket.","No. A cleverer model can still be persuaded; and the attack text looked like a real director note.","No. A longer warning in the prompt is still only a request to the model."]'>
+    <h4>Quick check: what stopped attack 1 most reliably?</h4>
+    <div class="opts"><label><input type="radio" name="q31">The policy guard — the release rules written as code</label><label><input type="radio" name="q31">Using a more intelligent model</label><label><input type="radio" name="q31">Telling the agents more firmly to ignore instructions</label></div><p class="fb"></p>
+  </div>
+  <div class="decision" data-d="d3"><h4>Decision card · What should an agent never do alone in my area?</h4>
+    <label><input type="radio" name="d3" value="Agents may read and recommend; anything that contacts a customer, changes a release decision or touches a plant needs human approval.">Read and recommend only — customer contact, release decisions and plant actions need a human.</label>
+    <label><input type="radio" name="d3" value="Agents may act on low-risk internal tasks; every external or irreversible action needs approval and is logged.">Act on low-risk internal tasks; anything external or irreversible needs approval.</label>
+    <label><input type="radio" name="d3" value="No agents in production until we have guardrails in all four layers and an eval set.">No production agents until all four guard layers and an eval set exist.</label>
+  </div>
+</section>
+
+<!-- ================= S4 ================= -->
+<section id="s4">
+  <div class="slot">11:30 · 60 minutes</div>
+  <h2>4 · Evals and Observability <span class="layer">Layers 6 and 7</span></h2><div class="rule"></div>
+  <p>In Lab 3 you judged one scenario at a time, by eye. That does not scale. An <b>eval</b> runs a fixed <b>golden set</b> of cases — with known correct answers — every time anything changes: a new model, a new prompt, a new document. It produces one scorecard. Three kinds of checks go into it:</p>
+  <ul class="c">
+    <li><b>Exact checks in code</b> — was the verdict right? did a phone number leave? was an email sent?</li>
+    <li><b>An AI judge</b> — a second model scores things code cannot, like clarity. Cheap, but spot-check the judge by hand.</li>
+    <li><b>Human review</b> — for anything that touches a customer or a plant.</li>
+  </ul>
+  <p><b>Observability</b> answers a different question: what did the AI actually do, step by step, and what did it cost? In production this is your early-warning system.</p>
+  <div class="lab"><span class="open">ABB AI Lab → 4 · Evals, then 5 · Observability</span>
+    <h3>Lab 4 and 5 · The scorecard and the trace</h3>
+    <div class="predict">Predict: with guardrails OFF the crew gets <input data-k="p4a" placeholder="__ / 6"> right; with ON <input data-k="p4b" placeholder="__ / 6"></div>
+    <ol>
+      <li>Lab 4: click <b>Run the eval (OFF vs ON)</b>. Twelve crew reviews run in parallel. Read the two scorecards.</li>
+      <li>Find one case the judge scored low. Do you agree with the judge?</li>
+      <li>Lab 5: which lab spent the most today? Which agent is the most expensive? Replay the attack 1 run step by step — where exactly did it go wrong?</li>
+      <li>Watch the trainer open the same calls in <b>Langfuse</b>, a production observability tool.</li>
+    </ol>
+  </div>
+  <table>
+    <tr><th>What a manager should watch in production</th><th>Why</th></tr>
+    <tr><td>Cost per answer, per day, per team</td><td>One looping agent can burn a month's budget in a night</td></tr>
+    <tr><td>Slowest 5% of response times</td><td>Users judge by the worst experience</td></tr>
+    <tr><td>Thumbs-down and escalation rate</td><td>The earliest sign that quality is dropping</td></tr>
+    <tr><td>Guardrail hits per day</td><td>A sudden jump means an attack — or a new document with hidden text</td></tr>
+    <tr><td>Eval score after every change</td><td>Catches regressions before users do</td></tr>
+  </table>
+  <div class="war"><b class="t">Failure story pattern:</b> the demo passed, production failed. There was no eval set, and real users asked different questions from the ones the team tested. Fix: collect real questions in week one and grow the golden set every week.</div>
+  <div class="card quiz" data-answer="1" data-why='["No. A demo with three questions tells you almost nothing about week two.","Right. A gate written in numbers — on a golden set — is what lets you say yes or no with confidence, and run it again after every change.","No. Observability tells you what happened after the fact; it does not tell you if you are ready."]'>
+    <h4>Quick check: what should decide go-live for an AI feature?</h4>
+    <div class="opts"><label><input type="radio" name="q41">A successful demo to the steering committee</label><label><input type="radio" name="q41">A written eval gate — e.g. 95% correct on the golden set, zero safety incidents, judge score 4+</label><label><input type="radio" name="q41">A Langfuse dashboard</label></div><p class="fb"></p>
+  </div>
+  <div class="decision" data-d="d4"><h4>Decision card · My go-live gate</h4>
+    <label><input type="radio" name="d4" value="Go-live gate: a golden set of at least 50 real cases, 95% correct, zero safety incidents, re-run after every change; production traces with cost and thumbs-down watched weekly.">Golden set of 50+ real cases, 95% correct, zero safety incidents; weekly trace review.</label>
+    <label><input type="radio" name="d4" value="Pilot with human review of every answer for 4 weeks, building the golden set from real questions, then set the gate.">Four-week pilot with human review of every answer to build the golden set first.</label>
+    <label><input type="radio" name="d4" value="Ask my team to show me, for any answer last week, every step it took and what it cost — before we scale.">"Show me any answer's steps and cost" — before we scale.</label>
+  </div>
+</section>
+
+<!-- ================= S5 ================= -->
+<section id="s5">
+  <div class="slot">12:30 · 30 minutes · trainer demo</div>
+  <h2>5 · AI in the workplace</h2><div class="rule"></div>
+  <p>One story across four apps: <b>raw Azure DevOps data to a steering committee pack in 25 minutes.</b> If you have Microsoft 365 Copilot, follow along with the same prompts and the file <code>Axion_AX900_ADO_Export.xlsx</code> (on your VM in <code>C:\ai-abb\day2\data</code>). You can use the same prompts in Abby at your desk.</p>
+  <h3>Prompt pack</h3>
+  <p><b>Excel</b></p>
+  <div class="prompt" id="pp1">Summarise this data by team and sprint. What are the three biggest delivery risks for the AX900 v4.2 release? Give numbers.</div><button class="copy" data-copy="pp1">Copy</button>
+  <div class="prompt" id="pp2">Chart customer-found bugs (Tags = customer-found) by team across sprints.</div><button class="copy" data-copy="pp2">Copy</button>
+  <p><b>Word</b></p>
+  <div class="prompt" id="pp3">Draft a one-page release readiness memo for AX900 v4.2 for the steering committee using these findings: [paste]. Recommendation, risks, asks.</div><button class="copy" data-copy="pp3">Copy</button>
+  <div class="prompt" id="pp4">Act as a sceptical VP of Engineering. List the 5 hardest questions you would ask about this memo. Then revise the memo so it answers them, in one page.</div><button class="copy" data-copy="pp4">Copy</button>
+  <p><b>PowerPoint and Outlook</b></p>
+  <div class="prompt" id="pp5">Create a 5-slide steering committee presentation from this memo: situation, three risks, options, recommendation, asks.</div><button class="copy" data-copy="pp5">Copy</button>
+  <div class="prompt" id="pp6">Draft an email to the customer programme manager explaining that HMI Panel fixes move v4.2 by two weeks. Give me a firm version and a diplomatic version.</div><button class="copy" data-copy="pp6">Copy</button>
+  <div class="plain"><b class="t">In plain words:</b> the most powerful move is not "write this for me" — it is "attack this for me". Use AI as the toughest reviewer before the real meeting. And always check one number by hand before anything goes to a VP.</div>
+</section>
+
+<!-- ================= S6 ================= -->
+<section id="s6">
+  <div class="slot">13:45 · 30 minutes</div>
+  <h2>6 · Azure DevOps + Power BI — the role of AI <span class="layer">Layers 3 and 8</span></h2><div class="rule"></div>
+  <svg viewBox="0 0 900 120" style="width:100%;max-width:900px;background:#fff;border:1.5px solid var(--line);border-radius:6px" role="img" aria-label="ADO to Power BI to AI architecture">
+    <g font-family="Saira, sans-serif" font-size="14" text-anchor="middle">
+      <rect x="15" y="35" width="175" height="54" rx="6" fill="#E7F1FB" stroke="#1E4E8C" stroke-width="2"/><text x="102" y="58" font-weight="600">Azure DevOps</text><text x="102" y="77" font-size="12">Boards · Test Plans · Pipelines</text>
+      <rect x="240" y="35" width="175" height="54" rx="6" fill="#fff" stroke="#22262A" stroke-width="2"/><text x="327" y="58" font-weight="600">Analytics views / OData</text><text x="327" y="77" font-size="12">governed extract</text>
+      <rect x="465" y="35" width="175" height="54" rx="6" fill="#fff" stroke="#22262A" stroke-width="2"/><text x="552" y="58" font-weight="600">Power BI model</text><text x="552" y="77" font-size="12">measures · DAX · security</text>
+      <rect x="690" y="35" width="195" height="54" rx="6" fill="#FFF8E8" stroke="#B37E00" stroke-width="2"/><text x="787" y="58" font-weight="600">AI layer</text><text x="787" y="77" font-size="12">summary · Q&amp;A · fact check</text>
+      <g stroke="#22262A" stroke-width="2"><line x1="190" y1="62" x2="238" y2="62"/><line x1="415" y1="62" x2="463" y2="62"/><line x1="640" y1="62" x2="688" y2="62"/></g>
+    </g>
+  </svg>
+  <p><b>Where AI helps:</b> writing DAX and OData queries; three-sentence summaries of a dashboard; spotting unusual trends; predicting sprint slip or defect growth; first drafts of root-cause analysis. <b>Who owns what:</b> the ADO admin owns access, the BI team owns the model and measures, security owns what may leave the tenant.</p>
+  <div class="lab"><span class="open">ABB AI Lab → 6 · Sprint Board</span>
+    <h3>Lab 6 · Six charts vs three sentences</h3>
+    <div class="predict">Predict: in 10 seconds, the biggest v4.2 risk is <input data-k="p6" style="width:260px"></div>
+    <ol>
+      <li>Look at the six charts for 10 seconds. Write your answer above.</li>
+      <li>Click <b>Write the executive summary</b> with the rule ON. Read the fact check.</li>
+      <li>Switch the rule OFF and run again. What does the fact check show now?</li>
+      <li>Ask your data: <i>"What is our customer satisfaction score?"</i> — does it admit the data cannot answer?</li>
+    </ol>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> the AI read five small summary tables, not 306 rows — cheaper, faster and safer. Every number it writes is checked against the data in code, so a figure from "typical industry benchmarks" is caught before it reaches a VP.</div>
+  <div class="decision" data-d="d6"><h4>Decision card · AI on our delivery data</h4>
+    <label><input type="radio" name="d6" value="Use the AI built into our BI tool (Power BI Copilot) where licensed; insist every AI statement quotes its number.">Use the BI tool's built-in AI where licensed; every statement must quote its number.</label>
+    <label><input type="radio" name="d6" value="Build a small AI layer over governed ADO Analytics extracts, with a code fact-check before anything is shared.">Build a small AI layer over governed extracts, with a code fact-check.</label>
+    <label><input type="radio" name="d6" value="Start with weekly AI-written summaries reviewed by a person; automate only after three months of clean reviews.">Weekly AI summaries reviewed by a person first; automate later.</label>
+  </div>
+</section>
+
+<!-- ================= S7 ================= -->
+<section id="s7">
+  <div class="slot">14:15 · 60 minutes</div>
+  <h2>7 · Architecture trade-offs <span class="layer">Layers 1 and 8</span></h2><div class="rule"></div>
+  <table>
+    <tr><th>Choice</th><th>Options</th><th>The question to ask</th></tr>
+    <tr><td>Model</td><td>Frontier · small · open-weight (DeepSeek, Kimi, Llama…)</td><td>What is the smallest model that passes our eval?</td></tr>
+    <tr><td>Hosting</td><td>Serverless pay-per-token · dedicated GPU by the hour · on-prem</td><td>How steady and how high is our volume? Where must the data stay?</td></tr>
+    <tr><td>Framework</td><td>Buy (Copilot, Abby) · managed (Azure AI Foundry Agent Service) · build (LangGraph, CrewAI, Semantic Kernel)</td><td>Do we need our own data and tools? Who will maintain it?</td></tr>
+    <tr><td>Upgrade path</td><td>Model gateway + eval set</td><td>Can we swap to next quarter's model in one day?</td></tr>
+  </table>
+  <p><b>Open-weight</b> means the model's weights are published, so it can run on your own servers — important for plants with no internet, for IP, and for data sovereignty. The price is a team to run it, GPUs to buy, and patches to apply.</p>
+  <div class="lab"><span class="open">ABB AI Lab → 7 · Trade-offs</span>
+    <h3>Lab 7 · Four models, one question — then the money</h3>
+    <div class="predict">Predict: the best answer will come from <input data-k="p7a" style="width:180px">, the cheapest from <input data-k="p7b" style="width:180px"></div>
+    <ol>
+      <li><b>A:</b> click <b>Ask all four at once</b>. Score each answer 1–5. Look at quality per dollar.</li>
+      <li><b>B:</b> move the sliders. At how many requests a day does pay-per-token stop being cheapest?</li>
+      <li><b>C:</b> each team takes one scenario card, chooses model · hosting · framework, and defends it in 2 minutes.</li>
+    </ol>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> pay-per-token wins while usage is low or unpredictable — which is most pilots. Fixed capacity wins only at high, steady volume. On-prem is mostly a decision about data, network and control, not cost.</div>
+  <div class="decision" data-d="d7"><h4>Decision card · My default architecture</h4>
+    <label><input type="radio" name="d7" value="Default: smallest model that passes our eval, serverless, inside our tenant, behind a model gateway — revisit hosting only when volume is high and steady.">Smallest model that passes the eval, serverless, behind a gateway.</label>
+    <label><input type="radio" name="d7" value="For plant-side use cases: open-weight models on-prem, read-only, with offline evals before every model upgrade.">Plant-side: open-weight on-prem, read-only, offline evals before upgrades.</label>
+    <label><input type="radio" name="d7" value="Buy before build: Copilot/Abby agents first; build only when a measured gap remains.">Buy before build; build only for a measured gap.</label>
+  </div>
+</section>
+
+<!-- ================= S8 ================= -->
+<section id="s8">
+  <div class="slot">15:30 · 40 minutes</div>
+  <h2>8 · Proving AI value — with no baseline <span class="layer">Layer 10</span></h2><div class="rule"></div>
+  <p>New project, no history, no one-to-one comparison. You do not need history — you <b>build the comparison inside the project</b>:</p>
+  <table>
+    <tr><th>Method</th><th>How</th><th>Measures</th></tr>
+    <tr><td>Estimate first, then measure</td><td>The team estimates each task "without AI" in planning, as usual, then records the actual time with AI. Report the median over 20+ tasks.</td><td>Time</td></tr>
+    <tr><td>Split tasks inside the project</td><td>Similar tasks alternate with and without AI for two sprints</td><td>Time and quality</td></tr>
+    <tr><td>Cost per unit of work</td><td>Cost per test case, per requirement, per defect found — including AI spend, review time and learning time</td><td>Cost</td></tr>
+    <tr><td>Quality as a gate</td><td>Speed counts only if escaped defects, rework % and change failure rate do not get worse. The first two sprints are your baseline.</td><td>Quality</td></tr>
+  </table>
+  <p><b>The formulas:</b> Time saved = (estimate without AI − actual with AI) ÷ estimate, reported as a range. · Net cost = hours saved × loaded rate − (licences + tokens + extra review + training). · Quality = escaped defects and rework % against sprints 1–2.</p>
+  <div class="lab"><span class="open">ABB AI Lab → 8 · Value Case</span>
+    <h3>Lab 8 · The trap, the honest range, your case</h3>
+    <div class="predict">Predict: Team A (with AI) is <input data-k="p8" placeholder="__ %"> better than Team B</div>
+    <ol>
+      <li><b>A · The trap:</b> start with cycle time only. Then add review time, rework and escaped defects. Watch the headline.</li>
+      <li><b>B · The honest range:</b> read the median and the middle range over 30 tasks.</li>
+      <li><b>C · Your case:</b> fill it for one real project of yours and download the one-page Word note for your manager.</li>
+    </ol>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> "AI saved 16–34% on typical tasks, median 27%, over 30 tasks, with no rise in escaped defects" convinces a CFO. "AI makes us 40% faster" does not — and the first sceptical question breaks it.</div>
+  <div class="decision" data-d="d8"><h4>Decision card · How I will prove value</h4>
+    <label><input type="radio" name="d8" value="Estimate-first-then-measure on every AI-assisted task for 6 weeks, reported as a range, with escaped defects as a quality gate.">Estimate first, then measure, for 6 weeks; report a range; quality gate on escaped defects.</label>
+    <label><input type="radio" name="d8" value="Split similar tasks with and without AI for two sprints, then decide to scale.">Split tasks with / without AI for two sprints, then decide.</label>
+    <label><input type="radio" name="d8" value="Track cost per unit of work (per test case / requirement) including AI spend and review time, from day one.">Cost per unit of work from day one, including AI spend and review.</label>
+  </div>
+</section>
+
+<!-- ================= S9 ================= -->
+<section id="s9">
+  <div class="slot">16:10 · 25 minutes</div>
+  <h2>9 · AI and cyber security <span class="layer">Layer 9</span></h2><div class="rule"></div>
+  <ul class="c">
+    <li><b>Securing AI</b> — the five OWASP risks for AI applications a manager must know: prompt injection, sensitive information disclosure, supply chain (models and plug-ins you did not build), excessive agency, and over-reliance on confident wrong answers.</li>
+    <li><b>Shadow AI</b> — ABB data pasted into public tools. Give people an approved tool (Abby) so they do not need an unapproved one.</li>
+    <li><b>Plant (OT) side</b> — AI near control systems follows IEC 62443 zones and conduits. <b>AI reads from OT; it never writes to OT without a human.</b></li>
+    <li><b>AI-written code</b> — secrets in code and vulnerable libraries arrive faster. Keep security scanning gates in every pipeline.</li>
+    <li><b>AI for defenders</b> — triaging vulnerability advisories and PSAs, checking the software bill of materials, summarising logs.</li>
+  </ul>
+  <div class="lab"><span class="open">ABB AI Lab → 9 · Break the Bot</span>
+    <h3>Lab 9 · Make the support bot leak its secret</h3>
+    <ol><li>Guardrails OFF: get the partner discount code out of the bot. Count your attempts.</li><li>Guardrails ON: try again. Enter your attempt counts in AhaSlides — fastest break wins.</li></ol>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> the bot's instructions are a polite request, not a lock. The real fix is simpler than any guardrail: never put a secret where the AI can read it.</div>
+  <div class="card quiz" data-answer="2" data-why='["Unsafe. Customer data is leaving the company to a tool ABB does not control.","Unsafe. Writing to the control system without a human is exactly what the OT rule forbids.","Safe. Public information, an approved internal tool, and a person decides."]'>
+    <h4>Which of these is safe?</h4>
+    <div class="opts"><label><input type="radio" name="q91">Pasting a customer's fault log into a free public chatbot to get a quick answer</label><label><input type="radio" name="q91">An agent that changes a drive parameter on a live line when it detects a fault</label><label><input type="radio" name="q91">Using Abby to summarise a public CVE advisory before a person decides the patch plan</label></div><p class="fb"></p>
+  </div>
+  <div class="decision" data-d="d9"><h4>Decision card · My AI security rule</h4>
+    <label><input type="radio" name="d9" value="No secrets or customer data where an AI can read them unless the tool is approved; AI never writes to OT without a human.">No secrets or customer data in unapproved tools; AI never writes to OT without a human.</label>
+    <label><input type="radio" name="d9" value="Every AI feature gets a prompt-injection test and a data-leak test before go-live, run again after each change.">Injection and data-leak tests before go-live and after each change.</label>
+    <label><input type="radio" name="d9" value="Treat everything an AI reads — tickets, emails, documents — as untrusted input, like user input on a website.">Treat everything an AI reads as untrusted input.</label>
+  </div>
+</section>
+
+<!-- ================= CLOSE ================= -->
+<section id="close" style="border-bottom:none">
+  <div class="slot">16:35 · 20 minutes</div>
+  <h2>Close — best practices, failure stories, your AI Playbook</h2><div class="rule"></div>
+  <h3>The AI Decision Framework — seven questions for any AI proposal</h3>
+  <ol class="c">
+    <li>What problem, and who owns the outcome?</li>
+    <li>What does good look like, and how will we test it (the golden set)?</li>
+    <li>Which data, and who is allowed to see it?</li>
+    <li>What is the smallest model that passes?</li>
+    <li>Buy, managed or build?</li>
+    <li>Where does a human approve?</li>
+    <li>How will we measure time, cost and quality from day one?</li>
+  </ol>
+  <h3>Failure stories — and the lesson</h3>
+  <table>
+    <tr><th>What happened</th><th>Lesson</th></tr>
+    <tr><td>RAG quoted last year's policy with full confidence — the index was never refreshed</td><td>Every document has an owner and a refresh date; show the source date with every answer</td></tr>
+    <tr><td>Chunking cut a limits table in half; the bot gave the wrong amount</td><td>Chunk by structure; put table questions in the eval set</td></tr>
+    <tr><td>A chatbot invented a refund rule; the company was held liable (Air Canada, 2024)</td><td>Your AI's words are your company's words</td></tr>
+    <tr><td>Two agents kept passing work back and forth overnight; the token bill jumped</td><td>Step limits, budget caps and cost alerts from day one</td></tr>
+    <tr><td>The demo passed; production failed — real users asked different questions</td><td>Collect real questions in week one; grow the golden set weekly</td></tr>
+    <tr><td>An instruction hidden in a ticket changed an agent's decision</td><td>Treat everything the AI reads as untrusted; rules in code</td></tr>
+    <tr><td>The team stopped reviewing AI-written test cases and missed the negative paths</td><td>AI drafts, people own; sample-review even when it looks good</td></tr>
+  </table>
+  <h3>Look back — how sure do you feel now?</h3>
+  <table id="lookback">
+    <tr><th>Outcome</th><th>1 = not yet · 5 = I can explain it to my team</th></tr>
+    <tr><td>The ten layers of an AI system</td><td><input type="range" min="1" max="5" value="3" data-k="lb1"></td></tr>
+    <tr><td>Demo vs product: specs, guardrails, evals, observability</td><td><input type="range" min="1" max="5" value="3" data-k="lb2"></td></tr>
+    <tr><td>Architecture choice: model, hosting, buy or build</td><td><input type="range" min="1" max="5" value="3" data-k="lb3"></td></tr>
+    <tr><td>A value case with no past data</td><td><input type="range" min="1" max="5" value="3" data-k="lb4"></td></tr>
+  </table>
+  <h3>Your Monday action</h3>
+  <div class="two">
+    <div><label>One AI use case I will start or fix<input class="t" data-k="m1" placeholder="e.g. AI-drafted test cases for Safety I/O"></label></div>
+    <div><label>The one number I will measure<input class="t" data-k="m2" placeholder="e.g. test design hours per story"></label></div>
+    <div><label>The person I will talk to first<input class="t" data-k="m3" placeholder="e.g. my QA lead"></label></div>
+    <div><label>My name<input class="t" data-k="m4"></label></div>
+  </div>
+  <button class="btn" id="build">Build my AI Playbook</button>
+  <div id="playbook" style="display:none"></div>
+</section>
+</main>
+<footer class="wrap">Axion Controls, its products, data, people and customers are fictional, created for this training. Do not upload ABB confidential documents to the lab VMs. · DevPro Academy</footer>
+
+<script>
+(function(){
+  var KEY="abb-day2"; var S={};
+  try{ S=JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+  // text, number and range inputs
+  document.querySelectorAll("[data-k]").forEach(function(el){
+    if(S[el.dataset.k]!==undefined) el.value=S[el.dataset.k];
+    el.addEventListener("input", function(){ S[el.dataset.k]=el.value; save(); });
+  });
+  // decision cards
+  document.querySelectorAll(".decision").forEach(function(d){
+    var k=d.dataset.d;
+    d.querySelectorAll("input").forEach(function(r){
+      if(S[k]===r.value) r.checked=true;
+      r.addEventListener("change", function(){ S[k]=r.value; save(); });
+    });
+  });
+  // quizzes
+  document.querySelectorAll(".quiz").forEach(function(q){
+    var labels=q.querySelectorAll("label"), fb=q.querySelector(".fb"), ans=+q.dataset.answer, why=JSON.parse(q.dataset.why);
+    labels.forEach(function(l,i){ l.querySelector("input").addEventListener("change", function(){
+      labels.forEach(function(x){ x.classList.remove("right","wrong"); });
+      l.classList.add(i===ans?"right":"wrong"); fb.textContent=why[i]; fb.style.display="block"; }); });
+  });
+  // copy buttons
+  document.querySelectorAll(".copy").forEach(function(b){
+    b.addEventListener("click", function(){
+      var t=document.getElementById(b.dataset.copy).innerText;
+      var ok=function(){ b.textContent="Copied ✓"; b.classList.add("ok"); setTimeout(function(){ b.textContent="Copy"; b.classList.remove("ok"); },1500); };
+      if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(t).then(ok,ok); }
+      else { var a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(a); ok(); }
+    });
+  });
+  // playbook
+  var titles={d1:"Specs",d2:"Knowledge assistants",d3:"Agents",d4:"Go-live gate",d6:"AI on delivery data",d7:"Default architecture",d8:"Proving value",d9:"Security rule"};
+  function esc(s){ return String(s||"").replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+  document.getElementById("build").addEventListener("click", function(){
+    var rows=Object.keys(titles).map(function(k){ return "<tr><td><b>"+titles[k]+"</b></td><td>"+(S[k]?esc(S[k]):"<i>— not chosen —</i>")+"</td></tr>"; }).join("");
+    var lb=["lb1","lb2","lb3","lb4"].map(function(k){ return S[k]||"3"; });
+    var pb=document.getElementById("playbook");
+    pb.innerHTML="<h3>My AI Playbook"+(S.m4?" — "+esc(S.m4):"")+"</h3><p class='slot'>ABB · AI Engineering for Managers · Day 2</p>"+
+      "<h4 style='margin-top:12px'>My decisions</h4><table>"+rows+"</table>"+
+      "<h4>Seven questions I ask of any AI proposal</h4><ol class='c'><li>What problem, and who owns the outcome?</li><li>What does good look like, and how will we test it?</li><li>Which data, and who may see it?</li><li>Smallest model that passes?</li><li>Buy, managed or build?</li><li>Where does a human approve?</li><li>How will we measure time, cost and quality from day one?</li></ol>"+
+      "<h4>Monday</h4><table><tr><td><b>Use case</b></td><td>"+esc(S.m1)+"</td></tr><tr><td><b>The number I will measure</b></td><td>"+esc(S.m2)+"</td></tr><tr><td><b>First conversation</b></td><td>"+esc(S.m3)+"</td></tr></table>"+
+      "<p class='slot'>Confidence today (1–5): layers "+lb[0]+" · demo vs product "+lb[1]+" · architecture "+lb[2]+" · value case "+lb[3]+"</p>"+
+      "<button class='btn' onclick='window.print()'>Print or save as PDF</button>";
+    pb.style.display="block"; pb.scrollIntoView({behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>

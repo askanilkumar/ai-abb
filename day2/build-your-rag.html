@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build your own RAG in 10 minutes · ABB Day 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600&family=Saira+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22262A; --ink-soft:#4A5157; --paper:#FAFBFA; --panel:#EDEFED;
+    --amber:#E8A200; --amber-deep:#B37E00; --amber-pale:#FFF8E8;
+    --green:#2F7D4F; --green-pale:#E7F3EC; --red:#B3432B; --line:#C6CBC6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{font-family:'Saira',system-ui,sans-serif; color:var(--ink); background:var(--paper); font-size:17px; line-height:1.55}
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px}
+  h1,h2,h3{font-family:'Saira Condensed',sans-serif; line-height:1.1}
+  .hazard{height:10px; background:repeating-linear-gradient(135deg,var(--amber) 0 18px,var(--ink) 18px 36px)}
+  header{background:#fff; border-bottom:2px solid var(--ink)}
+  .mast{padding:28px 0 22px}
+  .doc-id{font-weight:600; font-size:.95rem; color:var(--ink-soft); border:1.5px solid var(--line); display:inline-block; padding:3px 12px; border-radius:3px; margin-bottom:12px}
+  h1{font-size:clamp(2.2rem,5.5vw,3.6rem)}
+  h1 span{color:var(--amber-deep)}
+  .sub{margin-top:8px; font-size:1.12rem; color:var(--ink-soft); max-width:66ch}
+  .strip{display:flex; flex-wrap:wrap; border-top:2px solid var(--ink)}
+  .strip div{flex:1 1 180px; padding:10px 18px; background:var(--panel); border-right:1.5px solid var(--line)}
+  .strip div:last-child{border-right:none}
+  .strip b{display:block; font-size:.85rem; color:var(--ink-soft); font-weight:500}
+  section{padding:38px 0 14px; border-bottom:1.5px solid var(--line)}
+  h2{font-size:2rem; margin-bottom:4px}
+  .rule{width:64px; height:5px; background:var(--amber); margin:10px 0 18px}
+  p{max-width:74ch; margin-bottom:12px}
+  code{font-family:ui-monospace,Consolas,monospace; font-size:.9em; background:var(--panel); padding:1px 6px; border-radius:3px}
+  .plain{background:var(--green-pale); border-left:5px solid var(--green); padding:12px 18px; margin:14px 0; max-width:78ch; border-radius:0 3px 3px 0}
+  .plain b{color:var(--green)}
+  .note{background:var(--panel); border-left:5px solid var(--amber); padding:12px 18px; margin:14px 0; max-width:78ch; border-radius:0 3px 3px 0}
+  .warn{background:#FBEDEA; border-left:5px solid var(--red); padding:12px 18px; margin:14px 0; max-width:78ch}
+  table{width:100%; border-collapse:collapse; background:#fff; margin:8px 0 18px; font-size:.97rem}
+  th{font-family:'Saira Condensed'; font-size:1.08rem; text-align:left; border-bottom:2px solid var(--ink); padding:8px 12px}
+  td{border-bottom:1px solid var(--line); padding:8px 12px; vertical-align:top}
+  /* steps */
+  .step{display:grid; grid-template-columns:56px 1fr; gap:16px; background:#fff; border:1.5px solid var(--line); border-radius:6px; padding:16px 18px; margin:14px 0}
+  .step.done{border-color:var(--green); background:#FBFEFC}
+  .num{width:48px; height:48px; border-radius:50%; background:var(--ink); color:#fff; font:700 1.5rem 'Saira Condensed'; display:flex; align-items:center; justify-content:center}
+  .step.done .num{background:var(--green)}
+  .step h3{font-size:1.4rem; margin-bottom:4px}
+  .where{display:inline-block; font-size:.82rem; font-weight:600; padding:2px 10px; border-radius:20px; margin-bottom:8px}
+  .where.vm{background:#DCE8F7; color:#1E4E8C}
+  .where.abby{background:var(--amber-pale); color:var(--amber-deep); border:1px solid var(--amber)}
+  .tick{margin-top:8px; font-size:.95rem; cursor:pointer; user-select:none}
+  .tick input{transform:scale(1.25); margin-right:8px; vertical-align:middle}
+  /* prompt boxes */
+  .prompt{position:relative; background:var(--ink); color:#F2F3F2; border-radius:6px; padding:16px 18px 16px; margin:10px 0 6px; font-family:ui-monospace,Consolas,monospace; font-size:.86rem; line-height:1.5; white-space:pre-wrap; max-height:340px; overflow:auto}
+  .copy{font:600 1rem 'Saira Condensed'; background:var(--amber); color:var(--ink); border:none; padding:8px 18px; border-radius:4px; cursor:pointer; margin:4px 0 8px}
+  .copy:hover{background:#FFC21A}
+  .copy.ok{background:var(--green); color:#fff}
+  /* predict + quiz */
+  .card{background:#fff; border:2px solid var(--ink); border-radius:6px; padding:16px 20px; margin:16px 0}
+  .card h3{font-size:1.35rem; margin-bottom:8px}
+  .opts label{display:block; padding:7px 12px; margin:5px 0; border:1.5px solid var(--line); border-radius:4px; cursor:pointer; background:var(--paper)}
+  .opts label:hover{border-color:var(--amber)}
+  .opts label.right{border-color:var(--green); background:var(--green-pale)}
+  .opts label.wrong{border-color:var(--red); background:#FBEDEA}
+  .opts input{margin-right:8px}
+  .fb{margin-top:8px; font-size:.97rem; display:none}
+  details{background:#fff; border:1.5px solid var(--line); border-radius:4px; padding:10px 14px; margin:10px 0; max-width:80ch}
+  summary{cursor:pointer; font-weight:600}
+  details[open] summary{margin-bottom:8px}
+  /* pipeline */
+  .pipe{display:flex; flex-wrap:wrap; gap:8px; align-items:stretch; margin:14px 0}
+  .pipe div{flex:1 1 130px; background:#fff; border:1.5px solid var(--ink); border-radius:6px; padding:10px 12px; font-size:.92rem; position:relative}
+  .pipe b{display:block; font-family:'Saira Condensed'; font-size:1.15rem}
+  .pipe .tag{display:inline-block; margin-top:6px; font-size:.78rem; background:var(--panel); padding:1px 8px; border-radius:10px}
+  .pipe .ai{border-color:var(--amber-deep); background:var(--amber-pale)}
+  .score{font:700 1.2rem 'Saira Condensed'; margin-top:6px}
+  .progress{position:sticky; top:0; z-index:5; background:var(--ink); color:#fff; padding:8px 0; font-size:.95rem}
+  .bar{height:8px; background:#4A5157; border-radius:4px; overflow:hidden; margin-top:4px}
+  .bar i{display:block; height:100%; width:0; background:var(--amber); transition:width .3s}
+  footer{padding:30px 0 50px; color:var(--ink-soft); font-size:.92rem}
+</style>
+</head>
+<body>
+<div class="hazard"></div>
+<header>
+  <div class="wrap mast">
+    <div class="doc-id">ABB · AI Engineering for Managers · Day 2 · Session 2</div>
+    <h1>Build your own RAG <span>in 10 minutes</span></h1>
+    <p class="sub">You will not write code. You will describe what you want, Abby will write it, and your VM will run it. In ten minutes you will have your own working "Chat with my PDF" application.</p>
+  </div>
+  <div class="wrap strip">
+    <div><b>What you build</b>A chat app that answers from a PDF</div>
+    <div><b>Who writes the code</b>Abby (you give the instructions)</div>
+    <div><b>Where it runs</b>Your lab VM</div>
+    <div><b>Work in pairs</b>Driver types · Decision-maker checks</div>
+  </div>
+</header>
+
+<div class="progress"><div class="wrap">Your progress: <span id="pct">0</span>% · <span id="pcount">0</span> of 6 steps done
+  <div class="bar"><i id="pbar"></i></div></div></div>
+
+<main class="wrap">
+
+<!-- ============ PART A ============ -->
+<section id="watch">
+  <h2>First, watch: what a serious RAG looks like</h2>
+  <div class="rule"></div>
+  <p>The trainer will show <b>AskIT</b>, a RAG application for an IT helpdesk. It looks simple from outside, but inside it does a lot of work so that the answers can be trusted. Watch for these four things:</p>
+  <table>
+    <tr><th>What AskIT does</th><th>Why it matters to a manager</th></tr>
+    <tr><td>Uses only the <b>current</b> version of an article, not the old one</td><td>An old policy answered with confidence is worse than no answer.</td></tr>
+    <tr><td>Gives a <b>contractor</b> a different answer from an <b>employee</b></td><td>The same question can have two correct answers depending on who asks.</td></tr>
+    <tr><td>Says <b>"I don't know"</b> when the knowledge base has no answer</td><td>This one behaviour decides whether users trust the tool.</td></tr>
+    <tr><td>Catches a document with a <b>hidden instruction</b> inside it</td><td>Anything the AI reads can try to give it orders. This is a security issue.</td></tr>
+  </table>
+  <div class="plain"><b>In plain words:</b> a demo RAG takes ten minutes. A RAG you can put in front of customers takes weeks — and most of that time goes into the four rows above, plus testing.</div>
+</section>
+
+<!-- ============ PREDICT ============ -->
+<section id="predict">
+  <h2>Before you build: predict</h2>
+  <div class="rule"></div>
+  <div class="card" data-q="p1">
+    <h3>How many lines of code do you think Abby will write for your app?</h3>
+    <div class="opts">
+      <label><input type="radio" name="p1"> About 20 lines</label>
+      <label><input type="radio" name="p1"> About 80 to 120 lines</label>
+      <label><input type="radio" name="p1"> About 500 lines</label>
+      <label><input type="radio" name="p1"> More than 2,000 lines</label>
+    </div>
+    <p class="fb muted">Noted. We will count the lines after you build it. Most apps from this prompt come out at around 80 to 120 lines.</p>
+  </div>
+</section>
+
+<!-- ============ PART B: BUILD ============ -->
+<section id="build">
+  <h2>Now, build yours</h2>
+  <div class="rule"></div>
+  <p>You need two windows side by side: <b>Abby</b> on your ABB laptop, and your <b>lab VM</b> (the Bastion browser tab from Day 1). Copy and paste works between them.</p>
+
+  <div class="step" id="s1">
+    <div class="num">1</div>
+    <div>
+      <span class="where vm">On your VM</span>
+      <h3>Open your empty app file</h3>
+      <p>Open File Explorer, go to <code>C:\ai-abb\day2\build-your-rag</code> and double-click <code>1_open_app_file.bat</code>.</p>
+      <p>Notepad opens an empty file called <code>app.py</code>, and a folder <b>my-rag</b> appears on your Desktop with the sample PDF in it. Keep Notepad open.</p>
+      <label class="tick"><input type="checkbox" data-step="s1"> Notepad is open with an empty app.py</label>
+    </div>
+  </div>
+
+  <div class="step" id="s2">
+    <div class="num">2</div>
+    <div>
+      <span class="where abby">In Abby, on your laptop</span>
+      <h3>Give Abby the instructions</h3>
+      <p>Click <b>Copy the prompt</b>, paste it into a new Abby chat, and send it. Read the prompt while Abby writes — notice that it is a short specification, not a vague wish.</p>
+      <button class="copy" data-copy="buildPrompt">Copy the prompt</button>
+<div class="prompt" id="buildPrompt">Write a complete Python Streamlit app in ONE file called app.py. It is a "Chat with my PDF" app that uses RAG (retrieval-augmented generation).
+
+THE MACHINE IS ALREADY SET UP. These environment variables exist. Do not ask me for keys and do not use a .env file:
+- FOUNDRY_ENDPOINT and FOUNDRY_API_KEY: an Azure AI Foundry endpoint and its key
+- MODEL_MINI: the chat model deployment name
+- MODEL_EMBED: the embedding model deployment name
+
+Use only these libraries: streamlit, openai, pypdf, numpy.
+Create the client exactly like this:
+    from openai import AzureOpenAI
+    client = AzureOpenAI(azure_endpoint=os.environ["FOUNDRY_ENDPOINT"], api_key=os.environ["FOUNDRY_API_KEY"], api_version="2024-10-21")
+Do NOT pass temperature or max_tokens to the model.
+
+WHAT THE APP MUST DO:
+1. Page title "📄 Chat with my PDF". In the sidebar, a PDF file uploader.
+2. When a PDF is uploaded: read the text of every page with pypdf. Split each page's text into chunks of about 800 characters with 100 characters of overlap. Keep the page number with every chunk.
+3. Create embeddings for all chunks in one call: client.embeddings.create(model=os.environ["MODEL_EMBED"], input=list_of_chunk_texts). Store the chunks and vectors in st.session_state so this happens only once per file. Show "Indexed N chunks from M pages" in the sidebar.
+4. A chat screen using st.chat_input and st.chat_message, with the chat history kept in st.session_state.
+5. For every question: embed the question, find the 3 most similar chunks using cosine similarity with numpy, and call client.chat.completions.create(model=os.environ["MODEL_MINI"], messages=[...]) with this system message: "Answer only from the context. If the answer is not in the context, say: I could not find this in the document. Mention the page number."
+6. Under every answer, an expander called "Sources" that shows the 3 chunks with their page number and similarity score.
+7. Wrap the model calls in try/except and show any error with st.error.
+
+Keep the code short and simple, with comments in plain English. Return only the complete code in one block.</div>
+      <label class="tick"><input type="checkbox" data-step="s2"> Abby has written the code</label>
+    </div>
+  </div>
+
+  <div class="step" id="s3">
+    <div class="num">3</div>
+    <div>
+      <span class="where abby">Abby</span> → <span class="where vm">VM</span>
+      <h3>Copy the code into your app file</h3>
+      <p>In Abby, use the <b>copy</b> button on the code block. On the VM, click inside Notepad, press <code>Ctrl+V</code>, then <code>Ctrl+S</code> to save. Close Notepad.</p>
+      <p class="muted">Decision-maker: look at the code for 30 seconds. Can you spot the line that reads the PDF, the line that creates embeddings, and the line that asks the model?</p>
+      <label class="tick"><input type="checkbox" data-step="s3"> Code pasted and saved</label>
+    </div>
+  </div>
+
+  <div class="step" id="s4">
+    <div class="num">4</div>
+    <div>
+      <span class="where vm">On your VM</span>
+      <h3>Run your app</h3>
+      <p>Open the <b>my-rag</b> folder on the Desktop and double-click <code>2_run_my_rag.bat</code>. A black window opens (keep it open), and after a few seconds your app opens in the browser at <code>http://localhost:8601</code>.</p>
+      <label class="tick"><input type="checkbox" data-step="s4"> My app is open in the browser</label>
+    </div>
+  </div>
+
+  <div class="step" id="s5">
+    <div class="num">5</div>
+    <div>
+      <span class="where vm">In your app</span>
+      <h3>Upload the PDF and ask questions</h3>
+      <p>In the sidebar, upload <code>Axion_HR_Policy.pdf</code> from the <b>my-rag</b> folder. Wait for "Indexed … chunks". Then ask these questions one by one and open <b>Sources</b> each time.</p>
+      <table>
+        <tr><th>#</th><th>Ask this</th><th>What to look for</th></tr>
+        <tr><td>1</td><td>How many days of earned leave do I get in a year?</td><td>A number and a page</td></tr>
+        <tr><td>2</td><td>What is the hotel limit per night in Pune?</td><td>The right city category</td></tr>
+        <tr><td>3</td><td>I am a contractor. Can I claim INR 6,500 for a hotel in Mumbai?</td><td>Did it notice the contractor rule?</td></tr>
+        <tr><td>4</td><td>Can I take 5 days of leave the week before the AX900 release?</td><td>Two sections must be joined</td></tr>
+        <tr><td>5</td><td>What is the canteen menu on Friday?</td><td>Does it admit it does not know?</td></tr>
+      </table>
+      <details><summary>Check your answers (open after you have tried)</summary>
+        <ol style="margin-left:20px">
+          <li>24 days a year, credited at 2 days a month (Section 2.1, page 1).</li>
+          <li>INR 4,500 — Pune is Tier-2 (Section 4.2, page 2).</li>
+          <li>No. Contractors get the Tier-2 limit (INR 4,500) in every city, and only if travel is in the SOW and pre-approved (Section 6.3, page 3). If your app said "yes, 6,500", it found the Metro row but missed Section 6 — a classic RAG miss.</li>
+          <li>For engineering staff, more than 2 days in a release freeze needs Engineering Director approval as well (Section 5.2, page 3).</li>
+          <li>It should say it could not find this in the document. If it made up a menu, the grounding instruction failed.</li>
+        </ol>
+      </details>
+      <label class="tick"><input type="checkbox" data-step="s5"> I asked all 5 questions</label>
+    </div>
+  </div>
+
+  <div class="step" id="s6">
+    <div class="num">6</div>
+    <div>
+      <span class="where vm">VM</span>
+      <h3>Try your own document</h3>
+      <p>Upload any other non-confidential PDF on the VM (a public datasheet or a standard you know well) and ask it three questions you already know the answers to. Did it get them right?</p>
+      <label class="tick"><input type="checkbox" data-step="s6"> Tried my own document</label>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.5rem; margin-top:22px">If something breaks</h3>
+  <p>A red error, or the black window closes? Copy the full error text, then paste it into the <b>same</b> Abby chat after this prompt. Paste the new code into Notepad (select all first), save, and run step 4 again.</p>
+  <button class="copy" data-copy="fixPrompt">Copy the "fix it" prompt</button>
+<div class="prompt" id="fixPrompt">My app gave the error below. Please find the cause and give me the complete corrected app.py — the whole file, not just the changed lines. Keep all the rules from my first message.
+
+ERROR:
+</div>
+  <div class="note"><b>Common errors:</b> <code>No module named ...</code> → tell the trainer. · <code>Port 8601 is already in use</code> → close the old black window and run again. · <code>KeyError: 'FOUNDRY_ENDPOINT'</code> → you are not on the lab VM.</div>
+</section>
+
+<!-- ============ LEVEL UP ============ -->
+<section id="levelup">
+  <h2>Finished early? Level up</h2>
+  <div class="rule"></div>
+  <p>Send one of these to Abby in the same chat, paste the full new code, save and run again. Each one is a feature that a real RAG product needs.</p>
+  <button class="copy" data-copy="lv1">Copy level-up 1: show cost</button>
+<div class="prompt" id="lv1">Add to my app: under every answer, show the number of input tokens, output tokens, and the cost of that answer in US dollars, using USD 0.75 per 1 million input tokens and USD 4.50 per 1 million output tokens. Also show the total cost of the session in the sidebar. Give me the complete app.py.</div>
+  <button class="copy" data-copy="lv2">Copy level-up 2: show the prompt</button>
+<div class="prompt" id="lv2">Add to my app: an expander "What was sent to the model" under every answer, showing the exact system message and user message sent to the model. Add a sidebar slider "Chunks to retrieve" from 1 to 8 (default 3). Give me the complete app.py.</div>
+  <button class="copy" data-copy="lv3">Copy level-up 3: refuse weak matches</button>
+<div class="prompt" id="lv3">Add to my app: if the best similarity score is below 0.30, do not call the chat model at all. Instead reply "I could not find this in the document." and show the best score. Add a sidebar slider for this threshold from 0.0 to 0.9. Give me the complete app.py.</div>
+</section>
+
+<!-- ============ BACKGROUND ============ -->
+<section id="background">
+  <h2>What happened in the background</h2>
+  <div class="rule"></div>
+  <p>Your app does the same six things that every RAG system does. Only two of them use AI (in amber); the rest is ordinary software.</p>
+  <div class="pipe">
+    <div><b>1. Read</b>pypdf pulls the text out of each page<span class="tag">once per file</span></div>
+    <div><b>2. Chunk</b>Text is cut into pieces of about 800 characters<span class="tag">once per file</span></div>
+    <div class="ai"><b>3. Embed</b>Each piece becomes a list of numbers that captures its meaning<span class="tag">AI · once per file</span></div>
+    <div><b>4. Search</b>Your question is compared with every piece; the 3 closest win<span class="tag">every question</span></div>
+    <div><b>5. Prompt</b>The 3 pieces + your question + the rules go to the model<span class="tag">every question</span></div>
+    <div class="ai"><b>6. Answer</b>The model writes the answer only from those pieces<span class="tag">AI · every question</span></div>
+  </div>
+  <div class="plain"><b>In plain words:</b> the model never "reads" your PDF. It only sees the three pieces your search found. If the search picks the wrong pieces, even the best model gives a wrong answer. That is why question 3 can fail.</div>
+  <table>
+    <tr><th>Your 10-minute app</th><th>What AskIT added (and a product needs)</th></tr>
+    <tr><td>Fixed 800-character chunks</td><td>Chunks that follow headings and sections</td></tr>
+    <tr><td>Meaning search only</td><td>Meaning search + keyword search together (hybrid)</td></tr>
+    <tr><td>Top 3, no checking</td><td>A second step that re-ranks the results</td></tr>
+    <tr><td>Trusts every document</td><td>Version and audience filters; scan for hidden instructions</td></tr>
+    <tr><td>"Looks right to me"</td><td>A test set with scores, run after every change</td></tr>
+  </table>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz">
+  <h2>Check yourself</h2>
+  <div class="rule"></div>
+  <div class="card quiz" data-answer="1">
+    <h3>1. Your app gave a wrong answer to question 3. What is the most likely cause?</h3>
+    <div class="opts">
+      <label><input type="radio" name="q1"> The model is not intelligent enough</label>
+      <label><input type="radio" name="q1"> The search did not bring the contractor section into the 3 pieces</label>
+      <label><input type="radio" name="q1"> The PDF was too long</label>
+    </div>
+    <p class="fb"></p>
+  </div>
+  <div class="card quiz" data-answer="2">
+    <h3>2. In your app, which step runs again for every new question?</h3>
+    <div class="opts">
+      <label><input type="radio" name="q2"> Reading the PDF</label>
+      <label><input type="radio" name="q2"> Chunking and embedding all the pages</label>
+      <label><input type="radio" name="q2"> Embedding the question, searching, and asking the model</label>
+    </div>
+    <p class="fb"></p>
+  </div>
+  <div class="card quiz" data-answer="0">
+    <h3>3. Your team built this in 10 minutes. What should a manager ask before it goes to 500 users?</h3>
+    <div class="opts">
+      <label><input type="radio" name="q3"> "Where is the test set, and what score does it get?"</label>
+      <label><input type="radio" name="q3"> "Can we switch to the most expensive model?"</label>
+      <label><input type="radio" name="q3"> "Can we make the chunks bigger?"</label>
+    </div>
+    <p class="fb"></p>
+  </div>
+  <p class="score">Score: <span id="qscore">0</span> / 3</p>
+</section>
+
+<section id="decide" style="border-bottom:none">
+  <h2>Decision card</h2>
+  <div class="rule"></div>
+  <table>
+    <tr><th>Situation</th><th>Your call</th></tr>
+    <tr><td>Team wants a quick internal tool over one stable document</td><td>A 10-minute RAG like yours is fine. Add the "I don't know" rule and a source link.</td></tr>
+    <tr><td>Many documents with versions, or different answers for different users</td><td>Needs metadata filters, better chunking and a test set — plan weeks, not days.</td></tr>
+    <tr><td>Questions need several sections joined together (like question 4)</td><td>Consider a knowledge graph / Graph RAG — next topic.</td></tr>
+    <tr><td>Customers or plant operators will act on the answer</td><td>Evals, guardrails, human review and monitoring are mandatory before go-live.</td></tr>
+  </table>
+</section>
+</main>
+<footer class="wrap">Axion Controls is a fictional company. The HR policy PDF is invented for training. Do not upload ABB confidential documents to the lab VM.</footer>
+
+<script>
+(function(){
+  var KEY="abb-day2-rag";
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){ return {}; } }
+  function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+  var state=load();
+  // copy buttons
+  document.querySelectorAll(".copy").forEach(function(b){
+    b.addEventListener("click", function(){
+      var t=document.getElementById(b.dataset.copy).innerText;
+      var done=function(){ var old=b.textContent; b.textContent="Copied ✓"; b.classList.add("ok");
+        setTimeout(function(){ b.textContent=old; b.classList.remove("ok"); },1800); };
+      if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(t).then(done, function(){ fallback(t); done(); }); }
+      else { fallback(t); done(); }
+    });
+  });
+  function fallback(t){ var a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select();
+    try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(a); }
+  // steps + progress
+  var boxes=document.querySelectorAll("input[data-step]");
+  function paint(){ var n=0; boxes.forEach(function(c){ var s=document.getElementById(c.dataset.step);
+      if(c.checked){ n++; s.classList.add("done"); } else s.classList.remove("done"); });
+    var pct=Math.round(n/boxes.length*100);
+    document.getElementById("pct").textContent=pct; document.getElementById("pcount").textContent=n;
+    document.getElementById("pbar").style.width=pct+"%"; }
+  boxes.forEach(function(c){ c.checked=!!(state.steps&&state.steps[c.dataset.step]);
+    c.addEventListener("change", function(){ state.steps=state.steps||{}; state.steps[c.dataset.step]=c.checked; save(state); paint(); }); });
+  paint();
+  // predict
+  document.querySelectorAll('.card[data-q] input').forEach(function(r){
+    r.addEventListener("change", function(){ r.closest(".card").querySelector(".fb").style.display="block"; });
+  });
+  // quiz
+  var why=[
+    ["Not usually. The model can only use what the search gives it.","Right. The model only sees the 3 pieces the search found. If Section 6 is not among them, the answer is wrong however good the model is.","No. Length is not the issue here; which pieces were picked is."],
+    ["No. The PDF is read only once, when you upload it.","No. Chunks and embeddings are made once per file and kept in memory.","Right. Each question needs its own embedding, search and model call — that is where the running cost is."],
+    ["Right. Without a test set and a score, nobody knows if it is good enough, or if the next change made it worse.","No. A bigger model costs more and does not fix a search that picks the wrong pieces.","No. That is a tuning detail. The test set tells you whether any tuning helped."]];
+  var quizzes=document.querySelectorAll(".quiz");
+  function score(){ var s=0; quizzes.forEach(function(q){ if(q.dataset.ok==="1") s++; }); document.getElementById("qscore").textContent=s; }
+  quizzes.forEach(function(q,qi){
+    var labels=q.querySelectorAll("label"), fb=q.querySelector(".fb"), ans=+q.dataset.answer;
+    labels.forEach(function(l,i){ l.querySelector("input").addEventListener("change", function(){
+      labels.forEach(function(x){ x.classList.remove("right","wrong"); });
+      l.classList.add(i===ans?"right":"wrong"); fb.textContent=why[qi][i]; fb.style.display="block";
+      q.dataset.ok = (i===ans)?"1":"0"; score(); }); });
+  });
+})();
+</script>
+</body>
+</html>

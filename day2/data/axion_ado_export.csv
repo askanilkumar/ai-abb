@@ -1,0 +1,307 @@
+ID,Work Item Type,Title,State,Severity,Priority,Area Path,Iteration Path,Assigned To,Story Points,Created Date,Closed Date,Tags,Found In
+40101,User Story,Refactor alarm list driver init,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Vikas,5,2026-07-29,2026-08-20,carried-over,
+40102,User Story,Add diagnostic counter for PROFINET,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 1,Arun,5,2026-07-25,2026-08-06,,
+40103,User Story,Log ETH2 events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Vikas,1,2026-07-25,2026-08-16,,
+40104,User Story,Improve PROFINET startup time,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Arun,5,2026-07-30,2026-08-08,,
+40105,User Story,Refactor alarm list driver init,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Arun,5,2026-07-29,2026-08-07,,
+40106,User Story,Log trend view events to syslog,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 1,Vikas,3,2026-07-28,2026-08-26,carried-over,
+40107,User Story,Add diagnostic counter for event log,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Vikas,5,2026-07-27,2026-08-28,carried-over,
+40108,User Story,Validate watchdog input range,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 1,Vikas,8,2026-07-30,2026-08-09,,
+40109,User Story,Expose alarm list status over OPC UA,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 1,Meera,8,2026-08-01,2026-08-10,,
+40110,User Story,Refactor torque loop driver init,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Arun,3,2026-07-28,2026-08-16,,
+40111,User Story,Log fieldbus events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 1,Arun,3,2026-08-01,2026-08-13,,
+40112,Bug,alarm list alarm not cleared,Closed,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 1,Vikas,,2026-08-08,2026-08-08,,Internal test
+40113,Bug,watchdog fails after power cycle,Closed,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 1,Arun,,2026-08-12,2026-08-13,customer-found,Customer site
+40114,Bug,Race condition in firmware update handler,Closed,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 1,Arun,,2026-08-07,2026-08-10,,Internal test
+40115,User Story,Support new PROFINET config parameter,Closed,,3,AX900\Safety IO,AX900\Sprint 1,Farah,2,2026-07-25,2026-08-12,,
+40116,User Story,Log firmware update events to syslog,Closed,,1,AX900\Safety IO,AX900\Sprint 1,Lakshmi,3,2026-07-31,2026-08-07,,
+40117,User Story,Log watchdog events to syslog,Closed,,3,AX900\Safety IO,AX900\Sprint 1,Rohan,2,2026-07-27,2026-08-15,,
+40118,User Story,Expose ETH2 status over OPC UA,Closed,,1,AX900\Safety IO,AX900\Sprint 1,Farah,3,2026-07-25,2026-08-14,,
+40119,User Story,Add diagnostic counter for trend view,Closed,,3,AX900\Safety IO,AX900\Sprint 1,Lakshmi,8,2026-07-28,2026-08-13,,
+40120,User Story,Log fieldbus events to syslog,Closed,,1,AX900\Safety IO,AX900\Sprint 1,Farah,1,2026-07-29,2026-08-10,,
+40121,User Story,Refactor fieldbus driver init,Closed,,2,AX900\Safety IO,AX900\Sprint 1,Lakshmi,8,2026-07-24,2026-08-14,,
+40122,User Story,Log torque loop events to syslog,Closed,,3,AX900\Safety IO,AX900\Sprint 1,Lakshmi,8,2026-08-02,2026-08-07,,
+40123,User Story,Refactor ETH2 driver init,Closed,,2,AX900\Safety IO,AX900\Sprint 1,Farah,3,2026-07-29,2026-08-07,,
+40124,Bug,fieldbus alarm not cleared,Active,2 - High,1,AX900\Safety IO,AX900\Sprint 1,Lakshmi,,2026-08-13,,,Internal test
+40125,Bug,safe stop alarm not cleared,Closed,3 - Medium,2,AX900\Safety IO,AX900\Sprint 1,Lakshmi,,2026-08-11,2026-08-11,,Internal test
+40126,User Story,Improve event log startup time,Closed,,3,AX900\HMI Panel,AX900\Sprint 1,Sanjay,5,2026-07-28,2026-08-09,,
+40127,User Story,Log event log events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 1,Imran,2,2026-08-02,2026-08-22,carried-over,
+40128,User Story,Refactor watchdog driver init,Closed,,1,AX900\HMI Panel,AX900\Sprint 1,Divya,1,2026-08-02,2026-08-20,carried-over,
+40129,User Story,Refactor event log driver init,Closed,,2,AX900\HMI Panel,AX900\Sprint 1,Imran,5,2026-07-26,2026-08-15,,
+40130,User Story,Expose safe stop status over OPC UA,Closed,,2,AX900\HMI Panel,AX900\Sprint 1,Sanjay,5,2026-07-26,2026-08-07,,
+40131,User Story,Improve firmware update startup time,Closed,,1,AX900\HMI Panel,AX900\Sprint 1,Imran,5,2026-07-27,2026-08-16,,
+40132,User Story,Validate torque loop input range,Closed,,1,AX900\HMI Panel,AX900\Sprint 1,Sanjay,5,2026-07-27,2026-08-22,carried-over,
+40133,User Story,Improve fieldbus startup time,Closed,,2,AX900\HMI Panel,AX900\Sprint 1,Divya,2,2026-07-31,2026-08-09,,
+40134,User Story,Expose event log status over OPC UA,Closed,,1,AX900\HMI Panel,AX900\Sprint 1,Sanjay,8,2026-07-26,2026-08-16,,
+40135,User Story,Expose alarm list status over OPC UA,Closed,,2,AX900\HMI Panel,AX900\Sprint 1,Divya,5,2026-08-01,2026-08-13,,
+40136,Bug,Wrong value shown in safe stop screen,Closed,3 - Medium,2,AX900\HMI Panel,AX900\Sprint 1,Sanjay,,2026-08-09,2026-08-12,,Internal test
+40137,Bug,Race condition in event log handler,Closed,4 - Low,2,AX900\HMI Panel,AX900\Sprint 1,Imran,,2026-08-14,2026-08-15,,Internal test
+40138,User Story,Add diagnostic counter for PROFINET,Closed,,1,AX900\Drive Interface,AX900\Sprint 1,Pooja,2,2026-07-30,2026-08-11,,
+40139,User Story,Log event log events to syslog,Closed,,2,AX900\Drive Interface,AX900\Sprint 1,Kavya,1,2026-07-26,2026-08-27,carried-over,
+40140,User Story,Log watchdog events to syslog,Closed,,2,AX900\Drive Interface,AX900\Sprint 1,Nikhil,1,2026-08-01,2026-08-07,,
+40141,User Story,Add diagnostic counter for PROFINET,Closed,,1,AX900\Drive Interface,AX900\Sprint 1,Nikhil,5,2026-07-24,2026-08-16,,
+40142,User Story,Support new alarm list config parameter,Closed,,2,AX900\Drive Interface,AX900\Sprint 1,Kavya,5,2026-07-28,2026-08-10,,
+40143,User Story,Improve torque loop startup time,Closed,,1,AX900\Drive Interface,AX900\Sprint 1,Kavya,3,2026-07-29,2026-08-13,,
+40144,User Story,Add diagnostic counter for event log,Closed,,2,AX900\Drive Interface,AX900\Sprint 1,Pooja,5,2026-08-01,2026-08-10,,
+40145,User Story,Refactor torque loop driver init,Closed,,2,AX900\Drive Interface,AX900\Sprint 1,Kavya,2,2026-08-01,2026-08-13,,
+40146,User Story,Log event log events to syslog,Closed,,1,AX900\Drive Interface,AX900\Sprint 1,Pooja,8,2026-07-29,2026-08-14,,
+40147,Bug,Wrong value shown in trend view screen,Closed,2 - High,1,AX900\Drive Interface,AX900\Sprint 1,Kavya,,2026-08-04,2026-08-16,,Internal test
+40148,Bug,alarm list fails after power cycle,Active,2 - High,1,AX900\Drive Interface,AX900\Sprint 1,Pooja,,2026-08-13,,,Internal test
+40149,Bug,watchdog times out under load,Closed,4 - Low,2,AX900\Drive Interface,AX900\Sprint 1,Pooja,,2026-08-09,2026-08-12,,Internal test
+40150,User Story,Validate trend view input range,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Vikas,1,2026-08-14,2026-09-09,carried-over,
+40151,User Story,Add diagnostic counter for watchdog,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 2,Vikas,5,2026-08-08,2026-08-22,,
+40152,User Story,Log event log events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Meera,5,2026-08-11,2026-09-04,carried-over,
+40153,User Story,Support new alarm list config parameter,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Vikas,1,2026-08-16,2026-08-21,,
+40154,User Story,Log fieldbus events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Arun,3,2026-08-10,2026-08-22,,
+40155,User Story,Expose safe stop status over OPC UA,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Meera,3,2026-08-11,2026-09-04,carried-over,
+40156,User Story,Expose ETH2 status over OPC UA,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 2,Arun,8,2026-08-10,2026-08-23,,
+40157,User Story,Support new alarm list config parameter,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Arun,8,2026-08-11,2026-08-30,,
+40158,User Story,Expose watchdog status over OPC UA,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 2,Meera,2,2026-08-12,2026-08-30,,
+40159,User Story,Support new ETH2 config parameter,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 2,Meera,5,2026-08-08,2026-08-22,,
+40160,User Story,Add diagnostic counter for watchdog,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 2,Meera,5,2026-08-12,2026-08-25,,
+40161,Bug,alarm list alarm not cleared,Active,3 - Medium,2,AX900\Ethernet Comms,AX900\Sprint 2,Meera,,2026-08-17,,,Internal test
+40162,Bug,alarm list alarm not cleared,Closed,3 - Medium,2,AX900\Ethernet Comms,AX900\Sprint 2,Meera,,2026-08-23,2026-08-23,customer-found,Customer site
+40163,Bug,Race condition in watchdog handler,Closed,4 - Low,2,AX900\Ethernet Comms,AX900\Sprint 2,Vikas,,2026-08-21,2026-08-30,,Internal test
+40164,User Story,Improve trend view startup time,Closed,,2,AX900\Safety IO,AX900\Sprint 2,Lakshmi,3,2026-08-11,2026-08-26,,
+40165,User Story,Log PROFINET events to syslog,Closed,,2,AX900\Safety IO,AX900\Sprint 2,Rohan,5,2026-08-14,2026-08-28,,
+40166,User Story,Refactor safe stop driver init,Closed,,2,AX900\Safety IO,AX900\Sprint 2,Rohan,8,2026-08-12,2026-09-09,carried-over,
+40167,User Story,Improve fieldbus startup time,Closed,,1,AX900\Safety IO,AX900\Sprint 2,Rohan,3,2026-08-08,2026-08-28,,
+40168,User Story,Add diagnostic counter for alarm list,Closed,,2,AX900\Safety IO,AX900\Sprint 2,Lakshmi,5,2026-08-11,2026-08-23,,
+40169,User Story,Improve PROFINET startup time,Closed,,1,AX900\Safety IO,AX900\Sprint 2,Rohan,2,2026-08-13,2026-09-08,carried-over,
+40170,User Story,Improve safe stop startup time,Closed,,2,AX900\Safety IO,AX900\Sprint 2,Lakshmi,5,2026-08-10,2026-08-30,,
+40171,User Story,Expose safe stop status over OPC UA,Closed,,2,AX900\Safety IO,AX900\Sprint 2,Lakshmi,5,2026-08-15,2026-09-10,carried-over,
+40172,User Story,Expose watchdog status over OPC UA,Closed,,3,AX900\Safety IO,AX900\Sprint 2,Lakshmi,3,2026-08-13,2026-09-09,carried-over,
+40173,Bug,Memory leak in PROFINET task,Closed,3 - Medium,2,AX900\Safety IO,AX900\Sprint 2,Farah,,2026-08-25,2026-08-28,,Internal test
+40174,Bug,Race condition in firmware update handler,Closed,4 - Low,2,AX900\Safety IO,AX900\Sprint 2,Rohan,,2026-08-21,2026-08-25,,Internal test
+40175,User Story,Improve alarm list startup time,Closed,,2,AX900\HMI Panel,AX900\Sprint 2,Divya,8,2026-08-08,2026-08-21,,
+40176,User Story,Support new torque loop config parameter,Closed,,1,AX900\HMI Panel,AX900\Sprint 2,Sanjay,5,2026-08-12,2026-08-22,,
+40177,User Story,Validate alarm list input range,Closed,,1,AX900\HMI Panel,AX900\Sprint 2,Divya,2,2026-08-14,2026-08-26,,
+40178,User Story,Add diagnostic counter for alarm list,Closed,,3,AX900\HMI Panel,AX900\Sprint 2,Divya,3,2026-08-10,2026-08-29,,
+40179,User Story,Improve firmware update startup time,Closed,,1,AX900\HMI Panel,AX900\Sprint 2,Divya,5,2026-08-07,2026-09-06,carried-over,
+40180,User Story,Log event log events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 2,Divya,8,2026-08-10,2026-08-23,,
+40181,User Story,Improve torque loop startup time,Closed,,3,AX900\HMI Panel,AX900\Sprint 2,Imran,3,2026-08-16,2026-08-22,,
+40182,User Story,Log event log events to syslog,Closed,,1,AX900\HMI Panel,AX900\Sprint 2,Divya,8,2026-08-14,2026-08-29,,
+40183,User Story,Validate safe stop input range,Closed,,2,AX900\HMI Panel,AX900\Sprint 2,Divya,5,2026-08-15,2026-08-22,,
+40184,User Story,Refactor firmware update driver init,Closed,,2,AX900\HMI Panel,AX900\Sprint 2,Divya,1,2026-08-11,2026-08-26,,
+40185,Bug,firmware update times out under load,Closed,2 - High,1,AX900\HMI Panel,AX900\Sprint 2,Sanjay,,2026-08-28,2026-08-30,,Internal test
+40186,Bug,ETH2 times out under load,Active,1 - Critical,1,AX900\HMI Panel,AX900\Sprint 2,Sanjay,,2026-08-20,,,Internal test
+40187,User Story,Refactor alarm list driver init,Closed,,2,AX900\Drive Interface,AX900\Sprint 2,Nikhil,2,2026-08-07,2026-08-30,,
+40188,User Story,Improve trend view startup time,Closed,,2,AX900\Drive Interface,AX900\Sprint 2,Kavya,1,2026-08-13,2026-08-29,,
+40189,User Story,Expose fieldbus status over OPC UA,Closed,,2,AX900\Drive Interface,AX900\Sprint 2,Kavya,5,2026-08-15,2026-08-29,,
+40190,User Story,Validate safe stop input range,Closed,,3,AX900\Drive Interface,AX900\Sprint 2,Pooja,1,2026-08-07,2026-08-23,,
+40191,User Story,Add diagnostic counter for trend view,Closed,,1,AX900\Drive Interface,AX900\Sprint 2,Pooja,1,2026-08-13,2026-08-20,,
+40192,User Story,Add diagnostic counter for event log,Closed,,2,AX900\Drive Interface,AX900\Sprint 2,Kavya,3,2026-08-11,2026-08-26,,
+40193,User Story,Support new firmware update config parameter,Closed,,2,AX900\Drive Interface,AX900\Sprint 2,Nikhil,8,2026-08-10,2026-08-22,,
+40194,User Story,Log event log events to syslog,Closed,,3,AX900\Drive Interface,AX900\Sprint 2,Nikhil,5,2026-08-12,2026-08-26,,
+40195,User Story,Support new alarm list config parameter,Closed,,1,AX900\Drive Interface,AX900\Sprint 2,Nikhil,8,2026-08-12,2026-08-27,,
+40196,Bug,Memory leak in torque loop task,Closed,2 - High,1,AX900\Drive Interface,AX900\Sprint 2,Kavya,,2026-08-24,2026-08-27,,Internal test
+40197,Bug,trend view fails after power cycle,Closed,2 - High,1,AX900\Drive Interface,AX900\Sprint 2,Pooja,,2026-08-28,2026-08-26,,Internal test
+40198,Bug,Wrong value shown in safe stop screen,Active,3 - Medium,2,AX900\Drive Interface,AX900\Sprint 2,Nikhil,,2026-08-25,,,Internal test
+40199,User Story,Validate firmware update input range,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 3,Arun,8,2026-08-23,2026-09-17,carried-over,
+40200,User Story,Support new PROFINET config parameter,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 3,Meera,3,2026-08-27,2026-09-24,carried-over,
+40201,User Story,Support new torque loop config parameter,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 3,Meera,5,2026-08-22,2026-09-07,,
+40202,User Story,Support new watchdog config parameter,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 3,Arun,3,2026-08-27,2026-09-19,carried-over,
+40203,User Story,Expose event log status over OPC UA,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 3,Arun,5,2026-08-21,2026-09-06,,
+40204,User Story,Support new ETH2 config parameter,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 3,Meera,3,2026-08-28,2026-09-16,carried-over,
+40205,User Story,Validate firmware update input range,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 3,Arun,1,2026-08-28,2026-09-12,,
+40206,User Story,Support new fieldbus config parameter,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 3,Meera,3,2026-08-23,2026-09-10,,
+40207,User Story,Improve watchdog startup time,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 3,Arun,1,2026-08-24,2026-09-05,,
+40208,User Story,Add diagnostic counter for alarm list,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 3,Vikas,8,2026-08-26,2026-09-09,,
+40209,User Story,Refactor event log driver init,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 3,Meera,5,2026-08-21,2026-09-10,,
+40210,Bug,PROFINET alarm not cleared,Closed,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 3,Arun,,2026-09-09,2026-09-06,,Internal test
+40211,Bug,Race condition in watchdog handler,Active,4 - Low,2,AX900\Ethernet Comms,AX900\Sprint 3,Arun,,2026-09-03,,,Internal test
+40212,Bug,Memory leak in PROFINET task,Active,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 3,Meera,,2026-09-04,,customer-found,Customer site
+40213,User Story,Validate firmware update input range,Closed,,1,AX900\Safety IO,AX900\Sprint 3,Farah,1,2026-08-26,2026-09-06,,
+40214,User Story,Validate alarm list input range,Closed,,3,AX900\Safety IO,AX900\Sprint 3,Lakshmi,3,2026-08-21,2026-09-11,,
+40215,User Story,Expose fieldbus status over OPC UA,Closed,,1,AX900\Safety IO,AX900\Sprint 3,Lakshmi,2,2026-08-26,2026-09-05,,
+40216,User Story,Support new firmware update config parameter,Closed,,1,AX900\Safety IO,AX900\Sprint 3,Rohan,8,2026-08-21,2026-09-07,,
+40217,User Story,Log event log events to syslog,Closed,,3,AX900\Safety IO,AX900\Sprint 3,Rohan,5,2026-08-26,2026-09-04,,
+40218,User Story,Validate torque loop input range,Closed,,2,AX900\Safety IO,AX900\Sprint 3,Lakshmi,5,2026-08-24,2026-09-17,carried-over,
+40219,User Story,Log ETH2 events to syslog,Closed,,2,AX900\Safety IO,AX900\Sprint 3,Farah,2,2026-08-21,2026-09-03,,
+40220,User Story,Log firmware update events to syslog,Closed,,2,AX900\Safety IO,AX900\Sprint 3,Lakshmi,8,2026-08-23,2026-09-12,,
+40221,User Story,Add diagnostic counter for firmware update,Closed,,2,AX900\Safety IO,AX900\Sprint 3,Rohan,3,2026-08-23,2026-09-08,,
+40222,Bug,Memory leak in firmware update task,Active,2 - High,1,AX900\Safety IO,AX900\Sprint 3,Rohan,,2026-09-10,,customer-found,Customer site
+40223,Bug,Memory leak in watchdog task,Closed,4 - Low,2,AX900\Safety IO,AX900\Sprint 3,Rohan,,2026-09-04,2026-09-10,,Internal test
+40224,User Story,Expose event log status over OPC UA,Closed,,1,AX900\HMI Panel,AX900\Sprint 3,Imran,1,2026-08-24,2026-09-11,,
+40225,User Story,Log torque loop events to syslog,Closed,,3,AX900\HMI Panel,AX900\Sprint 3,Imran,3,2026-08-27,2026-09-10,,
+40226,User Story,Log fieldbus events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 3,Divya,8,2026-08-26,2026-09-23,carried-over,
+40227,User Story,Expose alarm list status over OPC UA,Closed,,2,AX900\HMI Panel,AX900\Sprint 3,Divya,1,2026-08-21,2026-09-24,carried-over,
+40228,User Story,Refactor watchdog driver init,Closed,,3,AX900\HMI Panel,AX900\Sprint 3,Sanjay,1,2026-08-29,2026-09-13,,
+40229,User Story,Log trend view events to syslog,Closed,,3,AX900\HMI Panel,AX900\Sprint 3,Divya,8,2026-08-26,2026-09-10,,
+40230,User Story,Improve alarm list startup time,Closed,,2,AX900\HMI Panel,AX900\Sprint 3,Sanjay,2,2026-08-28,2026-09-07,,
+40231,User Story,Support new event log config parameter,Closed,,2,AX900\HMI Panel,AX900\Sprint 3,Sanjay,8,2026-08-24,2026-09-07,,
+40232,User Story,Log firmware update events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 3,Divya,5,2026-08-21,2026-09-11,,
+40233,User Story,Expose event log status over OPC UA,Closed,,3,AX900\HMI Panel,AX900\Sprint 3,Divya,3,2026-08-22,2026-09-08,,
+40234,Bug,Memory leak in alarm list task,Active,4 - Low,2,AX900\HMI Panel,AX900\Sprint 3,Divya,,2026-08-31,,,Internal test
+40235,Bug,Memory leak in safe stop task,Closed,2 - High,1,AX900\HMI Panel,AX900\Sprint 3,Imran,,2026-09-12,2026-09-07,,Internal test
+40236,User Story,Log PROFINET events to syslog,Closed,,2,AX900\Drive Interface,AX900\Sprint 3,Kavya,3,2026-08-28,2026-09-10,,
+40237,User Story,Add diagnostic counter for fieldbus,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Pooja,1,2026-08-23,2026-09-05,,
+40238,User Story,Support new PROFINET config parameter,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Pooja,1,2026-08-26,2026-09-04,,
+40239,User Story,Improve torque loop startup time,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Pooja,8,2026-08-22,2026-09-03,,
+40240,User Story,Refactor watchdog driver init,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Kavya,5,2026-08-26,2026-09-17,carried-over,
+40241,User Story,Add diagnostic counter for ETH2,Closed,,2,AX900\Drive Interface,AX900\Sprint 3,Kavya,3,2026-08-26,2026-09-07,,
+40242,User Story,Refactor event log driver init,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Pooja,3,2026-08-28,2026-09-13,,
+40243,User Story,Add diagnostic counter for PROFINET,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Pooja,8,2026-08-28,2026-09-13,,
+40244,User Story,Refactor alarm list driver init,Closed,,3,AX900\Drive Interface,AX900\Sprint 3,Pooja,2,2026-08-21,2026-09-07,,
+40245,Bug,Memory leak in trend view task,Closed,3 - Medium,2,AX900\Drive Interface,AX900\Sprint 3,Pooja,,2026-09-08,2026-09-07,,Internal test
+40246,Bug,safe stop fails after power cycle,Closed,1 - Critical,1,AX900\Drive Interface,AX900\Sprint 3,Pooja,,2026-09-04,2026-09-12,,Internal test
+40247,Bug,Memory leak in watchdog task,Closed,4 - Low,2,AX900\Drive Interface,AX900\Sprint 3,Kavya,,2026-09-06,2026-09-10,,Internal test
+40248,User Story,Add diagnostic counter for safe stop,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Arun,5,2026-09-09,2026-10-09,carried-over,
+40249,User Story,Log firmware update events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Arun,8,2026-09-13,2026-09-26,,
+40250,User Story,Log trend view events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Vikas,8,2026-09-10,2026-09-18,,
+40251,User Story,Expose firmware update status over OPC UA,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 4,Vikas,5,2026-09-09,2026-09-22,,
+40252,User Story,Support new safe stop config parameter,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Arun,5,2026-09-09,2026-10-02,carried-over,
+40253,User Story,Log event log events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Arun,8,2026-09-08,2026-09-21,,
+40254,User Story,Validate torque loop input range,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 4,Meera,8,2026-09-09,2026-09-18,,
+40255,User Story,Expose safe stop status over OPC UA,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Arun,2,2026-09-10,2026-09-23,,
+40256,User Story,Improve torque loop startup time,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 4,Vikas,1,2026-09-12,2026-10-06,carried-over,
+40257,User Story,Add diagnostic counter for alarm list,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 4,Arun,8,2026-09-08,2026-09-26,,
+40258,User Story,Refactor watchdog driver init,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 4,Vikas,5,2026-09-04,2026-10-04,carried-over,
+40259,Bug,trend view times out under load,Active,3 - Medium,2,AX900\Ethernet Comms,AX900\Sprint 4,Meera,,2026-09-15,,customer-found,Customer site
+40260,Bug,Memory leak in torque loop task,Active,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 4,Vikas,,2026-09-25,,,Internal test
+40261,Bug,Race condition in fieldbus handler,Closed,3 - Medium,2,AX900\Ethernet Comms,AX900\Sprint 4,Meera,,2026-09-24,2026-09-20,,Internal test
+40262,User Story,Support new ETH2 config parameter,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Lakshmi,8,2026-09-07,2026-09-24,,
+40263,User Story,Add diagnostic counter for torque loop,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Lakshmi,3,2026-09-08,2026-09-23,,
+40264,User Story,Expose firmware update status over OPC UA,Closed,,1,AX900\Safety IO,AX900\Sprint 4,Farah,3,2026-09-12,2026-09-20,,
+40265,User Story,Add diagnostic counter for torque loop,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Lakshmi,5,2026-09-13,2026-09-26,,
+40266,User Story,Refactor PROFINET driver init,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Lakshmi,2,2026-09-05,2026-10-05,carried-over,
+40267,User Story,Add diagnostic counter for trend view,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Lakshmi,8,2026-09-04,2026-09-25,,
+40268,User Story,Validate ETH2 input range,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Lakshmi,3,2026-09-12,2026-09-22,,
+40269,User Story,Support new ETH2 config parameter,Closed,,2,AX900\Safety IO,AX900\Sprint 4,Rohan,8,2026-09-04,2026-09-17,,
+40270,User Story,Add diagnostic counter for watchdog,Closed,,3,AX900\Safety IO,AX900\Sprint 4,Rohan,2,2026-09-05,2026-09-22,,
+40271,Bug,ETH2 alarm not cleared,Closed,3 - Medium,2,AX900\Safety IO,AX900\Sprint 4,Farah,,2026-09-26,2026-09-27,customer-found,Customer site
+40272,Bug,Memory leak in safe stop task,Active,2 - High,1,AX900\Safety IO,AX900\Sprint 4,Rohan,,2026-09-24,,,Internal test
+40273,User Story,Add diagnostic counter for watchdog,Closed,,2,AX900\HMI Panel,AX900\Sprint 4,Imran,1,2026-09-06,2026-09-19,,
+40274,User Story,Validate PROFINET input range,Closed,,2,AX900\HMI Panel,AX900\Sprint 4,Divya,1,2026-09-04,2026-09-26,,
+40275,User Story,Log safe stop events to syslog,Closed,,1,AX900\HMI Panel,AX900\Sprint 4,Imran,5,2026-09-05,2026-09-18,,
+40276,User Story,Validate alarm list input range,Closed,,3,AX900\HMI Panel,AX900\Sprint 4,Divya,8,2026-09-05,2026-09-20,,
+40277,User Story,Improve safe stop startup time,Closed,,1,AX900\HMI Panel,AX900\Sprint 4,Divya,3,2026-09-06,2026-09-23,,
+40278,User Story,Refactor firmware update driver init,Closed,,1,AX900\HMI Panel,AX900\Sprint 4,Sanjay,3,2026-09-08,2026-09-18,,
+40279,User Story,Expose fieldbus status over OPC UA,Closed,,1,AX900\HMI Panel,AX900\Sprint 4,Imran,1,2026-09-08,2026-09-25,,
+40280,User Story,Improve torque loop startup time,Closed,,3,AX900\HMI Panel,AX900\Sprint 4,Imran,5,2026-09-12,2026-09-17,,
+40281,User Story,Add diagnostic counter for PROFINET,Closed,,2,AX900\HMI Panel,AX900\Sprint 4,Sanjay,3,2026-09-08,2026-09-27,,
+40282,User Story,Support new event log config parameter,Closed,,2,AX900\HMI Panel,AX900\Sprint 4,Sanjay,3,2026-09-12,2026-09-21,,
+40283,Bug,PROFINET alarm not cleared,Closed,3 - Medium,2,AX900\HMI Panel,AX900\Sprint 4,Imran,,2026-09-24,2026-09-27,,Internal test
+40284,Bug,ETH2 fails after power cycle,Closed,1 - Critical,1,AX900\HMI Panel,AX900\Sprint 4,Sanjay,,2026-09-18,2026-09-23,,Internal test
+40285,Bug,Wrong value shown in PROFINET screen,Active,4 - Low,2,AX900\HMI Panel,AX900\Sprint 4,Imran,,2026-09-20,,customer-found,Customer site
+40286,Bug,event log times out under load,Closed,1 - Critical,1,AX900\HMI Panel,AX900\Sprint 4,Sanjay,,2026-09-20,2026-09-25,,Internal test
+40287,User Story,Support new torque loop config parameter,Closed,,1,AX900\Drive Interface,AX900\Sprint 4,Kavya,3,2026-09-08,2026-09-19,,
+40288,User Story,Validate watchdog input range,Closed,,2,AX900\Drive Interface,AX900\Sprint 4,Nikhil,2,2026-09-13,2026-09-27,,
+40289,User Story,Improve trend view startup time,Closed,,2,AX900\Drive Interface,AX900\Sprint 4,Pooja,3,2026-09-06,2026-09-18,,
+40290,User Story,Validate PROFINET input range,Closed,,3,AX900\Drive Interface,AX900\Sprint 4,Pooja,3,2026-09-09,2026-09-27,,
+40291,User Story,Log ETH2 events to syslog,Closed,,1,AX900\Drive Interface,AX900\Sprint 4,Kavya,3,2026-09-07,2026-10-04,carried-over,
+40292,User Story,Support new torque loop config parameter,Closed,,1,AX900\Drive Interface,AX900\Sprint 4,Kavya,2,2026-09-09,2026-09-24,,
+40293,User Story,Improve event log startup time,Closed,,2,AX900\Drive Interface,AX900\Sprint 4,Pooja,5,2026-09-11,2026-09-25,,
+40294,User Story,Add diagnostic counter for safe stop,Closed,,1,AX900\Drive Interface,AX900\Sprint 4,Nikhil,8,2026-09-08,2026-09-17,,
+40295,User Story,Log safe stop events to syslog,Closed,,3,AX900\Drive Interface,AX900\Sprint 4,Pooja,3,2026-09-08,2026-09-27,,
+40296,Bug,fieldbus fails after power cycle,Active,3 - Medium,2,AX900\Drive Interface,AX900\Sprint 4,Pooja,,2026-09-21,,customer-found,Customer site
+40297,Bug,alarm list times out under load,Active,4 - Low,2,AX900\Drive Interface,AX900\Sprint 4,Nikhil,,2026-09-23,,,Internal test
+40298,Bug,Race condition in torque loop handler,Closed,3 - Medium,2,AX900\Drive Interface,AX900\Sprint 4,Kavya,,2026-09-19,2026-09-21,customer-found,Customer site
+40299,User Story,Log event log events to syslog,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 5,Meera,1,2026-09-26,2026-10-06,,
+40300,User Story,Refactor watchdog driver init,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 5,Meera,5,2026-09-25,2026-10-04,,
+40301,User Story,Refactor firmware update driver init,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 5,Vikas,2,2026-09-26,2026-10-10,,
+40302,User Story,Validate PROFINET input range,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 5,Vikas,3,2026-09-18,2026-10-06,,
+40303,User Story,Improve trend view startup time,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 5,Vikas,2,2026-09-20,2026-10-01,,
+40304,User Story,Improve firmware update startup time,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 5,Arun,3,2026-09-23,2026-10-06,,
+40305,User Story,Log PROFINET events to syslog,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 5,Meera,8,2026-09-26,2026-10-23,carried-over,
+40306,User Story,Improve PROFINET startup time,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 5,Meera,5,2026-09-27,2026-10-10,,
+40307,User Story,Improve watchdog startup time,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 5,Vikas,3,2026-09-27,2026-10-02,,
+40308,User Story,Refactor firmware update driver init,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 5,Vikas,5,2026-09-27,2026-10-09,,
+40309,User Story,Support new safe stop config parameter,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 5,Meera,5,2026-09-22,2026-10-23,carried-over,
+40310,Bug,watchdog fails after power cycle,Closed,1 - Critical,1,AX900\Ethernet Comms,AX900\Sprint 5,Vikas,,2026-10-08,2026-10-09,,Internal test
+40311,Bug,fieldbus alarm not cleared,Closed,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 5,Meera,,2026-09-29,2026-10-05,,Internal test
+40312,Bug,Race condition in safe stop handler,Closed,4 - Low,2,AX900\Ethernet Comms,AX900\Sprint 5,Arun,,2026-10-07,2026-10-04,,Internal test
+40313,User Story,Expose fieldbus status over OPC UA,Closed,,1,AX900\Safety IO,AX900\Sprint 5,Farah,3,2026-09-22,2026-10-11,,
+40314,User Story,Support new trend view config parameter,Closed,,2,AX900\Safety IO,AX900\Sprint 5,Lakshmi,3,2026-09-27,2026-10-06,,
+40315,User Story,Refactor fieldbus driver init,Closed,,1,AX900\Safety IO,AX900\Sprint 5,Rohan,8,2026-09-24,2026-10-02,,
+40316,User Story,Add diagnostic counter for torque loop,Closed,,2,AX900\Safety IO,AX900\Sprint 5,Farah,5,2026-09-19,2026-10-07,,
+40317,User Story,Expose fieldbus status over OPC UA,Closed,,3,AX900\Safety IO,AX900\Sprint 5,Lakshmi,2,2026-09-18,2026-10-07,,
+40318,User Story,Improve PROFINET startup time,Closed,,2,AX900\Safety IO,AX900\Sprint 5,Farah,3,2026-09-24,2026-10-08,,
+40319,User Story,Expose firmware update status over OPC UA,Closed,,2,AX900\Safety IO,AX900\Sprint 5,Rohan,2,2026-09-23,2026-10-11,,
+40320,User Story,Expose trend view status over OPC UA,Closed,,3,AX900\Safety IO,AX900\Sprint 5,Farah,5,2026-09-20,2026-10-09,,
+40321,User Story,Expose PROFINET status over OPC UA,Closed,,2,AX900\Safety IO,AX900\Sprint 5,Rohan,3,2026-09-24,2026-10-01,,
+40322,Bug,event log times out under load,Closed,3 - Medium,2,AX900\Safety IO,AX900\Sprint 5,Lakshmi,,2026-10-02,2026-10-04,,Internal test
+40323,Bug,Wrong value shown in safe stop screen,Closed,3 - Medium,2,AX900\Safety IO,AX900\Sprint 5,Lakshmi,,2026-10-01,2026-10-10,,Internal test
+40324,User Story,Add diagnostic counter for safe stop,Closed,,2,AX900\HMI Panel,AX900\Sprint 5,Sanjay,3,2026-09-21,2026-10-07,,
+40325,User Story,Support new watchdog config parameter,Closed,,2,AX900\HMI Panel,AX900\Sprint 5,Sanjay,1,2026-09-27,2026-10-03,,
+40326,User Story,Validate fieldbus input range,Closed,,3,AX900\HMI Panel,AX900\Sprint 5,Divya,1,2026-09-20,2026-10-10,,
+40327,User Story,Support new alarm list config parameter,Closed,,2,AX900\HMI Panel,AX900\Sprint 5,Imran,1,2026-09-27,2026-10-10,,
+40328,User Story,Refactor trend view driver init,Closed,,1,AX900\HMI Panel,AX900\Sprint 5,Sanjay,5,2026-09-23,2026-10-04,,
+40329,User Story,Improve watchdog startup time,Closed,,1,AX900\HMI Panel,AX900\Sprint 5,Divya,3,2026-09-18,2026-10-10,,
+40330,User Story,Log alarm list events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 5,Divya,5,2026-09-19,2026-10-20,carried-over,
+40331,User Story,Log safe stop events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 5,Imran,1,2026-09-24,2026-10-11,,
+40332,User Story,Add diagnostic counter for event log,Closed,,1,AX900\HMI Panel,AX900\Sprint 5,Divya,1,2026-09-22,2026-10-08,,
+40333,User Story,Support new ETH2 config parameter,Closed,,2,AX900\HMI Panel,AX900\Sprint 5,Sanjay,1,2026-09-22,2026-10-06,,
+40334,Bug,torque loop alarm not cleared,Active,2 - High,1,AX900\HMI Panel,AX900\Sprint 5,Sanjay,,2026-09-28,,,Internal test
+40335,Bug,Race condition in firmware update handler,Closed,2 - High,1,AX900\HMI Panel,AX900\Sprint 5,Imran,,2026-10-05,2026-10-05,customer-found,Customer site
+40336,Bug,Memory leak in ETH2 task,Closed,4 - Low,2,AX900\HMI Panel,AX900\Sprint 5,Divya,,2026-10-01,2026-10-03,customer-found,Customer site
+40337,Bug,event log fails after power cycle,Closed,3 - Medium,2,AX900\HMI Panel,AX900\Sprint 5,Divya,,2026-10-06,2026-10-10,,Internal test
+40338,Bug,ETH2 fails after power cycle,Active,2 - High,1,AX900\HMI Panel,AX900\Sprint 5,Imran,,2026-10-03,,,Internal test
+40339,Bug,Memory leak in firmware update task,Closed,2 - High,1,AX900\HMI Panel,AX900\Sprint 5,Divya,,2026-10-03,2026-10-05,,Internal test
+40340,User Story,Expose event log status over OPC UA,Closed,,2,AX900\Drive Interface,AX900\Sprint 5,Kavya,3,2026-09-22,2026-10-07,,
+40341,User Story,Log trend view events to syslog,Closed,,2,AX900\Drive Interface,AX900\Sprint 5,Kavya,1,2026-09-25,2026-10-02,,
+40342,User Story,Improve PROFINET startup time,Closed,,3,AX900\Drive Interface,AX900\Sprint 5,Kavya,3,2026-09-23,2026-10-08,,
+40343,User Story,Log safe stop events to syslog,Closed,,2,AX900\Drive Interface,AX900\Sprint 5,Pooja,3,2026-09-22,2026-10-01,,
+40344,User Story,Support new event log config parameter,Closed,,2,AX900\Drive Interface,AX900\Sprint 5,Kavya,1,2026-09-21,2026-10-03,,
+40345,User Story,Add diagnostic counter for fieldbus,Closed,,1,AX900\Drive Interface,AX900\Sprint 5,Kavya,8,2026-09-20,2026-10-11,,
+40346,User Story,Add diagnostic counter for PROFINET,Closed,,2,AX900\Drive Interface,AX900\Sprint 5,Pooja,3,2026-09-18,2026-10-08,,
+40347,User Story,Log fieldbus events to syslog,Closed,,2,AX900\Drive Interface,AX900\Sprint 5,Nikhil,3,2026-09-26,2026-10-06,,
+40348,User Story,Add diagnostic counter for fieldbus,Closed,,3,AX900\Drive Interface,AX900\Sprint 5,Pooja,5,2026-09-26,2026-10-07,,
+40349,Bug,Race condition in firmware update handler,Closed,4 - Low,2,AX900\Drive Interface,AX900\Sprint 5,Kavya,,2026-10-07,2026-10-07,customer-found,Customer site
+40350,Bug,Wrong value shown in watchdog screen,Active,3 - Medium,2,AX900\Drive Interface,AX900\Sprint 5,Nikhil,,2026-09-30,,,Internal test
+40351,Bug,Race condition in torque loop handler,Active,4 - Low,2,AX900\Drive Interface,AX900\Sprint 5,Pooja,,2026-10-03,,,Internal test
+40352,User Story,Support new trend view config parameter,Active,,2,AX900\Ethernet Comms,AX900\Sprint 6,Vikas,5,2026-10-03,,carried-over,
+40353,User Story,Expose torque loop status over OPC UA,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 6,Arun,5,2026-10-09,2026-10-18,,
+40354,User Story,Add diagnostic counter for torque loop,Active,,2,AX900\Ethernet Comms,AX900\Sprint 6,Meera,8,2026-10-04,,carried-over,
+40355,User Story,Log watchdog events to syslog,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 6,Meera,8,2026-10-09,2026-10-21,,
+40356,User Story,Improve safe stop startup time,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 6,Arun,5,2026-10-03,2026-10-20,,
+40357,User Story,Validate event log input range,Active,,2,AX900\Ethernet Comms,AX900\Sprint 6,Arun,5,2026-10-04,,carried-over,
+40358,User Story,Refactor fieldbus driver init,Closed,,3,AX900\Ethernet Comms,AX900\Sprint 6,Vikas,8,2026-10-02,2026-10-15,,
+40359,User Story,Support new fieldbus config parameter,Active,,2,AX900\Ethernet Comms,AX900\Sprint 6,Meera,8,2026-10-09,,carried-over,
+40360,User Story,Support new watchdog config parameter,Active,,2,AX900\Ethernet Comms,AX900\Sprint 6,Arun,5,2026-10-03,,carried-over,
+40361,User Story,Refactor trend view driver init,Closed,,1,AX900\Ethernet Comms,AX900\Sprint 6,Vikas,5,2026-10-07,2026-10-25,,
+40362,User Story,Refactor fieldbus driver init,Closed,,2,AX900\Ethernet Comms,AX900\Sprint 6,Vikas,2,2026-10-02,2026-10-15,,
+40363,Bug,Race condition in PROFINET handler,Active,4 - Low,2,AX900\Ethernet Comms,AX900\Sprint 6,Meera,,2026-10-22,,customer-found,Customer site
+40364,Bug,firmware update times out under load,Closed,2 - High,1,AX900\Ethernet Comms,AX900\Sprint 6,Vikas,,2026-10-20,2026-10-21,,Internal test
+40365,Bug,Race condition in safe stop handler,Active,3 - Medium,2,AX900\Ethernet Comms,AX900\Sprint 6,Meera,,2026-10-19,,,Internal test
+40366,User Story,Improve safe stop startup time,Closed,,3,AX900\Safety IO,AX900\Sprint 6,Rohan,1,2026-10-09,2026-10-18,,
+40367,User Story,Expose torque loop status over OPC UA,Closed,,2,AX900\Safety IO,AX900\Sprint 6,Rohan,3,2026-10-06,2026-10-17,,
+40368,User Story,Add diagnostic counter for torque loop,Closed,,2,AX900\Safety IO,AX900\Sprint 6,Rohan,8,2026-10-03,2026-10-16,,
+40369,User Story,Add diagnostic counter for ETH2,Closed,,2,AX900\Safety IO,AX900\Sprint 6,Rohan,3,2026-10-09,2026-10-24,,
+40370,User Story,Expose torque loop status over OPC UA,Closed,,2,AX900\Safety IO,AX900\Sprint 6,Lakshmi,3,2026-10-09,2026-10-17,,
+40371,User Story,Improve trend view startup time,Closed,,3,AX900\Safety IO,AX900\Sprint 6,Lakshmi,3,2026-10-04,2026-10-16,,
+40372,User Story,Refactor PROFINET driver init,Closed,,2,AX900\Safety IO,AX900\Sprint 6,Lakshmi,3,2026-10-08,2026-10-15,,
+40373,User Story,Support new event log config parameter,Closed,,1,AX900\Safety IO,AX900\Sprint 6,Lakshmi,3,2026-10-04,2026-10-21,,
+40374,User Story,Expose safe stop status over OPC UA,Closed,,2,AX900\Safety IO,AX900\Sprint 6,Lakshmi,2,2026-10-06,2026-10-21,,
+40375,Bug,watchdog fails after power cycle,Closed,1 - Critical,1,AX900\Safety IO,AX900\Sprint 6,Rohan,,2026-10-20,2026-10-24,,Internal test
+40376,Bug,Race condition in PROFINET handler,Closed,3 - Medium,2,AX900\Safety IO,AX900\Sprint 6,Lakshmi,,2026-10-14,2026-10-18,,Internal test
+40377,User Story,Log torque loop events to syslog,Closed,,2,AX900\HMI Panel,AX900\Sprint 6,Sanjay,3,2026-10-06,2026-10-24,,
+40378,User Story,Add diagnostic counter for ETH2,Closed,,2,AX900\HMI Panel,AX900\Sprint 6,Imran,5,2026-10-11,2026-10-20,,
+40379,User Story,Refactor PROFINET driver init,Closed,,2,AX900\HMI Panel,AX900\Sprint 6,Divya,8,2026-10-04,2026-10-24,,
+40380,User Story,Validate trend view input range,Closed,,2,AX900\HMI Panel,AX900\Sprint 6,Imran,3,2026-10-02,2026-10-23,,
+40381,User Story,Support new firmware update config parameter,Closed,,1,AX900\HMI Panel,AX900\Sprint 6,Divya,5,2026-10-02,2026-10-20,,
+40382,User Story,Log trend view events to syslog,Active,,1,AX900\HMI Panel,AX900\Sprint 6,Imran,5,2026-10-05,,carried-over,
+40383,User Story,Log alarm list events to syslog,Closed,,1,AX900\HMI Panel,AX900\Sprint 6,Imran,3,2026-10-02,2026-10-22,,
+40384,User Story,Expose safe stop status over OPC UA,Closed,,2,AX900\HMI Panel,AX900\Sprint 6,Imran,2,2026-10-02,2026-10-18,,
+40385,User Story,Refactor ETH2 driver init,Closed,,3,AX900\HMI Panel,AX900\Sprint 6,Divya,1,2026-10-10,2026-10-21,,
+40386,User Story,Improve event log startup time,Closed,,3,AX900\HMI Panel,AX900\Sprint 6,Imran,2,2026-10-08,2026-10-15,,
+40387,Bug,Race condition in firmware update handler,Closed,3 - Medium,2,AX900\HMI Panel,AX900\Sprint 6,Imran,,2026-10-18,2026-10-22,customer-found,Customer site
+40388,Bug,torque loop alarm not cleared,Closed,4 - Low,2,AX900\HMI Panel,AX900\Sprint 6,Imran,,2026-10-24,2026-10-21,customer-found,Customer site
+40389,Bug,trend view alarm not cleared,Active,3 - Medium,2,AX900\HMI Panel,AX900\Sprint 6,Sanjay,,2026-10-16,,customer-found,Customer site
+40390,Bug,Memory leak in torque loop task,Closed,3 - Medium,2,AX900\HMI Panel,AX900\Sprint 6,Divya,,2026-10-17,2026-10-25,,Internal test
+40391,Bug,PROFINET times out under load,Closed,4 - Low,2,AX900\HMI Panel,AX900\Sprint 6,Imran,,2026-10-20,2026-10-23,,Internal test
+40392,Bug,Wrong value shown in trend view screen,Closed,4 - Low,2,AX900\HMI Panel,AX900\Sprint 6,Sanjay,,2026-10-16,2026-10-18,customer-found,Customer site
+40393,Bug,Memory leak in alarm list task,Closed,2 - High,1,AX900\HMI Panel,AX900\Sprint 6,Sanjay,,2026-10-20,2026-10-21,customer-found,Customer site
+40394,Bug,PROFINET alarm not cleared,Active,4 - Low,2,AX900\HMI Panel,AX900\Sprint 6,Sanjay,,2026-10-15,,,Internal test
+40395,User Story,Refactor alarm list driver init,Closed,,1,AX900\Drive Interface,AX900\Sprint 6,Kavya,1,2026-10-03,2026-10-21,,
+40396,User Story,Validate fieldbus input range,Closed,,1,AX900\Drive Interface,AX900\Sprint 6,Pooja,3,2026-10-10,2026-10-17,,
+40397,User Story,Improve alarm list startup time,Closed,,2,AX900\Drive Interface,AX900\Sprint 6,Nikhil,3,2026-10-04,2026-10-19,,
+40398,User Story,Validate PROFINET input range,Active,,2,AX900\Drive Interface,AX900\Sprint 6,Pooja,5,2026-10-10,,carried-over,
+40399,User Story,Refactor safe stop driver init,Closed,,2,AX900\Drive Interface,AX900\Sprint 6,Kavya,5,2026-10-11,2026-10-21,,
+40400,User Story,Add diagnostic counter for ETH2,Closed,,2,AX900\Drive Interface,AX900\Sprint 6,Pooja,8,2026-10-07,2026-10-24,,
+40401,User Story,Support new firmware update config parameter,Closed,,3,AX900\Drive Interface,AX900\Sprint 6,Kavya,1,2026-10-06,2026-10-23,,
+40402,User Story,Support new fieldbus config parameter,Closed,,3,AX900\Drive Interface,AX900\Sprint 6,Pooja,3,2026-10-10,2026-10-19,,
+40403,User Story,Expose trend view status over OPC UA,Closed,,2,AX900\Drive Interface,AX900\Sprint 6,Kavya,5,2026-10-06,2026-10-24,,
+40404,Bug,torque loop alarm not cleared,Closed,4 - Low,2,AX900\Drive Interface,AX900\Sprint 6,Kavya,,2026-10-18,2026-10-18,,Internal test
+40405,Bug,Wrong value shown in ETH2 screen,Closed,2 - High,1,AX900\Drive Interface,AX900\Sprint 6,Nikhil,,2026-10-18,2026-10-20,,Internal test
+40406,Bug,PROFINET alarm not cleared,Closed,3 - Medium,2,AX900\Drive Interface,AX900\Sprint 6,Kavya,,2026-10-16,2026-10-22,,Internal test
