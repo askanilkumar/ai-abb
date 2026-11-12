@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab: The Manager's AI Desk | ABB AI for Leaders</title>
+<style>
+  :root{
+    --red:#ff000f; --ink:#1d1d1f; --muted:#5a5a63; --line:#e3e3e8; --bg:#f6f6f8;
+    --card:#ffffff; --green:#0a7d43; --greenbg:#e8f6ee; --amber:#8a5a00; --amberbg:#fff4dc;
+    --blue:#0b4fa8; --bluebg:#eaf1fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Aptos","Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);background:var(--bg)}
+  header{background:#fff;border-bottom:4px solid var(--red);padding:22px 28px}
+  header h1{margin:0;font-size:32px}
+  header p{margin:6px 0 0;color:var(--muted)}
+  main{max-width:1050px;margin:0 auto;padding:24px 20px 80px}
+  h2{font-size:28px;margin:0 0 6px}
+  h3{font-size:21px;margin:18px 0 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:20px 0}
+  .plain{background:var(--greenbg);color:var(--green);border-left:5px solid var(--green);padding:10px 14px;border-radius:6px;font-weight:600;margin:12px 0}
+  .warn{background:var(--amberbg);color:var(--amber);border-left:5px solid var(--amber);padding:12px 14px;border-radius:6px;margin:12px 0}
+  .tip{background:var(--bluebg);color:var(--blue);border-left:5px solid var(--blue);padding:12px 14px;border-radius:6px;margin:12px 0}
+  .steps{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+  .steps span{background:#fff;border:2px solid var(--ink);border-radius:30px;padding:6px 14px;font-weight:600}
+  table{border-collapse:collapse;width:100%;margin:10px 0}
+  td,th{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#f0f0f3}
+  .box{position:relative;background:#fbfbfc;border:1px dashed #b9b9c3;border-radius:8px;padding:14px 16px;margin:10px 0;white-space:pre-wrap;font-family:Consolas,"Courier New",monospace;font-size:16px}
+  .box .label{display:block;font-family:"Aptos","Segoe UI",Arial,sans-serif;font-weight:700;font-size:15px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+  .prompt{background:#fff7f7;border:1px solid #ffc9cc}
+  button.copy{position:absolute;top:10px;right:10px;background:var(--ink);color:#fff;border:0;border-radius:6px;padding:7px 14px;font-size:15px;cursor:pointer}
+  button.copy.done{background:var(--green)}
+  textarea{width:100%;min-height:90px;font-family:inherit;font-size:17px;padding:10px;border:1px solid #c7c7cf;border-radius:8px}
+  label.chk{display:flex;gap:10px;align-items:center;margin:8px 0;font-weight:600}
+  label.chk input{width:22px;height:22px}
+  nav.toc{display:flex;gap:8px;flex-wrap:wrap}
+  nav.toc a{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);text-decoration:none;font-weight:600}
+  nav.toc a.done{border-color:var(--green);color:var(--green)}
+  .pill{display:inline-block;background:var(--red);color:#fff;border-radius:6px;padding:2px 10px;font-size:15px;font-weight:700;margin-right:8px}
+  .btn{background:var(--red);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-size:17px;font-weight:700;cursor:pointer}
+  details summary{cursor:pointer;font-weight:700;color:var(--blue)}
+  .score{font-size:20px;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lab: The Manager's AI Desk</h1>
+  <p>ABB AI for Leaders · Day 1 · About 40 minutes · No coding, no VM. You only need Abby (or Copilot) in your browser.</p>
+</header>
+<main>
+
+<div class="card">
+  <h2>Why this lab</h2>
+  <p>In the morning poll, most of you said that emails, weekly status reports, Excel analysis and long documents take most of your week. In this lab you will hand three of these tasks to AI, check its work, and leave with prompts you can use from Monday.</p>
+  <div class="plain">In plain words: AI writes the first draft in one minute. You remain the editor and the decision-maker.</div>
+  <h3>By the end of this lab you will be able to:</h3>
+  <ol>
+    <li>Turn rough project notes into a clean weekly status report.</li>
+    <li>Reply to a difficult customer email in the right tone.</li>
+    <li>Summarise a long document for your manager, and catch the mistakes AI makes.</li>
+    <li>Save your best prompts in a personal prompt library.</li>
+  </ol>
+  <div class="warn"><b>Data rule:</b> In this lab, use only the sample data given on this page (Axion Controls is a made-up company). At work, paste ABB data only into tools that ABB has approved, such as Abby. Do not paste confidential data into public AI tools.</div>
+  <nav class="toc">
+    <a href="#t0" id="n0">0. The prompt formula</a>
+    <a href="#t1" id="n1">1. Weekly status report</a>
+    <a href="#t2" id="n2">2. Difficult email</a>
+    <a href="#t3" id="n3">3. Summary + check</a>
+    <a href="#t4" id="n4">4. Bonus: slides</a>
+    <a href="#t5" id="n5">5. My prompt library</a>
+  </nav>
+</div>
+
+<!-- TASK 0 -->
+<div class="card" id="t0">
+  <h2><span class="pill">5 min</span>0. The prompt formula</h2>
+  <p>A good prompt is like a good brief to a new team member. It has five parts. Remember them as <b>R-C-T-F-C</b>.</p>
+  <table>
+    <tr><th>Part</th><th>What you write</th><th>Example</th></tr>
+    <tr><td><b>Role</b></td><td>Who should the AI act as?</td><td>"You are a project manager at ABB."</td></tr>
+    <tr><td><b>Context</b></td><td>What is the situation? Paste the data.</td><td>"Here are my notes from this week…"</td></tr>
+    <tr><td><b>Task</b></td><td>What exactly must it do?</td><td>"Write the weekly status report."</td></tr>
+    <tr><td><b>Format</b></td><td>How should the answer look?</td><td>"A table with Done, Next week, Risks."</td></tr>
+    <tr><td><b>Check</b></td><td>What should it be careful about?</td><td>"Do not invent numbers. Mark anything unclear."</td></tr>
+  </table>
+  <div class="plain">In plain words: vague prompt, vague answer. Clear brief, useful answer.</div>
+  <label class="chk"><input type="checkbox" data-task="0"> I have Abby (or Copilot) open in my browser and I am ready.</label>
+</div>
+
+<!-- TASK 1 -->
+<div class="card" id="t1">
+  <h2><span class="pill">12 min</span>1. Weekly status report from rough notes</h2>
+  <p>You manage the <b>Axion Controls – Plant Monitoring Upgrade</b> project. It is Friday evening. Your notes from the week are messy. Your manager wants the status report by 6 pm.</p>
+  <div class="steps"><span>1. Predict</span><span>2. Run</span><span>3. Improve</span><span>4. Check</span><span>5. Save</span></div>
+
+  <h3>Step 1 – Predict</h3>
+  <p>Before you run it: do you think the AI will spot the biggest risk in these notes? Write your guess in one line.</p>
+  <textarea data-save="t1-predict" placeholder="My guess…"></textarea>
+
+  <h3>Step 2 – Run this prompt</h3>
+  <div class="box prompt"><span class="label">Prompt 1A · copy into Abby</span><button class="copy">Copy</button>You are a project manager at an industrial automation company.
+Below are my rough notes from this week on the "Plant Monitoring Upgrade" project for our customer Axion Controls.
+
+Write a weekly status report for my manager with these sections:
+1. Overall status (Green / Amber / Red) with a one-line reason
+2. Done this week
+3. Plan for next week
+4. Risks and issues (with an owner for each)
+5. Help needed from management
+
+Keep it under 200 words. Use simple English.
+Do not invent any numbers or dates. If something is unclear, write "TO CONFIRM".
+
+My notes:
+- dashboard v2 demo done on tue, customer happy mostly, wants alarm colours changed
+- 3 of 8 site gateways installed (Pune, Nashik, Aurangabad). remaining 5 slipped – vendor shipment stuck in customs
+- QA found 14 bugs in data sync, 9 fixed, 2 are critical (data loss when network drops)
+- Ravi on leave next week, nobody else knows gateway config
+- customer asking for go-live 15 Dec, our plan said 20 Dec
+- budget ok so far, ~62% spent
+- security review not yet started, needed before go-live</div>
+
+  <h3>Step 3 – Improve (pick one)</h3>
+  <div class="box prompt"><span class="label">Prompt 1B · follow-up</span><button class="copy">Copy</button>Now rewrite this as a 4-line message I can post in a Teams chat to the steering committee. Start with the overall status colour.</div>
+  <div class="box prompt"><span class="label">Prompt 1C · follow-up</span><button class="copy">Copy</button>Act as a strict programme director. Read this report and tell me the 3 questions you would ask me in the review meeting.</div>
+
+  <h3>Step 4 – Check</h3>
+  <label class="chk"><input type="checkbox"> Did it mark the status Amber or Red? (Critical bugs + gateway delay + date mismatch = not Green.)</label>
+  <label class="chk"><input type="checkbox"> Did it flag the risk of Ravi being the only person who knows the gateway configuration?</label>
+  <label class="chk"><input type="checkbox"> Did it flag that the security review has not started?</label>
+  <label class="chk"><input type="checkbox"> Did it keep 62% and 15 Dec / 20 Dec exactly as given, without inventing new numbers?</label>
+  <details><summary>Reveal: what a good answer contains</summary>
+    <p>Status <b>Amber</b> (or Red). Top risks: 5 gateways stuck in customs; 2 critical data-loss bugs; single-person dependency on Ravi; security review not started; customer wants 15 Dec but plan is 20 Dec. Help needed: decision on the go-live date and support to clear the customs delay. If the AI said "Green", your prompt needs a stronger Check line.</p>
+  </details>
+
+  <h3>Step 5 – Decide</h3>
+  <p>Would you send this report after a 2-minute edit? What did you have to fix?</p>
+  <textarea data-save="t1-decide" placeholder="Yes / No, because…"></textarea>
+  <label class="chk"><input type="checkbox" data-task="1"> Task 1 done</label>
+</div>
+
+<!-- TASK 2 -->
+<div class="card" id="t2">
+  <h2><span class="pill">8 min</span>2. Reply to a difficult customer email</h2>
+  <p>The customer has just seen the go-live date in your report. They are not happy.</p>
+  <div class="box"><span class="label">Customer email (sample)</span><button class="copy">Copy</button>From: Meera Joshi, Head of Operations, Axion Controls
+Subject: Go-live date – not acceptable
+
+Hi,
+We were promised the monitoring system before our December maintenance shutdown. Now I hear the gateways are delayed and there are data loss bugs. This is the second delay this year. I need a clear answer by Monday on whether 15 Dec is possible, otherwise I will have to escalate to your leadership.
+Meera</div>
+
+  <div class="box prompt"><span class="label">Prompt 2A · copy into Abby</span><button class="copy">Copy</button>You are a senior project manager. Write a reply to the customer email below.
+
+Tone: calm, respectful, honest. Do not over-promise. Do not blame the vendor by name.
+Include:
+- Acknowledge her concern in one line
+- What we know today (5 of 8 gateways delayed in customs, 2 critical bugs being fixed)
+- What we are doing about it
+- A clear commitment: we will confirm whether 15 Dec is possible by Monday 5 pm
+- Offer a 30-minute call
+Keep it under 150 words.
+
+Customer email:
+[paste the email here]</div>
+
+  <div class="box prompt"><span class="label">Prompt 2B · try a different tone</span><button class="copy">Copy</button>Make it shorter and warmer, suitable for a customer I have a good long-term relationship with. Keep the Monday 5 pm commitment.</div>
+
+  <label class="chk"><input type="checkbox"> The reply does not promise 15 Dec.</label>
+  <label class="chk"><input type="checkbox"> It gives one clear next step with a date.</label>
+  <div class="tip">Copilot (M365 licence) users: you can do the same directly in Outlook with "Draft with Copilot", and add the same instructions.</div>
+  <label class="chk"><input type="checkbox" data-task="2"> Task 2 done</label>
+</div>
+
+<!-- TASK 3 -->
+<div class="card" id="t3">
+  <h2><span class="pill">12 min</span>3. Summarise a long document – and catch the mistakes</h2>
+  <p>Your director forwarded a long release review note and asked: "Can we release or not?" You have 5 minutes.</p>
+  <div class="box"><span class="label">Release review note (sample)</span><button class="copy">Copy</button>RELEASE REVIEW – Plant Monitoring Suite v2.3 – Axion Controls
+
+1. Scope: v2.3 adds alarm colour themes, a new trend chart, and offline buffering for site gateways. Offline buffering was requested by the customer after two data-loss incidents in Q3.
+2. Testing: 412 test cases were executed. 398 passed, 11 failed, 3 were blocked because the test gateway was unavailable. Of the 11 failures, 2 are rated critical: (a) when network drops for more than 90 seconds, buffered data older than 60 seconds is lost; (b) after a gateway restart, the trend chart shows duplicate points. The remaining 9 failures are cosmetic.
+3. Performance: dashboard load time improved from 4.1 s to 2.6 s. Memory use on the gateway rose by 18%, which is within the 25% limit.
+4. Security: static code scan completed with no high findings. The penetration test is scheduled for 2 December and has not been done.
+5. Documentation: user guide updated; operator training material pending.
+6. Recommendation from QA lead: do not release to production until critical defect (a) is fixed, because it breaks the main purpose of this release. A controlled pilot at one site (Pune) is acceptable if the customer agrees in writing.
+7. Customer expectation: go-live before the December maintenance shutdown.</div>
+
+  <div class="box prompt"><span class="label">Prompt 3A · copy into Abby</span><button class="copy">Copy</button>You are an advisor to an engineering director who has 2 minutes.
+Summarise the release review note below in exactly 5 bullet points, then give a one-line recommendation: Release / Pilot only / Do not release.
+Quote the exact numbers from the note. Do not add any information that is not in the note.
+At the end, list anything the note says is still pending.
+
+Note:
+[paste the note here]</div>
+
+  <h3>Now check the AI like a reviewer</h3>
+  <p>AI summaries often sound right but drop or change one key fact. Tick only what is true in <b>your</b> AI answer:</p>
+  <label class="chk"><input type="checkbox" class="q3" data-ok="1"> It said 398 of 412 tests passed (not "all tests passed" or a rounded %).</label>
+  <label class="chk"><input type="checkbox" class="q3" data-ok="1"> It mentioned the data-loss defect (a) as the main blocker.</label>
+  <label class="chk"><input type="checkbox" class="q3" data-ok="1"> It said the penetration test is still pending (2 December).</label>
+  <label class="chk"><input type="checkbox" class="q3" data-ok="1"> It recommended "Pilot only" or "Do not release" – not "Release".</label>
+  <label class="chk"><input type="checkbox" class="q3" data-ok="1"> It did not invent anything (no new dates, names or numbers).</label>
+  <p class="score" id="q3score">Your AI scored 0 / 5</p>
+  <div class="box prompt"><span class="label">Prompt 3B · make the AI check itself</span><button class="copy">Copy</button>Check your summary against the original note line by line. List any number, fact or recommendation that you changed, missed or added. Then give a corrected summary.</div>
+  <div class="plain">In plain words: never forward an AI summary on a go / no-go decision without checking the numbers. Asking the AI to check itself (Prompt 3B) catches most slips.</div>
+  <label class="chk"><input type="checkbox" data-task="3"> Task 3 done</label>
+</div>
+
+<!-- TASK 4 -->
+<div class="card" id="t4">
+  <h2><span class="pill">Bonus</span>4. From report to slides</h2>
+  <p>If you finish early, turn your status report into a short steering-committee deck.</p>
+  <div class="box prompt"><span class="label">Prompt 4A · copy into Abby</span><button class="copy">Copy</button>Turn the weekly status report above into a 4-slide steering committee deck.
+For each slide give: a title (max 8 words), 3 bullet points (max 12 words each), and a one-line speaker note.
+Slide 1: Overall status. Slide 2: Progress. Slide 3: Risks and decisions needed. Slide 4: Next steps.</div>
+  <div class="tip">Copilot (M365 licence) users: open PowerPoint → Copilot → "Create a presentation from…" and paste this outline. Abby users: copy the outline into your ABB template.</div>
+  <label class="chk"><input type="checkbox" data-task="4"> Bonus done</label>
+</div>
+
+<!-- TASK 5 -->
+<div class="card" id="t5">
+  <h2><span class="pill">5 min</span>5. My prompt library – take this home</h2>
+  <p>Think of the top 3 tasks you typed in the morning poll. Write one prompt for each, using R-C-T-F-C. Save them in Abby as personal prompts, so you can reuse them from Monday.</p>
+  <h3>My task 1</h3>
+  <textarea data-save="lib1" placeholder="Role… Context… Task… Format… Check…"></textarea>
+  <h3>My task 2</h3>
+  <textarea data-save="lib2" placeholder="Role… Context… Task… Format… Check…"></textarea>
+  <h3>My task 3</h3>
+  <textarea data-save="lib3" placeholder="Role… Context… Task… Format… Check…"></textarea>
+  <p><button class="btn" id="copyLib">Copy my prompt library</button> <span id="libMsg"></span></p>
+  <h3>Look back</h3>
+  <table>
+    <tr><th>Task</th><th>Time it takes you today</th><th>With AI (draft + your check)</th></tr>
+    <tr><td>Weekly status report</td><td>45–60 min</td><td>about 10 min</td></tr>
+    <tr><td>Difficult customer email</td><td>20–30 min</td><td>about 5 min</td></tr>
+    <tr><td>Summarise a long document</td><td>30 min</td><td>about 5 min + checking</td></tr>
+  </table>
+  <div class="plain">In plain words: AI gives you the first draft. Your judgement – the status colour, the promise to the customer, the go / no-go – is still yours.</div>
+  <label class="chk"><input type="checkbox" data-task="5"> Prompt library saved</label>
+</div>
+
+</main>
+<script>
+(function(){
+  var store = {
+    get:function(k){try{return localStorage.getItem('abbdesk_'+k);}catch(e){return null;}},
+    set:function(k,v){try{localStorage.setItem('abbdesk_'+k,v);}catch(e){}}
+  };
+  // copy buttons
+  document.querySelectorAll('button.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var box=b.parentElement.cloneNode(true);
+      box.querySelectorAll('.label,button').forEach(function(x){x.remove();});
+      var text=box.textContent.trim();
+      var done=function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent='Copy';b.classList.remove('done');},1500);};
+      if(navigator.clipboard){navigator.clipboard.writeText(text).then(done,function(){fallback(text);done();});}
+      else{fallback(text);done();}
+    });
+  });
+  function fallback(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
+  // saved text
+  document.querySelectorAll('textarea[data-save]').forEach(function(t){
+    var k=t.getAttribute('data-save'); var v=store.get(k); if(v) t.value=v;
+    t.addEventListener('input',function(){store.set(k,t.value);});
+  });
+  // task progress
+  document.querySelectorAll('input[data-task]').forEach(function(c){
+    var k='task'+c.getAttribute('data-task');
+    var link=document.getElementById('n'+c.getAttribute('data-task'));
+    if(store.get(k)==='1'){c.checked=true; if(link) link.classList.add('done');}
+    c.addEventListener('change',function(){store.set(k,c.checked?'1':'0'); if(link) link.classList.toggle('done',c.checked);});
+  });
+  // task 3 score
+  function score(){var n=document.querySelectorAll('.q3:checked').length;document.getElementById('q3score').textContent='Your AI scored '+n+' / 5'+(n<5?' – run Prompt 3B to fix it.':' – well checked!');}
+  document.querySelectorAll('.q3').forEach(function(c){c.addEventListener('change',score);});
+  // copy library
+  document.getElementById('copyLib').addEventListener('click',function(){
+    var out=['lib1','lib2','lib3'].map(function(k,i){var t=document.querySelector('[data-save="'+k+'"]').value.trim();return t?('PROMPT '+(i+1)+':\n'+t):'';}).filter(Boolean).join('\n\n');
+    if(!out){document.getElementById('libMsg').textContent='Write at least one prompt first.';return;}
+    if(navigator.clipboard){navigator.clipboard.writeText(out).catch(function(){fallback(out);});}else{fallback(out);}
+    document.getElementById('libMsg').textContent='Copied. Paste it into Abby → personal prompts, or into an email to yourself.';
+  });
+})();
+</script>
+</body>
+</html>
