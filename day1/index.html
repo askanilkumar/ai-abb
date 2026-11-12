@@ -115,6 +115,29 @@
     border-left:4px solid var(--green); font-size:.94rem; max-width:66ch}
   .q-item.answered .expl{display:block}
 
+  /* experience layer: rhythm strip, predict, challenge, decision card, memo */
+  .rhythm{display:flex; flex-wrap:wrap; gap:0; margin:4px 0 16px; border:2px solid var(--ink); border-radius:3px; overflow:hidden; background:#fff}
+  .rhythm div{flex:1 1 120px; padding:7px 10px; border-right:1.5px solid var(--line); font-size:.9rem}
+  .rhythm div:last-child{border-right:none}
+  .rhythm b{display:block; font-family:'Saira Condensed'; font-size:1.08rem}
+  .rhythm span{color:var(--ink-soft)}
+  .predict{background:var(--ink); color:#F2F3F2; border-radius:3px; padding:12px 16px; margin:0 0 16px; max-width:76ch}
+  .predict b{color:#FFD34D}
+  .predict ol{margin:6px 0 0 22px}
+  .challenge{background:#fff; border:2px solid var(--amber-deep); border-left-width:8px; border-radius:3px; padding:12px 16px; margin:12px 0 16px; max-width:76ch}
+  .challenge h4{font-size:1.25rem; color:var(--amber-deep); margin-bottom:4px}
+  .challenge ul{margin:6px 0 4px 22px}
+  .challenge li{margin-bottom:4px}
+  .decide{background:var(--panel); border:2px solid var(--ink); border-radius:3px; padding:12px 16px; margin:12px 0 16px; max-width:76ch}
+  .decide b{color:var(--amber-deep)}
+  .decide textarea, .memo textarea{display:block; width:100%; margin:8px 0 2px; padding:8px 10px; font:inherit; font-size:.95rem;
+    border:1.5px solid var(--line); border-radius:3px; resize:vertical; background:#fff}
+  .gonogo{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
+  .gonogo button{font:inherit; font-weight:600; padding:7px 16px; border:2px solid var(--ink); border-radius:3px; background:#fff; cursor:pointer}
+  .gonogo button.on{background:var(--amber)}
+  .memo{background:#fff; border:2px solid var(--ink); border-radius:4px; padding:20px; margin:22px 0; max-width:76ch}
+  .memo textarea{font-family:ui-monospace,Consolas,monospace; font-size:.88rem; min-height:220px}
+
   footer{margin-top:52px; border-top:2px solid var(--ink); background:var(--ink); color:#E8EAE8}
   footer .wrap{padding:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; font-size:.95rem}
   footer b{color:#fff}
@@ -142,6 +165,7 @@
 
 <nav class="flow" aria-label="Day flow">
   <div class="wrap">
+    <a href="flow.html">Day flow ↗</a>
     <a href="#start">Start</a>
     <a href="#m1">M1 Tiers</a>
     <a href="#lab1" class="labstep">Lab 1</a>
@@ -205,11 +229,28 @@
     <li>Take the seat card with your name: VM name, link, username, password.</li>
     <li>Open the link in your browser — it is an <strong>azure.com</strong> address and opens a full Windows
         desktop in the tab. No install, no VPN, no Azure account, nothing on your ABB laptop.</li>
-    <li>On the desktop, open <strong>VS Code</strong> → folder <strong>Documents\abb-ai-engineering</strong>.
+    <li>On the desktop, open <strong>VS Code</strong> → folder <strong>C:\ai-abb\day1</strong>.
         All four lab notebooks are in <code>labs/</code>; model endpoints are pre-configured.</li>
   </ol>
   <p class="muted">Three ground rules for the day: hands on, not hands up (ask your pair partner first) ·
   numbers, not impressions · everything here is fictional.</p>
+
+  <h3 style="font-size:1.5rem; margin:18px 0 6px">Your role today: Axion's AI steering committee</h3>
+  <div class="note"><strong>Axion's CEO has one question for this room, due at 17:00:</strong><br>
+  <em>"Do we ship the service-knowledge assistant to our field engineers, and on what terms?"</em><br>
+  Every lab today produces one piece of <strong>evidence</strong> for that decision. You know plants and
+  products better than any model does; today you learn how to make AI trustworthy on top of what you know.
+  At the close, each table gives a two-minute <strong>GO / NO-GO</strong> with its own numbers.</div>
+  <p><strong>Every lab runs the same five steps</strong>, so you always know what comes next:</p>
+  <div class="rhythm" aria-label="The lab rhythm">
+    <div><b>1 · Predict</b><span>Vote on AhaSlides before you run anything</span></div>
+    <div><b>2 · Run</b><span>Run the notebook, read the numbers</span></div>
+    <div><b>3 · Challenge</b><span>A pair contest; the room compares results</span></div>
+    <div><b>4 · Reveal</b><span>Your prediction vs the real numbers</span></div>
+    <div><b>5 · Decide</b><span>One sentence on your decision card</span></div>
+  </div>
+  <p><strong>Work in pairs, two roles.</strong> The <strong>Driver</strong> runs the VM. The
+  <strong>Decision-maker</strong> reads the numbers and writes the decision card. Swap roles every lab.</p>
 </section>
 
 <!-- ======================================================= M1 -->
@@ -260,6 +301,8 @@
     <div class="labbody">
       <p><strong>Goal:</strong> prove your environment works, then call two very different models on the same
       Axion field report and put numbers on the difference.</p>
+      <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>15 min</span></div><div><b>3 · Challenge</b><span>17 min</span></div><div><b>4 · Reveal</b><span>10 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
+      <div class="predict"><b>1 · Predict first (AhaSlides):</b> A VectorDrive 450 keeps tripping F-07 overtemp. The frontier model costs about 7× the mini model. What happens?<ol type="A"><li>The frontier model finds the real fix; the mini model doesn't</li><li>Both find the same fix; the frontier model just writes better</li><li>Neither finds the real fix</li></ol></div>
       <ol class="c">
         <li>Open the Bastion link from your seat card → Windows desktop → VS Code → the Lab 1 notebook.</li>
         <li>Run the cells top to bottom (<em>Run All</em> works). First call = environment proven.</li>
@@ -273,7 +316,16 @@
         <textarea rows="2" placeholder="LAB1|mini_per_1k=...|frontier_per_1k=..."></textarea>
         <button class="btn check" type="button">Check</button><span class="verdict"></span>
       </div>
-      <p class="muted">Done early? Set temperature to 0.9, run twice, watch the answers differ — then decide which of your use cases could tolerate that.</p>
+      <div class="challenge"><h4>3 · Challenge: your own question, both models</h4>
+        <ul>
+          <li>In cell 1.2, replace the field report with a question <strong>your own team</strong> would really ask.</li>
+          <li>Run it on both models. Did the expensive model change the <em>decision</em>, or only the wording?</li>
+          <li>Post to AhaSlides: <strong>your question in five words + "worth 7×: yes / no"</strong>. The room tally is the reveal.</li>
+        </ul>
+        <p class="muted" style="margin:4px 0 0">Done early? Set temperature to 0.9, run twice and watch the answers differ. Which of your use cases could tolerate that?</p>
+      </div>
+      <div class="decide"><b>5 · Decision card 1:</b> Our model-routing rule: <em>we pay for the expensive model only when…</em>
+        <textarea rows="2" data-card="1" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
   <p class="muted">☕ Break 10:45 – 11:00. Every VM proven working before it.</p>
@@ -295,7 +347,7 @@
     </div>
 
     <div class="q-item">
-      <p class="qt">2. In Lab 1 the frontier model cost roughly 15–20× the mini model. When is that premium worth paying?</p>
+      <p class="qt">2. In Lab 1 the frontier model cost roughly 7× the mini model. When is that premium worth paying?</p>
       <button class="opt" data-ok="0">Always — quality first</button>
       <button class="opt" data-ok="0">Never — cost first</button>
       <button class="opt" data-ok="1">When the measured answer changes a decision the cheap model gets wrong</button>
@@ -325,7 +377,7 @@
       <tr><td><strong>Structured output</strong></td><td>Demand JSON against a schema, not prose</td><td>Parseable, testable, pipeline-ready — and shorter outputs cost less</td></tr>
       <tr><td><strong>Context engineering</strong></td><td>Supply the reference facts the task needs, nothing more</td><td>Facts in context beat facts hoped-for in training; extra context is paid noise</td></tr>
       <tr><td><strong>Cache-friendly design</strong></td><td>Stable system prompt, variable part last</td><td>Providers price cached input tokens at a fraction — but only identical, stable prefixes cache</td></tr>
-      <tr><td><strong>Model-appropriate scaffolding</strong></td><td>Mini models need rules and examples; frontier models need less</td><td>Scaffolding is what makes the 20×-cheaper model usable — it's where routing savings come from</td></tr>
+      <tr><td><strong>Model-appropriate scaffolding</strong></td><td>Mini models need rules and examples; frontier models need less</td><td>Scaffolding is what makes the ~7×-cheaper model usable — it's where routing savings come from</td></tr>
     </tbody>
   </table>
   <div class="note"><strong>The anti-pattern to ban:</strong> the "kitchen sink" prompt — 300 words of
@@ -343,6 +395,8 @@
     <div class="labbody">
       <p><strong>Goal:</strong> one real task — classify Axion service tickets — four prompt designs,
       scored for quality and cost. Find out which design your team should standardise on.</p>
+      <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>12 min</span></div><div><b>3 · Challenge</b><span>25 min</span></div><div><b>4 · Reveal</b><span>15 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
+      <div class="predict"><b>1 · Predict first (AhaSlides):</b> Four prompts do the same job. Which one wins on quality?<ol type="A"><li>V1 · one line, no rules</li><li>V2 · 300-word "kitchen sink" covering every case</li><li>V3 · a few worked examples</li><li>V4 · short, with a strict output schema</li></ol></div>
       <ol class="c">
         <li>Run the bake-off: V1 naive · V2 kitchen sink · V3 few-shot · V4 structured schema. 20 calls, one table.</li>
         <li>Read the table like a manager: quality %, cost per 100k tickets.</li>
@@ -356,7 +410,17 @@
         <textarea rows="2" placeholder="LAB2|best=V4|quality=...|cost_100k=..."></textarea>
         <button class="btn check" type="button">Check</button><span class="verdict"></span>
       </div>
-      <p class="muted">Done early? Run V4 on the frontier model — is it worth 15–20× the price <em>for this task</em>?</p>
+      <div class="challenge"><h4>3 · Challenge: beat V4 (pair leaderboard)</h4>
+        <ul>
+          <li>Edit the V4 prompt in the ✏️ cell and re-run the bake-off. Two ways to win:
+            <strong>higher quality</strong> than V4, or <strong>lower cost per 100k</strong> without losing quality.</li>
+          <li>Post <strong>quality % + cost per 100k</strong> to the AhaSlides leaderboard. Best pair wins.</li>
+          <li>Whatever wins becomes the room's prompt-library entry.</li>
+        </ul>
+        <p class="muted" style="margin:4px 0 0">Done early? Run V4 on the frontier model. Is it worth ~7× the price <em>for this task</em>?</p>
+      </div>
+      <div class="decide"><b>5 · Decision card 2:</b> The prompt standard I'll ask my team for: <em>before a prompt goes live, it must…</em>
+        <textarea rows="2" data-card="2" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
   <p class="muted">🍽 Lunch 12:30 – 13:15.</p>
@@ -427,6 +491,8 @@
     <div class="labbody">
       <p><strong>Goal:</strong> build the Axion service-knowledge assistant end to end — ingest 14 documents,
       chunk, embed, retrieve, answer with citations. Then break it on purpose, three ways.</p>
+      <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>15 min</span></div><div><b>3 · Challenge</b><span>22 min</span></div><div><b>4 · Reveal</b><span>15 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
+      <div class="predict"><b>1 · Predict first (AhaSlides):</b> Same cheap mini model as this morning, now given Axion's 14 documents. Ask the F-07 question again. What happens?<ol type="A"><li>Still guesses "cooling or the fan"</li><li>Names the bulletin and the firmware fix, with the source</li><li>Needs the frontier model to get it right</li></ol></div>
       <ol class="c">
         <li>Ingest the corpus and chunk it (start at 1,200 characters).</li>
         <li>Embed all chunks, build the index — note this is the <em>only</em> indexing cost.</li>
@@ -441,7 +507,18 @@
         <textarea rows="2" placeholder="LAB3|tokens_tuned=...|tokens_big=..."></textarea>
         <button class="btn check" type="button">Check</button><span class="verdict"></span>
       </div>
-      <p class="muted">Done early? Change the chunk size to 400 and see what breaks next.</p>
+      <div class="challenge"><h4>3 · Challenge: predict, then break</h4>
+        <ul>
+          <li>The trainer gives each pair one dial:
+            <strong>A</strong> chunk size 400 · <strong>B</strong> k = 10 ·
+            <strong>C</strong> delete the "answer only from the context" rule ·
+            <strong>D</strong> ask a question the documents cannot answer.</li>
+          <li><strong>Write your prediction first</strong> (quality? tokens? honesty?), then run it.</li>
+          <li>Report to the room in one line: <em>"We predicted ___, we got ___."</em></li>
+        </ul>
+      </div>
+      <div class="decide"><b>5 · Decision card 3:</b> When an AI pilot in my team disappoints, the first three things I'll ask them to check are…
+        <textarea rows="2" data-card="3" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
   <p class="muted">☕ Break 14:45 – 15:00.</p>
@@ -511,6 +588,8 @@
     <div class="labbody">
       <p><strong>Goal:</strong> add guardrails to your Lab 3 assistant, score it against an eval set,
       improve one thing, and prove the score moved.</p>
+      <div class="rhythm"><div><b>1 · Predict</b><span>3 min</span></div><div><b>2 · Run</b><span>12 min</span></div><div><b>3 · Challenge</b><span>20 min</span></div><div><b>4 · Reveal</b><span>10 min</span></div><div><b>5 · Decide</b><span>5 min</span></div></div>
+      <div class="predict"><b>1 · Predict first (AhaSlides):</b> Lab 4 adds a groundedness check run by the cheap mini model. It reads a fluent but invented answer: "replace the PSU to fix F-07". Will it catch it?<ol type="A"><li>No, fluent answers fool small models</li><li>Only the frontier model could catch it</li><li>Yes, it flags the claim as not supported by the documents</li></ol></div>
       <ol class="c">
         <li>Reload the Lab 3 index (saved automatically).</li>
         <li>Input guardrail: watch it pass real questions and bounce injection and off-topic ones.</li>
@@ -525,6 +604,17 @@
         <textarea rows="2" placeholder="LAB4|baseline=...|improved=..."></textarea>
         <button class="btn check" type="button">Check</button><span class="verdict"></span>
       </div>
+      <div class="challenge"><h4>3 · Challenge: red-team the guardrail</h4>
+        <ul>
+          <li>In cell 4.2, try to get a question <strong>past</strong> the input guardrail that it should block:
+            an injection, an off-topic request, anything sneaky.</li>
+          <li>First pair to show a successful bypass on their screen wins. Then the room asks:
+            <em>what would have caught it?</em></li>
+          <li>Then each of you adds <strong>two eval questions</strong> in the messy wording your help desk really gets.</li>
+        </ul>
+      </div>
+      <div class="decide"><b>5 · Decision card 4:</b> Before any AI feature ships in my team, it must…
+        <textarea rows="2" data-card="4" placeholder="Write one sentence you would say to your team on Monday."></textarea></div>
     </div>
   </div>
 </section>
@@ -606,6 +696,21 @@
   under study: measure its real cost per query, cut the bill without moving your eval score, run a real workload
   through the CRA checklist, build your 30→80% plan. <strong>Bring your baseline eval score.</strong></div>
 
+  <div class="memo" id="memo">
+    <h3 style="font-size:1.6rem">Steering committee: your GO / NO-GO</h3>
+    <p>Ship the Axion service-knowledge assistant to field engineers?</p>
+    <div class="gonogo" role="group" aria-label="Go or no-go">
+      <button type="button" data-v="GO">GO</button>
+      <button type="button" data-v="GO WITH CONDITIONS">GO WITH CONDITIONS</button>
+      <button type="button" data-v="NO-GO">NO-GO</button>
+    </div>
+    <textarea rows="2" id="conditions" style="min-height:0" placeholder="Your conditions or reasons, in one or two lines."></textarea>
+    <h4 style="font-size:1.25rem; margin:14px 0 2px">Your Monday memo</h4>
+    <p class="muted" style="margin-bottom:0">Builds itself from your decision cards and lab numbers. Copy it, keep it, send it to your team.</p>
+    <textarea id="memotxt" readonly aria-label="Monday memo"></textarea>
+    <button class="btn" id="copymemo" type="button">Copy my Monday memo</button>
+  </div>
+
   <div class="summary" id="result">
     <h3 style="font-size:1.6rem">Your Day 1 result</h3>
     <div class="big" id="bigscore">0 / 16</div>
@@ -614,7 +719,7 @@
     <button class="btn" id="copyres" type="button">Copy my result</button>
     <button class="btn ghost" id="resetpage" type="button">Reset this page</button>
     <p class="muted" style="margin-top:8px">Paste the copied text into the AhaSlides board when the trainer asks.
-    Works offline — nothing on this page is sent anywhere; checks run in your browser.</p>
+    Works offline — nothing on this page is sent anywhere; your answers stay in this browser only.</p>
   </div>
 </section>
 
@@ -628,9 +733,27 @@
 </footer>
 
 <script>
-  // Everything runs in the browser. Nothing is stored or sent anywhere.
+  // Everything runs in the browser. Nothing is sent anywhere; progress is kept in this browser only.
+  var KEY = 'abb-day1-v2';
   var state = { quizRight: 0, quizDone: 0, labs: {1:false, 2:false, 3:false, 4:false},
                 labLines: {} };
+  var saved = { quiz: {}, paste: {}, cards: {}, go: '', cond: '' };
+  try { var s = localStorage.getItem(KEY); if (s) saved = Object.assign(saved, JSON.parse(s)); } catch(e){}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){} }
+
+  var CARD_TITLES = {1:'Model routing', 2:'Prompt standard', 3:'When a pilot disappoints', 4:'Before anything ships'};
+  function memo(){
+    var L = ['MONDAY MEMO - AI Engineering for Managers, Day 1', ''];
+    L.push('Steering committee decision: ' + (saved.go || '(not decided yet)'));
+    if (saved.cond) L.push('Conditions / reasons: ' + saved.cond);
+    L.push('');
+    [1,2,3,4].forEach(function(n){
+      L.push(n + '. ' + CARD_TITLES[n] + ': ' + (saved.cards[n] || '(empty)'));
+      if (state.labLines[n]) L.push('   Evidence: ' + state.labLines[n]);
+    });
+    L.push('', 'Rule I take home: no eval set, no deployment.');
+    var m = document.getElementById('memotxt'); if (m) m.value = L.join('\n');
+  }
 
   function refresh(){
     var labsOk = Object.values(state.labs).filter(Boolean).length;
@@ -642,13 +765,15 @@
                  'Score: ' + total + '/16 (labs ' + labsOk + '/4, quiz ' + state.quizRight + '/12)'];
     [1,2,3,4].forEach(function(n){ if(state.labLines[n]) lines.push(state.labLines[n]); });
     document.getElementById('sumtxt').value = lines.join('\n');
+    memo();
   }
 
   // --- Quiz: click an option → mark right/wrong, reveal explanation, count score.
-  document.querySelectorAll('.q-item').forEach(function(item){
-    item.querySelectorAll('button.opt').forEach(function(btn){
+  document.querySelectorAll('.q-item').forEach(function(item, qi){
+    item.querySelectorAll('button.opt').forEach(function(btn, oi){
       btn.addEventListener('click', function(){
         if(item.classList.contains('answered')) return;
+        saved.quiz[qi] = oi; save();
         item.classList.add('answered');
         state.quizDone++;
         if(btn.dataset.ok === '1'){ btn.classList.add('correct'); state.quizRight++; }
@@ -692,6 +817,7 @@
       var t = box.querySelector('textarea').value.trim();
       var v = box.querySelector('.verdict');
       var res = validators[n](t);
+      saved.paste[n] = t; save();
       if(res === true){
         state.labs[n] = true; state.labLines[n] = t.split('\n').pop();
         v.textContent = '✔ Checked'; v.className = 'verdict ok';
@@ -708,7 +834,53 @@
     try{ navigator.clipboard.writeText(ta.value); }catch(e){ document.execCommand('copy'); }
     this.textContent = 'Copied ✔'; var b=this; setTimeout(function(){ b.textContent='Copy my result'; }, 1500);
   });
-  document.getElementById('resetpage').addEventListener('click', function(){ location.reload(); });
+  document.getElementById('resetpage').addEventListener('click', function(){
+    if (!confirmReset()) return;
+    try { localStorage.removeItem(KEY); } catch(e){}
+    location.reload();
+  });
+  function confirmReset(){
+    var b = document.getElementById('resetpage');
+    if (b.dataset.armed === '1') return true;
+    b.dataset.armed = '1'; b.textContent = 'Click again to erase everything';
+    setTimeout(function(){ b.dataset.armed = ''; b.textContent = 'Reset this page'; }, 3000);
+    return false;
+  }
+
+  // Decision cards
+  document.querySelectorAll('textarea[data-card]').forEach(function(ta){
+    var n = ta.dataset.card;
+    if (saved.cards[n]) ta.value = saved.cards[n];
+    ta.addEventListener('input', function(){ saved.cards[n] = ta.value.trim(); save(); memo(); });
+  });
+  // Go / no-go
+  var goBtns = document.querySelectorAll('.gonogo button');
+  function paintGo(){ goBtns.forEach(function(b){ b.classList.toggle('on', b.dataset.v === saved.go); }); }
+  goBtns.forEach(function(b){ b.addEventListener('click', function(){ saved.go = b.dataset.v; save(); paintGo(); memo(); }); });
+  var cond = document.getElementById('conditions');
+  cond.value = saved.cond || '';
+  cond.addEventListener('input', function(){ saved.cond = cond.value.trim(); save(); memo(); });
+  paintGo();
+  document.getElementById('copymemo').addEventListener('click', function(){
+    var ta = document.getElementById('memotxt'); ta.select();
+    try{ navigator.clipboard.writeText(ta.value); }catch(e){ document.execCommand('copy'); }
+    this.textContent = 'Copied ✔'; var b=this; setTimeout(function(){ b.textContent='Copy my Monday memo'; }, 1500);
+  });
+
+  // Restore quiz answers and pasted lines after a refresh
+  var items = document.querySelectorAll('.q-item');
+  Object.keys(saved.quiz).forEach(function(qi){
+    var item = items[qi]; if (!item) return;
+    var btn = item.querySelectorAll('button.opt')[saved.quiz[qi]];
+    var keep = saved.quiz[qi];
+    if (btn) { btn.click(); }
+    saved.quiz[qi] = keep;
+  });
+  document.querySelectorAll('.paste').forEach(function(box){
+    var n = +box.dataset.lab;
+    if (saved.paste[n]) { box.querySelector('textarea').value = saved.paste[n]; box.querySelector('button.check').click(); }
+  });
+  save();
 
   refresh();
 </script>

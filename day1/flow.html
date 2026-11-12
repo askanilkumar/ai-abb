@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 — The flow of the day</title>
+<style>
+  :root{--ink:#22262A;--soft:#4A5157;--paper:#FAFBFA;--panel:#EDEFED;--amber:#E8A200;--deep:#B37E00;--pale:#FFF8E8;--green:#2F7D4F;--red:#B3432B;--line:#C6CBC6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Aptos,'Segoe UI',system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.5}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  .hazard{height:8px;background:repeating-linear-gradient(135deg,var(--amber) 0 16px,var(--ink) 16px 32px)}
+  header{background:#fff;border-bottom:2px solid var(--ink);padding:20px 0 14px}
+  h1{font-size:2rem;line-height:1.1} h1 span{color:var(--deep)}
+  .sub{color:var(--soft);margin-top:4px}
+  .clock{position:sticky;top:0;z-index:5;background:var(--ink);color:#fff;padding:8px 0;font-weight:600}
+  .clock .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .clock b{color:#FFD34D}
+  h2{font-size:1.35rem;margin:26px 0 10px}
+  .rule{background:var(--pale);border:2px solid var(--ink);border-radius:4px;padding:12px 16px;margin:14px 0}
+  .rule strong{color:var(--deep)}
+  .block{display:grid;grid-template-columns:120px 1fr;background:#fff;border:1.5px solid var(--line);border-radius:4px;margin:10px 0;overflow:hidden}
+  .block.lab{border:2px solid var(--ink)}
+  .block.now{outline:4px solid var(--amber)}
+  .block.done{opacity:.55}
+  .time{background:var(--panel);padding:12px;font-weight:700;border-right:1.5px solid var(--line)}
+  .lab .time{background:var(--amber)}
+  .time small{display:block;font-weight:500;color:var(--soft);font-size:.82rem}
+  .lab .time small{color:var(--ink)}
+  .body{padding:12px 16px}
+  .body h3{font-size:1.12rem;margin-bottom:6px}
+  .row{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;margin:3px 0;font-size:.95rem}
+  .row b{color:var(--soft);font-weight:600}
+  .t-only{display:none} body.trainer .t-only{display:block} body.trainer tr.t-only{display:table-row}
+  .who{display:inline-block;font-weight:700;font-size:.8rem;padding:0 7px;border-radius:3px;margin-right:6px}
+  .you{background:#E3F1E8;color:var(--green)} .tr{background:var(--ink);color:#FFD34D}
+  .say{background:var(--pale);border-left:4px solid var(--amber);padding:6px 10px;margin:6px 0;font-style:italic}
+  .aha{display:inline-block;background:var(--ink);color:#FFD34D;font-weight:700;padding:1px 8px;border-radius:3px;font-size:.85rem}
+  table.r{width:100%;border-collapse:collapse;margin:6px 0;font-size:.93rem}
+  table.r td,table.r th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  table.r th{border-bottom:2px solid var(--ink)}
+  .warn{border-left:5px solid var(--red);background:#FBF0ED;padding:8px 12px;margin:8px 0;font-size:.95rem}
+  ul.c{margin:4px 0 4px 20px} ul.c li{margin:2px 0}
+  .check{list-style:none;margin:6px 0} .check li{margin:4px 0}
+  .check input{margin-right:8px;transform:scale(1.2)}
+  footer{margin:30px 0 20px;color:var(--soft);font-size:.9rem}
+  @media print{.clock{display:none}.block{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="hazard"></div>
+<header><div class="wrap">
+  <h1>Day 1 · the flow of the day <span class="t-only" style="display:inline">· trainer view</span></h1>
+  <p class="sub">AI Engineering for Managers · ABB Bangalore · 12 Nov 2026 · 09:00–17:00 · Content, labs and quizzes live on the <a href="index.html">course page</a>; this page shows what happens when. <span class="who you">You</span> = participants · <span class="who tr">Trainer</span> = what the trainer runs.</p>
+</div></header>
+<div class="clock"><div class="wrap"><span>Now: <b id="now">--:--</b></span><span>Block: <b id="cur">—</b></span><span>Next: <b id="nxt">—</b></span></div></div>
+
+<main class="wrap">
+
+<div class="rule"><strong>The same rhythm in every lab:</strong>
+1 · Predict <span class="aha">1 AhaSlides question</span> → 2 · Run the notebook → 3 · Challenge (pair contest) → 4 · Reveal <span class="aha">3 AhaSlides questions</span> → 5 · Decide (decision card on the course page).
+<br><strong>Pairs:</strong> the Driver runs the VM · the Decision-maker writes the decision card · swap every lab.
+<br><strong>Keep your phone handy</strong> for AhaSlides. The course-page quizzes (Quiz 1–4) are self-paced: do them if you finish early or at the start of a break.</div>
+
+<h2 class="t-only">Trainer: tonight, before you sleep</h2>
+<ul class="check t-only">
+  <li><label><input type="checkbox">Push the course page: <code>git add . ; git commit -m "final" ; git push</code></label></li>
+  <li><label><input type="checkbox">VMs 02–19: env vars + <code>git clone</code> into <code>C:\ai-abb</code> + <code>pip install</code> + turn off the VS Code trust prompt</label></li>
+  <li><label><input type="checkbox">Spot-check 2–3 VMs: Lab 1 setup cell prints "Client ready"</label></li>
+  <li><label><input type="checkbox">Bastion shareable link for each VM → seat cards (VM name, link, username, password)</label></li>
+  <li><label><input type="checkbox">Auto-shutdown off for tomorrow (or set to 18:00) · budget alert on</label></li>
+  <li><label><input type="checkbox">Import the AhaSlides Excel (Sheet1) · add the 2 open boards + GO/NO-GO poll</label></li>
+  <li><label><input type="checkbox">lab-vm-01: leave Streamlit indexed for the demo</label></li>
+  <li><label><input type="checkbox">Read the cheat sheet: 60-second story + 5 safe answers</label></li>
+</ul>
+
+<h2>The day, block by block</h2>
+
+<div class="block" data-s="09:00" data-e="09:25"><div class="time">09:00<small>25 min</small></div><div class="body">
+  <h3>Start: pre-check, story, role</h3>
+  <div class="row"><b>AhaSlides</b><span><span class="who tr">Trainer</span>runs AhaSlides <span class="aha">#1–5</span> · <span class="who you">You</span>5 warm-up questions on your phone while people settle</span></div>
+  <div class="row"><b>On screen</b><span>Course page → <em>Start</em></span></div>
+  <div class="say t-only">"A machine stops with an error code. Engineers order a spare part. A bulletin already says the fix is a software update. Can AI find that, and can we trust it?"</div>
+  <div class="row"><b>Then</b><span><span class="who tr">Trainer</span>explains your role (Axion's AI steering committee) and the 5-step rhythm · <span class="who you">You</span>form pairs</span></div>
+</div></div>
+
+<div class="block" data-s="09:25" data-e="09:55"><div class="time">09:25<small>30 min</small></div><div class="body">
+  <h3>M1 · Where AI runs: the three tiers</h3>
+  <div class="row"><b>On screen</b><span>Course page → <em>M1</em> · walk the deployment decision tree</span></div>
+  <div class="say t-only">"Abby is Tier 1. What you build today is Tier 2: your documents, your guardrails, your evals."</div>
+  <div class="row"><b>At 09:50</b><span><span class="who tr">Trainer</span>hands out seat cards · <span class="who you">You</span>open the link on your card now, so any login problem shows up before Lab 1</span></div>
+</div></div>
+
+<div class="block lab" data-s="09:55" data-e="10:45"><div class="time">09:55<small>Lab 1 · 50 min</small></div><div class="body">
+  <h3>Lab 1 · Stand up and compare</h3>
+  <table class="r"><tr><th>Step</th><th>Min</th><th>Who does what</th></tr>
+  <tr><td>Predict</td><td>3</td><td><span class="who tr">Trainer</span>runs AhaSlides <span class="aha">#6</span> · <span class="who you">You</span>vote: who finds the F-07 fix? <span class="t-only">Don't explain the answer yet.</span></td></tr>
+  <tr><td>Run</td><td>15</td><td><span class="who you">You</span>VS Code → folder <code>C:\ai-abb\day1</code> → <code>labs\lab1…</code> → Run All, read both answers · <span class="who tr">Trainer</span>walks the room, fixes logins first</td></tr>
+  <tr><td>Challenge</td><td>17</td><td><span class="who you">You</span>ask your own team's question on both models · post "5 words + worth 7×: yes/no" on the AhaSlides board</td></tr>
+  <tr><td>Reveal</td><td>10</td><td><span class="who tr">Trainer</span>shows the board tally, then AhaSlides <span class="aha">#7–9</span> · <span class="who you">You</span>answer, hear the learning point</td></tr>
+  <tr><td>Decide</td><td>5</td><td><span class="who you">You</span>write decision card 1 · paste your LAB1 line on the course page</td></tr></table>
+  <div class="say t-only">Reveal line: "Neither model knew the bulletin. A bigger model is not a substitute for your knowledge."</div>
+  <div class="say t-only">Tell the true story: the newer model broke our code on one setting last night. Pin versions; re-test on upgrade.</div>
+</div></div>
+
+<div class="block" data-s="10:45" data-e="11:00"><div class="time">10:45<small>15 min</small></div><div class="body"><h3>☕ Break</h3>
+  <div class="row"><b>Rule</b><span>Make sure your VM worked before you leave the room.</span></div></div></div>
+
+<div class="block" data-s="11:00" data-e="11:30"><div class="time">11:00<small>30 min</small></div><div class="body">
+  <h3>M2 · Prompting for cost and quality</h3>
+  <div class="row"><b>On screen</b><span>Course page → <em>M2</em> · the 4 patterns + the kitchen-sink anti-pattern</span></div>
+</div></div>
+
+<div class="block lab" data-s="11:30" data-e="12:30"><div class="time">11:30<small>Lab 2 · 60 min</small></div><div class="body">
+  <h3>Lab 2 · Four prompt designs, measured</h3>
+  <table class="r"><tr><th>Step</th><th>Min</th><th>Who does what</th></tr>
+  <tr><td>Predict</td><td>3</td><td><span class="who tr">Trainer</span>runs AhaSlides <span class="aha">#10</span> · <span class="who you">You</span>vote: which prompt wins?</td></tr>
+  <tr><td>Run</td><td>12</td><td><span class="who you">You</span>run the bake-off, read quality % and cost per 100k</td></tr>
+  <tr><td>Challenge</td><td>25</td><td><span class="who you">You</span>edit V4 to beat it · post "quality % + cost per 100k" on the leaderboard</td></tr>
+  <tr><td>Reveal</td><td>15</td><td><span class="who tr">Trainer</span>reads the top 3, then AhaSlides <span class="aha">#11–13</span></td></tr>
+  <tr><td>Decide</td><td>5</td><td><span class="who you">You</span>write decision card 2 · paste your LAB2 line</td></tr></table>
+  <div class="say t-only">Reveal line (dry run): "Kitchen sink: 20% quality at $97 per 100k. V4: 93% at $25. Your Monday sentence: show me the bake-off."</div>
+</div></div>
+
+<div class="block" data-s="12:30" data-e="13:15"><div class="time">12:30<small>45 min</small></div><div class="body"><h3>🍽 Lunch</h3></div></div>
+
+<div class="block" data-s="13:15" data-e="13:45"><div class="time">13:15<small>30 min</small></div><div class="body">
+  <h3>M3 · Retrieval done properly</h3>
+  <div class="row"><b>On screen</b><span>Course page → <em>M3</em> · the 4 dials (chunk, embed, retrieve, answer)</span></div>
+  <div class="row"><b>Before Lab 3</b><span><span class="who tr">Trainer</span>assigns each pair a dial: A chunk 400 · B k=10 · C delete the "answer only from context" rule · D ask a question the documents can't answer</span></div>
+</div></div>
+
+<div class="block lab" data-s="13:45" data-e="14:45"><div class="time">13:45<small>Lab 3 · 60 min</small></div><div class="body">
+  <h3>Lab 3 · Build the retrieval pipeline</h3>
+  <table class="r"><tr><th>Step</th><th>Min</th><th>Who does what</th></tr>
+  <tr><td>Predict</td><td>3</td><td><span class="who tr">Trainer</span>runs AhaSlides <span class="aha">#14</span> · <span class="who you">You</span>vote: does the cheap model find the fix now?</td></tr>
+  <tr><td>Run</td><td>15</td><td><span class="who you">You</span>build the index, ask the F-07 question, run the 3 breaks</td></tr>
+  <tr><td>Challenge</td><td>22</td><td><span class="who you">You</span>your pair's dial (A–D): write your prediction first, then run it</td></tr>
+  <tr><td>Reveal</td><td>15</td><td><span class="who you">You</span>each pair: "We predicted ___, we got ___" · <span class="who tr">Trainer</span>AhaSlides <span class="aha">#15–17</span></td></tr>
+  <tr><td>Decide</td><td>5</td><td><span class="who you">You</span>write decision card 3 · paste your LAB3 line</td></tr></table>
+  <div class="say t-only">Reveal line: "Same cheap model as this morning, now it names the bulletin with a source. The model is the engine; your documents are the fuel."</div>
+  <div class="row"><b>Bonus demo</b><span><span class="who tr">Trainer</span>shows the Streamlit app: the same pipeline with a simple UI on top</span></div>
+</div></div>
+
+<div class="block" data-s="14:45" data-e="15:00"><div class="time">14:45<small>15 min</small></div><div class="body"><h3>☕ Break</h3></div></div>
+
+<div class="block" data-s="15:00" data-e="15:30"><div class="time">15:00<small>30 min</small></div><div class="body">
+  <h3>M4 · Guardrails and evaluation</h3>
+  <div class="say t-only">"No eval set, no deployment." Say it, write it on the whiteboard, leave it there.</div>
+</div></div>
+
+<div class="block lab" data-s="15:30" data-e="16:20"><div class="time">15:30<small>Lab 4 · 50 min</small></div><div class="body">
+  <h3>Lab 4 · Make it trustworthy</h3>
+  <table class="r"><tr><th>Step</th><th>Min</th><th>Who does what</th></tr>
+  <tr><td>Predict</td><td>3</td><td><span class="who tr">Trainer</span>runs AhaSlides <span class="aha">#18</span> · <span class="who you">You</span>vote: will the cheap model catch the invented answer?</td></tr>
+  <tr><td>Run</td><td>12</td><td><span class="who you">You</span>run the guardrail, the groundedness check and both evals</td></tr>
+  <tr><td>Challenge</td><td>20</td><td><span class="who you">You</span>try to sneak a question past the guardrail (first bypass wins) · then add 2 messy eval questions</td></tr>
+  <tr><td>Reveal</td><td>10</td><td><span class="who tr">Trainer</span>shows the winning bypass: "what would have caught it?" · AhaSlides <span class="aha">#19–21</span></td></tr>
+  <tr><td>Decide</td><td>5</td><td><span class="who you">You</span>write decision card 4 · paste your LAB4 line</td></tr></table>
+  <div class="say t-only">"Bring your baseline score tomorrow. Day 2 cost cuts only count if this number holds."</div>
+</div></div>
+
+<div class="block" data-s="16:20" data-e="16:45"><div class="time">16:20<small>25 min</small></div><div class="body">
+  <h3>M5 · When retrieval is not enough</h3>
+  <div class="row"><b>On screen</b><span>Course page → <em>M5</em> · the decision table (flat RAG vs graph vs SQL)</span></div>
+  <div class="warn t-only"><strong>Check tonight:</strong> the page promises a projector demo of a knowledge graph answering the multi-hop question. There is no graph demo file in the repo. If you don't have one, teach M5 from the decision table and Lab 3's Break 3, where they already saw flat RAG fail the join.</div>
+</div></div>
+
+<div class="block" data-s="16:45" data-e="17:00"><div class="time">16:45<small>15 min</small></div><div class="body">
+  <h3>Close · GO / NO-GO</h3>
+  <div class="row"><b>AhaSlides</b><span><span class="who tr">Trainer</span>runs the GO / NO-GO poll · <span class="who you">You</span>vote</span></div>
+  <div class="row"><b>Tables</b><span><span class="who you">You</span>each table: a 2-minute GO / NO-GO using its own numbers</span></div>
+  <div class="row"><b>Course page</b><span><span class="who you">You</span>pick GO / NO-GO on the course page, copy your Monday memo and result line</span></div>
+  <div class="say t-only">"Tomorrow your app becomes the object under study: real cost, compliance, and your 30→80% plan."</div>
+</div></div>
+
+<h2>If something goes wrong</h2>
+<table class="r">
+<tr><th>Symptom</th><th>What to do</th></tr>
+<tr><td>"Python is not installed" / Restricted Mode banner</td><td>Trust the folder (banner → Manage → Trust) → Reload Window</td></tr>
+<tr><td>Setup cell assertion error</td><td>Env vars not visible: close VS Code fully and reopen</td></tr>
+<tr><td>"(retrying in 5s …)" then success</td><td>Fine: a brief rate limit, the retry is working</td></tr>
+<tr><td>Lab 4 file-not-found</td><td>Lab 3 not finished: run Lab 3 to the end first</td></tr>
+<tr><td>Your VM is dead</td><td>Work on your partner's VM and tell the trainer; that's why we work in pairs</td></tr>
+<tr class="t-only"><td>Domain question you can't answer</td><td>"Good catch, it's fictional. How would it behave in your plant?"</td></tr>
+</table>
+
+<footer>AI Engineering for Managers · Day 1 · DevPro Academy<span class="t-only">Trainer view (open with #trainer at the end of the address). Answers and learning points: Trainer\Day1_AhaSlides_Quiz_ABB.xlsx → "Trainer reveal notes".</span></footer>
+</main>
+
+<script>
+  if (/trainer/.test(location.hash + location.search)) document.body.classList.add('trainer');
+  window.addEventListener('hashchange', function(){ document.body.classList.toggle('trainer', /trainer/.test(location.hash)); });
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.block'));
+  function mins(t){ var p=t.split(':'); return (+p[0])*60 + (+p[1]); }
+  function tick(){
+    var d=new Date(), n=d.getHours()*60+d.getMinutes();
+    document.getElementById('now').textContent = d.toTimeString().slice(0,5);
+    var cur='—', nxt='—';
+    blocks.forEach(function(b, i){
+      var s=mins(b.dataset.s), e=mins(b.dataset.e), title=b.querySelector('h3').textContent;
+      b.classList.toggle('now', n>=s && n<e);
+      b.classList.toggle('done', n>=e);
+      if(n>=s && n<e){ cur = title + ' (ends ' + b.dataset.e + ')'; if(blocks[i+1]) nxt = blocks[i+1].dataset.s + ' ' + blocks[i+1].querySelector('h3').textContent; }
+      if(cur==='—' && nxt==='—' && n<s) nxt = b.dataset.s + ' ' + title;
+    });
+    document.getElementById('cur').textContent = cur;
+    document.getElementById('nxt').textContent = nxt;
+  }
+  tick(); setInterval(tick, 30000);
+</script>
+</body>
+</html>
