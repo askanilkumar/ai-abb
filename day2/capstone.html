@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capstone · Design your team's first AI assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#22262A;--mute:#4A5157;--line:#D9DCDA;--bg:#F6F7F6;--amber:#E8A200;--green:#2F7D4F;--gbg:#E7F3EC;--red:#B42318;--rbg:#FDECEA;--abg:#FFF6DD;--blue:#1E4E8C;--bbg:#EAF1FA}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:'Saira Condensed',system-ui,sans-serif;margin:0}
+.wrap{max-width:1050px;margin:0 auto;padding:0 18px 60px}
+header{background:var(--ink);color:#fff;padding:22px 0 18px;margin-bottom:18px}
+header h1{font-size:2.1rem}
+header p{margin:6px 0 0;color:#D9DCDA}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px 0;margin-bottom:16px}
+.bar .wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding-bottom:0}
+.prog{flex:1;min-width:200px;height:10px;background:#EDEFED;border-radius:6px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+button{font:inherit;font-weight:600;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;background:var(--ink);color:#fff}
+button.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+button.amber{background:var(--amber);color:var(--ink)}
+.timer{font-family:'Saira Condensed';font-size:1.4rem;min-width:70px;text-align:center}
+.flow{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 18px}
+.flow a{flex:1;min-width:84px;text-decoration:none;color:var(--ink);background:#EDEFED;border-radius:4px;padding:6px 4px;font-size:.74rem;text-align:center;line-height:1.2}
+.flow a.done{background:var(--gbg);color:var(--green);font-weight:600}
+.intro{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px 20px;margin-bottom:18px}
+.intro ol{margin:6px 0 0;padding-left:20px}
+.card{background:#fff;border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:8px;padding:18px 20px;margin-bottom:18px}
+.card.done{border-left-color:var(--green)}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.num{background:var(--ink);color:#fff;font-family:'Saira Condensed';font-size:1.3rem;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.head h2{font-size:1.55rem;flex:1}
+.chip{font-size:.75rem;background:#EDEFED;border-radius:12px;padding:2px 10px;white-space:nowrap}
+.ent{background:var(--bbg);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 4px 4px 0;font-size:.92rem;margin:6px 0 12px}
+.ent b{color:var(--blue)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
+.full{grid-column:1/-1}
+label{display:block;font-weight:600;font-size:.92rem;margin-bottom:3px}
+label small{font-weight:400;color:var(--mute)}
+input[type=text],input[type=number],textarea,select{width:100%;font:inherit;font-size:.95rem;padding:8px 10px;border:1.5px solid var(--line);border-radius:6px;background:#FCFCFC}
+textarea{min-height:66px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--amber);background:#fff}
+.checks label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin:3px 0}
+.checks input{margin-top:4px}
+.probe{background:var(--abg);border-radius:6px;padding:10px 14px;margin-top:14px;font-size:.92rem}
+.probe b{display:block;margin-bottom:2px}
+.probe ul{margin:2px 0 0;padding-left:20px}
+.tip{background:var(--gbg);border-left:5px solid var(--green);padding:8px 14px;border-radius:0 4px 4px 0;margin-top:10px;font-size:.92rem}
+.tip b{color:var(--green)}
+.auto{margin-top:12px;font-size:.93rem}
+.flag{padding:8px 12px;border-radius:6px;margin:6px 0;font-size:.92rem}
+.flag.red{background:var(--rbg);color:var(--red)}
+.flag.amb{background:var(--abg);color:#7A5300}
+.flag.ok{background:var(--gbg);color:var(--green)}
+table.cases{width:100%;border-collapse:collapse;font-size:.9rem}
+table.cases th{text-align:left;border-bottom:2px solid var(--ink);padding:4px}
+table.cases td{padding:4px;vertical-align:top}
+table.cases td:first-child{width:28px;font-weight:600}
+table.cases select{min-width:110px}
+.cost{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.cost div{background:var(--bg);border-radius:6px;padding:10px;text-align:center}
+.cost b{display:block;font-family:'Saira Condensed';font-size:1.5rem}
+.verdict{font-family:'Saira Condensed';font-size:2rem;padding:12px 18px;border-radius:8px;text-align:center;margin:8px 0}
+.v-go{background:var(--gbg);color:var(--green)}.v-fix{background:var(--abg);color:#7A5300}.v-stop{background:var(--rbg);color:var(--red)}
+.canvas{border:2px solid var(--ink);border-radius:8px;padding:16px 20px;background:#fff;margin-top:14px;font-size:.9rem}
+.canvas h3{font-size:1.4rem;margin-bottom:6px}
+.canvas table{width:100%;border-collapse:collapse}
+.canvas td{border-top:1px solid var(--line);padding:5px 6px;vertical-align:top}
+.canvas td:first-child{width:24%;font-weight:600;color:var(--mute)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:6px;display:none;z-index:9}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.cost{grid-template-columns:1fr}}
+@media print{header,.bar,.flow,.intro,.card,.actions,.noprint{display:none!important}body{background:#fff}#gateCard{display:block!important;border:0;padding:0}#gateCard>*:not(.canvas){display:none!important}.canvas{border:0}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Capstone · Design your team's first AI assistant</h1>
+  <p>Take one real task from your own team and walk it through the same 10 gates that large enterprises use before any AI goes live. 30 minutes, in pairs. At the end you get a one-page AI use-case canvas.</p>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <b>Progress</b><div class="prog"><i id="progBar"></i></div><span id="progTxt">0%</span>
+  <span class="timer" id="timer">30:00</span><button class="amber" id="timerBtn">Start 30 min</button>
+  <button class="ghost" onclick="location.hash='gate'">Jump to result</button>
+</div></div>
+
+<div class="wrap">
+  <div class="flow" id="flow"></div>
+
+  <div class="intro">
+    <b>How to work (pairs):</b>
+    <ol>
+      <li><b>Pick one real task</b> from your team — something done often, by several people. Not a dream project.</li>
+      <li>Go gate by gate. <b>Read the yellow probing questions first, then type.</b> Short answers are fine; vague answers are not.</li>
+      <li>The page checks your answers like a review board would and raises <b>red flags</b>. Fix them or explain them.</li>
+      <li>At the end: <b>print or save your canvas</b>, and copy the "challenge me" prompt into Abby for a tough second opinion.</li>
+    </ol>
+    <div class="tip"><b>The rule for today:</b> if you cannot answer a question, that is the finding. Write "Don't know yet — ask &lt;name&gt;". That is exactly what real projects discover too late.</div>
+  </div>
+
+  <div id="stages"></div>
+
+  <div class="card" id="gateCard"><a id="gate"></a>
+    <div class="head"><div class="num">✓</div><h2>Gate 10 · Go / No-go for a pilot</h2><span class="chip">3 min</span></div>
+    <div class="ent"><b>How large enterprises do it:</b> an AI review board (business owner, architecture, security, data protection, quality) looks at one page and says <i>pilot</i>, <i>fix first</i> or <i>stop</i>. No page, no pilot.</div>
+    <div id="verdict"></div>
+    <div id="flags"></div>
+    <div class="canvas" id="canvas"></div>
+    <div class="actions">
+      <button onclick="window.print()">🖨️ Print / save as PDF</button>
+      <button class="ghost" onclick="copyText(canvasText())">📋 Copy canvas as text</button>
+      <button class="amber" onclick="copyText(abbyPrompt())">🤖 Copy "challenge me" prompt for Abby</button>
+      <button class="ghost noprint" onclick="if(confirm('Clear all your answers on this browser?')){data={};save();render();}">Clear all</button>
+    </div>
+    <div class="tip"><b>Close the loop:</b> paste the prompt into Abby. Pick the hardest of its 5 questions and write your answer in box 1 of your Monday plan.</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const STAGES = [
+ {id:"g1", t:"Problem and owner", short:"1 Problem", min:3,
+  ent:"Every AI idea starts as a use-case intake form with <b>one named business owner</b>. No owner, no project. Ideas are ranked by volume × pain × low risk.",
+  fields:[
+   {k:"name",l:"Name your AI assistant",ph:"e.g. Weekly Status Report Assistant",req:1},
+   {k:"owner",l:"Business owner who will sign off",s:"(a real role or name)",ph:"e.g. R&D manager, AX900 platform",req:1},
+   {k:"problem",l:"What task does it help with, and who does it by hand today?",ph:"e.g. Every Friday 8 team leads copy ADO data into a status email for the steering committee",req:1,full:1,ta:1},
+   {k:"freq",l:"How many times a month is this task done?",s:"(whole team)",ph:"e.g. 32",num:1,req:1},
+   {k:"mins",l:"Minutes it takes each time today",ph:"e.g. 60",num:1,req:1},
+   {k:"wrong",l:"What happens if the AI gets it wrong?",s:"(be honest)",ph:"e.g. Wrong status goes to a director; a delayed risk is missed",req:1,full:1,ta:1}],
+  probe:["Is this a real pain your team complains about — or a nice demo?","Would it still be worth it if AI saved only 20% of the time?","Who will complain first if it fails?"],
+  tip:"Start with a task done <b>often</b>, by <b>many</b> people, where a mistake is <b>cheap to catch</b>. Leave the hardest problem for the second project."},
+ {id:"g2", t:"Risk level", short:"2 Risk", min:3,
+  ent:"Large companies sort every AI use case into a <b>risk tier</b> first (the EU AI Act works the same way). The tier decides how many controls and sign-offs you need — not the technology.",
+  fields:[
+   {k:"audience",l:"Who sees or uses the AI's output?",sel:["","Only me — a draft I edit","My team — internal decision support","Customers or partners","A plant / OT system — it can act on equipment"],req:1},
+   {k:"decide",l:"Who makes the final decision?",sel:["","AI suggests, a person decides every time","AI decides, a person checks a sample","AI acts on its own"],req:1},
+   {k:"sens",l:"Which sensitive data could it read?",s:"(tick all)",chk:["Customer names or contacts","Employee personal data","Prices, contracts, commercial terms","Security or export-controlled information","Source code or product design","None of these"],full:1,req:1}],
+  probe:["If this output was forwarded to a customer by mistake, what is the damage?","Does it read anything you would not paste into an email to an outsider?","Can a person undo what the AI did — in minutes?"],
+  tip:"Same model, different risk: a draft for yourself is low risk; the same text sent to a customer is high risk. <b>Controls follow the risk, not the tool.</b>"},
+ {id:"g3", t:"The spec", short:"3 Spec", min:3,
+  ent:"Teams write the spec <b>before</b> anyone writes a prompt or code — inputs, rules, output and the definition of 'good'. The spec is reviewed like any requirement document.",
+  fields:[
+   {k:"inputs",l:"Inputs — what does it receive?",ph:"e.g. ADO export of the sprint, last week's report",req:1,ta:1},
+   {k:"output",l:"Output — exact format",ph:"e.g. 5 lines: status RAG, top 3 risks with owner, next week's plan",req:1,ta:1},
+   {k:"rules",l:"Business rules it must always follow",s:"(the things only your company knows)",ph:"e.g. Any open Sev-1 = status RED. Never show customer names.",req:1,full:1,ta:1},
+   {k:"good",l:"How will you know an answer is good?",ph:"e.g. Team lead changes fewer than 2 lines before sending",req:1,ta:1},
+   {k:"refuse",l:"Out of scope — what must it refuse or say 'I don't know'?",ph:"e.g. Questions about other projects; predicting dates without data",req:1,ta:1}],
+  probe:["Could a new joiner do this task from your spec alone?","Which rule, if broken, causes a real incident? Is it written down?","Lab 1: the AI was equally clever both times — what did the spec carry that the vague prompt did not?"],
+  tip:"If a rule really matters, it goes in the spec <b>and</b> later in code (Gate 6). Never trust the model alone with it."},
+ {id:"g4", t:"Data and knowledge", short:"4 Data", min:3,
+  ent:"Each data source has a <b>data owner</b> who approves its use. RAG is only built on <b>approved, current</b> documents, and the AI must respect the same access rights as the user.",
+  fields:[
+   {k:"sources",l:"Which documents or systems must it read?",ph:"e.g. ADO boards, release policy PDF, test reports on SharePoint",req:1,full:1,ta:1},
+   {k:"downer",l:"Who owns that data and must approve?",ph:"e.g. ADO admin; Quality head for the policy",req:1},
+   {k:"fresh",l:"How often does the source change?",sel:["","Every day","Every week","A few times a year","Almost never"],req:1},
+   {k:"versions",l:"Are there old versions that could give a wrong answer?",sel:["","Yes — old versions exist","No — one clean version","Don't know"],req:1},
+   {k:"access",l:"Should everyone see everything it can read?",sel:["","Yes — all users may see all of it","No — access differs by role","Don't know"],req:1}],
+  probe:["Lab 2: the AskIT bot answered from an old version of a policy. Where could that happen in your data?","If someone uploads a wrong or 'poisoned' document, who would notice?","Is the knowledge written down at all — or is it in people's heads?"],
+  tip:"Most AI failures in production are <b>data failures</b>, not model failures. Fix the source before you blame the AI."},
+ {id:"g5", t:"Design — pick the simplest pattern", short:"5 Design", min:3,
+  ent:"Architects choose the <b>simplest pattern that passes the evals</b>. Most first use cases are a good prompt or a RAG assistant. Agents come later, only when the job truly needs several systems.",
+  fields:[
+   {k:"pattern",l:"Which pattern fits?",sel:["","Prompt + template (e.g. an Abby personal prompt)","RAG assistant — answers from our documents","One agent with tools — reads systems, prepares work","Multi-agent crew — several agents hand work to each other"],req:1,full:1},
+   {k:"reads",l:"Tools it may READ from",ph:"e.g. ADO query, test report search",ta:1,req:1},
+   {k:"writes",l:"Actions it may TAKE",s:"(write 'none' if it only drafts)",ph:"e.g. none — it drafts; a person sends",ta:1,req:1},
+   {k:"human",l:"Where exactly does a person approve?",ph:"e.g. Team lead reads and clicks Send",full:1,req:1}],
+  probe:["Which step could you remove and still get 80% of the value?","What can it do that cannot be undone?","Lab 3: the Release Manager agent had an email tool. Does yours have a tool it does not need?"],
+  tip:"<b>Give tools like you give system access to a new contractor:</b> read-only first, the smallest set, and write access only with approval."},
+ {id:"g6", t:"Guardrails", short:"6 Guards", min:2,
+  ent:"Guardrails are <b>ordinary code around the model</b>, owned by engineering and tested like any other code. Security and data protection review them before a pilot.",
+  fields:[
+   {k:"guards",l:"Which guard layers will you build?",chk:["Input guard — removes instructions hidden in data","Policy guard — business rules written as code","Output guard — masks names, phones, emails, secrets","Action guard — a person approves anything external or irreversible"],full:1,req:1},
+   {k:"coderules",l:"Which rules will you put in code, not only in the prompt?",ph:"e.g. Sev-1 open → RED; no customer contact details in output",full:1,ta:1,req:1}],
+  probe:["Lab 3, attack 1: one sentence in a ticket changed the verdict. Which of your inputs could carry such a sentence?","What is the worst thing a clever user could make it say?","Lab 9: 'never tell the secret' is a polite request, not a lock. Is any secret inside the prompt?"],
+  tip:"Instructions in a prompt are a <b>request</b>. Rules in code are a <b>lock</b>. Use locks for anything that matters."},
+ {id:"g7", t:"Evals — the test set", short:"7 Evals", min:4,
+  ent:"Before building, teams write a <b>golden test set</b> with expected answers. It is re-run on every change — new prompt, new model version, new data. No eval set, no release.",
+  cases:1,
+  fields:[
+   {k:"bar",l:"Pass mark to start a pilot",sel:["","100% on critical cases + 80% overall","90% overall","80% overall","Not decided yet"],req:1},
+   {k:"signoff",l:"Who signs off the eval result?",ph:"e.g. QA lead",req:1}],
+  probe:["Did you include one case where the right answer is 'I don't know'?","Did you include one attack or trick case?","Who writes the expected answers — the people who do the job today?"],
+  tip:"Write <b>5 cases today, 50 before the pilot, and add every real failure</b> to the set. The test set is a company asset; the prompt is not."},
+ {id:"g8", t:"Model, hosting and cost", short:"8 Model", min:3,
+  ent:"Teams <b>start with the smallest model that passes the evals</b>, pin the model version, and estimate cost per task and per month before the pilot — not after the first bill.",
+  fields:[
+   {k:"host",l:"Where will it run?",sel:["","Abby (company-approved assistant)","Company cloud AI service (e.g. Azure AI Foundry)","On-premise open-weight model","Don't know yet"],req:1},
+   {k:"model",l:"Model size to start with",sel:["","Small / mini model","Frontier (largest) model"],req:1},
+   {k:"calls",l:"AI calls per working day",ph:"e.g. 40",num:1,req:1},
+   {k:"tin",l:"Tokens in per call",s:"(1 page ≈ 700)",ph:"e.g. 4000",num:1,req:1},
+   {k:"tout",l:"Tokens out per call",ph:"e.g. 600",num:1,req:1},
+   {k:"pin",l:"Can you pin the model version?",sel:["","Yes","No","Don't know"],req:1}],
+  probe:["Lab 7: if mini and frontier both score 4/5, which do you pay for at 50,000 calls a day?","What happens to your answers when the provider updates the model next month?","Does this data allow a public cloud model, or must it stay inside?"],
+  tip:"The use case and its limits choose the model — <b>not the leaderboard</b>.", cost:1},
+ {id:"g9", t:"Pilot, monitoring and ownership", short:"9 Pilot", min:3,
+  ent:"First run in <b>shadow mode</b>: the AI works beside the person, outputs are compared, nobody acts on the AI alone. Every call is logged (inputs, outputs, cost, guardrail hits) and someone owns the <b>kill switch</b>.",
+  fields:[
+   {k:"pilotusers",l:"Pilot group",ph:"e.g. 3 team leads in one product line",req:1},
+   {k:"weeks",l:"Pilot length",sel:["","2 weeks","4 weeks","6 weeks"],req:1},
+   {k:"logs",l:"What will you log and watch?",chk:["Inputs and outputs","Cost per task","User thumbs up / down","Errors and timeouts","Guardrail hits"],full:1,req:1},
+   {k:"kill",l:"Who can switch it off, and how fast?",ph:"e.g. Platform lead, within 1 hour",req:1},
+   {k:"fixer",l:"Who fixes it when it breaks at 9 pm?",ph:"e.g. Tools team on-call",req:1}],
+  probe:["Lab 5: could you show, for one wrong answer, every step and every token behind it?","What signal would tell you the AI is getting worse over time?","After the pilot, who owns it — your team or IT?"],
+  tip:"If nobody owns it after go-live, it will quietly break. <b>Name the owner before the pilot, not after.</b>"},
+ {id:"g10", t:"Value — prove it with no baseline", short:"10 Value", min:3,
+  ent:"Finance does not accept 'it feels faster'. Teams fix <b>one metric</b>, measure a <b>baseline before the pilot</b>, and agree up front what result means stop.",
+  fields:[
+   {k:"metric",l:"The one metric you will report",sel:["","Time saved per task","Quality — fewer defects or rework","Speed — shorter cycle time","Cost per task"],req:1},
+   {k:"baseline",l:"How will you get a baseline?",sel:["","Time 10 tasks by hand this week","Shadow pilot — compare AI vs person on the same tasks","Use existing data (e.g. ADO cycle time)","Expert estimate"],req:1},
+   {k:"saving",l:"Expected time saving",s:"(%)",ph:"e.g. 40",num:1,req:1},
+   {k:"target",l:"Target that means success",ph:"e.g. 30% less time AND no more errors than today",req:1},
+   {k:"stop",l:"What result would make you stop?",ph:"e.g. Users edit more than half of each output",full:1,req:1}],
+  probe:["Lab 8: which metric could make a bad AI look like a win?","Saved time — what will people do with it? If nothing changes, finance sees no value.","Are you measuring quality as well as speed?"],
+  tip:"Always pair a <b>speed</b> metric with a <b>quality</b> metric. Faster and wrong is not a win."}
+];
+const CASES = 5, TYPES = ["Normal","Edge case","Should say 'I don't know'","Attack / trick"];
+let data = {}; try { data = JSON.parse(localStorage.getItem("abbCapstone") || "{}"); } catch(e) { data = {}; }
+function save(){ try { localStorage.setItem("abbCapstone", JSON.stringify(data)); } catch(e) {} }
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const v = k => data[k] ?? "";
+const n = k => parseFloat(data[k]) || 0;
+const arr = k => Array.isArray(data[k]) ? data[k] : [];
+
+function fieldHTML(f){
+  const lab = `<label for="${f.k}">${f.l} ${f.s ? `<small>${f.s}</small>` : ""}</label>`;
+  let inp;
+  if (f.sel) inp = `<select id="${f.k}" data-k="${f.k}">${f.sel.map(o => `<option ${v(f.k)===o?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+  else if (f.chk) inp = `<div class="checks">${f.chk.map((o,i) => `<label><input type="checkbox" data-c="${f.k}" value="${esc(o)}" ${arr(f.k).includes(o)?"checked":""}> ${esc(o)}</label>`).join("")}</div>`;
+  else if (f.ta) inp = `<textarea id="${f.k}" data-k="${f.k}" placeholder="${esc(f.ph)}">${esc(v(f.k))}</textarea>`;
+  else inp = `<input type="${f.num?"number":"text"}" id="${f.k}" data-k="${f.k}" placeholder="${esc(f.ph)}" value="${esc(v(f.k))}">`;
+  return `<div class="${f.full?"full":""}">${lab}${inp}</div>`;
+}
+function casesHTML(){
+  let rows = "";
+  for (let i=0;i<CASES;i++) rows += `<tr><td>${i+1}</td>
+   <td><input type="text" data-k="c${i}q" placeholder="${i===0?"e.g. Sprint with one open Sev-1":"Input or question"}" value="${esc(v("c"+i+"q"))}"></td>
+   <td><input type="text" data-k="c${i}a" placeholder="${i===0?"e.g. Status RED, Sev-1 named with owner":"Expected answer or behaviour"}" value="${esc(v("c"+i+"a"))}"></td>
+   <td><select data-k="c${i}t">${["",...TYPES].map(o=>`<option ${v("c"+i+"t")===o?"selected":""}>${o}</option>`).join("")}</select></td></tr>`;
+  return `<div class="full"><label>Your first 5 test cases</label><table class="cases"><tr><th>#</th><th>Input / question</th><th>Expected answer or behaviour</th><th>Type</th></tr>${rows}</table></div>`;
+}
+function render(){
+  document.getElementById("stages").innerHTML = STAGES.map((s,i) => `
+   <div class="card" id="${s.id}">
+    <div class="head"><div class="num">${i+1}</div><h2>Gate ${i+1} · ${s.t}</h2><span class="chip">${s.min} min</span></div>
+    <div class="ent"><b>How large enterprises do it:</b> ${s.ent}</div>
+    <div class="probe"><b>🤔 Think first — discuss in your pair, then type:</b><ul>${s.probe.map(p=>`<li>${p}</li>`).join("")}</ul></div>
+    <div class="grid" style="margin-top:12px">${s.cases?casesHTML():""}${s.fields.map(fieldHTML).join("")}</div>
+    <div class="auto" id="auto-${s.id}"></div>
+    <div class="tip"><b>Best practice:</b> ${s.tip}</div>
+   </div>`).join("");
+  document.querySelectorAll("[data-k]").forEach(el => el.addEventListener("input", e => { data[el.dataset.k] = el.value; save(); update(); }));
+  document.querySelectorAll("[data-c]").forEach(el => el.addEventListener("change", () => {
+    data[el.dataset.c] = [...document.querySelectorAll(`[data-c="${el.dataset.c}"]:checked`)].map(x=>x.value); save(); update(); }));
+  update();
+}
+function stageDone(s){
+  const req = s.fields.filter(f=>f.req);
+  let ok = req.filter(f => f.chk ? arr(f.k).length : String(v(f.k)).trim()).length, tot = req.length;
+  if (s.cases){ tot += 1; if (casesFilled()>=3) ok += 1; }
+  return [ok, tot];
+}
+const casesFilled = () => [...Array(CASES).keys()].filter(i => v("c"+i+"q").trim() && v("c"+i+"a").trim()).length;
+const caseTypes = () => [...Array(CASES).keys()].map(i => v("c"+i+"t"));
+function tier(){
+  const a = v("audience"), d = v("decide"), sens = arr("sens").filter(x=>x!=="None of these");
+  if (!a || !d) return "";
+  if (a.startsWith("A plant") || a.startsWith("Customers") || d.startsWith("AI acts")) return "High";
+  if (a.startsWith("My team") || sens.length || d.startsWith("AI decides")) return "Medium";
+  return "Low";
+}
+const PRICE = {mini:[0.75,4.5], frontier:[5.5,33]};
+function monthly(p){ return n("calls")*22*(n("tin")*p[0] + n("tout")*p[1])/1e6; }
+function flags(){
+  const F = [], t = tier(), g = arr("guards"), sens = arr("sens");
+  const has = w => g.some(x=>x.startsWith(w));
+  if (!v("owner").trim()) F.push(["stop","No business owner. Large enterprises do not start without one."]);
+  if (v("audience").startsWith("A plant") && v("decide").startsWith("AI acts")) F.push(["stop","AI acting alone on a plant / OT system. OT rule: AI reads, a person writes."]);
+  if (t==="High" && !has("Action")) F.push(["red","High risk without an action guard — a person must approve anything external or irreversible."]);
+  if (sens.some(x=>x.startsWith("Customer")||x.startsWith("Employee")) && !has("Output")) F.push(["red","Personal data can be read but there is no output guard to mask it (Lab 3, attack 2)."]);
+  if ((t==="High"||t==="Medium") && !has("Policy")) F.push(["red","Business rules live only in the prompt. Put the critical ones in code (policy guard)."]);
+  if (v("sources").trim() && !has("Input")) F.push(["amb","It reads documents or tickets but has no input guard against hidden instructions (Lab 3, attack 1)."]);
+  if (casesFilled()<3) F.push(["red","Fewer than 3 test cases. No eval set, no release."]);
+  if (casesFilled()>=3 && !caseTypes().includes("Attack / trick")) F.push(["amb","No attack or trick case in your test set."]);
+  if (casesFilled()>=3 && !caseTypes().includes("Should say 'I don't know'")) F.push(["amb","No case where the right answer is 'I don't know'."]);
+  if (v("bar")==="Not decided yet") F.push(["amb","No pass mark agreed. Decide it before you see the results."]);
+  if (!v("kill").trim()) F.push(["red","Nobody owns the kill switch."]);
+  if (v("versions").startsWith("Yes")) F.push(["amb","Old document versions exist — clean or tag them before building RAG (Lab 2)."]);
+  if (v("access").startsWith("No")) F.push(["amb","Access differs by role — the AI must apply the same permissions as the user."]);
+  if (v("pin")==="No") F.push(["amb","Model version cannot be pinned — re-run your evals whenever the provider changes the model."]);
+  if (v("pattern").startsWith("Multi-agent") && n("freq")>0 && n("freq")<20) F.push(["amb","Multi-agent crew for a task done fewer than 20 times a month — is this over-engineered?"]);
+  if (v("model").startsWith("Frontier")) F.push(["amb","Starting with the frontier model. Test the mini model first; move up only if evals fail."]);
+  if (v("baseline")==="Expert estimate") F.push(["amb","An expert estimate is the weakest baseline. Time 10 real tasks this week instead."]);
+  if (v("writes").trim() && !/^\s*(none|no|nil|-)\b/i.test(v("writes")) && !has("Action")) F.push(["red","The AI can take actions but there is no action guard."]);
+  return F;
+}
+function update(){
+  let ok=0, tot=0;
+  STAGES.forEach((s,i) => { const [a,b] = stageDone(s); ok+=a; tot+=b;
+    document.getElementById(s.id).classList.toggle("done", a===b); });
+  const pct = Math.round(100*ok/tot);
+  document.getElementById("progBar").style.width = pct+"%"; document.getElementById("progTxt").textContent = pct+"%";
+  document.getElementById("flow").innerHTML = STAGES.map(s => { const [a,b]=stageDone(s); return `<a href="#${s.id}" class="${a===b?"done":""}">${a===b?"✓ ":""}${s.short}</a>`; }).join("") + `<a href="#gate">✓ Go / No-go</a>`;
+  // auto feedback
+  const t = tier();
+  document.getElementById("auto-g1").innerHTML = (n("freq")&&n("mins")) ? `<div class="flag ok">Today this task costs your team about <b>${Math.round(n("freq")*n("mins")/60)} hours a month</b>.</div>` : "";
+  const need = {Low:"Basic: a good spec, 5–10 test cases, the user reviews every output.",
+    Medium:"Standard: spec review, 30+ test cases, policy and output guards, pilot in shadow mode, data owner sign-off.",
+    High:"Full: review board, security and data-protection review, all four guards, 50+ test cases incl. attacks, human approval of every action, logging from day one."};
+  document.getElementById("auto-g2").innerHTML = t ? `<div class="flag ${t==="High"?"red":t==="Medium"?"amb":"ok"}"><b>Risk tier: ${t}.</b> Controls you will need — ${need[t]}</div>` : "";
+  const mm = monthly(PRICE.mini), mf = monthly(PRICE.frontier);
+  document.getElementById("auto-g8").innerHTML = n("calls") ? `<div class="cost"><div>Mini model<b>$${mm.toFixed(2)}</b>per month</div><div>Frontier model<b>$${mf.toFixed(2)}</b>per month</div><div>Frontier costs<b>${mm?(mf/mm).toFixed(1):"–"}×</b>more</div></div><div style="font-size:.8rem;color:var(--mute);margin-top:4px">22 working days; list prices per 1M tokens: mini $0.75 in / $4.50 out, frontier $5.50 / $33. Approximate.</div>` : "";
+  const hrs = n("freq")*n("mins")*n("saving")/100/60;
+  document.getElementById("auto-g10").innerHTML = hrs ? `<div class="flag ok">If you hit ${n("saving")}%, you save about <b>${hrs.toFixed(0)} hours a month</b>${n("calls")?` for about <b>$${(v("model").startsWith("Frontier")?mf:mm).toFixed(2)}</b> of model cost`:""}. Now: what will people do with those hours?</div>` : "";
+  // gate
+  const F = flags();
+  const stop = F.some(f=>f[0]==="stop"), red = F.some(f=>f[0]==="red");
+  const verdict = pct<60 ? ["v-fix","Keep going — "+pct+"% complete"] : stop ? ["v-stop","STOP — rethink the use case"] : red ? ["v-fix","FIX FIRST — then pilot"] : ["v-go","READY FOR A SHADOW PILOT"];
+  document.getElementById("verdict").innerHTML = `<div class="verdict ${verdict[0]}">${verdict[1]}</div>`;
+  document.getElementById("flags").innerHTML = F.length ? `<b>What the review board would say (${F.length}):</b>` + F.map(f=>`<div class="flag ${f[0]==="amb"?"amb":"red"}">${f[0]==="stop"?"⛔":f[0]==="red"?"🔴":"🟠"} ${f[1]}</div>`).join("") : `<div class="flag ok">No red flags. Ask Abby to find the ones you missed.</div>`;
+  document.getElementById("canvas").innerHTML = `<h3>AI use-case canvas · ${esc(v("name")||"(name your assistant)")}</h3>
+   <table>${rowsForCanvas().map(r=>`<tr><td>${r[0]}</td><td>${esc(r[1]).replace(/\n/g,"<br>")||"—"}</td></tr>`).join("")}</table>
+   <div style="margin-top:8px"><b>Verdict:</b> ${verdict[1]} · <b>Open flags:</b> ${F.length}</div>`;
+}
+function rowsForCanvas(){
+  const cases = [...Array(CASES).keys()].filter(i=>v("c"+i+"q").trim()).map(i=>`${i+1}. ${v("c"+i+"q")} → ${v("c"+i+"a")}${v("c"+i+"t")?" ["+v("c"+i+"t")+"]":""}`).join("\n");
+  return [
+   ["1 Problem", `${v("problem")}\nOwner: ${v("owner")} · ${v("freq")}×/month × ${v("mins")} min · If wrong: ${v("wrong")}`],
+   ["2 Risk", `Tier: ${tier()||"?"} · Output to: ${v("audience")} · Decision: ${v("decide")} · Sensitive data: ${arr("sens").join(", ")}`],
+   ["3 Spec", `In: ${v("inputs")}\nOut: ${v("output")}\nRules: ${v("rules")}\nGood = ${v("good")}\nRefuse: ${v("refuse")}`],
+   ["4 Data", `${v("sources")}\nOwner: ${v("downer")} · Changes: ${v("fresh")} · Old versions: ${v("versions")} · Access: ${v("access")}`],
+   ["5 Design", `${v("pattern")}\nReads: ${v("reads")} · Acts: ${v("writes")} · Human approves: ${v("human")}`],
+   ["6 Guardrails", `${arr("guards").map(g=>g.split(" —")[0]).join(", ")}\nIn code: ${v("coderules")}`],
+   ["7 Evals", `${cases}\nPass mark: ${v("bar")} · Sign-off: ${v("signoff")}`],
+   ["8 Model & cost", `${v("host")} · ${v("model")} · pinned: ${v("pin")} · ${v("calls")} calls/day · ~$${monthly(v("model").startsWith("Frontier")?PRICE.frontier:PRICE.mini).toFixed(2)}/month`],
+   ["9 Pilot", `${v("pilotusers")} · ${v("weeks")} · Logs: ${arr("logs").join(", ")} · Kill switch: ${v("kill")} · Fixer: ${v("fixer")}`],
+   ["10 Value", `Metric: ${v("metric")} · Baseline: ${v("baseline")} · Saving: ${v("saving")}% · Target: ${v("target")} · Stop if: ${v("stop")}`]];
+}
+function canvasText(){ return `AI USE-CASE CANVAS — ${v("name")}\n\n` + rowsForCanvas().map(r=>`${r[0]}:\n${r[1]}`).join("\n\n") + `\n\nOpen flags:\n` + flags().map(f=>"- "+f[1]).join("\n"); }
+function abbyPrompt(){ return `You are a senior reviewer on an AI review board at a large industrial engineering company. Review my AI use-case canvas below.\n1. Ask me the 5 hardest questions a review board would ask.\n2. List the top 3 risks I have missed, most serious first.\n3. Say what I must fix before a 4-week shadow pilot.\n4. Suggest 3 more test cases, including one attack.\nBe direct and specific. Use simple English. Do not rewrite the canvas.\n\n` + canvasText(); }
+function copyText(t){
+  const done = () => toast("Copied — paste it where you need it");
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(done, () => fallback(t));
+  else fallback(t);
+  function fallback(t){ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand("copy"); done();}catch(e){alert(t);} a.remove(); }
+}
+function toast(m){ const el=document.getElementById("toast"); el.textContent=m; el.style.display="block"; setTimeout(()=>el.style.display="none",2200); }
+let left = 1800, tick = null;
+document.getElementById("timerBtn").onclick = function(){
+  if (tick){ clearInterval(tick); tick=null; this.textContent="Resume"; return; }
+  this.textContent="Pause";
+  tick = setInterval(()=>{ left=Math.max(0,left-1); const m=String(Math.floor(left/60)).padStart(2,"0"), s=String(left%60).padStart(2,"0");
+    const el=document.getElementById("timer"); el.textContent=`${m}:${s}`; el.style.color = left<300?"#B42318":"";
+    if(!left){clearInterval(tick);tick=null;toast("Time! Go to Gate 10 and print your canvas.");} },1000);
+};
+render();
+</script>
+</body>
+</html>
