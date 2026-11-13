@@ -7,7 +7,6 @@ import streamlit as st
 from common import plain, money
 from labs.agents import render, AGENTS
 
-LANGFUSE_URL = os.environ.get("LANGFUSE_BASE_URL") or os.environ.get("LANGFUSE_HOST") or "https://cloud.langfuse.com"
 
 
 def show():
@@ -55,9 +54,9 @@ def show():
                      hide_index=True, width="stretch")
 
     st.markdown("### The same thing in a real tool: Langfuse")
-    if os.environ.get("LANGFUSE_PUBLIC_KEY"):
-        st.success("This VM sends every model call to Langfuse. The trainer will show the dashboard on the screen.")
-    st.link_button("Open Langfuse", LANGFUSE_URL)
+    st.info("👀 **Watch the trainer's screen.** Every model call from this VM is also sent to Langfuse, a production "
+            "observability tool. The trainer will open your runs there — the agent tree, tool calls, guardrail hits, "
+            "scores and cost.")
     st.markdown("""
 | What a manager should watch in production | Why |
 |---|---|

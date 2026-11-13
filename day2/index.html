@@ -76,8 +76,45 @@
   #playbook{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:20px 24px;margin:14px 0}
   #playbook h3{margin-top:4px}
   .btn{font:600 1rem 'Saira Condensed';background:var(--ink);color:#fff;border:none;padding:8px 18px;border-radius:4px;cursor:pointer}
+  .flips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0} @media(max-width:860px){.flips{grid-template-columns:1fr 1fr}}
+  .flip{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:12px;min-height:200px;display:flex;flex-direction:column}
+  .flip .front{font-weight:600;font-size:1.02rem;flex:1}
+  .flip .vote{display:flex;gap:6px;margin-top:8px} .flip .vote button{flex:1;font:600 .85rem 'Saira Condensed';border:1.5px solid var(--ink);background:#fff;border-radius:4px;padding:5px;cursor:pointer}
+  .flip .vote button:hover{background:var(--amber-pale)}
+  .flip .back{display:none;font-size:.9rem;margin-top:8px;border-top:1.5px dashed var(--line);padding-top:8px}
+  .flip.done .vote{display:none} .flip.done .back{display:block}
+  .flip.ok{border-color:var(--green);background:#FBFEFC} .flip.miss{border-color:var(--red)}
+  .gate{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:16px 20px;margin:10px 0}
+  .gate .wk{font:700 .9rem 'Saira Condensed';color:var(--amber-deep)}
+  .gate button.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:4px;padding:8px 12px;margin:6px 0;cursor:pointer}
+  .gate button.opt:hover{border-color:var(--amber)}
+  .gate button.opt:disabled{cursor:default;opacity:.55}
+  .gate button.opt.pick,.gate button.opt.pick:disabled{opacity:1;border-width:2.5px;font-weight:600}
+  .dots{display:flex;gap:6px;margin:6px 0} .dots span{width:22px;height:8px;border-radius:4px;background:var(--panel)}
+  .dots span.g{background:var(--green)} .dots span.r{background:var(--red)} .dots span.c{background:var(--amber)}
+  .reveal{display:none} .reveal.show{display:block}
   footer{padding:30px 0 50px;color:var(--ink-soft);font-size:.92rem}
   @media print{body *{visibility:hidden} #playbook,#playbook *{visibility:visible} #playbook{position:absolute;left:0;top:0;border:none}}
+  .m8grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0} @media(max-width:860px){.m8grid{grid-template-columns:1fr 1fr}}
+  .m8{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:12px;display:flex;flex-direction:column;min-height:190px}
+  .m8 .n{font:700 1.6rem 'Saira Condensed';color:var(--amber-deep);line-height:1}
+  .m8 .h{font:700 1.08rem 'Saira Condensed';margin:2px 0 6px}
+  .m8 .ask{font-size:.92rem;flex:1}
+  .m8 .vote{display:flex;gap:6px;margin-top:8px} .m8 .vote button{flex:1;font:600 .85rem 'Saira Condensed';border:1.5px solid var(--ink);background:#fff;border-radius:4px;padding:5px;cursor:pointer}
+  .m8 .vote button:hover{background:var(--amber-pale)}
+  .m8 .back{display:none;font-size:.88rem;margin-top:8px;border-top:1.5px dashed var(--line);padding-top:8px}
+  .m8.done .back{display:block} .m8.do{border-color:var(--green);background:#FBFEFC} .m8.skip{border-color:var(--red);background:#FFFBFA}
+  .m8 .tag{font:700 .8rem 'Saira Condensed';float:right}
+  .sk{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:12px 16px;margin:10px 0}
+  .sk .stp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .sk .stp button{font:700 1rem 'Saira Condensed';width:40px;height:34px;border:1.5px solid var(--ink);background:#fff;border-radius:4px;cursor:pointer}
+  .sk .stp button:hover{background:var(--amber-pale)} .sk .stp button.r{background:var(--green);color:#fff;border-color:var(--green)} .sk .stp button.x{background:var(--red-pale);border-color:var(--red)}
+  .sk .fb2{display:none;margin-top:8px;font-size:.95rem} .sk.done .fb2{display:block}
+  .pq{margin-bottom:10px} .pq h4{font-size:1.05rem;margin-bottom:4px}
+  .pq label{display:inline-block;padding:5px 10px;margin:3px 4px 3px 0;border:1.5px solid var(--line);border-radius:4px;cursor:pointer;background:var(--paper);font-size:.93rem}
+  .pq label:hover{border-color:var(--amber)} .pq input{margin-right:6px}
+  .pkres{background:var(--ink);color:#fff;border-radius:8px;padding:14px 18px} .pkres h4{color:#FFD34D;font-size:1.2rem;margin:8px 0 4px} .pkres h4:first-child{margin-top:0}
+  .pkres td{border-color:#5B6770;color:#fff} .pkres table{background:transparent} .pkres th{color:#FFD34D;border-color:#fff}
 </style>
 </head>
 <body>
@@ -90,8 +127,8 @@
   </div>
 </header>
 <nav class="flow"><div class="wrap">
-  <a href="#start">Start</a><a href="#s1">1 Spec</a><a href="#s2">2 RAG</a><a href="#s3">3 Agents</a><a href="#s4">4 Evals &amp; Ops</a>
-  <a href="#s5">5 Workplace</a><a href="#s6">6 ADO</a><a href="#s7">7 Trade-offs</a><a href="#s8">8 Value</a><a href="#s9">9 Security</a><a href="#close" class="hl">My Playbook</a>
+  <a href="#start">Start</a><a href="#mindset">Mindset</a><a href="#s1">1 Spec</a><a href="#s2">2 RAG</a><a href="#s3">3 Agents</a><a href="#s4">4 Evals &amp; Ops</a>
+  <a href="#s5">5 Workplace</a><a href="#s6">6 ADO</a><a href="#s7">7 Trade-offs</a><a href="#s8">8 Value</a><a href="#s9">9 Security</a><a href="#close" class="hl">Launch Day + Playbook</a>
 </div></nav>
 
 <main class="wrap">
@@ -101,13 +138,13 @@
   <h2>How today runs</h2><div class="rule"></div>
   <table>
     <tr><th>Time</th><th>Session</th><th>Time</th><th>Session</th></tr>
-    <tr><td>09:00</td><td>Recap and today's map</td><td>13:00</td><td>Lunch</td></tr>
-    <tr><td>09:10</td><td>1 · Prompt vs Spec</td><td>13:45</td><td>6 · Azure DevOps + Power BI</td></tr>
-    <tr><td>09:40</td><td>2 · Build your RAG + Knowledge Graphs</td><td>14:15</td><td>7 · Architecture trade-offs</td></tr>
-    <tr><td>10:15</td><td>3 · Agents + Guardrails</td><td>15:15</td><td>Tea</td></tr>
+    <tr><td>09:00</td><td>Recap + Mindset: old habit or AI habit?</td><td>13:00</td><td>Lunch</td></tr>
+    <tr><td>09:15</td><td>1 · Prompt vs Spec</td><td>13:45</td><td>6 · AI on your delivery data (ADO + Power BI)</td></tr>
+    <tr><td>09:45</td><td>2 · Build your RAG + Knowledge Graphs</td><td>14:15</td><td>7 · Architecture trade-offs</td></tr>
+    <tr><td>10:20</td><td>3 · Agents + Guardrails</td><td>15:15</td><td>Tea</td></tr>
     <tr><td>11:15</td><td>Tea</td><td>15:30</td><td>8 · Proving AI value</td></tr>
     <tr><td>11:30</td><td>4 · Evals and Observability</td><td>16:10</td><td>9 · AI and cyber security</td></tr>
-    <tr><td>12:30</td><td>5 · AI in the workplace (demo)</td><td>16:35</td><td>Close — My AI Playbook</td></tr>
+    <tr><td>12:30</td><td>5 · AI in the workplace (demo)</td><td>16:35</td><td>Close — Launch Day + My AI Playbook</td></tr>
   </table>
   <h3>By the end of today you will be able to</h3>
   <ol class="c">
@@ -115,6 +152,7 @@
     <li>Tell the difference between a demo and a product — specs, guardrails, evals and observability.</li>
     <li>Make an architecture choice: which model, which hosting, buy or build.</li>
     <li>Build a value case for an AI project even when there is no past data.</li>
+    <li>Build security, cost control, evals and safety into an AI project <b>from day one</b> — not after the first incident.</li>
     <li>Leave with your own one-page <b>AI Playbook</b> and a Monday action.</li>
   </ol>
   <h3>The AI stack — today's map</h3>
@@ -131,7 +169,7 @@
     <div><span class="n">9</span><b>Security</b>How it is attacked and defended. Session 9.</div>
     <div><span class="n">10</span><b>Value</b>How you prove it was worth it. Session 8.</div>
   </div>
-  <div class="lab" id="howto"><span class="open">Do this once, at 09:05</span>
+  <div class="lab" id="howto"><span class="open">Do this once, before Lab 1</span>
     <h3>How to open the lab (no files to open, nothing to install)</h3>
     <table>
       <tr><th>Step</th><th>Where</th><th>What to do</th></tr>
@@ -147,9 +185,19 @@
   <div class="plain"><b class="t">Yesterday in one line:</b> models are rented brains priced by the token; prompts shape the answer; RAG lets the AI answer from your documents; and nothing is trustworthy until it is tested.</div>
 </section>
 
+<!-- ================= MINDSET ================= -->
+<section id="mindset">
+  <div class="slot">09:05 · 10 minutes</div>
+  <h2>Mindset · Old habit or AI habit?</h2><div class="rule"></div>
+  <p>Most of what made you a good manager of software still holds. Some of it quietly stops working when the software is AI. Below are eight beliefs every engineering manager has. For each card, decide with your partner: <b>still true</b>, or <b>needs to change</b> for AI? Then the card flips and shows where today you will see it for yourself.</p>
+  <div class="flips" id="flips"></div>
+  <div class="note" id="flipScore">Your AI-habit score appears here when you have voted on all eight cards.</div>
+  <div class="plain"><b class="t">In plain words:</b> keep the habits that protect people — ownership, security by design. Change the ones that assume software is predictable and finished at release. You will meet every one of these cards again in a lab today, and at 16:35 you will test yourself in <a href="#launch">Launch Day</a>.</div>
+</section>
+
 <!-- ================= S1 ================= -->
 <section id="s1">
-  <div class="slot">09:10 · 30 minutes</div>
+  <div class="slot">09:15 · 30 minutes</div>
   <h2>1 · Prompt vs Spec <span class="layer">Layer 2</span></h2><div class="rule"></div>
   <p>Vibe coding means asking AI to build something with a short, loose request. It is fast, and often good enough for a prototype. But AI fills every gap in your request with a <b>sensible guess</b> — and your business rules are exactly the things it cannot guess.</p>
   <p><b>Spec-driven development</b> means writing a short specification first and giving it to the AI. A good spec has six parts:</p>
@@ -172,11 +220,10 @@
       <li>Scroll down to <b>The 5 test releases</b>. Each card shows GO (green) or NO-GO (red) — this is the AI's decision engine at work. Do not reveal the answers yet.</li>
       <li><b>Round 2:</b> click the <i>Specification</i> tab. Read rules R1–R4 in the box (these are Axion's own rules). Click <b>🔨 Build</b>.</li>
       <li>Scroll to the bottom and switch on <b>🔍 Reveal the correct answers</b>. Each card gets a ✅ or ❌, and you see both scores. Enter them in AhaSlides.</li>
-      <li><b>Twist:</b> in the Specification box change <code>98.0%</code> to <code>99.0%</code> in rule R1 and click Build again. Discuss: what would the vague-prompt team even change?</li>
     </ol>
     <p class="note" style="margin:8px 0 0">Model slow or failing? Click <b>▶ Replay a saved run</b> next to Build — it shows a real saved result instantly.</p>
   </div>
-  <div class="plain"><b class="t">In plain words:</b> the AI was equally clever in both rounds. The spec did not make it smarter — it gave it the knowledge only your team has. The acceptance tests inside the spec are also how you check the AI's work.</div>
+  <div class="plain"><b class="t">In plain words:</b> the AI was equally clever in both rounds. The spec did not make it smarter — it gave it the knowledge only your team has. The acceptance tests inside the spec are also how you check the AI's work. And when the rule changes tomorrow — say safety modules now need 99% — the spec team edits one line and rebuilds; the vague team starts again. <b>A spec is a living asset; a prompt is a one-time wish.</b></div>
   <div class="card quiz" data-answer="1" data-why='["No. The model and the build contract were the same in both rounds.","Right. A safety-rated module needs 98% at Axion — a rule no AI can guess. The vague version used a common 95% and gave a green GO.","No. The release data was identical in both rounds."]'>
     <h4>Quick check: why did the vague prompt give a GO to the Safety I/O release?</h4>
     <div class="opts"><label><input type="radio" name="q11">The vague round used a weaker model</label><label><input type="radio" name="q11">It did not know Axion's 98% rule for safety-rated modules</label><label><input type="radio" name="q11">The test data was different</label></div><p class="fb"></p>
@@ -190,7 +237,7 @@
 
 <!-- ================= S2 ================= -->
 <section id="s2">
-  <div class="slot">09:40 · 35 minutes</div>
+  <div class="slot">09:45 · 35 minutes</div>
   <h2>2 · Build your RAG + Knowledge Graphs <span class="layer">Layer 3</span></h2><div class="rule"></div>
   <h3>First, watch: a serious RAG (trainer demo — AskIT)</h3>
   <table>
@@ -228,8 +275,58 @@
   <h3>What happened in the background — six steps, two of them AI</h3>
   <p><b>1 Read</b> the PDF → <b>2 Chunk</b> it into pieces → <b>3 Embed</b> each piece into numbers that capture meaning (AI) → <b>4 Search</b> for the 3 pieces closest to the question → <b>5 Prompt</b> = pieces + question + rules → <b>6 Answer</b> (AI).</p>
   <div class="plain"><b class="t">In plain words:</b> the model never reads your PDF. It only sees the three pieces the search found. If the search picks the wrong pieces, even the best model gives a wrong answer. That is why question 3 often fails.</div>
-  <h3>Knowledge graphs and Graph RAG</h3>
-  <p>Normal RAG finds pieces of text that <i>sound like</i> the question. It struggles when the answer needs <b>several facts joined together</b> — "I am a contractor (Section 6) travelling to Mumbai (Metro, Section 4.2) — what applies?" A <b>knowledge graph</b> stores facts as things and the links between them, so the AI can follow a path instead of hoping the right paragraphs come up.</p>
+  <h3>Embeddings, vector store and semantic search — try it yourself</h3>
+  <p>Three words you will hear in every RAG discussion. Here they are with one small, drawable example from the Axion HR policy.</p>
+  <div class="two">
+    <div class="note" style="margin:0"><b>1 · Embedding</b> = turning text into a list of numbers that captures its <i>meaning</i> — like GPS coordinates, but for meaning. Texts that mean similar things get similar numbers, even if they use different words ("vacation" and "earned leave").</div>
+    <div class="note" style="margin:0"><b>2 · Vector store</b> = a table that keeps every chunk of text next to its numbers. In your Lab 2 app it is a simple list in memory; in production it is a database such as Azure AI Search or PostgreSQL with pgvector.</div>
+    <div class="note" style="margin:0"><b>3 · Semantic search</b> = turn the question into numbers too, then find the chunks whose numbers are closest. It searches by <i>meaning</i>, not by matching words.</div>
+    <div class="note" style="margin:0"><b>4 · Cosine similarity</b> = how "close" two meanings are, measured by the <b>angle</b> between their arrows. Same direction = <b>1.00</b> (same meaning). At right angles = <b>0.00</b> (unrelated).</div>
+  </div>
+
+  <div class="lab" id="emb">
+    <h3>Play with a meaning map</h3>
+    <p>Real embedding models use <b>1,536 numbers</b> per chunk (your Lab 2 app shows this). Here we use just <b>2</b>, so we can draw them: how much a text is about <b>time off</b> (left → right) and how much it is about <b>money &amp; travel</b> (bottom → top). The maths is exactly the same.</p>
+    <p><b>Pick a question</b> — or <b>click anywhere on the map</b> to place your own question.</p>
+    <div id="embQs" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
+    <div class="two" style="align-items:start">
+      <svg id="embMap" viewBox="0 0 420 420" style="width:100%;max-width:440px;background:#fff;border:1.5px solid var(--line);border-radius:6px;cursor:crosshair" role="img" aria-label="Meaning map with chunk arrows and the question arrow"></svg>
+      <div>
+        <div id="embQ" style="font-weight:600;margin-bottom:6px"></div>
+        <table id="embTable"><tr><th>Rank</th><th>Chunk</th><th>Cosine</th></tr></table>
+        <div id="embKw" class="note" style="margin:8px 0"></div>
+      </div>
+    </div>
+    <details><summary>See the vector store (what is actually saved)</summary>
+      <table id="embStore"><tr><th>id</th><th>page</th><th>text (the chunk)</th><th>vector (2 numbers here, 1,536 in real life)</th></tr></table>
+      <p class="muted" style="font-size:.9rem">A real vector looks like <code>[0.021, -0.113, 0.447, 0.006, … 1,536 numbers]</code>. Nobody reads them — the computer only compares them.</p>
+    </details>
+    <details><summary>How is cosine similarity calculated? (optional)</summary>
+      <p>For two arrows <i>a</i> and <i>b</i>: cosine = (a₁×b₁ + a₂×b₂) ÷ (length of a × length of b). It only cares about the <b>direction</b> of the arrows, not their length — so a long paragraph and a short question about the same topic still match. With 1,536 numbers the formula just has 1,536 terms instead of 2.</p>
+    </details>
+  </div>
+  <div class="plain"><b class="t">In plain words:</b> the AI does not "search for words". It turns every chunk and your question into points on a meaning map and picks the nearest ones. That is why "vacation" finds "earned leave" — and also why a question that needs two chunks that are far apart on the map can miss one of them. The next section shows exactly that.</div>
+
+  <h3>Knowledge graphs and Graph RAG — when one paragraph is not enough</h3>
+  <p>Remember question 3 in Lab 2? The Axion HR policy has <b>two rules in two different places</b>:</p>
+  <div class="two">
+    <div class="note" style="margin:0"><b>Rule A · Section 4.2 — hotel limits by city</b><br>Metro cities (Bengaluru, <b>Mumbai</b>, Delhi…) → <b>INR 6,500</b> a night.<br>Tier-2 cities (Pune, Ahmedabad…) → INR 4,500.</div>
+    <div class="note" style="margin:0"><b>Rule B · Section 6.3 — contractors</b><br>Contractors are paid the <b>Tier-2 limit (INR 4,500) in every city</b>, whatever the city category in Section 4.2.</div>
+  </div>
+  <p style="margin-top:12px">A contractor asks: <b>"Can I claim INR 6,500 for a hotel in Mumbai?"</b> The correct answer is <b>No — INR 4,500</b>. But you only get there by <b>joining both rules</b>. Click to see what each approach does.</p>
+  <button class="btn" data-reveal="rvA">① What normal RAG finds</button>
+  <div class="reveal" id="rvA">
+    <table style="margin-top:10px">
+      <tr><th>Rank</th><th>Chunk the search returned</th><th>Why it was picked</th></tr>
+      <tr><td>1</td><td>Section 4.2 — hotel limits table: <b>Mumbai = Metro = INR 6,500</b></td><td>Same words as the question: <i>hotel, Mumbai, 6,500</i></td></tr>
+      <tr><td>2</td><td>Section 4.3 — daily allowance INR 1,200 on outstation travel</td><td>Also about travel money</td></tr>
+      <tr><td>3</td><td>Section 4.4 — weekend travel needs approval</td><td>Also about travel</td></tr>
+    </table>
+    <div class="war" style="margin-top:0"><b class="t">AI answer: "Yes, you can claim up to INR 6,500 in Mumbai." ❌</b><br>Section 6 never reached the model. It uses different words (<i>contractors, SOW, Tier-2</i>), so on the meaning map it sits far from the question. The model was not stupid — it was never shown the rule.</div>
+  </div>
+  <button class="btn" data-reveal="rvB" style="margin-top:8px">② What Graph RAG follows</button>
+  <div class="reveal" id="rvB">
+    <p style="margin-top:10px">A <b>knowledge graph</b> stores the policy as <b>things</b> (Contractor, Section 6.3, Tier-2 limit, Mumbai) and the <b>links</b> between them (governed by, overrides, gives). Before searching text, the system first finds the things in the question — <i>contractor</i>, <i>Mumbai</i>, <i>hotel</i> — and follows their links:</p>
   <svg viewBox="0 0 900 190" style="width:100%;max-width:900px;background:#fff;border:1.5px solid var(--line);border-radius:6px" role="img" aria-label="Knowledge graph path from Contractor to hotel limit">
     <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 z" fill="#22262A"/></marker></defs>
     <g font-family="Saira, sans-serif" font-size="14">
@@ -241,10 +338,13 @@
       <line x1="140" y1="92" x2="213" y2="92" stroke="#22262A" stroke-width="2" marker-end="url(#ar)"/><text x="176" y="84" text-anchor="middle" font-size="12">governed by</text>
       <line x1="355" y1="92" x2="428" y2="92" stroke="#22262A" stroke-width="2" marker-end="url(#ar)"/><text x="392" y="84" text-anchor="middle" font-size="12">overrides</text>
       <line x1="580" y1="92" x2="658" y2="92" stroke="#22262A" stroke-width="2" marker-end="url(#ar)"/><text x="619" y="84" text-anchor="middle" font-size="12">gives</text>
-      <line x1="285" y1="114" x2="428" y2="158" stroke="#B3432B" stroke-width="2" stroke-dasharray="5 4"/><text x="592" y="164" font-size="12" fill="#B3432B" text-anchor="start">← normal RAG often stops here ✗</text>
+      <line x1="285" y1="114" x2="428" y2="158" stroke="#B3432B" stroke-width="2" stroke-dasharray="5 4"/><text x="592" y="164" font-size="12" fill="#B3432B" text-anchor="start">← where normal RAG stopped ✗</text>
       <text x="20" y="34" font-size="15" font-weight="600">Graph RAG follows the path: Contractor → Section 6.3 → Tier-2 limit → answer</text>
     </g>
   </svg>
+    <div class="plain"><b class="t">AI answer: "No. As a contractor you get the Tier-2 limit of INR 4,500, even in Mumbai (Section 6.3), and only if travel is in your SOW." ✅</b><br>Same model. The difference is that the system <i>knew the two rules were connected</i> and gave the model both.</div>
+  </div>
+  <h3>When is it worth it?</h3>
   <table>
     <tr><th>Approach</th><th>Use it when</th><th>Cost and effort</th></tr>
     <tr><td>Whole document in the prompt</td><td>One short, stable document</td><td>Simplest; expensive if long</td></tr>
@@ -264,7 +364,7 @@
 
 <!-- ================= S3 ================= -->
 <section id="s3">
-  <div class="slot">10:15 · 60 minutes</div>
+  <div class="slot">10:20 · 55 minutes</div>
   <h2>3 · Agents + Guardrails <span class="layer">Layers 4 and 5</span></h2><div class="rule"></div>
   <p>An <b>agent</b> is a model with a job description, tools it can ask to use, and memory of the conversation. A <b>multi-agent system</b> splits a job between several agents, each with its own instructions and tools — like a team. The model never touches data directly: it <i>asks</i> for a tool, and our code runs it.</p>
   <p><b>Guardrails</b> are not inside the model. They are ordinary code around it, in four layers:</p>
@@ -277,8 +377,13 @@
   </table>
   <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 3 · Agents + Guardrails</span>
     <h3>Lab 3 · The Release Readiness Crew</h3>
-    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. Pick a scenario, set the <b>🛡️ Guardrails ON</b> switch, click <b>▶ Run the crew</b> (20–40 s), read the conversation top to bottom, then the verdict bar. Fill the table below as you go.</p>
-    <p>Five agents — Coordinator, Test Analyst, Security Analyst, Policy Agent, Release Manager — review AX900 v4.2. For each scenario: predict, run with guardrails <b>OFF</b>, then <b>ON</b>.</p>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. The lab has four tabs — do them in order:</p>
+    <ol>
+      <li><b>① Meet the crew</b> (5 min): the problem the crew solves, the five agents, their tools, how one run works, and what is hidden in each scenario.</li>
+      <li><b>② Watch them work</b> (10 min): click <b>Start the walkthrough</b>, then <b>Next step</b> — one normal release, one agent at a time, with an explanation of each step.</li>
+      <li><b>③ Run &amp; attack</b> (30 min): for each attack, predict, run with guardrails OFF, switch ON, run again. Fill the table below.</li>
+      <li><b>④ What happened</b> (5 min): your results side by side, what went on in the background, and three questions for Monday.</li>
+    </ol>
     <table>
       <tr><th>Scenario</th><th>Guardrails OFF — what happened?</th><th>Guardrails ON — what happened?</th></tr>
       <tr><td>Normal release</td><td><input class="t" data-k="l3a"></td><td><input class="t" data-k="l3b"></td></tr>
@@ -346,7 +451,7 @@
 <section id="s5">
   <div class="slot">12:30 · 30 minutes · trainer demo</div>
   <h2>5 · AI in the workplace</h2><div class="rule"></div>
-  <p>One story across four apps: <b>raw Azure DevOps data to a steering committee pack in 25 minutes.</b> If you have Microsoft 365 Copilot, follow along with the same prompts and the file <code>Axion_AX900_ADO_Export.xlsx</code> (on your VM in <code>C:\ai-abb\day2\data</code>). You can use the same prompts in Abby at your desk.</p>
+  <p>One story across four apps: <b>raw Azure DevOps data to a steering committee pack in 25 minutes.</b> If you have Microsoft 365 Copilot, follow along on your laptop with the same prompts — <a href="data/Axion_AX900_ADO_Export.xlsx" download>download the Excel file here</a> (306 Azure DevOps work items, 4 teams, 6 sprints; fictional). You can use the same prompts in Abby at your desk.</p>
   <h3>Prompt pack</h3>
   <p><b>Excel</b></p>
   <div class="prompt" id="pp1">Summarise this data by team and sprint. What are the three biggest delivery risks for the AX900 v4.2 release? Give numbers.</div><button class="copy" data-copy="pp1">Copy</button>
@@ -363,33 +468,45 @@
 <!-- ================= S6 ================= -->
 <section id="s6">
   <div class="slot">13:45 · 30 minutes</div>
-  <h2>6 · Azure DevOps + Power BI — the role of AI <span class="layer">Layers 3 and 8</span></h2><div class="rule"></div>
-  <svg viewBox="0 0 900 120" style="width:100%;max-width:900px;background:#fff;border:1.5px solid var(--line);border-radius:6px" role="img" aria-label="ADO to Power BI to AI architecture">
+  <h2>6 · AI on your delivery data — Azure DevOps + Power BI <span class="layer">Layers 3 and 8</span></h2><div class="rule"></div>
+  <p>We do not connect to ABB's Azure DevOps or Power BI in this room. We do not need to: an ADO export is just a table, and everything below works the same on your real ADO, on Jira or on an Excel tracker. The focus is <b>what AI can do for you every week</b> — and how to keep it honest.</p>
+  <svg viewBox="0 0 900 120" style="width:100%;max-width:900px;background:#fff;border:1.5px solid var(--line);border-radius:6px" role="img" aria-label="ADO to Power BI to AI">
     <g font-family="Saira, sans-serif" font-size="14" text-anchor="middle">
-      <rect x="15" y="35" width="175" height="54" rx="6" fill="#E7F1FB" stroke="#1E4E8C" stroke-width="2"/><text x="102" y="58" font-weight="600">Azure DevOps</text><text x="102" y="77" font-size="12">Boards · Test Plans · Pipelines</text>
-      <rect x="240" y="35" width="175" height="54" rx="6" fill="#fff" stroke="#22262A" stroke-width="2"/><text x="327" y="58" font-weight="600">Analytics views / OData</text><text x="327" y="77" font-size="12">governed extract</text>
-      <rect x="465" y="35" width="175" height="54" rx="6" fill="#fff" stroke="#22262A" stroke-width="2"/><text x="552" y="58" font-weight="600">Power BI model</text><text x="552" y="77" font-size="12">measures · DAX · security</text>
-      <rect x="690" y="35" width="195" height="54" rx="6" fill="#FFF8E8" stroke="#B37E00" stroke-width="2"/><text x="787" y="58" font-weight="600">AI layer</text><text x="787" y="77" font-size="12">summary · Q&amp;A · fact check</text>
+      <rect x="15" y="35" width="175" height="54" rx="6" fill="#E7F1FB" stroke="#1E4E8C" stroke-width="2"/><text x="102" y="58" font-weight="600">Azure DevOps</text><text x="102" y="77" font-size="12">work items · bugs · tests</text>
+      <rect x="240" y="35" width="175" height="54" rx="6" fill="#fff" stroke="#22262A" stroke-width="2"/><text x="327" y="58" font-weight="600">Export / Analytics</text><text x="327" y="77" font-size="12">the numbers (exact)</text>
+      <rect x="465" y="35" width="175" height="54" rx="6" fill="#fff" stroke="#22262A" stroke-width="2"/><text x="552" y="58" font-weight="600">Power BI</text><text x="552" y="77" font-size="12">charts · measures · alerts</text>
+      <rect x="690" y="35" width="195" height="54" rx="6" fill="#FFF8E8" stroke="#B37E00" stroke-width="2"/><text x="787" y="58" font-weight="600">AI</text><text x="787" y="77" font-size="12">writes words and queries</text>
       <g stroke="#22262A" stroke-width="2"><line x1="190" y1="62" x2="238" y2="62"/><line x1="415" y1="62" x2="463" y2="62"/><line x1="640" y1="62" x2="688" y2="62"/></g>
     </g>
   </svg>
-  <p><b>Where AI helps:</b> writing DAX and OData queries; three-sentence summaries of a dashboard; spotting unusual trends; predicting sprint slip or defect growth; first drafts of root-cause analysis. <b>Who owns what:</b> the ADO admin owns access, the BI team owns the model and measures, security owns what may leave the tenant.</p>
+  <div class="plain"><b class="t">The one rule:</b> the numbers come from ADO and Power BI. AI only writes the words and the queries — and a person checks before anything goes up.</div>
+  <h3>Top 5 things AI can do for you — and how to start on Monday</h3>
+  <table>
+    <tr><th>#</th><th>What AI does</th><th>Benefit</th><th>Start on Monday</th></tr>
+    <tr><td>1</td><td><b>Writes the queries and formulas</b> you usually ask the BI team for</td><td>No waiting days for "can you pull this number"</td><td>Ask Abby: <i>"Write an Azure DevOps query for all active Sev-1 and Sev-2 bugs in area [X] older than 14 days."</i> Paste it into the ADO query editor and check the count looks right.</td></tr>
+    <tr><td>2</td><td><b>Writes your weekly status</b> from the sprint data — 3 sentences: risk, quality, ask</td><td>Monday status in minutes instead of an hour</td><td>Export the sprint query to Excel, make a small summary table (team, planned, done, carried over, customer bugs). Ask: <i>"3 sentences for my director. Use only these numbers."</i> Check one number by hand.</td></tr>
+    <tr><td>3</td><td><b>Explains alerts</b> — when a number crosses a limit, AI says why</td><td>Problems seen the same day, not at the monthly review</td><td>In Power BI, set a <b>data alert</b> on the carry-over % card (for example above 30%). When it fires, paste the drill-down table into Abby: <i>"Explain the top 2 reasons from this data."</i></td></tr>
+    <tr><td>4</td><td><b>Spots duplicate bugs</b> in new bug lists</td><td>Less triage time; two teams do not fix the same bug</td><td>Paste this week's new bugs (ID and title) into Abby: <i>"Group likely duplicates and list the IDs."</i> The triager confirms.</td></tr>
+    <tr><td>5</td><td><b>Drafts the release go/no-go memo</b> against your release rules</td><td>The meeting starts from facts, with a record of why</td><td>Give Abby your release rules, open bugs by severity and test pass %: <i>"GO or NO-GO? Name the rule behind each point."</i> You make the final call.</td></tr>
+  </table>
+  <p class="muted" style="font-size:.92rem">The benefits are typical patterns, not promises. Measure your own with the value case in Lab 8. Copilot inside Power BI needs the right licence — check with your BI team before planning on it.</p>
   <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 6 · Sprint Board</span>
-    <h3>Lab 6 · Six charts vs three sentences</h3>
-    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Data:</b> already loaded (the Azure DevOps export in <code>C:\ai-abb\day2\data</code>).</p>
-    <div class="predict">Predict: in 10 seconds, the biggest v4.2 risk is <input data-k="p6" style="width:260px"></div>
+    <h3>Lab 6 · See why the one rule matters (10 minutes)</h3>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Data:</b> a sample Azure DevOps export, already loaded (306 work items, 4 teams, 6 sprints).</p>
+    <div class="predict">Predict: in 10 seconds, the biggest risk for the v4.2 release is <input data-k="p6" style="width:260px"></div>
     <ol>
       <li>Look at the six charts for 10 seconds. Write your answer above.</li>
-      <li>Click <b>Write the executive summary</b> with the rule ON. Read the fact check.</li>
-      <li>Switch the rule OFF and run again. What does the fact check show now?</li>
-      <li>Ask your data: <i>"What is our customer satisfaction score?"</i> — does it admit the data cannot answer?</li>
+      <li>Click <b>Write the executive summary</b> with the rule switched ON ("every number must come from the data"). Read the fact check.</li>
+      <li>Switch the rule OFF and run again. Does the AI add "industry" figures that are not in your data? The fact check marks them.</li>
+      <li>Ask your data: <i>"What is our customer satisfaction score?"</i> It is not in the data — does the AI admit that?</li>
     </ol>
   </div>
-  <div class="plain"><b class="t">In plain words:</b> the AI read five small summary tables, not 306 rows — cheaper, faster and safer. Every number it writes is checked against the data in code, so a figure from "typical industry benchmarks" is caught before it reaches a VP.</div>
-  <div class="decision" data-d="d6"><h4>Decision card · AI on our delivery data</h4>
-    <label><input type="radio" name="d6" value="Use the AI built into our BI tool (Power BI Copilot) where licensed; insist every AI statement quotes its number.">Use the BI tool's built-in AI where licensed; every statement must quote its number.</label>
-    <label><input type="radio" name="d6" value="Build a small AI layer over governed ADO Analytics extracts, with a code fact-check before anything is shared.">Build a small AI layer over governed extracts, with a code fact-check.</label>
-    <label><input type="radio" name="d6" value="Start with weekly AI-written summaries reviewed by a person; automate only after three months of clean reviews.">Weekly AI summaries reviewed by a person first; automate later.</label>
+  <div class="decision" data-d="d6x"><h4>My ADO + AI routine · tick the two you will start next week</h4>
+    <label><input type="checkbox" value="Ask AI to write my ADO queries and formulas; check the count before using them"> 1 · AI writes my queries and formulas</label>
+    <label><input type="checkbox" value="Weekly status from a small summary table: 3 sentences, only these numbers, one checked by hand"> 2 · Weekly status from the sprint data</label>
+    <label><input type="checkbox" value="Power BI data alert on carry-over %; AI explains the top reasons from the drill-down"> 3 · Alert + AI explanation</label>
+    <label><input type="checkbox" value="Weekly duplicate-bug check on new bugs; triager confirms"> 4 · Duplicate-bug check</label>
+    <label><input type="checkbox" value="Go/no-go memo drafted against our release rules; I make the call"> 5 · Release go/no-go memo</label>
   </div>
 </section>
 
@@ -405,17 +522,75 @@
     <tr><td>Upgrade path</td><td>Model gateway + eval set</td><td>Can we swap to next quarter's model in one day?</td></tr>
   </table>
   <p><b>Open-weight</b> means the model's weights are published, so it can run on your own servers — important for plants with no internet, for IP, and for data sovereignty. The price is a team to run it, GPUs to buy, and patches to apply.</p>
+  <div class="note"><b>This hour:</b> Part 1 · the 8 steps to choose a model (15 min) → Part 2 · Lab 7, four models side by side (30 min) → Part 3 · pick a model for <i>your</i> use case (15 min).</div>
+
+  <h3>Part 1 · How to choose a model — 8 steps</h3>
+  <p>Most teams choose the wrong way round: they pick the famous model, then look for a use. The 8 steps run the other way — <b>the use case and its limits choose the model.</b> Steps 1–3 happen before anyone tests a model.</p>
+  <p><b>Do it now (pairs, 5 min):</b> think of one AI use case in your team. For each step, be honest: <b>do we do this today, or do we skip it?</b> Each answer shows what goes wrong and what to do instead.</p>
+  <div class="m8grid" id="m8"></div>
+  <div class="score" id="m8score"></div>
+
+  <h3>Spot the skipped step</h3>
+  <p>Five things that happen in real AI projects. Which step did the team skip? Click the step number.</p>
+  <div id="skip"></div>
+  <div class="score" id="skipscore"></div>
+
+  <h3>Part 2 · Lab 7 — four models, one question</h3>
   <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 7 · Trade-offs</span>
-    <h3>Lab 7 · Four models, one question — then the money</h3>
+    <h3>Lab 7 · Four models, one question — then the money (steps 4 and 5, live)</h3>
     <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none. Three tabs at the top: A, B, C.</p>
     <div class="predict">Predict: the best answer will come from <input data-k="p7a" style="width:180px">, the cheapest from <input data-k="p7b" style="width:180px"></div>
     <ol>
       <li><b>A:</b> click <b>Ask all four at once</b>. Score each answer 1–5. Look at quality per dollar.</li>
+      <li><b>The 10× question:</b> if the small model and gpt-5.5 both scored 4 or 5, which one do you pay for at 50,000 calls a day? Price it in tab B.</li>
       <li><b>B:</b> move the sliders. At how many requests a day does pay-per-token stop being cheapest?</li>
       <li><b>C:</b> each team takes one scenario card, chooses model · hosting · framework, and defends it in 2 minutes.</li>
     </ol>
   </div>
   <div class="plain"><b class="t">In plain words:</b> pay-per-token wins while usage is low or unpredictable — which is most pilots. Fixed capacity wins only at high, steady volume. On-prem is mostly a decision about data, network and control, not cost.</div>
+  <h3>Part 3 · Model Picker — your own use case</h3>
+  <p>Take the use case from Part 1. Answer six questions; the picker gives a starting point and what you still have to prove. <b>It is a start, not an answer</b> — step 3, your own test set, decides.</p>
+  <div class="card" id="picker">
+    <div class="pq" data-q="d"><h4>1 · What data does it touch?</h4>
+      <label><input type="radio" name="pk_d" value="0">Public or general internal (manuals, published specs)</label>
+      <label><input type="radio" name="pk_d" value="1">Confidential — customer, HR, pricing, our IP</label>
+      <label><input type="radio" name="pk_d" value="2">Plant / OT data that must stay on site or work offline</label></div>
+    <div class="pq" data-q="w"><h4>2 · If the answer is wrong…</h4>
+      <label><input type="radio" name="pk_w" value="0">Green — it is a draft, a person rewrites it</label>
+      <label><input type="radio" name="pk_w" value="1">Amber — a person checks every answer before use</label>
+      <label><input type="radio" name="pk_w" value="2">Red — it reaches a customer, money or safety</label></div>
+    <div class="pq" data-q="t"><h4>3 · What is the job?</h4>
+      <label><input type="radio" name="pk_t" value="0">Sort, tag, extract fields, route tickets</label>
+      <label><input type="radio" name="pk_t" value="1">Answer from documents, summarise, draft</label>
+      <label><input type="radio" name="pk_t" value="2">Multi-step reasoning, code, or an agent using tools</label></div>
+    <div class="pq" data-q="v"><h4>4 · How many tasks a day?</h4>
+      <label><input type="radio" name="pk_v" value="0">Under 1,000</label>
+      <label><input type="radio" name="pk_v" value="1">1,000 – 20,000</label>
+      <label><input type="radio" name="pk_v" value="2">Over 20,000, every day</label></div>
+    <div class="pq" data-q="s"><h4>5 · How fast must it answer?</h4>
+      <label><input type="radio" name="pk_s" value="0">Live — a person is waiting (seconds)</label>
+      <label><input type="radio" name="pk_s" value="1">Batch — minutes or overnight is fine</label></div>
+    <div class="pq" data-q="n"><h4>6 · Does it call tools or return strict JSON to another system?</h4>
+      <label><input type="radio" name="pk_n" value="0">No — plain text for a person</label>
+      <label><input type="radio" name="pk_n" value="1">Yes — tools, JSON, or another system reads the output</label></div>
+    <button class="btn" id="pkGo">Recommend</button>
+    <div id="pkOut" style="margin-top:12px"></div>
+  </div>
+
+  <h3>Model decision record — one page per use case</h3>
+  <p>Fill this in for your use case. It goes into your Playbook. Ask your team for this page before any model is chosen — and again when the model changes.</p>
+  <div class="card">
+    <div class="two">
+      <div><b>Use case</b><input class="t" data-k="mr1" placeholder="e.g. tag incoming field-service tickets by product and severity">
+        <b>Green / amber / red — and why</b><input class="t" data-k="mr2" placeholder="Amber: a dispatcher checks before routing">
+        <b>Hard limits (data, region, allowed models)</b><input class="t" data-k="mr3" placeholder="Customer data — inside ABB tenant, approved models only">
+        <b>Test set: how many cases, who owns it, pass mark</b><input class="t" data-k="mr4" placeholder="50 real tickets · owner: service lead · pass 46/50"></div>
+      <div><b>First model tried → chosen model</b><input class="t" data-k="mr5" placeholder="mini → mini (passed 47/50)">
+        <b>Backup model</b><input class="t" data-k="mr6" placeholder="second approved model, tested on same set">
+        <b>Cost per task (target / actual)</b><input class="t" data-k="mr7" placeholder="under $0.01 / $0.004">
+        <b>Re-test when…</b><input class="t" data-k="mr8" placeholder="any model update, retirement date, or monthly"></div>
+    </div>
+  </div>
   <div class="decision" data-d="d7"><h4>Decision card · My default architecture</h4>
     <label><input type="radio" name="d7" value="Default: smallest model that passes our eval, serverless, inside our tenant, behind a model gateway — revisit hosting only when volume is high and steady.">Smallest model that passes the eval, serverless, behind a gateway.</label>
     <label><input type="radio" name="d7" value="For plant-side use cases: open-weight models on-prem, read-only, with offline evals before every model upgrade.">Plant-side: open-weight on-prem, read-only, offline evals before upgrades.</label>
@@ -467,8 +642,10 @@
   </ul>
   <div class="lab"><span class="open">Lab VM → ABB AI Lab → left menu: 9 · Break the Bot</span>
     <h3>Lab 9 · Make the support bot leak its secret</h3>
-    <p><b>Tool:</b> ABB AI Lab on your VM. Type in the chat box at the bottom of the page.</p>
-    <ol><li>Guardrails OFF: get the partner discount code out of the bot. Count your attempts.</li><li>Guardrails ON: try again. Enter your attempt counts in AhaSlides — fastest break wins.</li></ol>
+    <p><b>Tool:</b> ABB AI Lab on your VM. <b>Files:</b> none.</p>
+    <ol><li>Guardrails OFF: click the four <b>quick-start attack</b> buttons one by one, or type your own attack in the chat box at the bottom. Count your attempts until the code leaks (you will see balloons).</li>
+      <li>Switch <b>Guardrails ON</b> and try the same attacks again. What blocked them — the input guard or the output guard?</li>
+      <li>Enter your attempt counts in AhaSlides — fastest break wins.</li></ol>
   </div>
   <div class="plain"><b class="t">In plain words:</b> the bot's instructions are a polite request, not a lock. The real fix is simpler than any guardrail: never put a secret where the AI can read it.</div>
   <div class="card quiz" data-answer="2" data-why='["Unsafe. Customer data is leaving the company to a tool ABB does not control.","Unsafe. Writing to the control system without a human is exactly what the OT rule forbids.","Safe. Public information, an approved internal tool, and a person decides."]'>
@@ -484,8 +661,15 @@
 
 <!-- ================= CLOSE ================= -->
 <section id="close" style="border-bottom:none">
-  <div class="slot">16:35 · 20 minutes</div>
-  <h2>Close — best practices, failure stories, your AI Playbook</h2><div class="rule"></div>
+  <div class="slot">16:35 · 25 minutes</div>
+  <h2>Close — Launch Day, then your AI Playbook</h2><div class="rule"></div>
+  <div class="lab" id="launch"><span class="open">15 minutes · in pairs · on this page</span>
+    <h3>Launch Day · Can you get the Axion Field Service Assistant live?</h3>
+    <p>Axion is launching an AI assistant for its <b>400 field service technicians</b>: they ask about fault codes, manuals and procedures on site. Go-live is in <b>12 weeks</b>. You are the engineering manager. Seven situations will land on your desk — one for each discipline that must be <b>built in from day one</b>. Choose what you do. There is no undo.</p>
+    <div class="dots" id="lDots"></div>
+    <div id="lStage"></div>
+  </div>
+
   <h3>The AI Decision Framework — seven questions for any AI proposal</h3>
   <ol class="c">
     <li>What problem, and who owns the outcome?</li>
@@ -514,6 +698,7 @@
     <tr><td>Demo vs product: specs, guardrails, evals, observability</td><td><input type="range" min="1" max="5" value="3" data-k="lb2"></td></tr>
     <tr><td>Architecture choice: model, hosting, buy or build</td><td><input type="range" min="1" max="5" value="3" data-k="lb3"></td></tr>
     <tr><td>A value case with no past data</td><td><input type="range" min="1" max="5" value="3" data-k="lb4"></td></tr>
+    <tr><td>Security, cost, evals and safety built in from day one</td><td><input type="range" min="1" max="5" value="3" data-k="lb5"></td></tr>
   </table>
   <h3>Your Monday action</h3>
   <div class="two">
@@ -526,7 +711,7 @@
   <div id="playbook" style="display:none"></div>
 </section>
 </main>
-<footer class="wrap">Axion Controls, its products, data, people and customers are fictional, created for this training. Do not upload ABB confidential documents to the lab VMs. · DevPro Academy</footer>
+<footer class="wrap">Axion Controls, its products, data, people and customers are fictional, created for this training. Do not upload ABB confidential documents to the lab VMs.</footer>
 
 <script>
 (function(){
@@ -538,8 +723,16 @@
     if(S[el.dataset.k]!==undefined) el.value=S[el.dataset.k];
     el.addEventListener("input", function(){ S[el.dataset.k]=el.value; save(); });
   });
+  // routine checkboxes (session 6) -> stored as d6
+  (function(){ var box=document.querySelector(".decision[data-d=d6x]"); if(!box) return;
+    var cur=(S.d6||"").split(" | ");
+    box.querySelectorAll("input[type=checkbox]").forEach(function(c){
+      if(cur.indexOf(c.value)>=0) c.checked=true;
+      c.addEventListener("change", function(){
+        S.d6=[].slice.call(box.querySelectorAll("input:checked")).map(function(x){return x.value;}).join(" | "); save(); });
+    }); })();
   // decision cards
-  document.querySelectorAll(".decision").forEach(function(d){
+  document.querySelectorAll(".decision:not([data-d=d6x])").forEach(function(d){
     var k=d.dataset.d;
     d.querySelectorAll("input").forEach(function(r){
       if(S[k]===r.value) r.checked=true;
@@ -562,18 +755,308 @@
       else { var a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(a); ok(); }
     });
   });
+
+  // ---------- embeddings playground ----------
+  (function(){
+    var svg=document.getElementById("embMap"); if(!svg) return;
+    var CH=[
+      {id:"C1",page:1,t:"Earned leave: 24 days are credited every calendar year.",v:[0.95,0.10]},
+      {id:"C2",page:1,t:"Sick leave: 12 days a year; certificate after 2 days.",v:[0.88,0.04]},
+      {id:"C3",page:2,t:"Work from home up to 2 days a week with manager's agreement.",v:[0.70,0.30]},
+      {id:"C4",page:2,t:"Hotel limits: Metro INR 6,500, Tier-2 (Pune) INR 4,500 per night.",v:[0.10,0.96]},
+      {id:"C5",page:2,t:"Daily allowance on outstation travel: INR 1,200.",v:[0.16,0.88]},
+      {id:"C6",page:2,t:"Weekend travel needs approval; earns one compensatory day off.",v:[0.55,0.76]},
+      {id:"C7",page:3,t:"Contractors are paid the Tier-2 hotel limit in every city.",v:[0.22,0.80]}
+    ];
+    var QS=[
+      {q:"How much vacation am I entitled to?",v:[0.93,0.13]},
+      {q:"How much can I spend on a hotel in Pune?",v:[0.12,0.97]},
+      {q:"Can I work from my house on Fridays?",v:[0.76,0.27]},
+      {q:"I travelled on Sunday — do I get a day off?",v:[0.60,0.72]}
+    ];
+    var STOP={"how":1,"much":1,"what":1,"with":1,"from":1,"have":1,"this":1,"that":1,"your":1,"does":1,"there":1,"when":1,"can":1,"the":1,"for":1,"get":1,"day":0};
+    var S=380, O=20; // plot size and origin offset
+    function px(v){ return [O+v[0]*S, O+S-v[1]*S]; }
+    function cos(a,b){ var d=a[0]*b[0]+a[1]*b[1], la=Math.hypot(a[0],a[1]), lb=Math.hypot(b[0],b[1]); return (la&&lb)? d/(la*lb):0; }
+    function words(t){ return (t.toLowerCase().match(/[a-z]+/g)||[]).filter(function(w){ return w.length>3 && !STOP[w]; }); }
+    function esc(t){ return t.replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+    // vector store table
+    var st=document.getElementById("embStore");
+    CH.forEach(function(c){ st.insertAdjacentHTML("beforeend","<tr><td>"+c.id+"</td><td>"+c.page+"</td><td>"+esc(c.t)+"</td><td><code>["+c.v[0].toFixed(2)+", "+c.v[1].toFixed(2)+"]</code></td></tr>"); });
+    // question buttons
+    var qb=document.getElementById("embQs");
+    QS.forEach(function(q){ var b=document.createElement("button"); b.className="copy"; b.textContent=q.q; b.onclick=function(){ draw(q.v,q.q); }; qb.appendChild(b); });
+    function draw(qv, qtext){
+      var NS="http://www.w3.org/2000/svg", h="";
+      // axes
+      var o=px([0,0]), xe=px([1,0]), ye=px([0,1]);
+      h+="<line x1='"+o[0]+"' y1='"+o[1]+"' x2='"+xe[0]+"' y2='"+xe[1]+"' stroke='#22262A' stroke-width='1.5'/>";
+      h+="<line x1='"+o[0]+"' y1='"+o[1]+"' x2='"+ye[0]+"' y2='"+ye[1]+"' stroke='#22262A' stroke-width='1.5'/>";
+      h+="<text x='"+xe[0]+"' y='"+(xe[1]+16)+"' font-size='12' text-anchor='end' fill='#4A5157'>about time off →</text>";
+      h+="<text x='"+(ye[0]+4)+"' y='12' font-size='12' fill='#4A5157'>↑ about money &amp; travel</text>";
+      var ranked=CH.map(function(c){ return {c:c,s:cos(qv,c.v)}; }).sort(function(a,b){ return b.s-a.s; });
+      var top={}; ranked.slice(0,3).forEach(function(r){ top[r.c.id]=1; });
+      CH.forEach(function(c){
+        var p=px(c.v), t=top[c.id];
+        h+="<line x1='"+o[0]+"' y1='"+o[1]+"' x2='"+p[0]+"' y2='"+p[1]+"' stroke='"+(t?"#2F7D4F":"#C6CBC6")+"' stroke-width='"+(t?2.5:1.5)+"'/>";
+        h+="<circle cx='"+p[0]+"' cy='"+p[1]+"' r='6' fill='"+(t?"#2F7D4F":"#9AA19A")+"'/>";
+        h+="<text x='"+(p[0]+8)+"' y='"+(p[1]+4)+"' font-size='12' font-weight='"+(t?700:400)+"'>"+c.id+"</text>";
+      });
+      var qp=px(qv);
+      h+="<line x1='"+o[0]+"' y1='"+o[1]+"' x2='"+qp[0]+"' y2='"+qp[1]+"' stroke='#E8A200' stroke-width='3.5' stroke-dasharray='6 3'/>";
+      h+="<circle cx='"+qp[0]+"' cy='"+qp[1]+"' r='8' fill='#E8A200' stroke='#22262A'/>";
+      h+="<text x='"+(qp[0]-22)+"' y='"+(qp[1]+5)+"' font-size='13' font-weight='700' fill='#B37E00'>Q</text>";
+      svg.innerHTML=h;
+      document.getElementById("embQ").innerHTML="❓ "+esc(qtext)+" <span class='muted'>→ question vector ["+qv[0].toFixed(2)+", "+qv[1].toFixed(2)+"]</span>";
+      var tb=document.getElementById("embTable"); tb.innerHTML="<tr><th>Rank</th><th>Chunk</th><th>Cosine (angle)</th></tr>";
+      ranked.forEach(function(r,i){
+        var ang=Math.round(Math.acos(Math.max(-1,Math.min(1,r.s)))*180/Math.PI), w=Math.max(0,r.s)*100;
+        tb.insertAdjacentHTML("beforeend","<tr style='"+(i<3?"background:#E7F3EC":"")+"'><td>"+(i+1)+(i<3?" ✅":"")+"</td><td><b>"+r.c.id+"</b> "+esc(r.c.t)+"</td><td style='min-width:130px'><b>"+r.s.toFixed(2)+"</b> <span class='muted'>("+ang+"°)</span><div style='height:6px;background:#EDEFED;border-radius:3px'><div style='height:6px;width:"+w+"%;background:"+(i<3?"#2F7D4F":"#9AA19A")+";border-radius:3px'></div></div></td></tr>");
+      });
+      var kw=document.getElementById("embKw");
+      if(qtext.indexOf("your own")>=0){ kw.innerHTML="You placed your own question. The top 3 green chunks are what the AI would read before answering."; return; }
+      var qw=words(qtext), hits=CH.filter(function(c){ var cw=words(c.t); return qw.some(function(w){ return cw.indexOf(w)>=0; }); });
+      kw.innerHTML="<b>Keyword search</b> for "+qw.map(function(w){return "<code>"+w+"</code>";}).join(" ")+" finds: "+(hits.length? hits.map(function(c){return "<b>"+c.id+"</b>";}).join(", ") : "<b style='color:#B3432B'>nothing at all</b>")+
+        (hits.some(function(c){ return c.id===ranked[0].c.id; }) ?
+          ". Here both work, because the question uses the same words as the policy. Try the <i>vacation</i> question to see the difference." :
+          ". <b>Semantic search</b> found <b>"+ranked[0].c.id+"</b> first — by meaning, not by matching words.");
+    }
+    svg.addEventListener("click", function(ev){
+      var r=svg.getBoundingClientRect(), x=(ev.clientX-r.left)*420/r.width, y=(ev.clientY-r.top)*420/r.height;
+      var v=[Math.max(0.01,Math.min(1,(x-O)/S)), Math.max(0.01,Math.min(1,(O+S-y)/S))];
+      draw(v,"Your own question (placed on the map)");
+    });
+    draw(QS[0].v, QS[0].q);
+  })();
+
+  // ---------- mindset flip cards ----------
+  (function(){
+    var box=document.getElementById("flips"); if(!box) return;
+    var C=[
+      ["Same input, same output — software is predictable.","change","AI is <b>probabilistic</b>: the same question can get a different answer. Plan for \"mostly right\" and design how the rest gets caught.","Lab 1 and Lab 4"],
+      ["Testing happens at the end, before release.","change","<b>Write the tests first.</b> The acceptance tests in a spec — and later the golden set — are how you check the AI's work.","Lab 1 and Lab 4"],
+      ["If the demo works, we are 80% done.","change","The demo is about <b>20%</b>. Versions, filters, guardrails, evals and monitoring are the other 80% — that is what makes users trust it.","Lab 2 vs the AskIT demo"],
+      ["The licence fee is the cost.","change","Think <b>cost per outcome</b>: tokens grow with use, plus review time and running costs. One looping agent can burn a month's budget overnight.","Labs 5 and 7"],
+      ["A person must own every decision that affects a customer or a plant.","true","<b>Even more so.</b> AI drafts and recommends; people decide. Design the approval step in from the start.","Lab 3, attack 3"],
+      ["Once it is live, the project is done.","change","<b>Never done.</b> Models are retired every 6–12 months, documents and users change. Re-run your evals after every change.","Labs 4 and 7"],
+      ["Our documents are just data.","change","<b>Anything the AI reads can carry instructions.</b> Treat tickets, emails and manuals as untrusted input.","Lab 3 attack 1, Lab 9"],
+      ["Security must be designed in from the start.","true","And now it also covers prompts, the data the AI reads, and what agents are allowed to do.","Labs 3 and 9"]
+    ];
+    var votes=S.flips||{};
+    function score(){
+      var n=Object.keys(votes).length, ok=0;
+      C.forEach(function(c,i){ if(votes[i]===c[1]) ok++; });
+      var el=document.getElementById("flipScore");
+      if(n<C.length){ el.innerHTML="Voted on "+n+" of 8 cards. Your AI-habit score appears when all eight are done."; return; }
+      el.innerHTML="<b>Your AI-habit score: "+ok+" / 8.</b> "+(ok>=7?"Strong start — today will give you the evidence.":ok>=4?"Typical for experienced managers. Every card you missed comes back in a lab today.":"Good news: today is built for exactly this. Watch for each card in the labs.");
+    }
+    C.forEach(function(c,i){
+      var d=document.createElement("div"); d.className="flip";
+      d.innerHTML="<div class='front'>“"+c[0]+"”</div><div class='vote'><button data-v='true'>Still true</button><button data-v='change'>Needs to change</button></div>"+
+        "<div class='back'><div class='res'></div>"+c[2]+"<br><span class='muted' style='font-size:.85rem'>👀 See it in: <b>"+c[3]+"</b></span></div>";
+      function show(v){ d.classList.add("done", v===c[1]?"ok":"miss");
+        d.querySelector(".res").innerHTML=(v===c[1]?"✅ ":"❌ ")+"<b>"+(c[1]==="true"?"Still true":"Needs to change")+"</b><br>"; }
+      d.querySelectorAll(".vote button").forEach(function(b){ b.onclick=function(){ votes[i]=b.dataset.v; S.flips=votes; save(); show(b.dataset.v); score(); }; });
+      if(votes[i]) show(votes[i]);
+      box.appendChild(d);
+    });
+    score();
+  })();
+
+  // ---------- click to reveal ----------
+  document.querySelectorAll("[data-reveal]").forEach(function(b){
+    b.addEventListener("click", function(){ document.getElementById(b.dataset.reveal).classList.add("show"); b.disabled=true; b.style.opacity=.6; });
+  });
+
+  // ---------- launch day ----------
+  (function(){
+    var stage=document.getElementById("lStage"); if(!stage) return;
+    var G=[
+      {wk:"Week 0",d:"Evals and quality",q:"What should a manager ask before the build starts?",
+       s:"The team wants to start building next Monday. They ask what you need from them first.",
+       o:[["A golden set: 50 real technician questions with the correct answers, and the score we must reach before go-live.",1,"The team builds against a target. Every later change can be checked in minutes."],
+          ["A demo for the steering committee in two weeks.",0,"The demo impresses. Nobody can say if it is good enough — and in week 10 real questions expose the gaps."],
+          ["Use the most powerful model available, so quality is not a problem.",0,"Cost triples, and quality is still unknown — a big model does not tell you whether answers are right."]]},
+      {wk:"Week 2",d:"Data and privacy",q:"Which data, who may see it, does it leave the tenant?",
+       s:"To improve answers, the team wants to load 10 years of service tickets. They contain customer names and phone numbers.",
+       o:[["Load everything — it is internal data.",0,"In week 7 the assistant reads out a customer's phone number to a contractor. Privacy incident."],
+          ["Mask personal data, load only what technicians are allowed to see, keep it inside ABB's tenant.",1,"Better answers, no personal data exposed, and the privacy review passes first time."],
+          ["Leave the tickets out completely.",2,"Safe, but answers stay weaker than they could be. A missed opportunity, not an incident."]]},
+      {wk:"Week 3",d:"FinOps",q:"Cost per answer, budget cap, alerts?",
+       s:"The token bill is 4× the forecast. One agent retries in a loop every night.",
+       o:[["Step limits, a daily budget cap, cost alerts — and a smaller model wherever the eval says it is good enough.",1,"Cost falls by 70% within a week. The eval proves quality did not drop."],
+          ["Switch everything to the biggest model so it stops retrying.",0,"The loop continues — now at 7× the price. Finance freezes the budget."],
+          ["Wait for the month-end invoice and discuss it then.",0,"The loop runs for three more weeks. The quarter's AI budget is gone."]]},
+      {wk:"Week 5",d:"Security",q:"What does it read, what can it do, who approves?",
+       s:"A tester finds that one manual PDF has hidden text that makes the assistant say \"safety checks are optional for trained staff\".",
+       o:[["Input guard on all documents, treat every document as untrusted, and add this case to the golden set.",1,"Blocked now and caught automatically if anything similar is loaded again."],
+          ["Add \"ignore hidden text\" to the assistant's instructions.",0,"A request, not a lock. A differently worded document gets through in week 10."],
+          ["Delete that one PDF.",2,"This hole is closed; the next poisoned document will not be noticed."]]},
+      {wk:"Week 6",d:"Responsible AI and OT safety",q:"Can it cause harm? Who is accountable?",
+       s:"A technician reports that the assistant explained how to bypass a safety interlock to restart a line faster.",
+       o:[["A rule in code: never give bypass or override steps; route the question to a safety engineer; the safety owner signs off the fix (IEC 62443 / functional safety).",1,"The assistant now refuses and hands over to a person. The safety review closes with a clear owner."],
+          ["Remind technicians to use their own judgement.",0,"Two weeks later another technician follows the advice. A near-miss is reported on site."],
+          ["Add a disclaimer at the bottom of every answer.",0,"Nobody reads disclaimers. The risk is unchanged — and now it is documented that you knew."]]},
+      {wk:"Week 9",d:"Observability",q:"Can we replay any answer, with its steps and cost?",
+       s:"Legal asks: \"Why did the assistant give that answer to that technician on 3 March?\"",
+       o:[["Open the trace: the question, the chunks it retrieved, the model, the prompt, the answer and the cost.",1,"You answer legal in ten minutes, with evidence."],
+          ["Ask the AI vendor to explain.",0,"The vendor has no record of your prompts or documents. You cannot answer."],
+          ["Ask the same question again today and see what it says.",0,"Today's answer is different. Legal is less reassured than before."]]},
+      {wk:"Week 12",d:"Adoption and change",q:"Who owns it, who is trained, how do we measure use?",
+       s:"One month after go-live, only 15% of technicians use the assistant.",
+       o:[["A named owner, a 30-minute site training, a feedback button, weekly fixes from thumbs-down, usage measured per site.",1,"Use reaches 60% in six weeks. The thumbs-down list becomes next month's golden-set additions."],
+          ["Send an email making its use mandatory.",0,"Use rises for a week, then falls. Technicians find workarounds."],
+          ["Add more features to make it more attractive.",0,"More features, same 15%. Nobody asked why people were not using it."]]}
+    ];
+    var Q={"Evals and quality":"What's our golden set and go-live score?","Data and privacy":"Which data, who may see it, does any of it leave the tenant?","FinOps":"Cost per answer, budget cap, alerts?","Security":"What does it read, what can it do, and who approves?","Responsible AI and OT safety":"Can it cause harm, and who is accountable?","Observability":"Can we replay any answer with its steps and cost?","Adoption and change":"Who owns it, who is trained, how do we measure use?"};
+    var picks=[];
+    function dots(){ var h=""; G.forEach(function(g,i){ var p=picks[i]; h+="<span class='"+(p===undefined?"":p===1?"g":p===2?"c":"r")+"'></span>"; }); document.getElementById("lDots").innerHTML=h; }
+    function gate(i){
+      dots();
+      if(i>=G.length) return report();
+      var g=G[i], POS=[1,2,0,2,1,0,2];
+      if(!g.sorted){ var best=g.o.filter(function(x){return x[1]===1;})[0], rest=g.o.filter(function(x){return x[1]!==1;});
+        rest.splice(POS[i],0,best); g.o=rest; g.sorted=true; }
+      var h="<div class='gate'><div class='wk'>"+g.wk+" of 12 · "+g.d+"</div><p style='margin:6px 0 10px'><b>"+g.s+"</b></p>";
+      g.o.forEach(function(o,j){ h+="<button class='opt' data-j='"+j+"'>"+String.fromCharCode(65+j)+") "+o[0]+"</button>"; });
+      h+="<div class='res'></div></div>";
+      stage.innerHTML=h;
+      stage.querySelectorAll("button.opt").forEach(function(b){ b.onclick=function(){
+        var o=g.o[+b.dataset.j]; picks[i]=o[1];
+        stage.querySelectorAll("button.opt").forEach(function(x){ x.disabled=true; });
+        b.classList.add("pick"); b.style.borderColor=o[1]===1?"var(--green)":o[1]===2?"var(--amber)":"var(--red)";
+        var best=g.o.filter(function(x){return x[1]===1;})[0][0];
+        stage.querySelector(".res").innerHTML="<div class='"+(o[1]===1?"plain":o[1]===2?"note":"war")+"' style='margin:10px 0'>"+(o[1]===1?"✅ ":o[1]===2?"⚠️ ":"💥 ")+o[2]+
+          (o[1]!==1?"<br><span class='muted'>What strong teams do: "+best+"</span>":"")+
+          "<br><span class='muted'>The manager's question for <b>"+g.d+"</b>: <i>"+Q[g.d]+"</i></span></div>"+
+          "<button class='btn' id='lNext'>"+(i+1<G.length?"Next: "+G[i+1].wk+" ▶":"See launch result ▶")+"</button>";
+        dots(); document.getElementById("lNext").onclick=function(){ gate(i+1); };
+      }; });
+    }
+    function report(){
+      var inc=picks.filter(function(p){return p===0;}).length, weak=picks.filter(function(p){return p===2;}).length;
+      var verdict=inc===0&&weak<=1?["🚀 Smooth launch","#2F7D4F","Every discipline was built in. This is what \"production-ready\" means."]:
+                  inc<=2?["⚠️ Launched — with incidents","#B37E00","It went live, but the incidents below will cost trust, money or time."]:
+                         ["💥 Pulled after two weeks","#B3432B","Too many disciplines were skipped. The project is paused for a review."];
+      var blind=[];
+      var rows=G.map(function(g,i){ var p=picks[i]; if(p!==1) blind.push(g.d);
+        return "<tr><td>"+(p===1?"✅":p===2?"⚠️":"💥")+" <b>"+g.d+"</b></td><td><i>"+Q[g.d]+"</i></td></tr>"; }).join("");
+      S.blind=blind; save();
+      stage.innerHTML="<div style='background:"+verdict[1]+";color:#fff;padding:14px;border-radius:8px;text-align:center;font:700 1.5rem Saira Condensed'>"+verdict[0]+"</div>"+
+        "<p style='margin:10px 0'>"+verdict[2]+"</p><h4>Your incident report — seven disciplines, built in from day one</h4>"+
+        "<table><tr><th>Discipline</th><th>The question a manager asks</th></tr>"+rows+"</table>"+
+        (blind.length?"<div class='note'><b>Your blind spots</b> (they go into your Playbook): "+blind.join(", ")+"</div>":"<div class='plain'><b class='t'>No blind spots.</b> Take this checklist to your next AI kick-off.</div>")+
+        "<button class='btn' id='lAgain'>Play again</button>";
+      document.getElementById("lAgain").onclick=function(){ picks=[]; gate(0); };
+      dots();
+    }
+    gate(0);
+  })();
+  // ---------- 8 steps self-check ----------
+  (function(){
+    var box=document.getElementById("m8"); if(!box) return;
+    var M=[
+      ["Price the wrong answer","If the model is wrong, who notices — and what does it cost?","You pay frontier prices for drafts a person rewrites anyway — or put a cheap, untested model on a decision that reaches a customer.","Label it green (draft), amber (a person checks every answer) or red (customer, money, safety). Red needs a strict test set and a human sign-off."],
+      ["Hard limits first","Where may this data go — and which models is ABB allowed to use for it?","Weeks of testing on a model that security or legal then blocks: data leaves the tenant, the licence does not allow it, or the model is not on the approved list.","In week 1 ask IT security and legal: allowed regions, approved models, data classes. Remove models before you test them."],
+      ["Test set before choosing","Which 20–50 real cases, with known right answers, will decide this?","You choose by leaderboard or by demo. The leaderboard never saw your product codes, your German tickets or your plant names.","Collect real cases from the people who do the work. Agree the pass mark (e.g. 46 of 50) before anyone sees a model's score."],
+      ["Start small, go up","Did we try the smallest model first?","Frontier by default. It works, so nobody ever tries the cheaper one — and you pay 5–10× for ever.","Run the test set on the small model first. Move up one size only for the cases that fail."],
+      ["Measure four things","Quality, speed, cost per task, reliability — what are our numbers?","Price per token looks tiny. Cost per task is not: long context, retries and the hidden thinking tokens of reasoning models multiply it.","For each candidate record: test-set score · typical and slowest response time · cost per finished task · how often tool calls or JSON break."],
+      ["Fix the system before the model","Is the failure the model — or the data, prompt or tool around it?","Answers are wrong because retrieval missed the right page. The team buys a bigger model: still wrong, now at 7× the cost.","Read 10 failures yourself. If the right fact was not in front of the model, fix retrieval, the spec or the tool first."],
+      ["Mix models, plan a backup","Does every step need the big model? What happens when it is down?","One big model does sorting, extraction and reasoning. One provider outage stops the whole service.","Small model for sorting and extraction, big model only for the hard step. Keep a tested second model behind a model gateway."],
+      ["Pin the version, re-test","What happens when the provider updates or retires this model?","A version is retired, the new default changes its output format, and a report breaks on a Monday morning.","Pin the exact version. Put the retirement date in the plan. Re-run the test set before every switch; watch cost and quality weekly."]
+    ];
+    var v=S.m8||[];
+    function score(){ var d=0,k=0,gaps=[]; v.forEach(function(x,i){ if(x){k++; if(x==="do") d++; else gaps.push((i+1)+" "+M[i][0]);} });
+      document.getElementById("m8score").textContent=k?("Your team does "+d+" of "+k+(k<8?" so far.":".")+(k===8?(gaps.length?" Gaps go into your Playbook: "+gaps.join(" · "):" No gaps — rare. Ask your team to prove it."):"")):""; S.m8gaps=gaps; }
+    M.forEach(function(m,i){
+      var d=document.createElement("div"); d.className="m8";
+      d.innerHTML="<div class='n'>"+(i+1)+"<span class='tag'></span></div><div class='h'>"+m[0]+"</div><div class='ask'><b>Ask:</b> "+m[1]+"</div>"+
+        "<div class='vote'><button data-v='do'>We do this</button><button data-v='skip'>We skip it</button></div>"+
+        "<div class='back'><b style='color:var(--red)'>If you skip it:</b> "+m[2]+"<br><b style='color:var(--green)'>Do this:</b> "+m[3]+"</div>";
+      function show(x){ d.classList.add("done"); d.classList.remove("do","skip"); d.classList.add(x); d.querySelector(".tag").textContent=x==="do"?"✓ we do":"✗ gap"; d.querySelector(".tag").style.color=x==="do"?"var(--green)":"var(--red)"; }
+      d.querySelectorAll(".vote button").forEach(function(b){ b.onclick=function(){ v[i]=b.dataset.v; S.m8=v; show(b.dataset.v); score(); save(); }; });
+      if(v[i]) show(v[i]);
+      box.appendChild(d);
+    });
+    score();
+  })();
+
+  // ---------- spot the skipped step ----------
+  (function(){
+    var box=document.getElementById("skip"); if(!box) return;
+    var K=[
+      ["The team chose the model at the top of a public leaderboard. In the pilot it mixes up ABB product codes and fails on German service tickets.",3,"Step 3 — no test set of their own cases. A leaderboard measures someone else's questions."],
+      ["The pilot cost about $300 a month. At rollout the bill is 12× the plan: the reasoning model thinks thousands of hidden tokens per answer, and bad JSON triggers retries.",5,"Step 5 — they priced tokens, not the cost per finished task (thinking tokens + retries + context)."],
+      ["Answers about the warranty policy are wrong. The team upgrades to the frontier model. Still wrong — the right page was never retrieved.",6,"Step 6 — fix the system first. A bigger model cannot answer from a page it never sees."],
+      ["Six weeks of testing on an excellent open-weight model. Then security says it is not on the approved list for customer data.",2,"Step 2 — hard limits first. One email in week 1 would have saved six weeks."],
+      ["The provider retires the model version. The new default formats dates differently and the Monday dashboard breaks.",8,"Step 8 — pin the version, track the retirement date, re-run the test set before switching."]
+    ];
+    var got=S.skip||{};
+    function score(){ var n=Object.keys(got).length, r=0; Object.keys(got).forEach(function(k){ if(got[k]) r++; });
+      document.getElementById("skipscore").textContent=n?(r+" of "+n+" right first time"+(n===K.length?(r===K.length?" — you are ready to review an AI proposal.":" — the ones you missed are the ones to ask your team about."):"")):""; }
+    K.forEach(function(k,i){
+      var d=document.createElement("div"); d.className="sk";
+      var btns=""; for(var s=1;s<=8;s++) btns+="<button data-s='"+s+"'>"+s+"</button>";
+      d.innerHTML="<b>"+(i+1)+".</b> "+k[0]+"<div class='stp'>"+btns+"</div><div class='fb2'>"+k[2]+"</div>";
+      d.querySelectorAll(".stp button").forEach(function(b){ b.onclick=function(){
+        var s=+b.dataset.s; if(!(i in got)){ got[i]=(s===k[1]); S.skip=got; save(); score(); }
+        if(s===k[1]){ b.classList.add("r"); d.classList.add("done"); } else b.classList.add("x"); }; });
+      if(i in got){ d.classList.add("done"); d.querySelector("[data-s='"+k[1]+"']").classList.add("r"); }
+      box.appendChild(d);
+    });
+    score();
+  })();
+
+  // ---------- model picker ----------
+  (function(){
+    var go=document.getElementById("pkGo"); if(!go) return;
+    function val(q){ var r=document.querySelector("input[name=pk_"+q+"]:checked"); return r?+r.value:null; }
+    ["d","w","t","v","s","n"].forEach(function(q){ var cur=S["pk_"+q]; if(cur!==undefined){ var r=document.querySelector("input[name=pk_"+q+"][value='"+cur+"']"); if(r) r.checked=true; }
+      document.querySelectorAll("input[name=pk_"+q+"]").forEach(function(r){ r.addEventListener("change",function(){ S["pk_"+q]=+r.value; save(); }); }); });
+    function usd(x){ return x>=1000?"$"+Math.round(x).toLocaleString("en-US"):(x>=10?"$"+Math.round(x):"$"+x.toFixed(2)); }
+    go.onclick=function(){
+      var a={}, miss=[]; ["d","w","t","v","s","n"].forEach(function(q,i){ a[q]=val(q); if(a[q]===null) miss.push(i+1); });
+      var out=document.getElementById("pkOut");
+      if(miss.length){ out.innerHTML="<div class='note'>Answer question "+miss.join(", ")+" first.</div>"; return; }
+      var model=["Small model (mini class)","Small model + good retrieval (RAG)","Big model for the hard step only; small model for everything else"][a.t];
+      if(a.t===1&&a.w===2) model="Small model + good retrieval — but test a big model side by side; red work must hit the pass mark";
+      var host=["Pay-per-token (serverless)","Pay-per-token inside ABB's Azure tenant, approved models only","Open-weight model on site / at the plant, read-only, no internet needed"][a.d];
+      if(a.v===2&&a.d!==2) host+=" — at this volume, also price fixed capacity (Lab 7 tab B)";
+      var notes=[];
+      if(a.s===1) notes.push("Batch is fine → use batch processing; it is usually cheaper than live calls.");
+      if(a.s===0&&a.t===2) notes.push("Live + reasoning: reasoning models can take many seconds. Test the slowest response time, not the average.");
+      if(a.n===1) notes.push("Tools / JSON: add format checks to the test set. Reject a model that breaks the format more than about 1 in 50.");
+      if(a.w===2) notes.push("Red: a person signs off every answer, a test set of 50+ with hard edge cases, and a tested backup model.");
+      if(a.d===2) notes.push("Open-weight on site means your team patches, monitors and upgrades it. Budget for people, not only GPUs.");
+      if(a.t===2) notes.push("Agents: split the work — the small model routes and extracts, the big model only plans or reasons.");
+      var tok=[[1000,100],[3000,400],[6000,1500]][a.t], per=[500,8000,50000][a.v];
+      var mini=(tok[0]*0.75+tok[1]*4.5)/1e6, big=(tok[0]*5.5+tok[1]*33)/1e6*(a.t===2?1.5:1);
+      var mm=mini*per*30*1.2, bm=big*per*30*1.2;
+      var prove=[1,2,3,5,8]; if(a.t>=1) prove.push(6); if(a.t===2||a.w===2||a.v===2) prove.push(7); prove.sort(function(x,y){return x-y;});
+      var names=["Price the wrong answer","Hard limits first","Test set before choosing","Start small, go up","Measure four things","Fix the system before the model","Mix models, plan a backup","Pin the version, re-test"];
+      out.innerHTML="<div class='pkres'><h4>Start here</h4><table><tr><td><b>Model</b></td><td>"+model+"</td></tr><tr><td><b>Hosting</b></td><td>"+host+"</td></tr></table>"+
+        "<h4>Rough monthly bill at ~"+per.toLocaleString("en-US")+" tasks a day</h4><table><tr><th>All on the small model</th><th>All on the big model</th><th>Gap</th></tr><tr><td>"+usd(mm)+"</td><td>"+usd(bm)+"</td><td>× "+(bm/mm).toFixed(1)+"</td></tr></table>"+
+        "<p style='font-size:.85rem;color:#C9CFD4'>Lab list prices, about "+tok[0].toLocaleString("en-US")+" tokens in and "+tok[1].toLocaleString("en-US")+" out per task, +20% for retries. Your Azure price will differ — the gap is the point.</p>"+
+        (notes.length?"<h4>Watch out</h4><ul class='c'>"+notes.map(function(n){return "<li>"+n+"</li>";}).join("")+"</ul>":"")+
+        "<h4>You still must prove</h4><ul class='c'>"+prove.map(function(p){return "<li><b>Step "+p+"</b> · "+names[p-1]+"</li>";}).join("")+"</ul></div>";
+      S.pick=model+" · "+host+" · small ≈ "+usd(mm)+"/month vs big ≈ "+usd(bm)+"/month"; save();
+    };
+    if(S.pick) go.click();
+  })();
   // playbook
-  var titles={d1:"Specs",d2:"Knowledge assistants",d3:"Agents",d4:"Go-live gate",d6:"AI on delivery data",d7:"Default architecture",d8:"Proving value",d9:"Security rule"};
+  var titles={d1:"Specs",d2:"Knowledge assistants",d3:"Agents",d4:"Go-live gate",d6:"My ADO + AI routine",d7:"Default architecture",d8:"Proving value",d9:"Security rule"};
   function esc(s){ return String(s||"").replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
   document.getElementById("build").addEventListener("click", function(){
     var rows=Object.keys(titles).map(function(k){ return "<tr><td><b>"+titles[k]+"</b></td><td>"+(S[k]?esc(S[k]):"<i>— not chosen —</i>")+"</td></tr>"; }).join("");
-    var lb=["lb1","lb2","lb3","lb4"].map(function(k){ return S[k]||"3"; });
+    var lb=["lb1","lb2","lb3","lb4","lb5"].map(function(k){ return S[k]||"3"; });
     var pb=document.getElementById("playbook");
     pb.innerHTML="<h3>My AI Playbook"+(S.m4?" — "+esc(S.m4):"")+"</h3><p class='slot'>ABB · AI Engineering for Managers · Day 2</p>"+
       "<h4 style='margin-top:12px'>My decisions</h4><table>"+rows+"</table>"+
+      "<h4>Model choice</h4><table><tr><td><b>Model Picker</b></td><td>"+(S.pick?esc(S.pick):"<i>— run the Model Picker in Session 7 —</i>")+"</td></tr>"+"<tr><td><b>My gaps in the 8 steps</b></td><td>"+(S.m8gaps&&S.m8gaps.length?esc(S.m8gaps.join(" · ")):(S.m8&&S.m8.filter(Boolean).length===8?"None":"<i>— do the 8-step self-check —</i>"))+"</td></tr>"+[["mr1","Use case"],["mr2","Green / amber / red"],["mr3","Hard limits"],["mr4","Test set and pass mark"],["mr5","Model tried → chosen"],["mr6","Backup model"],["mr7","Cost per task"],["mr8","Re-test when"]].map(function(r){ return S[r[0]]?"<tr><td><b>"+r[1]+"</b></td><td>"+esc(S[r[0]])+"</td></tr>":""; }).join("")+"</table>"+
       "<h4>Seven questions I ask of any AI proposal</h4><ol class='c'><li>What problem, and who owns the outcome?</li><li>What does good look like, and how will we test it?</li><li>Which data, and who may see it?</li><li>Smallest model that passes?</li><li>Buy, managed or build?</li><li>Where does a human approve?</li><li>How will we measure time, cost and quality from day one?</li></ol>"+
+      "<h4>My blind spots (from Launch Day)</h4><p>"+(S.blind===undefined?"<i>— play Launch Day first —</i>":(S.blind.length?esc(S.blind.join(", ")):"None — all seven disciplines built in."))+"</p>"+
       "<h4>Monday</h4><table><tr><td><b>Use case</b></td><td>"+esc(S.m1)+"</td></tr><tr><td><b>The number I will measure</b></td><td>"+esc(S.m2)+"</td></tr><tr><td><b>First conversation</b></td><td>"+esc(S.m3)+"</td></tr></table>"+
-      "<p class='slot'>Confidence today (1–5): layers "+lb[0]+" · demo vs product "+lb[1]+" · architecture "+lb[2]+" · value case "+lb[3]+"</p>"+
+      "<p class='slot'>Confidence today (1–5): layers "+lb[0]+" · demo vs product "+lb[1]+" · architecture "+lb[2]+" · value case "+lb[3]+" · built in from day one "+lb[4]+"</p>"+
       "<button class='btn' onclick='window.print()'>Print or save as PDF</button>";
     pb.style.display="block"; pb.scrollIntoView({behavior:"smooth"});
   });
